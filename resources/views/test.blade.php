@@ -27,7 +27,7 @@
                     </div>
                     <div class="nav__user">
                         <div class="nav__user-hosting">
-                            <a href="#">Diventa un Host</a>
+                            <a href="#">Diventa un Host! :)</a>
                         </div>
                     </div>
                 </div>

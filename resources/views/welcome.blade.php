@@ -81,7 +81,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
+<<<<<<< HEAD
                     Modfica 2
+=======
+                    Modifica
+>>>>>>> master
                 </div>
 
                 <div class="links">

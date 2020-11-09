@@ -27,7 +27,7 @@
                     </div>
                     <div class="nav__user">
                         <div class="nav__user-hosting">
-                            <a href="#">Diventa un King! :)</a>
+                            <a href="#">Diventa un boolean King! :)</a>
                         </div>
                     </div>
                 </div>

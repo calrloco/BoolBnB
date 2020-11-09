@@ -20,9 +20,8 @@
                     </div>
                     <div class="nav__search">
                         <button class="nav__search-button">
-                            Inizia la ricerca
+                            Finisci la ricerca
                             <div class="nav__search-icon">
-
                             </div>
                         </button>
                     </div>

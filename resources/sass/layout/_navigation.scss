@@ -1,0 +1,51 @@
+.nav {
+    @include flex(row, space-between, center);
+    height: 80px;
+
+    &__logo {
+        flex: 1;
+        @include flex(row, flex-start, center);
+        & img {
+            height: 3.2rem;
+        }
+    }
+
+    &__search {
+        flex: 1;
+        @include flex(row, center, center);
+
+        &-button {
+            height: 4.8rem;
+            width: 30rem;
+            cursor: pointer;
+            border-radius: 3.2rem;
+            -webkit-border-radius: 3.2rem;
+            -moz-border-radius: 3.2rem;
+            -ms-border-radius: 3.2rem;
+            -o-border-radius: 3.2rem;
+            transition: all 0.2s;
+            background-color: #fff;
+            border: 1px solid #e2e2e2;
+            @include flex(row, space-between, center);
+            padding: 0 2rem;
+            &:hover {
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+                border: 1px solid transparent;
+            }
+        }
+        &-icon {
+            height: 3rem;
+            width: 3rem;
+            background-color: rebeccapurple;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+        }
+    }
+    &__user {
+        flex: 1;
+        @include flex(row, flex-end, center);
+    }
+}

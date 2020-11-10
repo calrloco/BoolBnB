@@ -4,7 +4,7 @@
     .col-xs-#{$i} {
       width: calc((100% / 12) * #{$i});
     }
-  } 
+  }
 }
 
 
@@ -12,7 +12,7 @@
   @for $i from 1 through 12 {
     .col-md-#{$i} {
       width: calc((100% / 12) * #{$i});
-    } 
+    }
   }
 }
 
@@ -20,7 +20,7 @@
   @for $i from 1 through 12 {
     .col-lg-#{$i} {
       width: calc((100% / 12) * #{$i});
-    } 
+    }
   }
 }
 
@@ -28,15 +28,15 @@
   @for $i from 1 through 12 {
     .col-xl-#{$i} {
       width: calc((100% / 12) * #{$i});
-    } 
+    }
   }
 }
 
-.container{
+.container-page{
   width: 100%;
   min-width: 100%;
   min-height: 100vh;
-  
+
 }
 
 .container-center{
@@ -44,4 +44,3 @@
   width:80%;
   margin:0 auto;
 }
-

@@ -1,7 +1,4 @@
 
-
-
-
 @include responsive(phone) {
   @for $i from 1 through 12 {
     .col-xs-#{$i} {

@@ -20,14 +20,14 @@
                     </div>
                     <div class="nav__search">
                         <button class="nav__search-button">
-                            Finisci la ricerca
+                            Finisci la ricerca boolean
                             <div class="nav__search-icon">
                             </div>
                         </button>
                     </div>
                     <div class="nav__user">
                         <div class="nav__user-hosting">
-                            <a href="#">Diventa un King! :)</a>
+                            <a href="#">Diventa un supremo boolean King! :)</a>
                         </div>
                     </div>
                 </div>

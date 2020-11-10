@@ -1,13 +1,12 @@
 .nav {
     @include flex(row, space-between, center);
     height: 80px;
-
+    font-size:1.4rem;
     &__logo {
         flex: 1;
         @include flex(row, flex-start, center);
         & img {
             height: 3.2rem;
-            
         }
     }
 
@@ -48,5 +47,32 @@
     &__user {
         flex: 1;
         @include flex(row, flex-end, center);
+        position: relative;
+        &-button {
+            height: 4.2rem;
+            border-radius: 2.1rem;
+            -webkit-border-radius: 2.1rem;
+            -moz-border-radius: 2.1rem;
+            -ms-border-radius: 2.1rem;
+            -o-border-radius: 2.1rem;
+            width: 4.2rem;
+            border: 1px solid #e2e2e2;
+            cursor: pointer;
+        }
+        &__menu{
+            position:absolute;
+            top:120%;
+            background-color:red;
+            list-style: none;
+            padding-right: 5rem;
+            padding-top: .5rem;
+            padding-bottom: 3rem;
+            border-radius:1.5rem;
+            width:20rem;
+            &-item a{
+            
+              text-decoration: none;
+            }
+        }
     }
 }

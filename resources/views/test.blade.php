@@ -10,34 +10,7 @@
 </head>
 
 <body>
-    <div class="container">
-        <nav class="nav-container">
-            <div class="container-center">
-                <div class="nav">
-                    <div class="nav__logo">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/1024px-Airbnb_Logo_B%C3%A9lo.svg.png"
-                            alt="">
-                    </div>
-                    <div class="nav__search">
-                        <button class="nav__search-button">
-<<<<<<< HEAD
-                            Inizia la ricerca
-=======
-                            Finisci la ricerca boolean
->>>>>>> 9b0547b4c269da643b5485c67ac0298642657d34
-                            <div class="nav__search-icon">
-                            </div>
-                        </button>
-                    </div>
-                    <div class="nav__user">
-                        <div class="nav__user-hosting">
-                            <a href="#">Diventa un supremo boolean King! :)</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
+   
 </body>
 
 </html>

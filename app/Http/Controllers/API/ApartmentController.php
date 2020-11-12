@@ -31,9 +31,9 @@ class ApartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $apartment = Apartment::create($request->all());
+
         return response()->json($apartment,201); 
     }
 
@@ -43,8 +43,7 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
-    {
+    public function show(Apartment $apartment){
         return response()->json($apartment,200);
     }
 
@@ -63,9 +62,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Apartment $apartment)
-    {
+    public function update(Request $request, Apartment $apartment){
         $apartment->update($request->all());
+
         return response()->json($apartment);
     }
 

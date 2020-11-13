@@ -37,4 +37,9 @@ class Apartment extends Model
             ->withPivot('end_sponsor')
             ->withTimestamps();
     }
+
+    public function views()
+    {
+        return $this->hasMany('App\View');
+    }
 }

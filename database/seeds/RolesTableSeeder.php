@@ -14,7 +14,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $ruoli = ['guest', 'host'];
+        $ruoli = ['admin', 'host'];
         for($i = 0; $i < count($ruoli); $i++){
             $newRole = new Role;
             $newRole->role = $ruoli[$i];

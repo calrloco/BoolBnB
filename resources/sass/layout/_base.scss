@@ -30,3 +30,6 @@ button {
   button:focus {
     outline: 0;
   }
+  main{
+    min-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
+  }

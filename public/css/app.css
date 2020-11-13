@@ -31,6 +31,10 @@ button:focus {
   outline: 0;
 }
 
+main {
+  min-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
+}
+
 /* media query */
 
 :root {
@@ -39,6 +43,8 @@ button:focus {
   --orange-bnb: rgb(252,100,45);
   --dark-gray: rgb(72,72,72);
   --light-gray: rgb(118,118,118);
+  --nav-height: 8rem;
+  --footer-height: 15rem;
 }
 
 @media screen and (max-width: 414px) {
@@ -254,7 +260,7 @@ button:focus {
 }
 
 .footer {
-  height: 30rem;
+  height: var(--footer-height);
   background-color: rebeccapurple;
 }
 
@@ -263,7 +269,7 @@ button:focus {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  height: 80px;
+  height: var(--nav-height);
   font-size: 1.4rem;
 }
 

@@ -1,6 +1,6 @@
 .nav {
     @include flex(row, space-between, center);
-    height: 80px;
+    height: var(--nav-height);
     font-size:1.4rem;
     &__logo {
         flex: 1;

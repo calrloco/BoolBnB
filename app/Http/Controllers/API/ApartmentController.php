@@ -48,7 +48,7 @@ class ApartmentController extends Controller
                'country'=>'required',
                'daily_price'=>'required',
                'description'=>'required|min:20',
-               'user_id'=>'numeric|exists:users,id'
+               'user_id'=>'numeric|exists:users,id',
         ],
         [
          'required'=>':attribute is a required field',

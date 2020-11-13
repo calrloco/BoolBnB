@@ -5021,6 +5021,6 @@ main {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  border-radius: 0.8rem;
+  border-radius: 1.2rem;
 }
 

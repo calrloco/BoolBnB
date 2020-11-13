@@ -13,14 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
 
-Route::get('/test', function () {
-    return view('test');
-});
+
 
 Auth::routes();
 
-Route::get('/cicco', 'HomeController@index')->name('home');
+// Route::prefix('admin')->namespace('Logged')->middleware('auth')->group(function(){
+//     Route::get('/home', 'HomeController@index')->name('home');
+//     Route::resource('posts', 'PostController');
+// });
+// ritorniamo la view home tramite il controller generale 
+ 
+Route::resource('/','HomeController');
+Route::resource('/search','SearchController');
+Route::resource('/messages','Logged\MessageController');

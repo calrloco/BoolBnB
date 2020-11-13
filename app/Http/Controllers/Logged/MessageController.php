@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Logged;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Message;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,6 @@ class MessageController extends Controller
         $messages = User::join('apartments','users.id','=','apartments.user_id')
         ->join('messages','apartments.id','=','messages.apartment_id')
         ->where('users.id','=', Auth::user()->id)->get();
-        dd($messages);
     }
    
 
@@ -54,9 +54,9 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Message $message)
     {
-        //
+      return view('logged.show',compact('message'));
     }
 
     /**
@@ -88,8 +88,9 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Message $message)
     {
-        //
+        $message->delete();
+        return view('logged.messages');
     }
 }

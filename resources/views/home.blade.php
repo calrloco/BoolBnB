@@ -12,7 +12,7 @@
     </header>
     <div class="container-center">
         <section class="highlited">
-
+            <i class="fas fa-star"></i>
             <p class="sponsor__home-title">In evidenza</p>
             <div class="sponsor__home">
 

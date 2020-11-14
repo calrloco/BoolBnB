@@ -1,39 +1,69 @@
-.jumbotron{
-    background-image:url('https://images.pexels.com/photos/3757905/pexels-photo-3757905.jpeg?cs=srgb&dl=pexels-corinna-widmer-3757905.jpg&fm=jpg');
+.jumbotron {
+    background-image: url("https://images.pexels.com/photos/3757905/pexels-photo-3757905.jpeg?cs=srgb&dl=pexels-corinna-widmer-3757905.jpg&fm=jpg");
     height: 70rem;
     background-size: cover;
-    background-position:center;
-    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: top;
 
-    &__text{
+    &__text {
         height: 100%;
         width: 100%;
-        @include flex(column,center,flex-start);
+        @include flex(column, center, flex-start);
+        font-size: 5.2rem;
+        color: var(--color-font-black);
+
+        &-button {
+            padding: 0.7rem 1.5rem;
+            border-radius: 0.8rem;
+            font-size: 1.4rem;
+            color: inherit;
+            cursor: pointer;
+            margin: 2.2rem 0 0 0;
+            transition: all 0.2s;
+            background-color: #fff;
+            font-weight: 400;
+            &:hover {
+                background-color: #f7f7f7;
+            }
+        }
     }
 }
-.highlited{
-    height: 40rem;
+.highlited {
+    margin: 4.8rem 0 4.8rem 0;
 }
-.sponsor__home{
-    @include flex(row,flex-start,center);
+.sponsor__home {
+    @include flex(row, flex-start, center);
     flex-wrap: nowrap;
     height: 100%;
 
-    &-card{
+    &-title {
+        padding-bottom: 1.6rem;
+        font-weight: 700;
+        font-size: 3.2rem;
+    }
+
+    &-card {
         flex: 0 1 calc(100% / 4);
-        
-        &:not(:last-child){
-            margin-right:1.5rem;
+        font-size: 1.8rem;
+        @include flex(column, flex-start, flex-start);
+        cursor: pointer;
+
+        &:not(:last-child) {
+            margin-right: 1.5rem;
+        }
+        &-text {
+            height: 3rem;
         }
     }
-    &-card-img{
+    &-card-img {
         width: 100%;
-        height: 100%;
-        
-        & img{
+        margin-bottom: 0.8rem;
+
+        & img {
             width: 100%;
             height: 100%;
-            object-fit:cover;
+            object-fit: cover;
             border-radius: $card-img-radius;
         }
     }

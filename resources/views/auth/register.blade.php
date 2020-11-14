@@ -1,77 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+<div class="signup_container">
+    <div class="signup">
+      <h1>Sign Up for an Account</h1>
+      <form method="POST" action="{{ route('register') }}"> 
+        @csrf
+        <div class="name_inputs">
+          <!-- first name -->
+          <div>
+            <label for="name">First Name</label><br />
+            <input type="text" name="name" placeholder="Your first name" class="fname" required />
+          </div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+          <!-- last name -->
+          <div>
+            <label for="lastname">Last Name</label><br />
+            <input type="text" name="lastname" placeholder="Your last name" class="lname" required />
+          </div>
         </div>
+
+        <!-- email -->
+        <div>
+          <label for="email">Email</label><br />
+          <input type="email" name="email" placeholder="Enter your email" />
+        </div>
+
+        <!-- password -->
+        <div>
+          <label for="password">Password</label><br />
+          <div class="password">
+            <input type="password" name="password" placeholder="Enter your password" />
+          </div>
+        </div>
+
+        <div>
+          <label for="password-confirm">Confirm Password</label><br />
+          <div class="password">
+            <input type="password" name="password_confirmation" placeholder="Confirm your password" />
+          </div>
+        </div>
+
+        <!-- Date of birth -->
+        <div class="date">
+          <label for="birth">Date Of Birth</label><br />
+          <div class="password">
+            <input type="date" name="date_of_birth" placeholder="Confirm your password" />
+          </div>
+        </div>
+        <button type="submit" class="signup_btn">{{ __('Register') }}</button>
+      </form>
+
+       <!-- Social icons -->
+      <p class="or_else">Or Sign up using</p>
+      <div class="social_logins">
+        <button type="submit" class="google_login">
+          <i class="fab fa-google"></i>
+        </button>
+        <button type="submit" class="facebook_login">
+          <i class="fab fa-facebook-f"></i>
+        </button>
+        <button type="submit" class="linkedin_login">
+          <i class="fab fa-linkedin-in"></i>
+        </button>
+      </div>
     </div>
-</div>
+  </div>
 @endsection

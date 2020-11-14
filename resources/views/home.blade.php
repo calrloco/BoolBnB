@@ -20,7 +20,7 @@
                                 alt="">
                         </div>
                         <div class="sponsor__home-card-text">
-                            <p>{{ $apartment[$i]->title }}</p>
+                            <p>{{-- {{ $apartment[$i]->title }} --}}</p>
                         </div>
                     </div>
                 @endfor

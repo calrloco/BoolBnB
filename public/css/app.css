@@ -5188,3 +5188,166 @@ main {
   display: block;
 }
 
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+.login_btn,
+.signup_btn,
+.google_login,
+.facebook_login,
+.linkedin_login {
+  padding: 0.8em 3.5em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  outline: none;
+  border: none;
+  letter-spacing: 1px;
+}
+
+.login_btn:hover,
+.signup_btn:hover,
+.google_login:hover,
+.facebook_login:hover,
+.linkedin_login:hover {
+  box-shadow: 0px 10px 20px rgba(43, 20, 11, 0.315);
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.signup_container {
+  font-family: "Open Sans", sans-serif;
+  background: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px 10px;
+}
+
+.signup_container .login_btn {
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  background-color: transparent;
+  margin: 15px 0;
+}
+
+.signup_container .login_btn:hover {
+  background-color: #ffffff;
+  color: #2b140b;
+}
+
+.signup_container .signup {
+  color: #202842;
+  width: 400px;
+  border: 2px solid #eaeaea;
+  padding: 13px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.signup_container .signup p {
+  text-align: center;
+  font-size: 14px;
+  margin: 20px 0;
+}
+
+.signup_container .signup form label {
+  font-size: 14px;
+  font-weight: 600px;
+  text-transform: capitalize;
+}
+
+.signup_container .signup form input {
+  padding: 15px 20px;
+  border-radius: 3px;
+  border: 2px solid #DCDFF1;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.signup_container .signup form input::-moz-placeholder {
+  font-size: 16px;
+  color: #5D698D;
+}
+
+.signup_container .signup form input:-ms-input-placeholder {
+  font-size: 16px;
+  color: #5D698D;
+}
+
+.signup_container .signup form input::placeholder {
+  font-size: 16px;
+  color: #5D698D;
+}
+
+.signup_container .signup form .name_inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.signup_container .signup form .date {
+  margin-bottom: 10px;
+}
+
+.signup_container .signup form .checkbox {
+  width: auto;
+  margin: 5px 10px 20px 0;
+}
+
+.signup_container .signup form span {
+  font-size: 14px;
+}
+
+.signup_container .signup form span a {
+  text-decoration: none;
+}
+
+.signup_container .signup form .signup_btn {
+  width: 100%;
+  background-color: #2b140b;
+  color: #ffffff;
+}
+
+.signup_container .signup form .or_else {
+  font-size: 11px;
+}
+
+.signup_container .signup .social_logins {
+  display: flex;
+  justify-content: center;
+}
+
+.signup_container .signup .social_logins .google_login,
+.signup_container .signup .social_logins .facebook_login,
+.signup_container .signup .social_logins .linkedin_login {
+  background-color: transparent;
+  margin: 2px;
+  border: 1px solid #2b140b;
+}
+
+.signup_container .signup .social_logins .google_login i,
+.signup_container .signup .social_logins .facebook_login i,
+.signup_container .signup .social_logins .linkedin_login i {
+  color: #2b140b;
+}
+
+.forgot_password {
+  text-decoration: underline;
+  text-align: center;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.login {
+  position: absolute;
+  transform: translateY(50px);
+}
+

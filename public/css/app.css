@@ -4994,6 +4994,7 @@ main {
 }
 
 .nav__user-box:hover {
+  border: 1px solid transparent;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
 }
 

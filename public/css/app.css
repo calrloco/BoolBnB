@@ -5433,3 +5433,52 @@ h1 {
   display: block;
 }
 
+.message-deck {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: columns;
+}
+
+.message-card {
+  width: 60%;
+  min-height: 100px;
+  margin-top: 10px;
+  border: 1px solid #e2e2e2;
+  border-radius: 0.8rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+
+.apart-info {
+  width: 20%;
+  min-height: 100px;
+  height: 100%;
+  border-right: 1px solid #e2e2e2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: columns;
+}
+
+.apart-info .apart-img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-image: url("https://st3.idealista.it/news/archivie/styles/news_detail/public/2019-08/casa_malaga_fachada.jpg?sv=L9VS5bO4&itok=BhTqfmqO");
+  background-size: contain;
+}
+
+.message-info {
+  width: 80%;
+  min-height: 100px;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: columns;
+}
+

@@ -1,4 +1,3 @@
-
 @include responsive(phone) {
   @for $i from 1 through 12 {
     .col-xs-#{$i} {
@@ -6,7 +5,6 @@
     }
   }
 }
-
 
 @include responsive(tab) {
   @for $i from 1 through 12 {
@@ -32,14 +30,17 @@
   }
 }
 
-.container-page{
+.container-page {
   width: 100%;
   min-width: 100%;
   min-height: 100vh;
 }
 
-.container-center{
+.container-center {
   padding: 0 8rem;
-  width:80%;
-  margin:0 auto;
+  width: 70%;
+  margin: 0 auto;
+}
+.container-fullheight {
+  height: 100%;
 }

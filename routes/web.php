@@ -27,3 +27,8 @@ Auth::routes();
 Route::resource('/','HomeController');
 Route::resource('/search','SearchController');
 Route::resource('/messages','Logged\MessageController');
+
+
+Route::get('/prova', function () {
+    return view('messages');
+});

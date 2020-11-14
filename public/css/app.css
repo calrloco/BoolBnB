@@ -4955,7 +4955,7 @@ main {
   flex-direction: row;
   height: 3rem;
   width: 3rem;
-  background-color: #FF385C;
+  background-color: #ff385c;
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -5130,7 +5130,7 @@ main {
 }
 
 .jumbotron__text-button:hover {
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 }
 
 .highlited {

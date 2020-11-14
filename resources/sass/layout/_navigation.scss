@@ -1,12 +1,22 @@
 .nav {
     @include flex(row, space-between, center);
     height: var(--nav-height);
-    font-size:1.4rem;
+    font-size: 1.4rem;
+    background-color: inherit;
+
+    &-container {
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
+    }
+
     &__logo {
         flex: 1;
         @include flex(row, flex-start, center);
         & img {
             height: 3.2rem;
+            cursor: pointer;
         }
     }
 
@@ -28,27 +38,55 @@
             border: 1px solid #e2e2e2;
             @include flex(row, space-between, center);
             padding: 0 2rem;
+            color: var(--color-font-black);
+            &-clciked {
+                height: 66px;
+            }
             &:hover {
                 box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
                 border: 1px solid transparent;
             }
         }
         &-icon {
+            @include flex(row, center, center);
             height: 3rem;
             width: 3rem;
-            background-color: rebeccapurple;
+            background-color: #ff385c;
             border-radius: 50%;
             -webkit-border-radius: 50%;
             -moz-border-radius: 50%;
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
+            color: #fff;
+
+            & i {
+                transform: scaleX(-1);
+                font-size: 1.3rem;
+                color: #fff;
+            }
         }
     }
     &__user {
         flex: 1;
         @include flex(row, flex-end, center);
         position: relative;
+
+        &-box {
+            @include flex(row-reverse, space-between, center);
+            transition: all 0.2s;
+            background-color: #fff;
+            border: 1px solid #e2e2e2;
+            padding: 1rem;
+            font-size: 2.3rem;
+            border-radius: 10rem;
+            cursor: pointer;
+            &:hover {
+                border: 1px solid transparent;
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+            }
+        }
         &-button {
+            @include flex(row, center, center);
             height: 4.2rem;
             border-radius: 2.1rem;
             -webkit-border-radius: 2.1rem;
@@ -58,20 +96,76 @@
             width: 4.2rem;
             border: 1px solid #e2e2e2;
             cursor: pointer;
+            background-color: #717171;
+            box-sizing: border-box;
+            z-index: 3;
+            position: relative;
+            overflow: hidden;
+            margin-left: 2rem;
+            & img {
+                height: 4rem;
+            }
         }
-        &__menu{
-            position:absolute;
-            top:120%;
-            background-color:red;
+        &__menu {
+            @include flex(column, flex-start, flex-start);
+            position: absolute;
+            top: 110%;
+            background-color: #fff;
             list-style: none;
             padding-right: 5rem;
-            padding-top: .5rem;
+            padding-top: 0.5rem;
             padding-bottom: 3rem;
-            border-radius:1.5rem;
-            width:20rem;
-            &-item a{
-            
-              text-decoration: none;
+            border-radius: 1.5rem;
+            width: 20rem;
+            padding: 1.5rem;
+            display: none;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+            &-item {
+                @include flex(row, center, center);
+                flex: 1;
+                padding: 0.6rem 0;
+                position: relative;
+                width: 100%;
+                margin-bottom: 0.2rem;
+                cursor: pointer;
+                border-bottom: 1px solid gray;
+                border-top: 1px solid gray;
+
+                &::before {
+                    content: "";
+                    left: 0;
+                    position: absolute;
+                    width: 0.5%;
+                    height: 100%;
+                    background-color: gray;
+                    z-index: 1;
+                    transition: all 0.2s;
+                }
+                &::after {
+                    content: "";
+                    position: absolute;
+                    right: 0;
+                    width: 0.5%;
+                    height: 100%;
+                    background-color: gray;
+                    z-index: 1;
+                    transition: all 0.2s;
+                }
+                &:hover::before {
+                    width: 50%;
+                }
+                &:hover::after {
+                    width: 50%;
+                }
+
+                & a {
+                    color: var(--color-font-black);
+                    text-decoration: none;
+                    z-index: 2;
+                }
+                &:hover .nav-link {
+                    color: #fff;
+                }
             }
         }
     }

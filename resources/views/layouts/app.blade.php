@@ -25,7 +25,7 @@
     <div class="container-page">
       @include('partials/navbar')
      
-        <main class="py-4">
+        <main class="">
             @yield('content')
         </main>
         

@@ -28,8 +28,7 @@
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background-image: url('https://st3.idealista.it/news/archivie/styles/news_detail/public/2019-08/casa_malaga_fachada.jpg?sv=L9VS5bO4&itok=BhTqfmqO');
-        background-size: contain;
+        overflow: hidden;
     }
 
        
@@ -40,7 +39,7 @@
 
 .message-info {
     width: 80%;
-    min-height: 100px;
+    min-height: 150px;
     height: 100%;
     @include flex(columns, flex-start, center);
 

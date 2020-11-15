@@ -9,17 +9,17 @@
     </form>
     <form method="POST" action=""> 
         @csrf
-        
+        @method('POST')
         <!-- TITOLO -->
         <div class="input-row">
-        <label for="title">Titolo</label>
-        <input type="text" name="title" placeholder="Inserisci il titolo" class="" required />
+            <label for="title">Titolo</label>
+            <input type="text" name="title" placeholder="Inserisci il titolo" class="" required />
         </div>
 
         <!-- INDIRIZZO -->
         <div class="input-row">
-        <label for="address">Indirizzo</label>
-        <input type="text" name="address" placeholder="l'indirizzo del tuo appartamento" class="" required />
+            <label for="address">Indirizzo</label>
+            <input type="text" name="address" placeholder="l'indirizzo del tuo appartamento" class="" required />
         </div>
 
         <div class="input-row">
@@ -65,15 +65,22 @@
                 </div>
             </div>
 
-            <div class="input-row">
+            <!-- SERVIZI -->
+            <div class="input-group">
                 @foreach($services as $service)
-                <label for="services">{{ $service->service . " " . $service->icon }}</label>
-                <input type="checkbox" name="services[]" value="{{ $service->id }}">
+                <div class="label-input">
+                    {{-- <i class="{{$service->icon}}"></> --}}
+                    <label for="services">{{ $service->service }}</label>
+                    <input type="checkbox" name="services[]" value="{{ $service->id }}">
+                </div>
                 @endforeach
 
             </div>
 
-                <input type="hidden" name="user-id" value="{{ Auth::user()->id }}">
+            <input type="hidden" name="user-id" value="{{ Auth::user()->id }}">
+            <input type="submit" class="">
+
+
         </div>
 
 
@@ -83,5 +90,5 @@
 
     
 </div>
-
+@endsection
 

@@ -69,7 +69,7 @@
                     </textarea>
                     </p>
                     <p class "send-message">
-                    <input type="submit" name="mail-submit" value="Invia mail!"></submit>
+                    <input type="submit" name="mail-submit" value="Invia mail!"></input>
                     </p>
                 </form>
             </div>

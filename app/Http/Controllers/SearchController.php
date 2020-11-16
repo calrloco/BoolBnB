@@ -20,7 +20,8 @@ class SearchController extends Controller
 
     public function show(Apartment $apartment)
     {
-       
+       $apartment = Apartment::get();
+       return view('apartment', compact('apartment'));
     }
 
 }

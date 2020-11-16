@@ -5238,6 +5238,87 @@ main {
   border-radius: 1.2rem;
 }
 
+.container-center {
+  height: 100%;
+}
+
+.message-deck {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.message-card {
+  width: 60%;
+  min-height: 100px;
+  margin-top: 10px;
+  border: 1px solid #e2e2e2;
+  border-radius: 1.2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+
+.apart-info {
+  width: 20%;
+  min-height: 100px;
+  height: 100%;
+  border-right: 1px solid #e2e2e2;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.apart-info .apart-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.message-info {
+  width: 80%;
+  min-height: 150px;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: columns;
+}
+
+form {
+  width: 80%;
+}
+
+input {
+  width: 100%;
+}
+
+.input-row {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+textarea {
+  width: 100%;
+}
+
 .top-section {
   width: 80%;
   margin: 0 auto;

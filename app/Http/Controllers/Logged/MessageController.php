@@ -21,9 +21,11 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = User::join('apartments','users.id','=','apartments.user_id')
-        ->join('messages','apartments.id','=','messages.apartment_id')
-        ->where('users.id','=', Auth::user()->id)->get();
+        $messages = Message::join('apartments', 'messages.apartment_id', '=', 'apartments.id')
+        ->join('images', 'images.apartment_id', '=', 'apartments.id')
+        ->where('apartments.user_id', '=', Auth::user()->id)
+        ->get();      
+        return view('logged.messages',compact('messages'));
     }
    
 
@@ -54,9 +56,11 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    // HO TOLTO MESSAGE $MESSAGE RICAVARMI LA LISTA MESSAGGI di USER
+    public function show(User $user)
     {
-      return view('logged.show',compact('message'));
+       
+
     }
 
     /**

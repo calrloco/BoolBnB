@@ -77,6 +77,14 @@
 
             </div>
 
+
+            <h5>aggiungi le tue immagini</h5>
+            <div class="container-upload">
+                <input class="img-input" type="file" name="img[]" class="form-control-file" id="img" accept="image/*">
+                
+            </div>
+            <a id="add-img" href="#"> <i class="fas fa-plus-circle"></i> </a>
+
             <input type="hidden" name="user-id" value="{{ Auth::user()->id }}">
             <input type="submit" class="">
 
@@ -88,7 +96,6 @@
 
 
 
-    
 </div>
 @endsection
 

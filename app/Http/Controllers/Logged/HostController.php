@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Carbon\carbon;
 use App\Apartment;
+use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,7 +44,8 @@ class HostController extends Controller
      */
     public function create()
     {
-        //
+        $services = Service::all();
+        return view('logged.add', compact('services'));
     }
 
     /**

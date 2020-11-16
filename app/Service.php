@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     protected $fillable = [
-        'service'
+        'service',
+        'description',
+        'icon'
     ];
 
     public function apartments()

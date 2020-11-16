@@ -28,6 +28,10 @@ Auth::routes();
 Route::resource('/','HomeController');
 Route::resource('/search','SearchController');
 Route::resource('/messages','Logged\MessageController');
+Route::resource('/host','Logged\HostController');
+Route::get('/prova', function () {
+    return view('logged.messages');
+});
 Route::get('/apartment', function () {
     return view('apartment');
 });

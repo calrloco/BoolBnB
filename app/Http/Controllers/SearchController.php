@@ -13,13 +13,15 @@ class SearchController extends Controller
      */
     public function index()
     {
-        
+        $apps = Apartment::get();
+        return view('search.search',compact('apps'));
     }
 
 
     public function show(Apartment $apartment)
     {
-       
+       $apartment = Apartment::get();
+       return view('apartment', compact('apartment'));
     }
 
 }

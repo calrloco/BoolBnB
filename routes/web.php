@@ -32,7 +32,7 @@ Route::resource('/host','Logged\HostController');
 Route::get('/prova', function () {
     return view('logged.messages');
 });
-Route::resource('/test','ViewsController');
+Route::resource('/view','ViewsController');
 Route::get('/apartment', function () {
     return view('apartment');
 });

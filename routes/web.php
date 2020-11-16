@@ -23,9 +23,12 @@ Auth::routes();
 //     Route::get('/home', 'HomeController@index')->name('home');
 //     Route::resource('posts', 'PostController');
 // });
-// ritorniamo la view home tramite il controller generale 
- 
+// ritorniamo la view home tramite il controller generale
+
 Route::resource('/','HomeController');
 Route::resource('/search','SearchController');
 Route::resource('/messages','Logged\MessageController');
 Route::resource('/test','ViewsController');
+Route::get('/apartment', function () {
+    return view('apartment');
+});

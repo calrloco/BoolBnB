@@ -4919,6 +4919,7 @@ main {
 }
 
 .nav-container {
+  z-index: 20;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -5229,6 +5230,168 @@ main {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 1.2rem;
+}
+
+.top-section {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.top-section .title-apt {
+  padding: 20px 0;
+}
+
+.top-section .title-apt .title {
+  font-size: 22px;
+}
+
+.top-section .title-apt .address-apt {
+  color: black;
+  text-decoration: none;
+}
+
+.slider-section {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.slider-section .slider-img {
+  width: 100%;
+  height: 300px;
+  background-color: tomato;
+  padding: 0 10px;
+  border-radius: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.slider-section .slider-img .apt-img-slider {
+  width: 90%;
+  height: 100%;
+  background-color: green;
+}
+
+.slider-section .slider-img .far {
+  font-size: 30px;
+  color: lightgrey;
+}
+
+.info-apt-section {
+  width: 80%;
+  min-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
+  margin: 10px auto;
+  background-color: yellow;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.info-apt-section .info-box-sx {
+  width: 50%;
+  height: 100%;
+  background-color: red;
+}
+
+.info-apt-section .info-box-sx .info-apt-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px 20px;
+}
+
+.info-apt-section .info-box-sx .info-apt-summary .info-host {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.info-apt-section .info-box-sx .info-apt-summary .info-apt {
+  font-size: 12px;
+}
+
+.info-apt-section .info-box-sx .info-apt-summary .host-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.info-apt-section .info-box-sx .split-line {
+  width: 95%;
+  margin: 0 auto;
+  border-bottom: 1px solid grey;
+}
+
+.info-apt-section .info-box-sx .apt-description {
+  padding: 20px 20px;
+  font-size: 15px;
+}
+
+.info-apt-section .info-box-sx .services-box {
+  padding: 10px 20px;
+}
+
+.info-apt-section .info-box-sx .services-box .services-title {
+  font-size: 20px;
+  font-weight: 500;
+  padding-bottom: 10px;
+}
+
+.info-apt-section .info-box-sx .services-box .service {
+  font-size: 12px;
+  padding: 5px;
+  list-style-type: none;
+}
+
+.info-apt-section .info-box-sx .services-box .service .fas {
+  padding-right: 10px;
+}
+
+.info-apt-section .info-box-dx {
+  width: 50%;
+  height: 100%;
+  background-color: blue;
+  position: sticky;
+  -webkit-position: -webkit-sticky;
+  top: 100px;
+  z-index: 2;
+}
+
+.info-apt-section .info-box-dx .send-message-box {
+  width: 80%;
+  background-color: grey;
+  margin: 20px auto;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 1.2rem;
+}
+
+.info-apt-section .info-box-dx .send-message-box .message-title {
+  font-size: 18px;
+  padding-bottom: 12px;
+}
+
+.info-apt-section .info-box-dx .send-message-box .message-form label {
+  padding-right: 5px;
+  font-size: 12px;
+  display: flex;
+  align-self: center;
+}
+
+.info-apt-section .info-box-dx .send-message-box .message-form p {
+  padding-bottom: 5px;
+}
+
+.map-section {
+  width: 80%;
+  height: 400px;
+  margin: 10px auto;
+  background-color: green;
 }
 
 h1 {

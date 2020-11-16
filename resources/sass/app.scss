@@ -6,7 +6,7 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
 //base
 @import 'layout/base';
-// abstract 
+// abstract
 @import 'abstract/mixins';
 @import 'abstract/var';
 
@@ -17,12 +17,10 @@
 
 //pages
 @import 'pages/home';
+@import 'pages/apartment';
 @import 'pages/auth/register';
 @import 'pages/auth/login';
 @import 'pages/auth/verify';
 
 //animations
 @import 'animations/animations';
-
-
-

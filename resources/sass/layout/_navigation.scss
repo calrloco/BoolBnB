@@ -4,6 +4,7 @@
     font-size: 1.4rem;
     background-color: inherit;
 
+
     &__search-city,
     &__search-date-start,
     &__search-date-end {
@@ -25,6 +26,7 @@
     }
 
     &-container {
+        z-index: 20;
         position: sticky;
         top: 0;
         background-color: #fff;

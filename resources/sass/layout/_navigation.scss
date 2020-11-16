@@ -4,7 +4,9 @@
     font-size: 1.4rem;
     background-color: inherit;
 
+
     &-container {
+        z-index: 20;
         position: sticky;
         top: 0;
         background-color: #fff;

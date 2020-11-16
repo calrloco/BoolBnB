@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="message-info">
-                <h4> <strong>Da: </strong> {{ $message->email }}</h4>
+                <p> <strong>Da: </strong> {{ $message->email }}</p>
                 <p> <strong>Messaggio: </strong> {{ $message->message }}</p>
             </div>
         </div>

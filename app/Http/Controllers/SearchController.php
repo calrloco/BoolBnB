@@ -13,7 +13,8 @@ class SearchController extends Controller
      */
     public function index()
     {
-        
+        $apps = Apartment::get();
+        return view('search.search',compact('apps'));
     }
 
 

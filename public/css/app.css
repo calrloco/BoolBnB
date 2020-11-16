@@ -4606,6 +4606,23 @@ readers do not read off random characters that represent icons */
 .fas {
   font-family: 'Font Awesome 5 Free';
   font-weight: 900; }
+/* media query */
+
+:root {
+  --pink-bnb: rgb(255,90,95);
+  --turcoise-bnb: rgb(0,166,153);
+  --orange-bnb: rgb(252,100,45);
+  --dark-gray: rgb(72,72,72);
+  --light-gray: rgb(118,118,118);
+  --nav-height: 8rem;
+  --footer-height: 15rem;
+  --nav-height: 8rem;
+  --color-font-black: #222222;
+  --button-color-withe: #fff;
+  --button-color-hover: #F7F7F7;
+  --form-radius: 1.1rem;
+}
+
 *,
 *::before,
 *::after {
@@ -4642,22 +4659,10 @@ button:focus {
 
 main {
   min-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
-}
-
-/* media query */
-
-:root {
-  --pink-bnb: rgb(255,90,95);
-  --turcoise-bnb: rgb(0,166,153);
-  --orange-bnb: rgb(252,100,45);
-  --dark-gray: rgb(72,72,72);
-  --light-gray: rgb(118,118,118);
-  --nav-height: 8rem;
-  --footer-height: 15rem;
-  --color-font-black: #222222;
-  --button-color-withe: #fff;
-  --button-color-hover: #F7F7F7;
-  --form-radius: 1.1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 @media screen and (max-width: 414px) {
@@ -5157,6 +5162,7 @@ main {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: top;
+  width: 100%;
 }
 
 .jumbotron__text {
@@ -5550,6 +5556,40 @@ h1 {
   display: flex;
   justify-content: center;
   padding: 15px;
+}
+
+.container__search {
+  height: inherit;
+  width: inherit;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: row;
+}
+
+.container__search-left {
+  flex: 1;
+}
+
+.container__search-right {
+  flex: 2;
+  background-color: aqua;
+}
+
+.container__search .search__resoults__apartment-cards {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+  padding: 0 2.4rem;
+}
+
+.container__search .search__resoults__apartment-cards-content {
+  flex: 0 1 calc(100% / 3);
+  background-color: antiquewhite;
+  padding: 0 0.8rem;
 }
 
 .active {

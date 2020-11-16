@@ -1,0 +1,24 @@
+.container__search{
+    height: inherit;
+    width: inherit;
+    flex:1;
+    width: 100%;
+    @include flex(row,flex-start,stretch);
+
+    &-left{
+        flex: 1;
+    }
+    &-right{
+        flex: 2;
+        background-color: aqua;
+    }
+    .search__resoults__apartment-cards{
+        @include flex(row,flex-start,flex-start);
+        padding:0 2.4rem;
+        &-content{
+            flex: 0 1 calc(100% / 3);
+            background-color: antiquewhite;
+            padding:0 .8rem;
+        }
+    }
+}

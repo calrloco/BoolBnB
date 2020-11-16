@@ -28,6 +28,7 @@ Auth::routes();
 Route::resource('/','HomeController');
 Route::resource('/search','SearchController');
 Route::resource('/messages','Logged\MessageController');
+Route::resource('/test','ViewsController');
 Route::get('/apartment', function () {
     return view('apartment');
 });

@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <header class="jumbotron">
         <div class="container-center container-fullheight">
             <div class="jumbotron__text">
@@ -13,17 +12,19 @@
         <section class="highlited">
             <p class="sponsor__home-title">In evidenza</p>
             <div class="sponsor__home">
-                @for ($i = 0; $i < 4; $i++)
+                @if(count($apartment) > 0)
+                @for ($i = 0; $i < 4 && $i < count($apartment); $i++)
                     <div class="sponsor__home-card">
                         <div class="sponsor__home-card-img">
                             <img src="https://a0.muscache.com/im/pictures/a0316ecb-e49b-4b3a-b6b6-c2876b820e8c.jpg?im_w=720"
                                 alt="">
                         </div>
                         <div class="sponsor__home-card-text">
-                            <p>{{-- {{ $apartment[$i]->title }} --}}</p>
+                            <p>{{ $apartment[$i]->title }}</p>
                         </div>
                     </div>
                 @endfor
+                @endif
         </section>
     </div>
     {{-- <div class="row justify-content-center">

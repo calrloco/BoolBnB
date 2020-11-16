@@ -43,13 +43,10 @@ h1 {
 }
 
 .signup_container {
-    font-family: 'Open Sans', sans-serif;
     background: $main_background;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px 10px;
-
+    @include flex(row,center,flex-start);
+    padding: 50px 10px;
+   
 
     .login_btn {
         border: 1px solid $primary_background;
@@ -70,7 +67,7 @@ h1 {
         border: 2px solid #eaeaea;
         padding: 13px;
         box-shadow: $box_shadow_one;
-
+        
 
         p {
             text-align: center;

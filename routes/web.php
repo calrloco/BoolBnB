@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,11 @@ Auth::routes();
 //     Route::get('/home', 'HomeController@index')->name('home');
 //     Route::resource('posts', 'PostController');
 // });
-// ritorniamo la view home tramite il controller generale 
- 
+// ritorniamo la view home tramite il controller generale
+
 Route::resource('/','HomeController');
 Route::resource('/search','SearchController');
 Route::resource('/messages','Logged\MessageController');
+Route::get('/apartment', function () {
+    return view('apartment');
+});

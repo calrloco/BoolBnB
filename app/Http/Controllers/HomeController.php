@@ -18,8 +18,8 @@ class HomeController extends Controller
         $apartment = Apartment::join('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
             ->where('apartment_sponsor.end_sponsor', '>=', Carbon::now())->inRandomOrder()
             ->get();
-        dd($apartment);
-        return view('home', compact('apartmet'));
+        // dd($apartment);
+        return view('home', compact('apartment'));
     }
 
     /**

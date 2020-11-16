@@ -21,6 +21,5 @@ class AuthKey
         }else{
             return response()->json(['messaggio'=>'chiave non ricosciuta']);
         }
-       
     }
 }

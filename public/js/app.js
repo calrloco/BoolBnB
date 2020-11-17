@@ -42349,9 +42349,37 @@ module.exports = function(module) {
   !*** ./resources/js/add.js ***!
   \*****************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\lavori\\BoolBnB\\resources\\js\\add.js: Unexpected token, expected \",\" (27:35)\n\n\u001b[0m \u001b[90m 25 | \u001b[39m        })\u001b[33m.\u001b[39mgo()\u001b[0m\n\u001b[0m \u001b[90m 26 | \u001b[39m        \u001b[33m.\u001b[39mthen(\u001b[36mfunction\u001b[39m(response){\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 27 | \u001b[39m            console\u001b[33m.\u001b[39mlog($(\u001b[32m'#title'\u001b[39m)\u001b[33m;\u001b[39m)\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m                                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 28 | \u001b[39m            \u001b[0m\n\u001b[0m \u001b[90m 29 | \u001b[39m        \u001b[0m\n\u001b[0m \u001b[90m 30 | \u001b[39m        \u001b[36mvar\u001b[39m address \u001b[33m=\u001b[39m response\u001b[33m.\u001b[39mresults[\u001b[35m0\u001b[39m]\u001b[33m.\u001b[39maddress[\u001b[32m'streetName'\u001b[39m]\u001b[33m;\u001b[39m\u001b[0m\n    at Parser._raise (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:790:17)\n    at Parser.raiseWithData (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:783:17)\n    at Parser.raise (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:777:17)\n    at Parser.unexpected (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:9095:16)\n    at Parser.expect (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:9081:28)\n    at Parser.parseCallExpressionArguments (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:10280:14)\n    at Parser.parseCoverCallAndAsyncArrowHead (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:10203:29)\n    at Parser.parseSubscript (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:10139:19)\n    at Parser.parseSubscripts (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:10111:19)\n    at Parser.parseExprSubscripts (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:10100:17)\n    at Parser.parseUpdate (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:10074:21)\n    at Parser.parseMaybeUnary (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:10063:17)\n    at Parser.parseExprOps (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:9933:23)\n    at Parser.parseMaybeConditional (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:9907:23)\n    at Parser.parseMaybeAssign (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:9870:21)\n    at Parser.parseExpressionBase (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:9815:23)\n    at C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:9809:39\n    at Parser.allowInAnd (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:11504:16)\n    at Parser.parseExpression (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:9809:17)\n    at Parser.parseStatementContent (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:11770:23)\n    at Parser.parseStatement (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:11639:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:12221:25)\n    at Parser.parseBlockBody (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:12207:10)\n    at Parser.parseBlock (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:12191:10)\n    at Parser.parseFunctionBody (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:11184:24)\n    at Parser.parseFunctionBodyAndFinish (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:11168:10)\n    at C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:12357:12\n    at Parser.withTopicForbiddingContext (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:11479:14)\n    at Parser.parseFunction (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:12356:10)\n    at Parser.parseFunctionOrFunctionSent (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:10613:17)\n    at Parser.parseExprAtom (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:10449:21)\n    at Parser.parseExprSubscripts (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:10094:23)\n    at Parser.parseUpdate (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:10074:21)\n    at Parser.parseMaybeUnary (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:10063:17)\n    at Parser.parseExprOps (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:9933:23)\n    at Parser.parseMaybeConditional (C:\\lavori\\BoolBnB\\node_modules\\@babel\\parser\\lib\\index.js:9907:23)");
+var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
+var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; // aggiunta campo input file fino ad un max di 5
+
+$('#add-img').click(function () {
+  if ($('.img-input').length < 5) {
+    $('.container-upload').append("<input class=\"img-input\" type=\"file\" name=\"img[]\" class=\"form-control-file\" id=\"img\" accept=\"image/*\">");
+
+    if ($('.img-input').length >= 5) {
+      $('#add-img').hide();
+    }
+  }
+}); // functions
+// function searchAddress(data, api){
+//     if (data != ''){
+//     tt.services.fuzzySearch({
+//     key: api,
+//     query: data
+//     }).go()
+//     .then(function(response){
+//     var address = response.results[0].address['streetName'];
+//     var longitude = response.results[0].position['lng'];
+//     var latitude = response.results[0].position['lat'];
+//     var city = response.results[0].address['municipality'];
+//     var postalCode = response.results[0].address['postalCode'];
+//     var country = response.results[0].address['country'];
+//     // se sono nel form crea apartament richiamo la funzione
+//     console.log('lat' + response.results[0].position['lat']);
+//     console.log('lng' + response.results[0].position['lng']);
 
 /***/ }),
 

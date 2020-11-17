@@ -7,19 +7,19 @@
            
     
     </form>
-    <form method="POST" action=""> 
+    <form method="GET" action=""> 
         @csrf
-        @method('POST')
+        @method('GET')
         <!-- TITOLO -->
         <div class="input-row">
             <label for="title">Titolo</label>
-            <input type="text" name="title" placeholder="Inserisci il titolo" class="" required />
+            <input type="text" id="title" name="title" placeholder="Inserisci il titolo" class="" required />
         </div>
 
         <!-- INDIRIZZO -->
         <div class="input-row">
             <label for="address">Indirizzo</label>
-            <input type="text" name="address" placeholder="l'indirizzo del tuo appartamento" class="" required />
+            <input type="text" id="address" name="address" placeholder="l'indirizzo del tuo appartamento" class="" required />
         </div>
 
         <div class="input-row">
@@ -86,7 +86,7 @@
             <a id="add-img" href="#"> <i class="fas fa-plus-circle"></i> </a>
 
             <input type="hidden" name="user-id" value="{{ Auth::user()->id }}">
-            <input type="submit" class="">
+            <input type="submit" id="crea">
 
 
         </div>

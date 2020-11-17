@@ -15,62 +15,30 @@ $('#add-img').click(function() {
 
 
 
-$('#crea').click(function() {
-    var data = $('#address');
-    if (data != ''){
-
-        tt.services.fuzzySearch({
-        key: apiKey,
-        query: data
-        }).go()
-        .then(function(response){
-            console.log($('#title');)
-            
-        
-        var address = response.results[0].address['streetName'];
-        var longitude = response.results[0].position['lng'];
-        var latitude = response.results[0].position['lat'];
-        var city = response.results[0].address['municipality'];
-        var postalCode = response.results[0].address['postalCode'];
-        var country = response.results[0].address['country'];
-        
-        // se sono nel form crea apartament richiamo la funzione
-        console.log('lat' + response.results[0].position['lat']);
-        console.log('lng' + response.results[0].position['lng']);
-    
-    
-    });
-});
-
-
-
-
-
-
 
 
 
 // functions
-    function searchAddress(data, api){
+    // function searchAddress(data, api){
 
-        if (data != ''){
-        tt.services.fuzzySearch({
-        key: api,
-        query: data
-        }).go()
-        .then(function(response){
+    //     if (data != ''){
+    //     tt.services.fuzzySearch({
+    //     key: api,
+    //     query: data
+    //     }).go()
+    //     .then(function(response){
             
         
-        var address = response.results[0].address['streetName'];
-        var longitude = response.results[0].position['lng'];
-        var latitude = response.results[0].position['lat'];
-        var city = response.results[0].address['municipality'];
-        var postalCode = response.results[0].address['postalCode'];
-        var country = response.results[0].address['country'];
+    //     var address = response.results[0].address['streetName'];
+    //     var longitude = response.results[0].position['lng'];
+    //     var latitude = response.results[0].position['lat'];
+    //     var city = response.results[0].address['municipality'];
+    //     var postalCode = response.results[0].address['postalCode'];
+    //     var country = response.results[0].address['country'];
         
-        // se sono nel form crea apartament richiamo la funzione
-        console.log('lat' + response.results[0].position['lat']);
-        console.log('lng' + response.results[0].position['lng']);
+    //     // se sono nel form crea apartament richiamo la funzione
+    //     console.log('lat' + response.results[0].position['lat']);
+    //     console.log('lng' + response.results[0].position['lng']);
         
         
-        });
+        

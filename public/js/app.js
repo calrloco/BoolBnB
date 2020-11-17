@@ -42398,7 +42398,8 @@ function compileHandlebars(risp) {
     var context = {
       city: risp[i].city,
       title: troncaStringa(risp[i].title),
-      id: "<input type=\"hidden\" name=\"apartment_id\" value=".concat(risp[i].id, ">")
+      id: "<input type=\"hidden\" name=\"apartment_id\" value=".concat(risp[i].apartment_id, ">"),
+      img: risp[i].path
     };
     var htmlContext = templateCards(context);
     $(".search__resoults__apartment-cards").append(htmlContext);

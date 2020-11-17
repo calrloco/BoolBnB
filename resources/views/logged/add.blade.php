@@ -7,33 +7,33 @@
            
     
     </form>
-    <form method="POST" action=""> 
+    <form id="creazione" method="GET"> 
         @csrf
-        @method('POST')
+        @method('GET')
         <!-- TITOLO -->
         <div class="input-row">
             <label for="title">Titolo</label>
-            <input type="text" name="title" placeholder="Inserisci il titolo" class="" required />
+            <input type="text" id="title" name="title" placeholder="Inserisci il titolo" class="" required />
         </div>
 
         <!-- INDIRIZZO -->
         <div class="input-row">
             <label for="address">Indirizzo</label>
-            <input type="text" name="address" placeholder="l'indirizzo del tuo appartamento" class="" required />
+            <input type="text" id="address" name="address" placeholder="l'indirizzo del tuo appartamento" class="" required />
         </div>
 
         <div class="input-row">
             <div class="input-group">
                 <div class="label-input">
                     <label for="city">Città</label>
-                    <input type="text" name="city">
+                    <input id="city" type="text" name="city">
                 </div>
                 <div class="label-input">
                     <label for="postal-code">Codice Postale</label>
-                    <input type="text" name="postal-code">
+                    <input id="postal" type="text" name="postal-code">
                 </div>
                 <div class="label-input">
-                    <label for="country">Nazione</label>
+                    <label id="country" for="country">Nazione</label>
                     <input type="text" name="country">
                 </div>
             </div>
@@ -71,14 +71,23 @@
                 <div class="label-input">
                     <span><i class="{{$service->icon}}"></i></span>
                     <label for="services">{{ $service->service }}</label>
-                    <input type="checkbox" name="services[]" value="{{ $service->id }}">
+                    <input type="checkbox" name="services" value="{{ $service->id }}">
                 </div>
                 @endforeach
 
             </div>
 
+
+            <h5>aggiungi le tue immagini</h5>
+            <div class="container-upload">
+                <input class="img-input" type="file" name="img" class="form-control-file" id="img" accept="image/*">
+                
+            </div>
+            <a id="add-img" href="#"> <i class="fas fa-plus-circle"></i> </a>
+
             <input type="hidden" name="user-id" value="{{ Auth::user()->id }}">
-            <input type="submit" class="">
+            <input type="submit" id="crea">
+            
 
 
         </div>
@@ -88,7 +97,6 @@
 
 
 
-    
 </div>
 @endsection
 

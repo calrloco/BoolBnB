@@ -14,9 +14,20 @@ class ApartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index(Request $request){
         
-        return response()->json(Apartment::get(), 200);
+        $validator = Validator::make($request->all(),[
+             'lat'=>'required',
+             'lng'=>'required',
+             'maxDist'=>'required',
+        ]);
+        
+        if($validator->fails()){
+            return response()->json($validator->messages());
+        }
+        $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat), 
+        point(longitude, latitude)) * .001 as distance")->having('distance','<=',$request->maxDist)->join('images','apartments.id','=','images.apartment_id')->orderBy('distance','asc')->get();
+        return response()->json($query, 200);
     }
 
     /**
@@ -63,6 +74,10 @@ class ApartmentController extends Controller
         $apartment = Apartment::create($request->all());
         $apartment->services()->attach($request['services']);
         
+        if (!empty($request['img'])) {
+            $request['img'] = Storage::disk('public')->put('images', $request['img']);
+
+
         return response()->json($apartment,201); 
     }
 

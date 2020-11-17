@@ -4,7 +4,6 @@
     font-size: 1.4rem;
     background-color: inherit;
 
-
     &-container {
         z-index: 20;
         position: sticky;
@@ -23,12 +22,46 @@
     }
 
     &__search {
-        flex: 1;
         @include flex(row, center, center);
 
+        &-large {
+            height: 100%;
+            flex: 3;
+        }
+
+        & input {
+            outline: none;
+            box-shadow: none;
+            border: none;
+            background-color: transparent;
+            height: 100%;
+            
+        }
+        & label {
+            margin-bottom: 0.2rem;
+        }
+        &-city,
+        &-date-start,
+        &-date-end {
+            @include flex(column, center, flex-start);
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: inherit;
+            margin-right: 1rem;
+            flex:1;
+            
+    
+            &:hover {
+                background-color: #f7f7f7;
+            }
+    
+            &__search-date-start::after {
+                width: 1rem;
+                height: 10px;
+                background-color: black;
+            }
+        }
         &-button {
-            height: 4.8rem;
-            width: 30rem;
             cursor: pointer;
             border-radius: 3.2rem;
             -webkit-border-radius: 3.2rem;
@@ -41,6 +74,13 @@
             @include flex(row, space-between, center);
             padding: 0 2rem;
             color: var(--color-font-black);
+
+
+            &-large {
+                box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+                border:none;
+                padding: 0 0;
+            }
             &-clciked {
                 height: 66px;
             }
@@ -48,6 +88,10 @@
                 box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
                 border: 1px solid transparent;
             }
+            &-large:hover {
+               border:none;
+            }
+            
         }
         &-icon {
             @include flex(row, center, center);
@@ -60,8 +104,15 @@
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
             color: #fff;
-
-            & i {
+            background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%) !important;
+            &-big {
+                border-radius: inherit;
+                padding: 2rem;
+                width: auto;
+                align-self: center;
+                margin-right:1rem;
+            }
+             i {
                 transform: scaleX(-1);
                 font-size: 1.3rem;
                 color: #fff;
@@ -130,8 +181,13 @@
                 width: 100%;
                 margin-bottom: 0.2rem;
                 cursor: pointer;
-                border-bottom: 1px solid gray;
-                border-top: 1px solid gray;
+                border-bottom: 1px solid rgb(118,118,118);
+                border-top: 1px solid rgb(118,118,118);
+                
+                &:hover{
+                    border-bottom: 1px solid rgb(255,90,95);
+                    border-top: 1px solid rgb(255,90,95);
+                }
 
                 &::before {
                     content: "";
@@ -139,7 +195,7 @@
                     position: absolute;
                     width: 0.5%;
                     height: 100%;
-                    background-color: gray;
+                    background-color: rgb(118,118,118);
                     z-index: 1;
                     transition: all 0.2s;
                 }
@@ -149,15 +205,17 @@
                     right: 0;
                     width: 0.5%;
                     height: 100%;
-                    background-color: gray;
+                    background-color: rgb(118,118,118);
                     z-index: 1;
                     transition: all 0.2s;
                 }
                 &:hover::before {
                     width: 50%;
+                    background-color:rgb(255,90,95);
                 }
                 &:hover::after {
                     width: 50%;
+                    background-color:rgb(255,90,95);
                 }
 
                 & a {

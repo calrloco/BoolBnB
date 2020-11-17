@@ -10,7 +10,7 @@
 </head>
 
 <body>
-   
+   @dd($views)
 </body>
 
 </html>

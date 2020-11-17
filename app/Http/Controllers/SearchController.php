@@ -11,10 +11,16 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        $apps = Apartment::get();
-        return view('search.search',compact('apps'));
+        $address = $request->address;
+        return view('search.search', compact('address'));
     }
 
 

@@ -4,16 +4,18 @@
     <div class="container__search">
         <div class="container__search-left">
             <div class="search__resoults-title">
-                <p>I tuoi risultati</p>
+                <p>I tuoi risultati per</p>
+                <p id="address-inst">{{$address}}</p>
             </div>
             <div class="search__resouts-filters"></div>
             <div class="search__resoults__apartment">
                 <div class="search__resoults__apartment-cards"></div>
             </div>
         </div>
-        <div class="container__search-right"></div>
+        <div class="container__search-right" id="map"></div>
         
     </div>
+ 
         <script id="handlebars_cards" type="text/x-handlebars-template">
             <div class="search__resoults__apartment-cards-content">
                <form action="{{route('view.store')}}" method="POST">

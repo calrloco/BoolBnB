@@ -42357,38 +42357,72 @@ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
 
+var APPLICATION_NAME = 'My Application';
+var APPLICATION_VERSION = '1.0';
+tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
+var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk';
+var map = tt.map({
+  key: apiKey,
+  container: 'map',
+  center: [12.49334, 41.88996],
+  style: 'tomtom://vector/1/basic-main',
+  zoom: 10
+});
 $(document).ready(function () {
-  $(".nav__user-box").click(function () {
-    $(".nav__user__menu").toggleClass("active");
-  });
-
-  var getCards = function () {
-    $.ajax({
-      url: "http://127.0.0.1:8000/api/apartments",
-      method: "GET",
-      headers: {
-        KEY: "test"
-      },
-      data: {
-        lat: 41.94989,
-        lng: 12.53509,
-        maxDist: 20
-      },
-      success: function success(risposta) {
-        console.log(risposta);
-        compileHandlebars(risposta);
-      },
-      error: function error() {
-        console.log("error");
-      }
-    });
+  var instantSearch = function () {
+    getCoordinates($('#address-inst').html());
   }();
 
+  $('.nav__search-icon-big').click(function () {
+    $(".search__resoults__apartment-cards").empty();
+    console.log($('#search').val());
+    getCoordinates($('#search').val());
+  });
+  $(".nav__user-box").click(function () {
+    $(".nav__user__menu").toggleClass("active");
+    getcards();
+  });
   $("#hidenav").click(function () {
     $(this).hide();
     hidenav();
   });
-}); /// funziione per inserire le card della ricerca nel dom
+}); //// prendi coordinate dell'input////////////////
+
+function getCoordinates(input) {
+  tt.services.fuzzySearch({
+    key: '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk',
+    query: input
+  }).go().then(function (response) {
+    var longitude = response.results[0].position['lng'];
+    var latitude = response.results[0].position['lat'];
+    console.log(response);
+    getCards(latitude, longitude);
+  });
+} /////////// chiamata all nostro db che richiama funzione handlebars
+
+
+function getCards(lat, lng) {
+  $.ajax({
+    url: "http://127.0.0.1:8000/api/apartments",
+    method: "GET",
+    headers: {
+      KEY: "test"
+    },
+    data: {
+      lat: lat,
+      lng: lng,
+      maxDist: 1000
+    },
+    success: function success(risposta) {
+      compileHandlebars(risposta);
+    },
+    error: function error() {
+      console.log("error");
+    }
+  });
+} ////////////////////////////////////
+/// funziione per inserire le card della ricerca nel dom
+
 
 function compileHandlebars(risp) {
   var source = $("#handlebars_cards").html();

@@ -27,7 +27,7 @@ $(document).ready(function() {
                 console.log("error");
             }
         });
-    })();
+    });
     $("#hidenav").click(function() {
         $(this).hide();
         hidenav();

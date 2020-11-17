@@ -7,7 +7,7 @@
            
     
     </form>
-    <form method="GET" action=""> 
+    <form id="creazione" method="GET"> 
         @csrf
         @method('GET')
         <!-- TITOLO -->
@@ -26,14 +26,14 @@
             <div class="input-group">
                 <div class="label-input">
                     <label for="city">Città</label>
-                    <input type="text" name="city">
+                    <input id="city" type="text" name="city">
                 </div>
                 <div class="label-input">
                     <label for="postal-code">Codice Postale</label>
-                    <input type="text" name="postal-code">
+                    <input id="postal" type="text" name="postal-code">
                 </div>
                 <div class="label-input">
-                    <label for="country">Nazione</label>
+                    <label id="country" for="country">Nazione</label>
                     <input type="text" name="country">
                 </div>
             </div>
@@ -71,7 +71,7 @@
                 <div class="label-input">
                     <span><i class="{{$service->icon}}"></i></span>
                     <label for="services">{{ $service->service }}</label>
-                    <input type="checkbox" name="services[]" value="{{ $service->id }}">
+                    <input type="checkbox" name="services" value="{{ $service->id }}">
                 </div>
                 @endforeach
 
@@ -80,13 +80,14 @@
 
             <h5>aggiungi le tue immagini</h5>
             <div class="container-upload">
-                <input class="img-input" type="file" name="img[]" class="form-control-file" id="img" accept="image/*">
+                <input class="img-input" type="file" name="img" class="form-control-file" id="img" accept="image/*">
                 
             </div>
             <a id="add-img" href="#"> <i class="fas fa-plus-circle"></i> </a>
 
             <input type="hidden" name="user-id" value="{{ Auth::user()->id }}">
             <input type="submit" id="crea">
+            
 
 
         </div>

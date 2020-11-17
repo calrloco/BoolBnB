@@ -42344,6 +42344,17 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/add.js":
+/*!*****************************!*\
+  !*** ./resources/js/add.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\lavori\\BoolBnB\\resources\\js\\add.js'");
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -42352,6 +42363,8 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+__webpack_require__(/*! ./add */ "./resources/js/add.js");
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
@@ -42362,7 +42375,7 @@ $(document).ready(function () {
     $(".nav__user__menu").toggleClass("active");
   });
 
-  var getCards = function () {
+  var getCards = function getCards() {
     $.ajax({
       url: "http://127.0.0.1:8000/api/apartments",
       method: "GET",
@@ -42382,7 +42395,7 @@ $(document).ready(function () {
         console.log("error");
       }
     });
-  }();
+  };
 
   $("#hidenav").click(function () {
     $(this).hide();

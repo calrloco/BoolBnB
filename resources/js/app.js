@@ -1,4 +1,5 @@
 require("./bootstrap");
+require("./add");
 var $ = require("jquery");
 const Handlebars = require("handlebars");
 
@@ -26,7 +27,7 @@ $(document).ready(function() {
                 console.log("error");
             }
         });
-    })();
+    });
     $("#hidenav").click(function() {
         $(this).hide();
         hidenav();

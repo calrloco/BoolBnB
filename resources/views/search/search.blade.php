@@ -35,4 +35,5 @@
                 
             </div>
         </script>
-    @endsection
+    <script src="{{ asset('js/map.js')}}"></script>
+@endsection

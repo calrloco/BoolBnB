@@ -6,7 +6,7 @@ $(document).ready(function() {
     $(".nav__user-box").click(function() {
         $(".nav__user__menu").toggleClass("active");
     });
-    var getCards = (function(lat,long) {
+    var getCards = (function() {
         $.ajax({
             url: "http://127.0.0.1:8000/api/apartments",
             method: "GET",
@@ -14,8 +14,8 @@ $(document).ready(function() {
                 KEY: "test"
             },
             data: {
-                lat: lat,
-                lng: long,
+                lat: 41.94989,
+                lng: 12.53509,
                 maxDist: 20
             },
             success: function(risposta) {

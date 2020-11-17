@@ -28,13 +28,19 @@ class HostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        // SE AMMINISTRATORE VENGONO RESTITUITI TUTTI GLI APPARTAMENTI
         if((Auth::user()->role->role)== "admin"){
-            $apartaments = Apartment::all();
+            
+            $apartments = Apartment::get();
+        // SE UTENTE VENGONO VISUALIZZATI GLI APPARTAMENTI DA LUI REGISTRATI
         } elseif ((Auth::user()->role->role)== "host") {
-            $apartaments = Apartment::where('user_id',Auth::id())->orderBy('created_at','desc');
+            $apartments = Apartment::where('apartments.user_id', '=' ,Auth::id())
+            ->get();
+            // ->orderBy('created_at','desc');
+            
         }
-        return view('admin.apartaments.index', compact('apartaments'));
+        return view('logged.apartments', compact('apartments'));
     }
 
     /**

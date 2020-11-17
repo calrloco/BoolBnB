@@ -4896,33 +4896,6 @@ main {
   background-color: inherit;
 }
 
-.nav__search-city,
-.nav__search-date-start,
-.nav__search-date-end {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  cursor: pointer;
-  padding: 1rem;
-  height: 100%;
-  border-radius: inherit;
-}
-
-.nav__search-city:hover,
-.nav__search-date-start:hover,
-.nav__search-date-end:hover {
-  background-color: #f7f7f7;
-}
-
-.nav__search-city__search-date-start::after,
-.nav__search-date-start__search-date-start::after,
-.nav__search-date-end__search-date-start::after {
-  width: 1rem;
-  height: 10px;
-  background-color: black;
-}
-
 .nav-container {
   z-index: 20;
   position: -webkit-sticky;
@@ -4946,7 +4919,6 @@ main {
 }
 
 .nav__search {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -4955,6 +4927,7 @@ main {
 
 .nav__search-large {
   height: 100%;
+  flex: 3;
 }
 
 .nav__search input {
@@ -4962,10 +4935,39 @@ main {
   box-shadow: none;
   border: none;
   background-color: transparent;
+  height: 100%;
 }
 
 .nav__search label {
   margin-bottom: 0.2rem;
+}
+
+.nav__search-city,
+.nav__search-date-start,
+.nav__search-date-end {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: inherit;
+  margin-right: 1rem;
+  flex: 1;
+}
+
+.nav__search-city:hover,
+.nav__search-date-start:hover,
+.nav__search-date-end:hover {
+  background-color: #f7f7f7;
+}
+
+.nav__search-city__search-date-start::after,
+.nav__search-date-start__search-date-start::after,
+.nav__search-date-end__search-date-start::after {
+  width: 1rem;
+  height: 10px;
+  background-color: black;
 }
 
 .nav__search-button {
@@ -4987,6 +4989,8 @@ main {
 }
 
 .nav__search-button-large {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+  border: none;
   padding: 0 0;
 }
 
@@ -4997,6 +5001,10 @@ main {
 .nav__search-button:hover {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
   border: 1px solid transparent;
+}
+
+.nav__search-button-large:hover {
+  border: none;
 }
 
 .nav__search-icon {
@@ -5013,12 +5021,15 @@ main {
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   color: #fff;
+  background-image: radial-gradient(circle at center center, #ff385c 0%, #e61e4d 27.5%, #e31c5f 40%, #d70466 57.5%, #bd1e59 75%, #bd1e59 100%) !important;
 }
 
 .nav__search-icon-big {
   border-radius: inherit;
   padding: 2rem;
   width: auto;
+  align-self: center;
+  margin-right: 1rem;
 }
 
 .nav__search-icon i {
@@ -5111,8 +5122,13 @@ main {
   width: 100%;
   margin-bottom: 0.2rem;
   cursor: pointer;
-  border-bottom: 1px solid gray;
-  border-top: 1px solid gray;
+  border-bottom: 1px solid #767676;
+  border-top: 1px solid #767676;
+}
+
+.nav__user__menu-item:hover {
+  border-bottom: 1px solid #ff5a5f;
+  border-top: 1px solid #ff5a5f;
 }
 
 .nav__user__menu-item::before {
@@ -5121,7 +5137,7 @@ main {
   position: absolute;
   width: 0.5%;
   height: 100%;
-  background-color: gray;
+  background-color: #767676;
   z-index: 1;
   transition: all 0.2s;
 }
@@ -5132,17 +5148,19 @@ main {
   right: 0;
   width: 0.5%;
   height: 100%;
-  background-color: gray;
+  background-color: #767676;
   z-index: 1;
   transition: all 0.2s;
 }
 
 .nav__user__menu-item:hover::before {
   width: 50%;
+  background-color: #ff5a5f;
 }
 
 .nav__user__menu-item:hover::after {
   width: 50%;
+  background-color: #ff5a5f;
 }
 
 .nav__user__menu-item a {
@@ -5339,7 +5357,7 @@ textarea {
 
 .slider-section {
   width: 80%;
-  margin: 0 auto;
+  align-self: center;
 }
 
 .slider-section .slider-img {
@@ -5357,7 +5375,6 @@ textarea {
 .slider-section .slider-img .apt-img-slider {
   width: 90%;
   height: 100%;
-  background-color: green;
 }
 
 .slider-section .slider-img .far {
@@ -5694,5 +5711,13 @@ h1 {
 
 .active {
   display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.active-flex {
+  display: flex;
 }
 

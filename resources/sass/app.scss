@@ -4,11 +4,13 @@
 // Variables
 @import 'variables';
 @import '~@fortawesome/fontawesome-free/css/all.css';
-//base
-@import 'layout/base';
-// abstract 
+
+// abstract
 @import 'abstract/mixins';
 @import 'abstract/var';
+//base
+@import 'layout/base';
+
 
 // layout
 @import 'layout/grid';
@@ -17,12 +19,12 @@
 
 //pages
 @import 'pages/home';
+@import 'pages/messages';
+@import 'pages/add';
+@import 'pages/apartment';
 @import 'pages/auth/register';
 @import 'pages/auth/login';
 @import 'pages/auth/verify';
-
+@import 'pages/search';
 //animations
 @import 'animations/animations';
-
-
-

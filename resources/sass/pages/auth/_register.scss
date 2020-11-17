@@ -11,7 +11,6 @@ $placeholder_color: #5D698D;
 $box_shadow_one: 0px 8px 15px rgba(0, 0, 0, 0.1);
 $box_shadow_two: 0px 10px 20px rgba(43, 20, 11, 0.315);
 
-
 h1 {
     font-size: 20px;
     font-weight: bold;
@@ -43,13 +42,10 @@ h1 {
 }
 
 .signup_container {
-    font-family: 'Open Sans', sans-serif;
     background: $main_background;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px 10px;
-
+    @include flex(row,center,flex-start);
+    padding: 50px 10px;
+   
 
     .login_btn {
         border: 1px solid $primary_background;
@@ -70,7 +66,7 @@ h1 {
         border: 2px solid #eaeaea;
         padding: 13px;
         box-shadow: $box_shadow_one;
-
+        
 
         p {
             text-align: center;

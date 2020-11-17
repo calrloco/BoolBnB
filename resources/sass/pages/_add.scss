@@ -1,0 +1,23 @@
+form {
+    width: 80%;
+}
+
+input {
+    width: 100%;
+}
+
+.input-row {
+    width: 100%;
+    margin-top: 10px;
+    @include flex(column, flex-start, center);
+}
+
+.input-group {
+    width: 100%;
+    @include flex(row, space-between, center)
+}
+
+
+textarea {
+    width: 100%;
+}

@@ -16,6 +16,8 @@ class ServicesTableSeeder extends Seeder
         for($i = 0; $i < 7; $i++){
             $newService = new Service;
             $newService->service = $faker->word;
+            $newService->description = $faker->text;
+            $newService->icon = '<i class="fas fa-star"></i>';
             $newService->save();
         }
     }

@@ -7,12 +7,28 @@
                         alt="">
                 </a>
             </div>
-            <div class="nav__search">
-                <button class="nav__search-button">
-                    Inizia la ricerca
-                    <div class="nav__search-icon">
+            <div class="nav__search nav__search-large">
+                <button class="nav__search-button nav__search-button-large">
+                    {{-- <p>Inizia la ricerca<p> --}}
+                     <div class="nav__search-city">
+                         <label for="search">Dove</label>
+                     <input id="search" type="text" placeholder="dove vuoi andare">
+                    </div>
+                    <div class="nav__search-date-start">
+                        <label for="search">Quando vuoi partire</label>
+                        <input id="search-start" type="date" placeholder="dove vuoi andare">
+                    </div>
+                    <div class="nav__search-date-end">
+                        <label for="search">Quando vuoi partire</label>
+                        <input id="search-end" type="date" placeholder="dove vuoi andare">
+                    </div>
+                    <div class="nav__search-icon nav__search-icon-big">
+                        <p>Cerca</p>
                         <i class="fas fa-search"></i>
                     </div>
+                    {{-- <div class="nav__search-icon">
+                        <i class="fas fa-search"></i>
+                    </div> --}}
                 </button>
             </div>
             <div class="nav__user">

@@ -1,4 +1,6 @@
 require('./bootstrap');
+require('./add');
+
 var $ = require('jquery');
 const Handlebars = require("handlebars");
 

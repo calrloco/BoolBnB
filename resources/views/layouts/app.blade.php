@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container-page">
@@ -31,7 +31,7 @@
         
       @include('partials/footer')
     </div>
-  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('/js/app.js') }}"></script>
 </body>
 
 </html>

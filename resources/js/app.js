@@ -17,6 +17,7 @@ let map = tt.map({
 
 
 
+
 $(document).ready(function() {
 
     var instantSearch = (function(){

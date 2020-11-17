@@ -1,4 +1,5 @@
 require("./bootstrap");
+require("./add");
 var $ = require("jquery");
 const Handlebars = require("handlebars");
 
@@ -7,7 +8,6 @@ $(document).ready(function() {
         $(".nav__user__menu").toggleClass("active");
         getcards();
     });
-
     $("#hidenav").click(function() {
         $(this).hide();
         hidenav();

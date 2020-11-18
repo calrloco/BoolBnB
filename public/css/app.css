@@ -5705,6 +5705,12 @@ h1 {
      object-fit: cover;
 }
 
+#marker {
+  background-color: tomato;
+  width: 40px;
+  height: 40px;
+}
+
 .active {
   display: block;
 }

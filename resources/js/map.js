@@ -1,6 +1,7 @@
 require("./bootstrap");
 var $ = require("jquery");
 const Handlebars = require("handlebars");
+const { log } = require("handlebars");
 
 const APPLICATION_NAME = "My Application";
 const APPLICATION_VERSION = "1.0";
@@ -54,6 +55,7 @@ function getCards(lat, lng) {
         },
         success: function(risposta) {
             compileHandlebars(risposta);
+            console.log(risposta);
         },
         error: function() {
             console.log("error");
@@ -66,6 +68,7 @@ function getCards(lat, lng) {
 function compileHandlebars(risp) {
     var source = $("#handlebars_cards").html();
     var templateCards = Handlebars.compile(source);
+    const markersCity = [];
     for (var i = 0; i < risp.length; i++) {
         var context = {
             city: risp[i].city,
@@ -73,8 +76,62 @@ function compileHandlebars(risp) {
             id: `<input type="hidden" name="apartment_id" value=${risp[i].apartment_id}>`,
             img: risp[i].path
         };
+
+        var coordinates = [
+            risp[i].longitude,
+            risp[i].latitude
+        ];
+        var address = risp[i].address;
+        var city = risp[i].city;
+        // creo il custom marker
+        var element = document.createElement('div');
+        element.id = 'marker';
+        const marker = new tt.Marker({element: element}).setLngLat(coordinates).setPopup(new tt.Popup({offset: 35}).setHTML(address)).addTo(map);
+     
+        markersCity[i] = {marker, city};
+        console.log(markersCity[i]);
+
+        var popupOffsets = {
+            top: [0, 0],
+            bottom: [0, -70],
+            'bottom-right': [0, -70],
+            'bottom-left': [0, -70],
+            left: [25, -35],
+            right: [-25, -35]
+        }
+
+        // popup sui marker standard
+        var popup = new tt.Popup({
+            offset: popupOffsets
+        }).setHTML(address + ' ' + city + ' ' + '<br>' + 'price' + '€');
+
+        // marker.setPopup(popup).togglePopup();
+
+    
+
+               
+        
+
         var htmlContext = templateCards(context);
         $(".search__resoults__apartment-cards").append(htmlContext);
+
+        var el = $('.search__resoults__apartment-cards-content');
+
+        console.log(el);
+        // cliccando su un elemento della store-list lo trova in mappa
+        el.on('click',
+        (function(marker) {
+            const activeItem = $(this);
+            return function() {
+                map.easeTo({
+                    center: marker.getLngLat(),
+                    zoom: 16
+                });
+                closeAllPopups();
+                marker.togglePopup();
+            }
+        })(marker)
+    );
     }
 }
 // funzione per troncare una stringa
@@ -91,3 +148,4 @@ function troncaStringa(stringa) {
     }
     return shortText;
 }
+

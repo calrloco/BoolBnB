@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sponsor extends Model
 {
     protected $fillable = [
-        'sponsor', 'sponsor_time'
+        'sponsor', 'sponsor_price', 'sponsor_time'
     ];
 
     public function apartments()

@@ -36,3 +36,6 @@ Route::resource('/view','ViewsController');
 Route::get('/apartment', function () {
     return view('apartment');
 });
+
+Route::get('/apartments', 'Logged\HostController@index');
+Route::get('/apartments/{id}/sponsor','Logged\HostController@sponsor')->name('logged.sponsor');

@@ -4,7 +4,7 @@
 {{-- @dd($messages) --}}
 <div class="container-center">
 <a href="{{ route('host.create')}}">crea appartamento temporaneo</a>
-    @if (!empty($apartments)) 
+    @if (!empty($apartments))
     <h2>I tuoi appartamenti</h2>
     <div class=messages-deck>
         @foreach($apartments as $apartment)
@@ -32,10 +32,14 @@
                     </li>
                     @endforeach
                 </ul>
+                <div class="sponsor-link">
+                    @php $id = $apartment->id @endphp
+                    <a href="{{ route('logged.sponsor', $id) }}">Sponsorizza l'appartamento</a>
+                </div>
             </div>
         </div>
-        @endforeach  
-    
+        @endforeach
+
     </div>
     @else
     <h2>Non hai ancora registrato un appartamento</h2>

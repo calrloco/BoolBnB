@@ -42419,6 +42419,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
+
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
@@ -42489,6 +42491,31 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/sponsor.js":
+/*!*********************************!*\
+  !*** ./resources/js/sponsor.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#sponsors-select').on('change', function () {
+  $('#summary-sponsor').empty();
+  var check = $('#sponsors-select').val();
+  var sponsor = JSON.parse(check);
+  var price = sponsor.sponsor_price;
+  $('#summary-sponsor').append(price);
+  console.log(sponsor);
+  $('#btn-sponsor').click(function () {
+    // var price = sponsor.sponsor_price;
+    // $('#summary-sponsor').append(price);
+    console.log(price);
+  });
+});
+var aptId = $('#apt-id').val();
+console.log(aptId);
 
 /***/ }),
 

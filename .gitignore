@@ -1,3 +1,4 @@
+public const home = '/';
 /node_modules
 /public/hot
 /public/storage

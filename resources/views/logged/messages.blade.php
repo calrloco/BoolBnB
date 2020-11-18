@@ -3,7 +3,7 @@
 @section('content')
 {{-- @dd($messages) --}}
 <div class="container-center">
-<a href="{{ route('host.create')}}">vedi tuoi appartamenti</a>
+<a href="{{ route(''host.index'')}}">vedi tuoi appartamenti</a>
     @if (!empty($messages)) 
     <h2>I tuoi messaggi</h2>
     <div class=messages-deck>

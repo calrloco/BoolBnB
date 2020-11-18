@@ -74,7 +74,17 @@ class HostController extends Controller
      */
     public function show($id)
     {
-        //
+        if((Auth::user()->role->role)== "admin"){
+
+            $apartment = Apartment::where('id', '=', $id)
+            ->get();
+        } elseif ((Auth::user()->role->role)== "host") {
+            $apartment = Apartment::where('id', '=', $id)
+            ->where('user_id', Auth::id())
+            ->get();
+        }
+
+       return view('logged.show', compact('apartment'));
     }
 
     /**

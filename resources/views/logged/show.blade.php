@@ -9,11 +9,7 @@
 </head>
 
 <body>
-    <form action="{{route('messages.destroy',$message)}}" method="post">
-        @csrf
-        @method('DELETE')
-        <button type="submit">CANCELLA</button>
-    </form>
+   @dd($apartment);
 </body>
 
 </html>

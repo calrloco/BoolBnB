@@ -8,11 +8,13 @@
                 </a>
             </div>
             <div class="nav__search">
-                <button class="nav__search-button">
+                <form class="nav__search-button" action="{{route('search.store')}}" method="POST">
+                    @csrf
+                    @method('POST')
                      <p id="start-search" class="">Inizia la ricerca<p>
                      <div class="nav__search-city hidden">
                          <label for="search">Dove</label>
-                         <input id="search" type="text" placeholder="dove vuoi andare">
+                         <input id="search" type="text" name="address" placeholder="dove vuoi andare">
                     </div>
                     <div class="nav__search-date-start hidden">
                         <label for="search">Quando vuoi partire</label>
@@ -28,8 +30,9 @@
                     </div>
                      <div id="hidenav" class="nav__search-icon">
                         <i class="fas fa-search"></i>
-                    </div> 
-                </button>
+                    </div>
+                    <button type="submit" class="">vaiwadwadwad</button> 
+                </form>
             </div>
             <div class="nav__user">
                 <div class="nav__user">

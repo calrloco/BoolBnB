@@ -81,6 +81,7 @@ class ApartmentController extends Controller
         return response()->json($apartment,201);
         
     }
+}
 
 
     /**

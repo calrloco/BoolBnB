@@ -87,11 +87,7 @@ function troncaStringa(stringa) {
             }
         }
     } else {
-<<<<<<< HEAD
         shortText = "Descrizione non disponibile";
-=======
-        shortText = "Trama Non Disponibile";
->>>>>>> 392cf68dc3156054dd02bb3319d38eb80bfaac8e
     }
     return shortText;
 }

@@ -36,3 +36,6 @@ Route::resource('/view','ViewsController');
 Route::get('/apartment', function () {
     return view('apartment');
 });
+Route::get('/test', function () {
+    return view('test');
+});

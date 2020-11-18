@@ -1,19 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Logged;
-use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Message;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MessageController extends Controller
+class SponsorController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -21,13 +14,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = Message::join('apartments', 'messages.apartment_id', '=', 'apartments.id')
-        // ->join('images', 'images.apartment_id', '=', 'apartments.id')
-        ->where('apartments.user_id', '=', Auth::user()->id)
-        ->get();
-        return view('logged.messages',compact('messages'));
+        //
     }
-   
 
     /**
      * Show the form for creating a new resource.
@@ -56,11 +44,9 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // HO TOLTO MESSAGE $MESSAGE RICAVARMI LA LISTA MESSAGGI di USER
-    public function show(User $user)
+    public function show($id)
     {
-       
-
+        //
     }
 
     /**
@@ -92,9 +78,8 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+    public function destroy($id)
     {
-        $message->delete();
-        return view('logged.messages');
+        //
     }
 }

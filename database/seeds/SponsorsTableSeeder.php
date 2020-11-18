@@ -18,6 +18,7 @@ class SponsorsTableSeeder extends Seeder
         for($i = 0; $i < count($sponsor); $i++){
             $newSponsor = new Sponsor;
             $newSponsor->sponsor = $sponsor[$i];
+            $newSponsor->sponsor_price = 7;
             $newSponsor->sponsor_time = $sponsor_time[$i];
             $newSponsor->save();
         }

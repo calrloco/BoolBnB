@@ -24,7 +24,7 @@
     <link href='https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' rel='stylesheet'>
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.36.1/services/services-web.min.js"></script>
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container-page">
@@ -36,7 +36,7 @@
         
       @include('partials/footer')
     </div>
-  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('/js/app.js') }}"></script>
 </body>
 
 </html>

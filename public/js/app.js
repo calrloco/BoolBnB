@@ -42344,6 +42344,70 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/add.js":
+/*!*****************************!*\
+  !*** ./resources/js/add.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
+var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; // aggiunta campo input file fino ad un max di 5
+// $('#add-img').click(function() {
+//     if ( $('.img-input').length < 5) {
+//         $('.container-upload').append(`<input class="img-input" type="file" name="img[]" class="form-control-file" id="img" accept="image/*">`);
+//         if ($('.img-input').length >= 5) {
+//             $('#add-img').hide();
+//         }
+//     } 
+// });
+
+$('#crea').on('click', function (event) {
+  // SALVO I VALORI DEL FORM
+  var title = $('input[data=title]');
+  var address = $('input[data=address]');
+  var city = $('input[data=city]');
+  var postalCode = $('input[data=postal-code]');
+  var country = $('input[data=country]');
+  var description = $('input[data=description]');
+  var dailyPrice = $('input[data=daily-price]');
+  var sm = $('input[data=sm]');
+  var beds = $('input[data=beds]');
+  var bathrooms = $('input[data=bathrooms]'); // salvo i checkbox con un ciclo
+
+  var services = [];
+  $('input[name=services]').each(function () {
+    var ischecked = $(this).is(":checked");
+
+    if (ischecked) {
+      services.push($(this).val());
+    }
+  }); //uguale per le immagini
+
+  var images = [];
+  $('input[name=img]').each(function () {});
+  var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
+  console.log(data);
+  tt.services.fuzzySearch({
+    key: apiKey,
+    query: data
+  }).go().then(function (response) {
+    console.log(response);
+  });
+  event.preventDefault();
+}); // se sono nel form crea apartament richiamo la funzione
+// console.log('lat' + response.results[0].position['lat']);
+// console.log('lng' + response.results[0].position['lng']);
+// var address = response.results[0].address['streetName'];
+// var longitude = response.results[0].position['lng'];
+// var latitude = response.results[0].position['lat'];
+// var city = response.results[0].address['municipality'];
+// var postalCode = response.results[0].address['postalCode'];
+// var country = response.results[0].address['country'];
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -42352,6 +42416,10 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+__webpack_require__(/*! ./add */ "./resources/js/add.js");
+
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
@@ -42423,6 +42491,31 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/sponsor.js":
+/*!*********************************!*\
+  !*** ./resources/js/sponsor.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#sponsors-select').on('change', function () {
+  $('#summary-sponsor').empty();
+  var check = $('#sponsors-select').val();
+  var sponsor = JSON.parse(check);
+  var price = sponsor.sponsor_price;
+  $('#summary-sponsor').append(price);
+  console.log(sponsor);
+  $('#btn-sponsor').click(function () {
+    // var price = sponsor.sponsor_price;
+    // $('#summary-sponsor').append(price);
+    console.log(price);
+  });
+});
+var aptId = $('#apt-id').val();
+console.log(aptId);
 
 /***/ }),
 

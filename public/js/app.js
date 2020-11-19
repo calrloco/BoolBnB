@@ -42421,6 +42421,8 @@ __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
 __webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
 
+__webpack_require__(/*! ./apt */ "./resources/js/apt.js");
+
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
@@ -42446,6 +42448,19 @@ function hidenav() {
   $(".nav__search-icon-big").addClass("active-flex");
   $("#start-search").addClass("hidden");
 }
+
+/***/ }),
+
+/***/ "./resources/js/apt.js":
+/*!*****************************!*\
+  !*** ./resources/js/apt.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(".fa-arrow-alt-circle-left").on('click', function () {
+  alert('Hello!');
+});
 
 /***/ }),
 

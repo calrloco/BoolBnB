@@ -25,7 +25,7 @@ class ApartmentController extends Controller
         if($validator->fails()){
             return response()->json($validator->messages());
         }
-        $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat), 
+        $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
         point(longitude, latitude)) * .001 as distance")->having('distance','<=',$request->maxDist)->orderBy('distance','asc')->get();
         return response()->json($query, 200);
     }
@@ -79,9 +79,9 @@ class ApartmentController extends Controller
         }
 
         return response()->json($apartment,201);
-        
+
     }
-}
+
 
     /**
      * Display the specified resource.

@@ -129,3 +129,4 @@ class ApartmentController extends Controller
          return response()->json($message);
     }
 }
+

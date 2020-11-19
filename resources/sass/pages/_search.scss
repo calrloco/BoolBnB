@@ -39,7 +39,16 @@
     
 }
 #marker {
-    background-color: tomato;
+    background-image: url('../../img/BnBpin.png');
+    background-size: cover;
     width: 40px;
     height: 40px;
   }
+
+.selected{
+    border: 10px solid red;
+}
+
+.list-entry{
+    border: 10px solid green;
+}

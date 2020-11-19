@@ -74,9 +74,9 @@ class ApartmentController extends Controller
         $apartment = Apartment::create($request->all());
         $apartment->services()->attach($request['services']);
 
-        if (!empty($request['img'])) {
-            $request['img'] = Storage::disk('public')->put('images', $request['img']);
-        }
+        // if (!empty($request['img'])) {
+        //     $request['img'] = Storage::disk('public')->put('images', $request['img']);
+        // }
 
         return response()->json($apartment,201);
 

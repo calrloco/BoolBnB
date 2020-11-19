@@ -48,6 +48,7 @@ $('#crea').on('click', (function(event) {
         beds: $('input[name=beds]').val(),
         bathrooms: $('input[name=bathrooms]').val(),
         services: services,
+        user_id: $('input[name=user-id]').val(),
     }
     console.log(apartmentData)
 
@@ -106,16 +107,19 @@ function createApart(response, apartmentData) {
                 sm: apartmentData.sm,
                 rooms: apartmentData.rooms,
                 beds: apartmentData.beds,
+                user_id: apartmentData.user_id,
                 bathrooms: apartmentData.bathrooms,
                 latitude: response.results[0].position['lng'],
-                longitude: response.results[0].position['lat'] 
+                longitude: response.results[0].position['lat'],
+                
+
             },
             success: function(data) {
                 console.log(data);
                 alert('appartamento inserito');
             },
-            error: function() {
-                alert('error');
+            error: function(errore) {
+               console.log(errore);
             }
 
         }

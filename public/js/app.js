@@ -42393,7 +42393,8 @@ $('#crea').on('click', function (event) {
     rooms: $('input[name=rooms]').val(),
     beds: $('input[name=beds]').val(),
     bathrooms: $('input[name=bathrooms]').val(),
-    services: services
+    services: services,
+    user_id: $('input[name=user-id]').val()
   };
   console.log(apartmentData);
   var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val(); // console.log(data);
@@ -42434,6 +42435,7 @@ function createApart(response, apartmentData) {
       sm: apartmentData.sm,
       rooms: apartmentData.rooms,
       beds: apartmentData.beds,
+      user_id: apartmentData.user_id,
       bathrooms: apartmentData.bathrooms,
       latitude: response.results[0].position['lng'],
       longitude: response.results[0].position['lat']
@@ -42442,8 +42444,8 @@ function createApart(response, apartmentData) {
       console.log(data);
       alert('appartamento inserito');
     },
-    error: function error() {
-      alert('error');
+    error: function error(errore) {
+      console.log(errore);
     }
   });
 }

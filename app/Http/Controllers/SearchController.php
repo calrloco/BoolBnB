@@ -24,9 +24,14 @@ class SearchController extends Controller
     }
 
 
-    public function show(Apartment $apartment)
+    public function show($id)
     {
-       $apartment = Apartment::get();
+       $apartment = Apartment::find($id);
+       if (empty($apartment)) {
+           abort('404');
+       }
+       //se user ID dell'appartamento non corrisponde con quello loggato, ERROR 403
+
        return view('apartment', compact('apartment'));
     }
 

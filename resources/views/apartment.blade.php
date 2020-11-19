@@ -2,14 +2,19 @@
 @section('content')
 <section class="top-section">
     <div class="title-apt">
-    <p class="title">Titolo Appartamento</p>
-    <a class="address-apt" href="#">Address apt</a>
+    <p class="title">{{$apartment->title}}</p>
+    <a class="address-apt" href="#">{{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->country }}</a>
     </div>
 </section>
 <section class="slider-section">
     <div class="slider-img">
         <i class="far fa-arrow-alt-circle-left"></i>
-        <img class="apt-img-slider" src="" alt="">
+        @foreach ($apartment->images as $image)
+            <img class="apt-img-slider" src="{{ $image->path }}" alt="{{$apartment->title}}">
+        @endforeach
+        {{-- @for($i = 0; $i < $apartment->images.length; i++)
+
+        @endfor --}}
         <i class="far fa-arrow-alt-circle-right"></i>
     </div>
 </section>
@@ -19,8 +24,9 @@
     <div class="info-box-sx">
         <div class="info-apt-summary">
             <div class="apt-summary">
-                <p class="info-host">Tipologia casa - Host: Pietro</p>
-                <p class="info-apt"> nr ospiti - nr. letti - nr. bagni - mq</p>
+                <p class="info-host">Host: {{ $apartment->user->name }} - Prezzo: €{{ $apartment->daily_price }}/giorno</p>
+                <p class="info-apt">  nr. stanze: {{ $apartment->rooms }}, nr. letti: {{ $apartment->beds }} - nr. bagni: {{ $apartment->bathrooms }} - mq: {{ $apartment->sm }}</p>
+                {{-- <p class="price">Prezzo giornaliero: €{{ $apartment->daily_price }}</p> --}}
             </div>
             <div class="host-logo">
                 <img src="" alt="">
@@ -28,19 +34,19 @@
         </div>
         <hr class = "split-line">
         <div class="apt-description">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>{{ $apartment->description }}</p>
         </div>
         <hr class = "split-line">
         <div class="services-box">
             <p class="services-title">Servizi</p>
             <ul class = "services">
-                <li class = "service"><i class="fas fa-parking"></i>Parcheggio gratuito</li>
-                <li class = "service"><i class="fas fa-tv"></i>TV</li>
-                <li class = "service"><i class="fas fa-wifi"></i>Wi-Fi</li>
-                <li class = "service"><i class="fas fa-laptop"></i>Zona lavoro user-friendly</li>
+                @foreach ($apartment->services as $service)
+                    <li class = "service">
+                        <span><i class="{{$service->icon}}"></i></span>
+                        <p class="service-title">{{ $service->service }}</p>
+                        <span>{{ $service->description }}</span>
+                     </li>
+                @endforeach
             </ul>
         </div>
     </div>

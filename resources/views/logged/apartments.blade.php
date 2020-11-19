@@ -4,7 +4,7 @@
 {{-- @dd($messages) --}}
 <div class="container-center">
 <a href="{{ route('host.create')}}">crea appartamento temporaneo</a>
-    @if (!empty($apartments)) 
+    @if (!empty($apartments))
     <h2>I tuoi appartamenti</h2>
     <div class=messages-deck>
         @foreach($apartments as $apartment)
@@ -32,10 +32,11 @@
                     </li>
                     @endforeach
                 </ul>
+                <a href="{{ route('host.show', $apartment->id) }}">Vedi l'appartamento</a>
             </div>
         </div>
-        @endforeach  
-    
+        @endforeach
+
     </div>
     @else
     <h2>Non hai ancora registrato un appartamento</h2>

@@ -42365,17 +42365,9 @@ var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; // aggiunta campo input file fi
 
 $('#crea').on('click', function (event) {
   // SALVO I VALORI DEL FORM
-  var title = $('input[data=title]');
-  var address = $('input[data=address]');
-  var city = $('input[data=city]');
-  var postalCode = $('input[data=postal-code]');
-  var country = $('input[data=country]');
-  var description = $('input[data=description]');
-  var dailyPrice = $('input[data=daily-price]');
-  var sm = $('input[data=sm]');
-  var beds = $('input[data=beds]');
-  var bathrooms = $('input[data=bathrooms]'); // salvo i checkbox con un ciclo
-
+  // var form = $('#creazione').serializeArray();
+  // console.log(form);
+  // salvo i checkbox con un ciclo
   var services = [];
   $('input[name=services]').each(function () {
     var ischecked = $(this).is(":checked");
@@ -42383,17 +42375,35 @@ $('#crea').on('click', function (event) {
     if (ischecked) {
       services.push($(this).val());
     }
-  }); //uguale per le immagini
+  });
+  console.log(services); //uguale per le immagini
+  // var images = [];
+  // $('input[name=img]').each(function() {
+  // });
 
-  var images = [];
-  $('input[name=img]').each(function () {});
-  var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
-  console.log(data);
+  var apartmentData = {
+    title: $('input[name=title]').val(),
+    address: $('#address').val(),
+    city: $('input[name=city]').val(),
+    postalCode: $('input[name=postal-code]').val(),
+    country: $('input[name=country]').val(),
+    description: $('textarea[name=description]').val(),
+    dailyPrice: $('input[name=daily-price]').val(),
+    sm: $('input[name=sm]').val(),
+    rooms: $('input[name=rooms]').val(),
+    beds: $('input[name=beds]').val(),
+    bathrooms: $('input[name=bathrooms]').val(),
+    services: services,
+    user_id: $('input[name=user-id]').val()
+  };
+  console.log(apartmentData);
+  var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val(); // console.log(data);
+
   tt.services.fuzzySearch({
     key: apiKey,
     query: data
   }).go().then(function (response) {
-    console.log(response);
+    createApart(response, apartmentData);
   });
   event.preventDefault();
 }); // se sono nel form crea apartament richiamo la funzione
@@ -42405,6 +42415,40 @@ $('#crea').on('click', function (event) {
 // var city = response.results[0].address['municipality'];
 // var postalCode = response.results[0].address['postalCode'];
 // var country = response.results[0].address['country'];
+// FUNZIONI
+
+function createApart(response, apartmentData) {
+  $.ajax({
+    url: 'http://127.0.0.1:8000/api/apartments',
+    method: 'POST',
+    headers: {
+      KEY: 'test'
+    },
+    data: {
+      title: apartmentData.title,
+      address: apartmentData.address,
+      city: apartmentData.city,
+      postal_code: apartmentData.postalCode,
+      country: apartmentData.country,
+      description: apartmentData.description,
+      daily_price: apartmentData.dailyPrice,
+      sm: apartmentData.sm,
+      rooms: apartmentData.rooms,
+      beds: apartmentData.beds,
+      user_id: apartmentData.user_id,
+      bathrooms: apartmentData.bathrooms,
+      latitude: response.results[0].position['lng'],
+      longitude: response.results[0].position['lat']
+    },
+    success: function success(data) {
+      console.log(data);
+      alert('appartamento inserito');
+    },
+    error: function error(errore) {
+      console.log(errore);
+    }
+  });
+}
 
 /***/ }),
 
@@ -42418,6 +42462,10 @@ $('#crea').on('click', function (event) {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
+
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
+
+__webpack_require__(/*! ./apt */ "./resources/js/apt.js");
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
@@ -42444,6 +42492,19 @@ function hidenav() {
   $(".nav__search-icon-big").addClass("active-flex");
   $("#start-search").addClass("hidden");
 }
+
+/***/ }),
+
+/***/ "./resources/js/apt.js":
+/*!*****************************!*\
+  !*** ./resources/js/apt.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(".fa-arrow-alt-circle-left").on('click', function () {
+  alert('Hello!');
+});
 
 /***/ }),
 
@@ -42489,6 +42550,31 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/sponsor.js":
+/*!*********************************!*\
+  !*** ./resources/js/sponsor.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('#sponsors-select').on('change', function () {
+  $('#summary-sponsor').empty();
+  var check = $('#sponsors-select').val();
+  var sponsor = JSON.parse(check);
+  var price = sponsor.sponsor_price;
+  $('#summary-sponsor').append(price);
+  console.log(sponsor);
+  $('#btn-sponsor').click(function () {
+    // var price = sponsor.sponsor_price;
+    // $('#summary-sponsor').append(price);
+    console.log(price);
+  });
+});
+var aptId = $('#apt-id').val();
+console.log(aptId);
 
 /***/ }),
 

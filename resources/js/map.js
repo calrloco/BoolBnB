@@ -7,13 +7,14 @@ const { find } = require("lodash");
 const APPLICATION_NAME = "My Application";
 const APPLICATION_VERSION = "1.0";
 tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
-const apiKey = "31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk";
+const apiKey = "RWf0OUXl0BIHVgSlxGaXYGUTma7oPbSu";
+
 let map = tt.map({
     key: apiKey,
     container: "map",
     center: [12.49334, 41.88996],
     style: "tomtom://vector/1/basic-main",
-    zoom: 10
+    zoom: 4
 });
 $(document).ready(function() {
     var instantSearch = (function() {
@@ -22,23 +23,37 @@ $(document).ready(function() {
     })();
     $(".nav__search-icon-big").click(function() {
         $(".search__resoults__apartment-cards").empty();
-        console.log($("#search").val());
         getCoordinates($("#search").val());
+        getServices();
     });
+
+    
 });
+
+
+
 //// prendi coordinate dell'input////////////////
 function getCoordinates(input) {
     tt.services
         .fuzzySearch({
-            key: "31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk",
-            query: input
+            key: apiKey,
+            query: input,
         })
         .go()
         .then(function(response) {
+            map = tt.map({
+                key: apiKey,
+                style: 'tomtom://vector/1/basic-main',
+                container: 'map',
+                center: response.results[0].position,
+                zoom: 10
+        
+              });
             var longitude = response.results[0].position["lng"];
             var latitude = response.results[0].position["lat"];
+            city = response.results[0].address['municipality'];
+            getCards(latitude, longitude, 3000);
             console.log(response);
-            getCards(latitude, longitude);
         });
 }
 
@@ -61,7 +76,7 @@ function getServices() {
     });
 }
 
-function getCards(lat, lng) {
+function getCards(lat, lng, maxDist) {
     $.ajax({
         url: "http://127.0.0.1:8000/api/apartments",
         method: "GET",
@@ -71,11 +86,11 @@ function getCards(lat, lng) {
         data: {
             lat: lat,
             lng: lng,
-            maxDist: 1000
+            maxDist: maxDist
         },
         success: function(risposta) {
             compileHandlebars(risposta);
-            console.log(risposta);
+           
         },
         error: function() {
             console.log("error");
@@ -84,7 +99,7 @@ function getCards(lat, lng) {
 }
 
 ////////////////////////////////////
-/// funziione per inserire le card della ricerca nel dom
+/// funzione per inserire le card della ricerca nel dom e creare i marker associati nella mappa
 function compileHandlebars(risp) {
     var source = $("#handlebars_cards").html();
     var templateCards = Handlebars.compile(source);
@@ -99,16 +114,12 @@ function compileHandlebars(risp) {
         var coordinates = [risp[i].longitude, risp[i].latitude];
         var address = risp[i].address;
         var city = risp[i].city;
+        var price = risp[i].daily_price;
         // creo il custom marker
-        var element = document.createElement("div");
-        element.id = "marker";
-        const marker = new tt.Marker({ element: element })
-            .setLngLat(coordinates)
-            .setPopup(new tt.Popup({ offset: 35 }).setHTML(address))
-            .addTo(map);
+        var element = document.createElement('div');
+        element.id = 'marker';
+        const marker = new tt.Marker({element: element}).setLngLat(coordinates).setPopup(new tt.Popup({offset: 35}).setHTML(address)).addTo(map);
 
-        markersCity[i] = { marker, city };
-        console.log(markersCity[i]);
 
         var popupOffsets = {
             top: [0, 0],
@@ -119,36 +130,51 @@ function compileHandlebars(risp) {
             right: [-25, -35]
         };
 
-        // popup sui marker standard
+        // popup sui marker 
         var popup = new tt.Popup({
             offset: popupOffsets
-        }).setHTML(address + " " + city + " " + "<br>" + "price" + "€");
+        }).setHTML(address + ' ' + city + ' ' + '<br>' + '<strong>' + price + '</strong>' + ' € a notte');
 
-        // marker.setPopup(popup).togglePopup();
+        // assegno il popup
+        marker.setPopup(popup);
+      
+        
 
         var htmlContext = templateCards(context);
         $(".search__resoults__apartment-cards").append(htmlContext);
-
-        var el = $(".search__resoults__apartment-cards-content");
         appendServices(risp[i].id);
-        console.log(el);
-        // cliccando su un elemento della store-list lo trova in mappa
-        el.on(
-            "click",
-            (function(marker) {
-                console.log(marker.getLngLat());
-                const activeItem = $(this);
-                return function() {
-                    map.easeTo({
-                        center: marker.getLngLat(),
-                        zoom: 16
-                    });
-                    closeAllPopups();
-                    marker.togglePopup();
-                };
-            })(marker)
-        );
+        var el = $('.search__resoults__apartment-cards-content');
+ 
+        // cliccando su un elemento della lista a sx lo trova in mappa
+        el.on('click',
+        (function(marker) {
+            const activeItem = $(this);
+            return function() {
+                map.easeTo({
+                    center: marker.getLngLat(),
+                    zoom: 16
+                });
+                closeAllPopups();
+                // marker.togglePopup();
+            }
+        })(marker)
+    );
+
+    // richiama funzione che associa l'address con la card nel DOM
+    var details =  buildLocation(el, address);
+      
+    // cliccando sul marker aggiunge la classe selected alla card dell'appartamento corrispondente
+       marker._element.addEventListener('click',
+        (function () {           
+            var posizione = $(this).index() - 1;
+            // console.log(posizione);
+            details.removeClass('selected');
+            details.eq(posizione).addClass('selected');          
+        })
+    );
+
     }
+
 }
 /// appende i servizi all'appartamento
 function appendServices(id) {
@@ -213,3 +239,9 @@ $(document).on('click','.services-all',function(){
     }
   });
 });
+//funzione che associa l'address con la card apartment nel DOM
+function buildLocation(el, text) {
+    const details =  el;
+    details.innerHTML = text;
+    return details;
+}

@@ -52,7 +52,7 @@ class HostController extends Controller
     public function create()
     {
         $services = Service::all();
-        return view('logged.add', compact('services'));
+        return view('logged.create', compact('services'));
     }
 
     /**
@@ -72,9 +72,33 @@ class HostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    // public function show($id)
+    // {
+    //    //  if((Auth::user()->role->role)== "admin"){
+    //    //
+    //    //      $apartment = Apartment::where('id', '=', $id)
+    //    //      ->get();
+    //    //  } elseif ((Auth::user()->role->role)== "host") {
+    //    //      $apartment = Apartment::where('id', '=', $id)
+    //    //      ->where('user_id', Auth::id())
+    //    //      ->get();
+    //    //  }
+    //    //
+    //    // return view('logged.show', compact('apartment'));
+    // }
+       public function show($id)
     {
-        //
+        //prendo appartamento cercandolo con ID
+        $apartment = Apartment::find($id);
+        if (empty($apartment)) {
+            abort('404');
+        }
+        //se user ID dell'appartamento non corrisponde con quello loggato, ERROR 403
+        if ($apartment->user_id = Auth::user()->id) {
+            return view('logged.show', compact('apartment'));
+        } else {
+            abort('403', 'Accesso non autorizzato');
+        }
     }
 
     /**

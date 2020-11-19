@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container-center">
+<div class="container-sponsor">
 
     <label for="sponsor-select">Scegli la tua sponsorizzazzione:</label>
 

@@ -32,10 +32,7 @@
                     </li>
                     @endforeach
                 </ul>
-                <div class="sponsor-link">
-                    @php $id = $apartment->id @endphp
-                    <a href="{{ route('logged.sponsor', $id) }}">Sponsorizza l'appartamento</a>
-                </div>
+                <a href="{{ route('host.show', $apartment->id) }}">Vedi l'appartamento</a>
             </div>
         </div>
         @endforeach

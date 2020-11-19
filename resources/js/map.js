@@ -24,7 +24,6 @@ $(document).ready(function() {
     $(".nav__search-icon-big").click(function() {
         $(".search__resoults__apartment-cards").empty();
         getCoordinates($("#search").val());
-        getServices();
     });
 
     
@@ -61,6 +60,7 @@ function getCoordinates(input) {
 function getServices() {
     $.ajax({
         url: "http://127.0.0.1:8000/api/services/all",
+        method: "GET",
         headers: {
             KEY: "test"
         },
@@ -162,7 +162,7 @@ function compileHandlebars(risp) {
 
     // richiama funzione che associa l'address con la card nel DOM
     var details =  buildLocation(el, address);
-      
+
     // cliccando sul marker aggiunge la classe selected alla card dell'appartamento corrispondente
        marker._element.addEventListener('click',
         (function () {           
@@ -245,3 +245,12 @@ function buildLocation(el, text) {
     details.innerHTML = text;
     return details;
 }
+
+// $(document).on('click','#marker',function(){
+//     $('#marker').each(function(){
+//         var posizione = $(this).index() - 1;
+//         console.log(posizione);
+//         $('.search__resoults__apartment-cards-content').removeClass('selected');
+//         $('.search__resoults__apartment-cards-content').eq(posizione).addClass('selected');    
+//     });
+//   });

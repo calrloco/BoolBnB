@@ -2,7 +2,7 @@
     <div class="container-center">
         <div class="nav">
             <div class="nav__logo">
-                <a href="{{ route('index') }}">
+                <a href="{{ route('home') }}">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/1024px-Airbnb_Logo_B%C3%A9lo.svg.png"
                         alt="">
                 </a>

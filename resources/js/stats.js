@@ -1,4 +1,5 @@
-//// statistiche
+require("./bootstrap");
+var $ = require("jquery");
 var myfunction = (function () {
     var labels = [];
     var dataSet = [];
@@ -25,7 +26,7 @@ var myfunction = (function () {
      }
   });
   })();
-  function compileChart(chrat,label,dataset){
+  function compileChart(label,dataset){
   var views = $('#chart');
   var statChart = new Chart(views,{
        type: "line",

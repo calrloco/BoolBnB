@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Apartment;
+use App\Image;
 use Illuminate\Support\Facades\Validator;
 
 class ApartmentController extends Controller
@@ -81,8 +82,6 @@ class ApartmentController extends Controller
         return response()->json($apartment,201);
         
     }
-}
-
 
     /**
      * Display the specified resource.
@@ -129,4 +128,13 @@ class ApartmentController extends Controller
          ];
          return response()->json($message);
     }
+
+    public function getServices($id){
+           
+    }
 }
+
+
+    
+
+

@@ -24,8 +24,7 @@ Auth::routes();
 //     Route::resource('posts', 'PostController');
 // });
 // ritorniamo la view home tramite il controller generale
-
-Route::resource('/','HomeController');
+Route::get('/','HomeController@index')->name('home');
 Route::resource('/search','SearchController');
 Route::resource('/messages','Logged\MessageController');
 Route::resource('/host','Logged\HostController');
@@ -38,4 +37,7 @@ Route::get('/apartment', function () {
 });
 Route::get('/test', function () {
     return view('test');
+});
+Route::get('/search', function () {
+    return view('search.search');
 });

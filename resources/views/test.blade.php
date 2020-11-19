@@ -4,5 +4,5 @@
     
 </canvas>
 
-
+<script src="{{ asset('js/stats.js')}}"></script>
 @endsection

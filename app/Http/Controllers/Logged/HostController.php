@@ -52,7 +52,7 @@ class HostController extends Controller
     public function create()
     {
         $services = Service::all();
-        return view('logged.add', compact('services'));
+        return view('logged.create', compact('services'));
     }
 
     /**
@@ -76,10 +76,10 @@ class HostController extends Controller
     {
         if((Auth::user()->role->role)== "admin"){
 
-            $apartment = Apartment::where('id', '=', $id)
+            $apartment = Apartment::find($id)
             ->get();
         } elseif ((Auth::user()->role->role)== "host") {
-            $apartment = Apartment::where('id', '=', $id)
+            $apartment = Apartment::find($id)
             ->where('user_id', Auth::id())
             ->get();
         }

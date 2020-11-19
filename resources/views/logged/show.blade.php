@@ -9,7 +9,7 @@
 </head>
 
 <body>
-   @dd($apartment);
+   {{ $apartment->title }}
 </body>
 
 </html>

@@ -30,7 +30,7 @@
                 </div>
                 <div class="label-input">
                     <label for="postal-code">Codice Postale</label>
-                    <input id="postal" type="text" name="postal-code">
+                    <input  type="text" name="postal-code">
                 </div>
                 <div class="label-input">
                     <label id="country" for="country">Nazione</label>
@@ -54,6 +54,9 @@
                 <div class="label-input">
                     <label for="sm">Metri quadri</label>
                     <input type="number" name="sm">
+                </div><div class="label-input">
+                    <label for="rooms">Stanze</label>
+                    <input type="number" name="rooms">
                 </div>  
                 <div class="label-input">
                     <label for="beds">Posti letto</label>

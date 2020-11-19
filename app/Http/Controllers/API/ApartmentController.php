@@ -15,13 +15,13 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request){
-        
+
         $validator = Validator::make($request->all(),[
              'lat'=>'required',
              'lng'=>'required',
              'maxDist'=>'required',
         ]);
-        
+
         if($validator->fails()){
             return response()->json($validator->messages());
         }
@@ -35,7 +35,7 @@ class ApartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -44,7 +44,7 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        
+
         $validator = Validator::make($request->all(),[
                'title' => 'required|min:10|max:300',
                'rooms'=>'required|numeric|min:1',
@@ -73,14 +73,15 @@ class ApartmentController extends Controller
         }
         $apartment = Apartment::create($request->all());
         $apartment->services()->attach($request['services']);
-        
+
         if (!empty($request['img'])) {
             $request['img'] = Storage::disk('public')->put('images', $request['img']);
+        }
 
-
-        return response()->json($apartment,201); 
+        return response()->json($apartment,201);
+        
     }
-}
+
 
     /**
      * Display the specified resource.
@@ -98,7 +99,7 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   
+
 
     /**
      * Update the specified resource in storage.
@@ -128,3 +129,4 @@ class ApartmentController extends Controller
          return response()->json($message);
     }
 }
+

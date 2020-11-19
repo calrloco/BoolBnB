@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\carbon;
 use App\Apartment;
 use App\Service;
+use App\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,17 +29,17 @@ class HostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         // SE AMMINISTRATORE VENGONO RESTITUITI TUTTI GLI APPARTAMENTI
         if((Auth::user()->role->role)== "admin"){
-            
+
             $apartments = Apartment::get();
         // SE UTENTE VENGONO VISUALIZZATI GLI APPARTAMENTI DA LUI REGISTRATI
         } elseif ((Auth::user()->role->role)== "host") {
             $apartments = Apartment::where('apartments.user_id', '=' ,Auth::id())
             ->get();
             // ->orderBy('created_at','desc');
-            
+
         }
         return view('logged.apartments', compact('apartments'));
     }
@@ -73,7 +74,17 @@ class HostController extends Controller
      */
     public function show($id)
     {
-        //
+        if((Auth::user()->role->role)== "admin"){
+
+            $apartment = Apartment::where('id', '=', $id)
+            ->get();
+        } elseif ((Auth::user()->role->role)== "host") {
+            $apartment = Apartment::where('id', '=', $id)
+            ->where('user_id', Auth::id())
+            ->get();
+        }
+
+       return view('logged.show', compact('apartment'));
     }
 
     /**
@@ -108,5 +119,18 @@ class HostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function sponsor($id)
+    {
+        $sponsors = Sponsor::all();
+        return view('logged.sponsor', compact('id','sponsors'));
     }
 }

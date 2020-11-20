@@ -1,12 +1,17 @@
-var i = 0;
-var check = $('#check-info-img').val();
+//recupero i valori dal for nel DOM
+var recovered_images = $('#check-info-img').val();
+console.log(recovered_images);
 
-var images = JSON.parse(check);
+//trasformo la stringa con tutte le img in un array di oggetti
+var images = JSON.parse(recovered_images);
 console.log(images);
 
+//inizializzo la variabile indice e imposto la prima img
+var i = 0;
 $('.apt-img-slider').attr('src', images[i].path);
 
-
+//al click a sx decremento l'indice spostandomi nell'arrray sull'img precedente.
+//se l'indice arriva a zero riparte dall'ultima img.
 $(".arrow-slider-sx").on('click', function(){
     if(i > 0){
         i--;
@@ -18,6 +23,8 @@ $(".arrow-slider-sx").on('click', function(){
     }
 });
 
+//al click a dx incremento l'indice spostandomi nell'arrray sull'img successiva.
+//se l'indice arriva a zero riparte dall'ultima img.
 $(".arrow-slider-dx").on('click', function(){
     if(i < images.length-1){
         i++;

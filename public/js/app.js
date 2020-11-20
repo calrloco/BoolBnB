@@ -42502,11 +42502,17 @@ function hidenav() {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+//recupero i valori dal for nel DOM
+var recovered_images = $('#check-info-img').val();
+console.log(recovered_images); //trasformo la stringa con tutte le img in un array di oggetti
+
+var images = JSON.parse(recovered_images);
+console.log(images); //inizializzo la variabile indice e imposto la prima img
+
 var i = 0;
-var check = $('#check-info-img').val();
-var images = JSON.parse(check);
-console.log(images);
-$('.apt-img-slider').attr('src', images[i].path);
+$('.apt-img-slider').attr('src', images[i].path); //al click a sx decremento l'indice spostandomi nell'arrray sull'img precedente.
+//se l'indice arriva a zero riparte dall'ultima img.
+
 $(".arrow-slider-sx").on('click', function () {
   if (i > 0) {
     i--; // console.log(i);
@@ -42516,7 +42522,9 @@ $(".arrow-slider-sx").on('click', function () {
     i = images.length - 1;
     $('.apt-img-slider').attr('src', images[i].path);
   }
-});
+}); //al click a dx incremento l'indice spostandomi nell'arrray sull'img successiva.
+//se l'indice arriva a zero riparte dall'ultima img.
+
 $(".arrow-slider-dx").on('click', function () {
   if (i < images.length - 1) {
     i++; // console.log(i);
@@ -42618,13 +42626,8 @@ console.log(aptId);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< Updated upstream
-__webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
 __webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/sass/app.scss */"./resources/sass/app.scss");
->>>>>>> Stashed changes
 
 
 /***/ })

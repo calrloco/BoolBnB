@@ -6,10 +6,11 @@
     <h2>Registra il tuo appartamento</h2>
            
     
-    </form>
-    <form id="creazione" enctype="multipart/form-data" method="GET"> 
+    
+    <form id="creazione" name="creazione" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('GET')
+        @method("POST")
+
         <!-- TITOLO -->
         <div class="input-row">
             <label for="title">Titolo</label>
@@ -80,22 +81,33 @@
 
             </div>
 
-
+            <!-- IMMAGINI -->
             <h5>aggiungi le tue immagini</h5>
             <div class="container-upload">
                 {{-- <input type="file" name="img" enctype="multipart/form-data" class="img-input form-control-file" id="img" accept="image/*"> --}}
-                <input type="image" name="img" class="img-input form-control-file" id="img">
+                <input type="file" name="img[]" class="img-input" id="img" accept="image/*">
                 
             </div>
             <a id="add-img" href="#"> <i class="fas fa-plus-circle"></i> </a>
 
+
+            <!-- CAMPI HIDDEN -->
+
             <input type="hidden" name="user-id" value="{{ Auth::user()->id }}">
+           
+            <input id="latitude" type="hidden" name="latitude" value="">
+            <input id="longitude" type="hidden" name="longitude" value="">
+
+       
+            
+            
+            
             <input type="submit" id="crea">
             
 
 
         </div>
-
+    </form>
 
 
 
@@ -103,4 +115,3 @@
 
 </div>
 @endsection
-

@@ -1,6 +1,6 @@
 var $ = require('jquery');
+const Handlebars = require("handlebars");
 const apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk';
-
 
 // aggiunta campo input file fino ad un max di 5
 $('#add-img').click(function() {
@@ -12,8 +12,45 @@ $('#add-img').click(function() {
     }
 });
 
-$('#crea').on('click', (function(event) {
+
+
+$('#address').focusout(function() {
+    var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
+    console.log(data);
+    tt.services.fuzzySearch({
+        key: apiKey,
+        query: data
+    }).go()
+    .then(function(response){
+        
+        $('#longitude').attr('value', response.results[0].position['lng']);
+        $('#latitude').attr('value', response.results[0].position['lat']);
+
+
+        
+    });
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('#pippo').submit(function(event) {
+    event.preventDefault();
+
     // SALVO I VALORI DEL FORM
+    // form = document.getElementById('creazione');
+    // var formData = new FormData(form);
+    // console.log(formData);
+
     // var form = $('#creazione').serializeArray();
     // console.log(form);
     
@@ -28,13 +65,15 @@ $('#crea').on('click', (function(event) {
     console.log(services)
 
     //uguale per le immagini
-    var images = [];
-    $('input[name=img]').each(function() {
-        if($(this).val() != "") {
-            images.push($(this).val());
-        }
+    var images = document.querySelectorAll($('.img-input'));
 
-    });
+    // var images = [];
+    // $('input[name=img]').each(function() {
+    //     if($(this).val() != "") {
+    //         images.push($(this).val());
+    //     }
+
+    // });
     console.log(images);
    
     
@@ -53,7 +92,7 @@ $('#crea').on('click', (function(event) {
         bathrooms: $('input[name=bathrooms]').val(),
         services: services,
         user_id: $('input[name=user-id]').val(),
-        img: $("input:image"),
+        img: images,
     }
     console.log(apartmentData)
 
@@ -71,8 +110,7 @@ $('#crea').on('click', (function(event) {
         
         
     });
-    event.preventDefault();
-}));
+});
     
     
 

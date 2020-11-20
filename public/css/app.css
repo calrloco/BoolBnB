@@ -5359,7 +5359,7 @@ textarea {
 
 .slider-section .slider-img {
   width: 100%;
-  height: 300px;
+  height: 400px;
   padding: 0 10px;
   border-radius: 1.2rem;
   display: flex;
@@ -5369,11 +5369,15 @@ textarea {
 }
 
 .slider-section .slider-img .apt-img-slider {
-  width: 90%;
+  width: 100%;
   height: 100%;
+  padding: 0 20px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
-.slider-section .slider-img .far {
+.slider-section .slider-img .arrow-slider-sx,
+.slider-section .slider-img .arrow-slider-dx {
   font-size: 30px;
   color: lightgrey;
 }

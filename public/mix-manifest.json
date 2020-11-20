@@ -1,6 +1,10 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+<<<<<<< Updated upstream
     "/js/map.js": "/js/map.js",
     "/js/stats.js": "/js/stats.js"
+=======
+    "/js/map.js": "/js/map.js"
+>>>>>>> Stashed changes
 }

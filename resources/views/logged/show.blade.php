@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    {{-- @dd($apartment); --}}
 <section class="top-section">
     <div class="title-apt">
     <p class="title">{{ $apartment->title }}</p>
@@ -11,8 +10,9 @@
     <div class="slider-img">
         <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
         @for($i = 0; $i < $apartment->images->count('id'); $i++)
-            <img class="apt-img-slider {{$i==0?'active':'hidden'}}" src="{{ $apartment->images[$i]->path }}" alt="{{$apartment->title}}">
+            <input id="check-info-img" type="hidden" name="" value="{{$apartment->images}}">
         @endfor
+        <img class="apt-img-slider" src="" alt="">
         <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
     </div>
 </section>
@@ -52,13 +52,10 @@
         <div class="send-message-box">
             <p class="message-title">Statistiche appartamento</p>
             <div class="message-form">
-                {{-- <a href="{{ route('logged.messages', $apartment->id )}}">MAILBOX!</a> --}}
                 <a href="{{ route('logged.sponsor', $apartment->id )}}">Sponsorizza il tuo appartamento!</a>
             </div>
-
         </div>
     </div>
-
 </div>
 
 <section class="map-section">

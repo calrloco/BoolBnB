@@ -6,10 +6,11 @@
     <h2>Registra il tuo appartamento</h2>
            
     
-    </form>
-    <form id="creazione" method="GET"> 
+    
+<form id="creazione" action="{{ route('host.store') }}" name="creazione" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('GET')
+        @method("POST")
+
         <!-- TITOLO -->
         <div class="input-row">
             <label for="title">Titolo</label>
@@ -29,8 +30,8 @@
                     <input id="city" type="text" name="city">
                 </div>
                 <div class="label-input">
-                    <label for="postal-code">Codice Postale</label>
-                    <input  type="text" name="postal-code">
+                    <label for="postal_code">Codice Postale</label>
+                    <input  type="text" name="postal_code">
                 </div>
                 <div class="label-input">
                     <label id="country" for="country">Nazione</label>
@@ -48,8 +49,8 @@
         <div class="input row">
             <div class="input-group">
                 <div class="label-input">
-                    <label for="daily-price">Prezzo per notte</label>
-                    <input type="number" name="daily-price">
+                    <label for="daily_price">Prezzo per notte</label>
+                    <input type="number" name="daily_price">
                 </div>  
                 <div class="label-input">
                     <label for="sm">Metri quadri</label>
@@ -80,21 +81,33 @@
 
             </div>
 
-
+            <!-- IMMAGINI -->
             <h5>aggiungi le tue immagini</h5>
             <div class="container-upload">
-                <input class="img-input" type="file" name="img" class="form-control-file" id="img" accept="image/*">
+                {{-- <input type="file" name="img" enctype="multipart/form-data" class="img-input form-control-file" id="img" accept="image/*"> --}}
+                <input type="file" name="img[]" class="img-input" id="img" accept="image/*">
                 
             </div>
             <a id="add-img" href="#"> <i class="fas fa-plus-circle"></i> </a>
 
-            <input type="hidden" name="user-id" value="{{ Auth::user()->id }}">
+
+            <!-- CAMPI HIDDEN -->
+
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+           
+            <input id="latitude" type="hidden" name="latitude" value="">
+            <input id="longitude" type="hidden" name="longitude" value="">
+
+       
+            
+            
+            
             <input type="submit" id="crea">
             
 
 
         </div>
-
+    </form>
 
 
 
@@ -102,4 +115,3 @@
 
 </div>
 @endsection
-

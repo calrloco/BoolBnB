@@ -9,13 +9,10 @@
 <section class="slider-section">
     <div class="slider-img">
         <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
+
         @for($i = 0; $i < $apartment->images->count('id'); $i++)
             <input id="check-info-img" type="hidden" name="" value="{{$apartment->images}}">
         @endfor
-
-        {{-- @foreach ($apartment->images as $image)
-            <input class="check-info-img" type="hidden" name="" value="{{$image}}">
-        @endforeach --}}
 
         <img class="apt-img-slider" src="" alt="">
         <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>

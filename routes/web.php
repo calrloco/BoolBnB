@@ -24,8 +24,7 @@ Auth::routes();
 //     Route::resource('posts', 'PostController');
 // });
 // ritorniamo la view home tramite il controller generale
-
-Route::resource('/','HomeController');
+Route::get('/','HomeController@index')->name('home');
 Route::resource('/search','SearchController');
 Route::resource('/messages','Logged\MessageController');
 Route::resource('/host','Logged\HostController');
@@ -36,6 +35,9 @@ Route::resource('/view','ViewsController');
 Route::get('/apartment', function () {
     return view('apartment');
 });
-
-Route::get('/apartments', 'Logged\HostController@index');
-Route::get('/apartments/{id}/sponsor','Logged\HostController@sponsor')->name('logged.sponsor');
+Route::get('/test', function () {
+    return view('test');
+});
+Route::get('/search', function () {
+    return view('search.search');
+});

@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Apartment;
+use App\Image;
 use Illuminate\Support\Facades\Validator;
 
 class ApartmentController extends Controller
@@ -27,6 +27,7 @@ class ApartmentController extends Controller
         }
         $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
         point(longitude, latitude)) * .001 as distance")->having('distance','<=',$request->maxDist)->orderBy('distance','asc')->get();
+        
         return response()->json($query, 200);
     }
 
@@ -74,14 +75,13 @@ class ApartmentController extends Controller
         $apartment = Apartment::create($request->all());
         $apartment->services()->attach($request['services']);
 
-        if (!empty($request['img'])) {
-            $request['img'] = Storage::disk('public')->put('images', $request['img']);
-        }
+        // if (!empty($request['img'])) {
+        //     $request['img'] = Storage::disk('public')->put('images', $request['img']);
+        // }
 
         return response()->json($apartment,201);
 
     }
-
 
     /**
      * Display the specified resource.
@@ -127,6 +127,10 @@ class ApartmentController extends Controller
            'messagio' =>'appartamento numero '.$apartment->id.' cancellato con successo'
          ];
          return response()->json($message);
+    }
+
+    public function getServices($id){
+           
     }
 }
 

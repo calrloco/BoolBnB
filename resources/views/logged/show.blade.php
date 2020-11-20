@@ -9,11 +9,11 @@
 </section>
 <section class="slider-section">
     <div class="slider-img">
-        <i class="far fa-arrow-alt-circle-left"></i>
-        @foreach ($apartment->images as $image)
-            <img class="apt-img-slider" src="{{ $image->path }}" alt="{{$apartment->title}}">
-        @endforeach
-        <i class="far fa-arrow-alt-circle-right"></i>
+        <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
+        @for($i = 0; $i < $apartment->images->count('id'); $i++)
+            <img class="apt-img-slider {{$i==0?'active':'hidden'}}" src="{{ $apartment->images[$i]->path }}" alt="{{$apartment->title}}">
+        @endfor
+        <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
     </div>
 </section>
 

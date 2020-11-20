@@ -20,7 +20,7 @@
             cursor: pointer;
         }
     }
-
+ 
     &__search {
         @include flex(row, center, center);
 
@@ -230,3 +230,4 @@
         }
     }
 }
+

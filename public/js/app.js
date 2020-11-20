@@ -42487,8 +42487,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
-__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js"); // require("./apt");
-
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
 
 __webpack_require__(/*! ./apt */ "./resources/js/apt.js");
 

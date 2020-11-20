@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Apartment;
 use Illuminate\Support\Facades\Validator;
@@ -73,9 +74,17 @@ class ApartmentController extends Controller
         }
         $apartment = Apartment::create($request->all());
         $apartment->services()->attach($request['services']);
+        
+        if (!empty($request['img'])) {
+            $request->img = Storage::disk('public')->put($request->img, 'images');
+            //nel database salvo il percorso che creo con Storage
+
+        }
+
 
         // if (!empty($request['img'])) {
-        //     $request['img'] = Storage::disk('public')->put('images', $request['img']);
+        //     foreach ($request['img'] as $image) {
+        //         $image = Storage::disk('public')->put('images', $image);
         // }
 
         return response()->json($apartment,201);
@@ -109,8 +118,8 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Apartment $apartment){
-         $apartment->update($request->all());
-         $apartment->services()->sync($request['services']);
+        $apartment->update($request->all());
+        $apartment->services()->sync($request['services']);
         return response()->json($apartment);
     }
 

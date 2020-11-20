@@ -42354,15 +42354,16 @@ module.exports = function(module) {
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; // aggiunta campo input file fino ad un max di 5
-// $('#add-img').click(function() {
-//     if ( $('.img-input').length < 5) {
-//         $('.container-upload').append(`<input class="img-input" type="file" name="img[]" class="form-control-file" id="img" accept="image/*">`);
-//         if ($('.img-input').length >= 5) {
-//             $('#add-img').hide();
-//         }
-//     } 
-// });
 
+$('#add-img').click(function () {
+  if ($('.img-input').length < 5) {
+    $('.container-upload').append("<input type=\"file\" name=\"img\" enctype=\"multipart/form-data\" class=\"img-input form-control-file\" id=\"img\" accept=\"image/*\">");
+
+    if ($('.img-input').length >= 5) {
+      $('#add-img').hide();
+    }
+  }
+});
 $('#crea').on('click', function (event) {
   // SALVO I VALORI DEL FORM
   // var form = $('#creazione').serializeArray();
@@ -42377,10 +42378,14 @@ $('#crea').on('click', function (event) {
     }
   });
   console.log(services); //uguale per le immagini
-  // var images = [];
-  // $('input[name=img]').each(function() {
-  // });
 
+  var images = [];
+  $('input[name=img]').each(function () {
+    if ($(this).val() != "") {
+      images.push($(this).val());
+    }
+  });
+  console.log(images);
   var apartmentData = {
     title: $('input[name=title]').val(),
     address: $('#address').val(),
@@ -42394,7 +42399,8 @@ $('#crea').on('click', function (event) {
     beds: $('input[name=beds]').val(),
     bathrooms: $('input[name=bathrooms]').val(),
     services: services,
-    user_id: $('input[name=user-id]').val()
+    user_id: $('input[name=user-id]').val(),
+    img: $("input:image")
   };
   console.log(apartmentData);
   var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val(); // console.log(data);
@@ -42437,6 +42443,7 @@ function createApart(response, apartmentData) {
       beds: apartmentData.beds,
       user_id: apartmentData.user_id,
       bathrooms: apartmentData.bathrooms,
+      img: apartmentData.img,
       latitude: response.results[0].position['lng'],
       longitude: response.results[0].position['lat']
     },

@@ -7,7 +7,7 @@
            
     
     </form>
-    <form id="creazione" method="GET"> 
+    <form id="creazione" enctype="multipart/form-data" method="GET"> 
         @csrf
         @method('GET')
         <!-- TITOLO -->
@@ -83,7 +83,8 @@
 
             <h5>aggiungi le tue immagini</h5>
             <div class="container-upload">
-                <input class="img-input" type="file" name="img" class="form-control-file" id="img" accept="image/*">
+                {{-- <input type="file" name="img" enctype="multipart/form-data" class="img-input form-control-file" id="img" accept="image/*"> --}}
+                <input type="image" name="img" class="img-input form-control-file" id="img">
                 
             </div>
             <a id="add-img" href="#"> <i class="fas fa-plus-circle"></i> </a>

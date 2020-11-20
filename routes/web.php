@@ -39,7 +39,3 @@ Route::get('/apartment', function () {
 
 Route::get('/apartments', 'Logged\HostController@index');
 Route::get('/apartments/{id}/sponsor','Logged\HostController@sponsor')->name('logged.sponsor');
-
-
-//DA ELIMINARE
-Route::resource('/img','Logged\ImagesController');

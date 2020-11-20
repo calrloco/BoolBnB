@@ -7,7 +7,7 @@
            
     
     
-    <form id="creazione" name="creazione" method="POST" enctype="multipart/form-data">
+<form id="creazione" action="{{ route('host.store') }}" name="creazione" method="POST" enctype="multipart/form-data">
         @csrf
         @method("POST")
 
@@ -30,8 +30,8 @@
                     <input id="city" type="text" name="city">
                 </div>
                 <div class="label-input">
-                    <label for="postal-code">Codice Postale</label>
-                    <input  type="text" name="postal-code">
+                    <label for="postal_code">Codice Postale</label>
+                    <input  type="text" name="postal_code">
                 </div>
                 <div class="label-input">
                     <label id="country" for="country">Nazione</label>
@@ -49,8 +49,8 @@
         <div class="input row">
             <div class="input-group">
                 <div class="label-input">
-                    <label for="daily-price">Prezzo per notte</label>
-                    <input type="number" name="daily-price">
+                    <label for="daily_price">Prezzo per notte</label>
+                    <input type="number" name="daily_price">
                 </div>  
                 <div class="label-input">
                     <label for="sm">Metri quadri</label>
@@ -93,7 +93,7 @@
 
             <!-- CAMPI HIDDEN -->
 
-            <input type="hidden" name="user-id" value="{{ Auth::user()->id }}">
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
            
             <input id="latitude" type="hidden" name="latitude" value="">
             <input id="longitude" type="hidden" name="longitude" value="">

@@ -10,6 +10,7 @@ use App\Service;
 use App\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class HostController extends Controller
 {
@@ -61,7 +62,7 @@ class HostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) 
     {
         $validator = Validator::make($request->all(),[
             'title' => 'required|min:10|max:300',
@@ -92,12 +93,12 @@ class HostController extends Controller
         $apartment = Apartment::create($request->all());
         $apartment->services()->attach($request['services']);
 
-        dd($request['img']);
-        if (!empty($request['img'])) {
-            $request['img'] = Storage::disk('public')->put('images', $request['img']);
+        // dd($request['img']);
+        // if (!empty($request['img'])) {
+        $request['img'] = Storage::disk('public')->put('images', $request['img']);
             //nel database salvo il percorso che creo con Storage
 
-        }
+        // }
 
         
      

@@ -8,22 +8,23 @@
                 </a>
             </div>
             <div class="nav__search">
-                <form class="nav__search-button" action="{{route('search.store')}}" method="POST">
+                <form class="nav__search-button" action="{{ route('search.store') }}" method="POST">
                     @csrf
                     @method('POST')
-                     <p id="start-search" class="">Inizia la ricerca<p>
-                     <div class="nav__search-city hidden">
-                         <label for="search">Dove</label>
-                         <input id="search" type="text" name="address" placeholder="dove vuoi andare">
+                    <p id="start-search" class="">Inizia la ricerca
+                    <p>
+                    <div class="nav__search-city hidden">
+                        <label for="search">Dove</label>
+                        <input id="search" type="text" name="address" placeholder="dove vuoi andare">
                     </div>
-                   <div class="nav__search-icon nav__search-icon-big hidden">
+                    <div class="nav__search-icon nav__search-icon-big hidden">
                         <p>Cerca</p>
                         <i class="fas fa-search"></i>
                     </div>
-                     <div id="hidenav" class="nav__search-icon">
+                    <div id="hidenav" class="nav__search-icon">
                         <i class="fas fa-search"></i>
                     </div>
-                    <button type="submit" class="">vaiwadwadwad</button> 
+                    <button type="submit" class="">vaiwadwadwad</button>
                 </form>
             </div>
             <div class="nav__user">
@@ -54,18 +55,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
                             </li>
-                            <li class="nav__user__menu-item">
-                               
-                                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
-                                        {{  __('Logout') }}
-                                    </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                
-                            </li>
                             <li class="nav__user__menu-item">
                                 <a href="" class="nav-link">Messaggi</a>
                             </li>
@@ -74,6 +64,18 @@
                             </li>
                             <li class="nav__user__menu-item">
                                 <a href="" class="nav-link">Nuovo appartamento</a>
+                            </li>
+                            <li class="nav__user__menu-item">
+
+                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+
                             </li>
                         @endguest
                     </ul>

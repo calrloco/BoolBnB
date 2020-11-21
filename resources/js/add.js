@@ -26,8 +26,8 @@ $('#address').focusout(function() {
         $('#longitude').attr('value', response.results[0].position['lng']);
         $('#latitude').attr('value', response.results[0].position['lat']);
 
-
-        
+    
+    
     });
 })
 

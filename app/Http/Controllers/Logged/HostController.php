@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class HostController extends Controller
 {
+   
     /**
      * Create a new controller instance.
      *
@@ -31,13 +32,13 @@ class HostController extends Controller
     public function index()
     {
         // SE AMMINISTRATORE VENGONO RESTITUITI TUTTI GLI APPARTAMENTI
-        if((Auth::user()->role->role)== "admin"){
+        if ((Auth::user()->role->role) == "admin") {
 
             $apartments = Apartment::get();
-        // SE UTENTE VENGONO VISUALIZZATI GLI APPARTAMENTI DA LUI REGISTRATI
-        } elseif ((Auth::user()->role->role)== "host") {
-            $apartments = Apartment::where('apartments.user_id', '=' ,Auth::id())
-            ->get();
+            // SE UTENTE VENGONO VISUALIZZATI GLI APPARTAMENTI DA LUI REGISTRATI
+        } elseif ((Auth::user()->role->role) == "host") {
+            $apartments = Apartment::where('apartments.user_id', '=', Auth::id())
+                ->get();
             // ->orderBy('created_at','desc');
 
         }
@@ -86,7 +87,7 @@ class HostController extends Controller
     //    //
     //    // return view('logged.show', compact('apartment'));
     // }
-       public function show($id)
+    public function show($id)
     {
         //prendo appartamento cercandolo con ID
         $apartment = Apartment::find($id);
@@ -145,6 +146,7 @@ class HostController extends Controller
     public function sponsor($id)
     {
         $sponsors = Sponsor::all();
-        return view('logged.sponsor', compact('id','sponsors'));
+        return view('logged.sponsor', compact('id', 'sponsors'));
     }
+    
 }

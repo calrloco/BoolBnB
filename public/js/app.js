@@ -42471,6 +42471,9 @@ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
 
+var _require = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js"),
+    Alert = _require.Alert;
+
 $(document).ready(function () {
   $(".nav__user-box").click(function () {
     $(".nav__user__menu").toggleClass("active");
@@ -42491,6 +42494,29 @@ function hidenav() {
   $(".nav__search-button").addClass("nav__search-button-large");
   $(".nav__search-icon-big").addClass("active-flex");
   $("#start-search").addClass("hidden");
+} /// delete messages
+
+
+$(".delete").click(function () {
+  update();
+});
+
+function update() {
+  var id = $(".delete").attr("data-id");
+  $.ajax({
+    url: "http://127.0.0.1:8000/api/messages/" + id,
+    method: "PATCH",
+    headers: {
+      KEY: "test",
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function success(response) {
+      alert('ciao');
+    },
+    error: function error() {
+      alert('ciaoz');
+    }
+  });
 }
 
 /***/ }),

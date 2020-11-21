@@ -21,8 +21,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = Message::join('apartments', 'messages.apartment_id', '=', 'apartments.id')
-        // ->join('images', 'images.apartment_id', '=', 'apartments.id')
+        $messages = Message::selectRaw('* , messages.id as id_mess')->join('apartments', 'messages.apartment_id', '=', 'apartments.id')
         ->where('apartments.user_id', '=', Auth::user()->id)
         ->get();
         return view('logged.messages',compact('messages'));

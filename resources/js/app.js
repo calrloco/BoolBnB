@@ -4,6 +4,7 @@ require("./sponsor");
 require("./apt");
 var $ = require("jquery");
 const Handlebars = require("handlebars");
+const { Alert } = require("bootstrap");
 
 $(document).ready(function() {
     $(".nav__user-box").click(function() {
@@ -28,3 +29,28 @@ function hidenav() {
     $("#start-search").addClass("hidden");
 }
 
+/// delete messages
+
+
+
+$(".delete").click(function() {
+    update();
+});
+function update() {
+    const id = $(".delete").attr("data-id");
+   
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/messages/"+id,
+        method: "PATCH",
+        headers: {
+            KEY: "test",
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        },
+        success: function(response) {
+               alert('ciao');
+        },
+        error: function() {
+            alert('ciaoz');
+        }
+    });
+}

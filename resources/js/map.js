@@ -24,14 +24,10 @@ $(document).ready(function() {
     $(".nav__search-icon-big").click(function() {
         $(".search__resoults__apartment-cards").empty();
         getCoordinates($("#search").val());
-        getServices();
     });
 
     
 });
-
-
-
 //// prendi coordinate dell'input////////////////
 function getCoordinates(input) {
     tt.services
@@ -61,6 +57,7 @@ function getCoordinates(input) {
 function getServices() {
     $.ajax({
         url: "http://127.0.0.1:8000/api/services/all",
+        method:'GET',
         headers: {
             KEY: "test"
         },

@@ -3,6 +3,7 @@
 
     <div class="container__search">
         <div class="container__search-left">
+        <div class="container__search-left-top">
             <div class="search__resoults-title">
                 <p>I tuoi risultati per</p>
                 <p id="address-inst">{{$address ?? ''}}</p>
@@ -12,6 +13,7 @@
                    
                 </div>
             </div>
+        </div>
             <div class="search__resoults__apartment">
                 <div class="search__resoults__apartment-cards">
                     

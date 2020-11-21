@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\carbon;
 use App\Apartment;
 use App\Service;
+use App\Image;
 use App\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -80,50 +81,34 @@ class HostController extends Controller
             'daily_price'=>'required',
             'description'=>'required|min:20',
             'user_id'=>'numeric|exists:users,id',
-            'img' =>'image'
         ],
         [
             'required'=>':attribute is a required field',
             'numeric'=>':attribute must be a number',
             'exists'=>'the room need to be associated to an existing user',
-        ]
- );
-    if($validator->fails()){
-        $error = $validator->messages();
-        return response()->json($error);
-    }
-        $apartment = Apartment::create($request->all());
-        $apartment->services()->attach($request['services']);
+        ]);
+        if($validator->fails()){
+            $error = $validator->messages();
+            return response()->json($error);
+        }
 
-        
-
-        // if (!empty($request['img'])) {
-            // $request['img'] = Storage::disk('public')->put('images', $request['img']);
-            //nel database salvo il percorso che creo con Storage
-
-        // }
+    $apartment = Apartment::create($request->all());
+    $apartment->services()->attach($request['services']);
     
-        $image = Storage::disk('public')->put('images', $image);
 
-        // }
+
+    $images = $request->file('img');
             
-        // if($request->hasFile('image')) {
-        //     foreach($request->file('image') as $image) {
-        //         $fileName = time()."_". $image->getClientOriginalName();
-        //         $request->file('image')->storeAs('upload', $filename); 
-        //     }
-        // }
+    foreach ($images as $image) {
+        $image = Storage::disk('public')->put('images', $image);
+        Image::insert(
+            [
+                'path' => $image,
+                'apartment_id' => $apartment->id,
+            ]
+        );
 
-        
-        
-        // $images = $request['img']; 
-        
-        // foreach ($images as $image) {
-        
-        // {
-        //     path: $request->img,
-        //     apartment_id: $request->user_id
-        // }
+    }
 
 
         
@@ -161,7 +146,8 @@ class HostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $images = Image::where('apartment_id', '=', $id )->get();
+        return view('test', compact('images'));
     }
 
     /**

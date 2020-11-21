@@ -32,28 +32,41 @@ $(document).ready(function() {
 
 
 //// prendi coordinate dell'input////////////////
-function getCoordinates(input) {
-    tt.services
-        .fuzzySearch({
-            key: apiKey,
-            query: input,
-        })
-        .go()
-        .then(function(response) {
-            map = tt.map({
+function getCoordinates(input){
+    var zoom = 10;
+    if (input != '') {         
+        tt.services
+            .fuzzySearch({
                 key: apiKey,
-                style: 'tomtom://vector/1/basic-main',
-                container: 'map',
-                center: response.results[0].position,
-                zoom: 10
-        
-              });
-            var longitude = response.results[0].position["lng"];
-            var latitude = response.results[0].position["lat"];
-            city = response.results[0].address['municipality'];
-            getCards(latitude, longitude, 3000);
-            console.log(response);
-        });
+                query: input,
+            })
+            .go()
+            .then(function(response) {
+                var longitude = response.results[0].position["lng"];
+                var latitude = response.results[0].position["lat"];
+                city = response.results[0].address['municipality'];
+                streetName = response.results[0].address['streetName'];
+                
+                if (streetName != undefined && city) {
+                    zoom = 16;
+                }else{
+                    zoom = 10;
+                }
+                map = tt.map({
+                    key: apiKey,
+                    style: 'tomtom://vector/1/basic-main',
+                    container: 'map',
+                    center: response.results[0].position,
+                    zoom: zoom
+                
+                  });
+                
+                getCards(latitude, longitude, zoom);
+                
+                console.log(response);
+                
+            });
+        }
 }
 
 /////////// chiamata all nostro db che richiama funzione handlebars
@@ -169,7 +182,7 @@ function compileHandlebars(risp) {
             var posizione = $(this).index() - 1;
             // console.log(posizione);
             details.removeClass('selected');
-            details.eq(posizione).addClass('selected');          
+            details.eq(posizione).addClass('selected');   
         })
     );
 
@@ -246,11 +259,56 @@ function buildLocation(el, text) {
     return details;
 }
 
-// $(document).on('click','#marker',function(){
-//     $('#marker').each(function(){
-//         var posizione = $(this).index() - 1;
-//         console.log(posizione);
-//         $('.search__resoults__apartment-cards-content').removeClass('selected');
-//         $('.search__resoults__apartment-cards-content').eq(posizione).addClass('selected');    
-//     });
-//   });
+// al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom
+$("#search").keyup(function(){
+    $('#auto-complete').empty();
+    var query = $("#search").val();
+    if (query < 3 || query == '') {
+        $('#auto-complete').removeClass('active');
+    }
+    if(query != '' && isNaN(query) && query.length > 3){
+        $('#auto-complete').addClass('active'); 
+        tt.services.fuzzySearch({
+            key: apiKey,
+            query: query,
+        })
+        .go()
+        .then(function(response) {
+            
+            var address = [];
+            var results = '';
+            var resp = response.results;
+            console.log(resp);
+
+            for (let i = 0; i < 4; i++) {
+                                   
+                var streetName = resp[i].address['streetName'];
+                var city = resp[i].address['municipality'];
+                var countryCode = resp[i].address['countryCode'];
+                if(streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == 'IT'){
+                    address.push(streetName + ' ' + city);
+                }else if(streetName == undefined && city != undefined && !address.includes(city) && countryCode == 'IT'){
+                    address.push(city);
+                }           
+        }
+            for (let i = 0; i < address.length; i++) {
+                results += '<div class="complete-results">' + address[i] + '</div>' 
+                
+            }
+            document.getElementById('auto-complete').innerHTML = results; 
+            if(results == ''){
+                $('#auto-complete').removeClass('active');
+            }          
+        });
+         
+    } 
+  });
+
+//funzione per selezionare suggerimento e restuirlo nella search
+  $(document).on('click', '.complete-results', function(){
+     var value = $(this).text();
+     $('#search').val(value);
+     getCoordinates($("#search").val());
+     $('#auto-complete').removeClass('active');
+
+  });

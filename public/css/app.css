@@ -4942,6 +4942,32 @@ main {
   margin-bottom: 0.2rem;
 }
 
+.nav__search-city {
+  position: relative;
+}
+
+.nav__search-city #auto-complete {
+  display: none;
+  position: absolute;
+  width: 300px;
+  top: 60px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.nav__search-city #auto-complete .complete-results {
+  padding: 5px;
+}
+
+.nav__search-city #auto-complete .complete-results:hover {
+  background-color: #f0f0f0;
+}
+
+.nav__search-city #auto-complete.active {
+  display: block;
+}
+
 .nav__search-city,
 .nav__search-date-start,
 .nav__search-date-end {

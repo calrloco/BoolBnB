@@ -36,10 +36,36 @@
             background-color: transparent;
             height: 100%;
             
-        }
+        }       
+
         & label {
             margin-bottom: 0.2rem;
         }
+
+        &-city {
+            position: relative;
+            #auto-complete {
+                display: none;
+                position: absolute;
+                width: 300px;
+                top: 60px;
+                padding: 10px;
+                background-color: white;
+                border-radius: 10px;
+
+                .complete-results{
+                    padding: 5px;
+                    &:hover{
+                        background-color: #f0f0f0;
+                    }
+                }
+
+            }
+            #auto-complete.active{
+                display: block;
+            }
+        }
+
         &-city,
         &-date-start,
         &-date-end {

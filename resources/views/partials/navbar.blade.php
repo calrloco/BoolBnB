@@ -12,9 +12,11 @@
                     @csrf
                     @method('POST')
                      <p id="start-search" class="">Inizia la ricerca<p>
-                     <div class="nav__search-city hidden">
+                         <!-- tolta classe hidden da nav__search-city -->
+                     <div class="nav__search-city">
                          <label for="search">Dove</label>
-                         <input id="search" type="text" name="address" placeholder="dove vuoi andare">
+                         <input id="search" type="text" name="address" placeholder="dove vuoi andare" autocomplete="off">
+                         <div id="auto-complete"></div>
                     </div>
                     <div class="nav__search-date-start hidden">
                         <label for="search">Quando vuoi partire</label>

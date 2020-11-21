@@ -1,20 +1,56 @@
 var $ = require('jquery');
+const Handlebars = require("handlebars");
 const apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk';
 
-
 // aggiunta campo input file fino ad un max di 5
-// $('#add-img').click(function() {
-//     if ( $('.img-input').length < 5) {
-//         $('.container-upload').append(`<input class="img-input" type="file" name="img[]" class="form-control-file" id="img" accept="image/*">`);
-//         if ($('.img-input').length >= 5) {
-//             $('#add-img').hide();
-//         }
-//     } 
+$('#add-img').click(function() {
+    if ( $('.img-input').length < 5) {
+        $('.container-upload').append(`<input type="file" name="img" enctype="multipart/form-data" class="img-input form-control-file" id="img" accept="image/*">`);
+        if ($('.img-input').length >= 5) {
+            $('#add-img').hide();
+        }
+    }
+});
 
-// });
 
-$('#crea').on('click', (function(event) {
+
+$('#address').focusout(function() {
+    var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
+    console.log(data);
+    tt.services.fuzzySearch({
+        key: apiKey,
+        query: data
+    }).go()
+    .then(function(response){
+        
+        $('#longitude').attr('value', response.results[0].position['lng']);
+        $('#latitude').attr('value', response.results[0].position['lat']);
+
+    
+    
+    });
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('#pippo').submit(function(event) {
+    event.preventDefault();
+
     // SALVO I VALORI DEL FORM
+    // form = document.getElementById('creazione');
+    // var formData = new FormData(form);
+    // console.log(formData);
+
     // var form = $('#creazione').serializeArray();
     // console.log(form);
     
@@ -29,9 +65,16 @@ $('#crea').on('click', (function(event) {
     console.log(services)
 
     //uguale per le immagini
+    var images = document.querySelectorAll($('.img-input'));
+
     // var images = [];
     // $('input[name=img]').each(function() {
+    //     if($(this).val() != "") {
+    //         images.push($(this).val());
+    //     }
+
     // });
+    console.log(images);
    
     
     var apartmentData = {
@@ -49,6 +92,7 @@ $('#crea').on('click', (function(event) {
         bathrooms: $('input[name=bathrooms]').val(),
         services: services,
         user_id: $('input[name=user-id]').val(),
+        img: images,
     }
     console.log(apartmentData)
 
@@ -66,8 +110,7 @@ $('#crea').on('click', (function(event) {
         
         
     });
-    event.preventDefault();
-}));
+});
     
     
 
@@ -109,6 +152,7 @@ function createApart(response, apartmentData) {
                 beds: apartmentData.beds,
                 user_id: apartmentData.user_id,
                 bathrooms: apartmentData.bathrooms,
+                img: apartmentData.img,
                 latitude: response.results[0].position['lng'],
                 longitude: response.results[0].position['lat'],
                 

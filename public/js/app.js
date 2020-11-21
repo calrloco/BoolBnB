@@ -42353,21 +42353,39 @@ module.exports = function(module) {
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
-var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; // aggiunta campo input file fino ad un max di 5
-// $('#add-img').click(function() {
-//     if ( $('.img-input').length < 5) {
-//         $('.container-upload').append(`<input class="img-input" type="file" name="img[]" class="form-control-file" id="img" accept="image/*">`);
-//         if ($('.img-input').length >= 5) {
-//             $('#add-img').hide();
-//         }
-//     } 
-// });
+var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
 
-$('#crea').on('click', function (event) {
-  // SALVO I VALORI DEL FORM
+var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; // aggiunta campo input file fino ad un max di 5
+
+$('#add-img').click(function () {
+  if ($('.img-input').length < 5) {
+    $('.container-upload').append("<input type=\"file\" name=\"img\" enctype=\"multipart/form-data\" class=\"img-input form-control-file\" id=\"img\" accept=\"image/*\">");
+
+    if ($('.img-input').length >= 5) {
+      $('#add-img').hide();
+    }
+  }
+});
+$('#address').focusout(function () {
+  var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
+  console.log(data);
+  tt.services.fuzzySearch({
+    key: apiKey,
+    query: data
+  }).go().then(function (response) {
+    $('#longitude').attr('value', response.results[0].position['lng']);
+    $('#latitude').attr('value', response.results[0].position['lat']);
+  });
+});
+$('#pippo').submit(function (event) {
+  event.preventDefault(); // SALVO I VALORI DEL FORM
+  // form = document.getElementById('creazione');
+  // var formData = new FormData(form);
+  // console.log(formData);
   // var form = $('#creazione').serializeArray();
   // console.log(form);
   // salvo i checkbox con un ciclo
+
   var services = [];
   $('input[name=services]').each(function () {
     var ischecked = $(this).is(":checked");
@@ -42377,10 +42395,15 @@ $('#crea').on('click', function (event) {
     }
   });
   console.log(services); //uguale per le immagini
-  // var images = [];
+
+  var images = document.querySelectorAll($('.img-input')); // var images = [];
   // $('input[name=img]').each(function() {
+  //     if($(this).val() != "") {
+  //         images.push($(this).val());
+  //     }
   // });
 
+  console.log(images);
   var apartmentData = {
     title: $('input[name=title]').val(),
     address: $('#address').val(),
@@ -42394,7 +42417,8 @@ $('#crea').on('click', function (event) {
     beds: $('input[name=beds]').val(),
     bathrooms: $('input[name=bathrooms]').val(),
     services: services,
-    user_id: $('input[name=user-id]').val()
+    user_id: $('input[name=user-id]').val(),
+    img: images
   };
   console.log(apartmentData);
   var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val(); // console.log(data);
@@ -42405,7 +42429,6 @@ $('#crea').on('click', function (event) {
   }).go().then(function (response) {
     createApart(response, apartmentData);
   });
-  event.preventDefault();
 }); // se sono nel form crea apartament richiamo la funzione
 // console.log('lat' + response.results[0].position['lat']);
 // console.log('lng' + response.results[0].position['lng']);
@@ -42437,6 +42460,7 @@ function createApart(response, apartmentData) {
       beds: apartmentData.beds,
       user_id: apartmentData.user_id,
       bathrooms: apartmentData.bathrooms,
+      img: apartmentData.img,
       latitude: response.results[0].position['lng'],
       longitude: response.results[0].position['lat']
     },
@@ -42528,8 +42552,30 @@ function update() {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(".fa-arrow-alt-circle-left").on('click', function () {
-  alert('Hello!');
+var i = 0;
+var check = $('#check-info-img').val();
+var images = JSON.parse(check);
+console.log(images);
+$('.apt-img-slider').attr('src', images[i].path);
+$(".arrow-slider-sx").on('click', function () {
+  if (i > 0) {
+    i--; // console.log(i);
+
+    $('.apt-img-slider').attr('src', images[i].path);
+  } else {
+    i = images.length - 1;
+    $('.apt-img-slider').attr('src', images[i].path);
+  }
+});
+$(".arrow-slider-dx").on('click', function () {
+  if (i < images.length - 1) {
+    i++; // console.log(i);
+
+    $('.apt-img-slider').attr('src', images[i].path);
+  } else {
+    i = 0;
+    $('.apt-img-slider').attr('src', images[i].path);
+  }
 });
 
 /***/ }),
@@ -42622,8 +42668,8 @@ console.log(aptId);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\lavori\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\lavori\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

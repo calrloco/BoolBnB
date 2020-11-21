@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Apartment;
 use App\Image;
@@ -90,7 +91,7 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Apartment $apartment){
-        return response()->json($apartment,200);
+        return response()->json($require,200);
     }
 
     /**
@@ -109,8 +110,8 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Apartment $apartment){
-         $apartment->update($request->all());
-         $apartment->services()->sync($request['services']);
+        $apartment->update($request->all());
+        $apartment->services()->sync($request['services']);
         return response()->json($apartment);
     }
 

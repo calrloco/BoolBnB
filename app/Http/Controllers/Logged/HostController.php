@@ -62,7 +62,7 @@ class HostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
             'title' => 'required|min:10|max:300',
@@ -101,32 +101,32 @@ class HostController extends Controller
             //nel database salvo il percorso che creo con Storage
 
         // }
-    
+
         $image = Storage::disk('public')->put('images', $image);
 
         // }
-            
+
         // if($request->hasFile('image')) {
         //     foreach($request->file('image') as $image) {
         //         $fileName = time()."_". $image->getClientOriginalName();
-        //         $request->file('image')->storeAs('upload', $filename); 
+        //         $request->file('image')->storeAs('upload', $filename);
         //     }
         // }
 
-        
-        
-        // $images = $request['img']; 
-        
+
+
+        // $images = $request['img'];
+
         // foreach ($images as $image) {
-        
+
         // {
         //     path: $request->img,
         //     apartment_id: $request->user_id
         // }
 
 
-        
-     
+
+
 
         return response()->json($apartment,201);
     }
@@ -146,7 +146,7 @@ class HostController extends Controller
         } elseif ((Auth::user()->role->role)== "host") {
             $apartment = Apartment::find($id)
             ->where('user_id', Auth::id())
-            ->get();
+            ->first();
         }
 
        return view('logged.show', compact('apartment'));

@@ -5357,7 +5357,7 @@ textarea {
   align-self: center;
 }
 
-.slider-section .slider-img {
+.slider-section .apt-images {
   width: 100%;
   height: 400px;
   padding: 0 10px;
@@ -5368,7 +5368,7 @@ textarea {
   flex-direction: row;
 }
 
-.slider-section .slider-img .apt-img-slider {
+.slider-section .apt-images .apt-image {
   width: 100%;
   height: 100%;
   padding: 0 20px;
@@ -5376,8 +5376,8 @@ textarea {
      object-fit: cover;
 }
 
-.slider-section .slider-img .arrow-slider-sx,
-.slider-section .slider-img .arrow-slider-dx {
+.slider-section .apt-images .arrow-slider-sx,
+.slider-section .apt-images .arrow-slider-dx {
   font-size: 30px;
   color: lightgrey;
 }

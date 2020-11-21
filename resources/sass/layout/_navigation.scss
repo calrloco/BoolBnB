@@ -3,7 +3,12 @@
     height: var(--nav-height);
     font-size: 1.4rem;
     background-color: inherit;
-
+    
+    &-link {
+        width: 100%;
+        height:100%;
+        @include flex(row,center,center);
+    }
     &-container {
         z-index: 20;
         position: sticky;
@@ -118,6 +123,7 @@
                 color: #fff;
             }
         }
+       
     }
     &__user {
         flex: 1;

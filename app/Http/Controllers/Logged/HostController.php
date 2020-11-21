@@ -95,7 +95,7 @@ class HostController extends Controller
         $apartment = Apartment::create($request->all());
         $apartment->services()->attach($request['services']);
 
-        dd($request->img, $request['img']);
+        
 
         // if (!empty($request['img'])) {
             // $request['img'] = Storage::disk('public')->put('images', $request['img']);

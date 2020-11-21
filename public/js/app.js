@@ -42487,9 +42487,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
-__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js"); //require("./apt");
 
-__webpack_require__(/*! ./apt */ "./resources/js/apt.js");
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
@@ -42518,65 +42517,7 @@ function hidenav() {
   $(".nav__search-button").addClass("nav__search-button-large");
   $(".nav__search-icon-big").addClass("active-flex");
   $("#start-search").addClass("hidden");
-} /// delete messages
-
-
-$(".delete").click(function () {
-  update();
-});
-
-function update() {
-  var id = $(".delete").attr("data-id");
-  $.ajax({
-    url: "http://127.0.0.1:8000/api/messages/" + id,
-    method: "PATCH",
-    headers: {
-      KEY: "test",
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
-    success: function success(response) {
-      alert('ciao');
-    },
-    error: function error() {
-      alert('ciaoz');
-    }
-  });
 }
-
-/***/ }),
-
-/***/ "./resources/js/apt.js":
-/*!*****************************!*\
-  !*** ./resources/js/apt.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var i = 0;
-var check = $('#check-info-img').val();
-var images = JSON.parse(check);
-console.log(images);
-$('.apt-img-slider').attr('src', images[i].path);
-$(".arrow-slider-sx").on('click', function () {
-  if (i > 0) {
-    i--; // console.log(i);
-
-    $('.apt-img-slider').attr('src', images[i].path);
-  } else {
-    i = images.length - 1;
-    $('.apt-img-slider').attr('src', images[i].path);
-  }
-});
-$(".arrow-slider-dx").on('click', function () {
-  if (i < images.length - 1) {
-    i++; // console.log(i);
-
-    $('.apt-img-slider').attr('src', images[i].path);
-  } else {
-    i = 0;
-    $('.apt-img-slider').attr('src', images[i].path);
-  }
-});
 
 /***/ }),
 

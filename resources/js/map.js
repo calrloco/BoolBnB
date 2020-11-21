@@ -63,7 +63,7 @@ function getServices() {
         },
         success: function(response) {
             for (var i = 0; i < response.length; i++) {
-                var service = `<p data-servicetype="${response[i].id}" class="services-all">${response[i].service}</p>`;
+                var service = `<button data-servicetype="${response[i].id}" class="services-all">${response[i].service}</button>`;
                 $(".services").append(service);
             }
         },
@@ -105,7 +105,7 @@ function compileHandlebars(risp) {
         var context = {
             city: risp[i].city,
             title: troncaStringa(risp[i].title),
-            id: `<input class="aps_id" type="" name="apartment_id" value=${risp[i].id}>`
+            id: `<input class="aps_id" type="hidden" name="apartment_id" value=${risp[i].id}>`
         };
 
         var coordinates = [risp[i].longitude, risp[i].latitude];

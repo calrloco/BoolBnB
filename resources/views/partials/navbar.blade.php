@@ -16,15 +16,7 @@
                          <label for="search">Dove</label>
                          <input id="search" type="text" name="address" placeholder="dove vuoi andare">
                     </div>
-                    <div class="nav__search-date-start hidden">
-                        <label for="search">Quando vuoi partire</label>
-                        <input id="search-start" type="date" placeholder="dove vuoi andare">
-                    </div>
-                    <div class="nav__search-date-end hidden">
-                        <label for="search">Quando vuoi partire</label>
-                        <input id="search-end" type="date" placeholder="dove vuoi andare">
-                    </div>
-                    <div class="nav__search-icon nav__search-icon-big hidden">
+                   <div class="nav__search-icon nav__search-icon-big hidden">
                         <p>Cerca</p>
                         <i class="fas fa-search"></i>
                     </div>
@@ -61,9 +53,10 @@
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-
-                                <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            </li>
+                            <li class="nav__user__menu-item">
+                               
+                                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
                                         {{  __('Logout') }}
                                     </a>
@@ -71,7 +64,16 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                </div>
+                                
+                            </li>
+                            <li class="nav__user__menu-item">
+                                <a href="" class="nav-link">Messaggi</a>
+                            </li>
+                            <li class="nav__user__menu-item">
+                                <a href="" class="nav-link">I tuoi appartamenti</a>
+                            </li>
+                            <li class="nav__user__menu-item">
+                                <a href="" class="nav-link">Nuovo appartamento</a>
                             </li>
                         @endguest
                     </ul>

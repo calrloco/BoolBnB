@@ -20,7 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('apartments','API\ApartmentController');
 Route::get('images','API\GetImagesController@index')->name('images.api');
 Route::get('services','API\GetServices@index')->name('services.api');
-Route::apiResource('messages','API\MessageController');
 Route::get('services/all','API\GetServices@getAll')->name('services.api');
 Route::get('stats','API\StatsController@index')->name('stats.api');
 

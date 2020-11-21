@@ -1,9 +1,8 @@
+
 var i = 0;
 var check = $('#check-info-img').val();
-
 var images = JSON.parse(check);
 console.log(images);
-
 $('.apt-img-slider').attr('src', images[i].path);
 
 

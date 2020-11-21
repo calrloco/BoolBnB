@@ -10,7 +10,10 @@
 </head>
 
 <body>
-   @dd($views)
+    @foreach($images as $image) 
+        <img src="{{ asset('storage/' . $image->path)}}" alt="">
+    @endforeach
+
 </body>
 
 </html>

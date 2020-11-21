@@ -79,6 +79,7 @@ class HostController extends Controller
             'daily_price'=>'required',
             'description'=>'required|min:20',
             'user_id'=>'numeric|exists:users,id',
+            'img' =>'image'
         ],
         [
             'required'=>':attribute is a required field',
@@ -93,12 +94,36 @@ class HostController extends Controller
         $apartment = Apartment::create($request->all());
         $apartment->services()->attach($request['services']);
 
-        // dd($request['img']);
+        dd($request->img, $request['img']);
+
         // if (!empty($request['img'])) {
-        $request['img'] = Storage::disk('public')->put('images', $request['img']);
+            // $request['img'] = Storage::disk('public')->put('images', $request['img']);
             //nel database salvo il percorso che creo con Storage
 
         // }
+    
+        $image = Storage::disk('public')->put('images', $image);
+
+        // }
+            
+        // if($request->hasFile('image')) {
+        //     foreach($request->file('image') as $image) {
+        //         $fileName = time()."_". $image->getClientOriginalName();
+        //         $request->file('image')->storeAs('upload', $filename); 
+        //     }
+        // }
+
+        
+        
+        // $images = $request['img']; 
+        
+        // foreach ($images as $image) {
+        
+        // {
+        //     path: $request->img,
+        //     apartment_id: $request->user_id
+        // }
+
 
         
      

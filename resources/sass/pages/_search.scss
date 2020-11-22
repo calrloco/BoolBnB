@@ -29,7 +29,6 @@
     }
     &-right {
         flex: 2;
-        background-color: aqua;
     }
     .search__resoults__apartment-cards {
         @include flex(row, flex-start, flex-start);

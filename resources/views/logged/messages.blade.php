@@ -27,25 +27,25 @@
                 </div>
             </div>
             <div class="message-info">
-                <p> <strong>Da: </strong> {{ $message->email }}</p>
+                <p> <strong>Da: </strong> {{ $message->name . " " . $message->lastname }}</p>
+                <p> <strong>Email: </strong> {{ $message->email }}</p>
                 <p> <strong>Messaggio: </strong> {{ $message->message }}</p>
             </div>
             <div class="button-section">
                 {{-- controllo messaggio letto --}}
-                @If($message->read == 0) 
+               
                 <form action="{{ route('messages.update', $message->id_msg) }}" method="post">
                     @csrf
                     @method('PATCH')
-                    <button type="submit"><i class="fas fa-envelope"></i></button>
+                    <button type="submit">
+                        @If($message->read == 0) 
+                        <i class="fas fa-envelope"></i>
+                        @else
+                        <i class="fas fa-envelope-open"></i>
+                        @endif
+                    </button>
                 </form>
-                @else
-                <form action="{{ route('messages.update', $message->id_msg) }}" method="post">
-                    @csrf
-                    @method('PATCH')
-                    <button type="submit"><i class="fas fa-envelope-open"></i></button>
-                </form>
-                @endif
-
+               
                 <form action="{{ route('messages.destroy', $message->id_msg) }}" method="post">
                     @csrf
                     @method('DELETE')

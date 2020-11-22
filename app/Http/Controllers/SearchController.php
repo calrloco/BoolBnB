@@ -20,7 +20,8 @@ class SearchController extends Controller
     public function store(Request $request)
     {
         $address = $request->address;
-        return view('search.search', compact('address'));
+        $range = $request->range;
+        return view('search.search', compact('address','range'));
     }
 
 

@@ -8,14 +8,13 @@
 </section>
 <section class="slider-section">
     <div class="slider-img">
-        <i class="far fa-arrow-alt-circle-left"></i>
-        @foreach ($apartment->images as $image)
-            <img class="apt-img-slider" src="{{ $image->path }}" alt="{{$apartment->title}}">
-        @endforeach
-        {{-- @for($i = 0; $i < $apartment->images.length; i++)
-
-        @endfor --}}
-        <i class="far fa-arrow-alt-circle-right"></i>
+        <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
+        @for($i = 0; $i < $apartment->images->count('id'); $i++)
+            <input id="check-info-img" type="hidden" name="" value="{{$apartment->images}}">
+             {{-- <img class="apt-img-slider {{$i == 0 ? 'active':'hidden'}}" src="{{ $apartment->images[$i]->path }}" alt="{{$apartment->title}}">  --}}
+        @endfor
+        <img class="apt-img-slider" src="" alt="">
+        <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
     </div>
 </section>
 

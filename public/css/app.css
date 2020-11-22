@@ -4954,6 +4954,7 @@ main {
   padding: 10px;
   background-color: white;
   border-radius: 10px;
+  box-shadow: 0px 0px 23px 0px rgba(50, 50, 50, 0.51);
 }
 
 .nav__search-city #auto-complete .complete-results {

@@ -3,12 +3,12 @@
 @section('content')
 <div class="signup_container">
     <div class="signup">
-      <h1>Sign Up for an Account</h1>
-      <form method="POST" action="{{ route('register') }}"> 
+      <p>Sign Up for an Account</p>
+      <form method="POST" id="creazione" action="{{ route('register') }}"> 
         @csrf
         <div class="name_inputs">
           <!-- first name -->
-          <div>
+          <div class="input-row">
             <label for="name">First Name</label><br />
             <input type="text" name="name" placeholder="Your first name" class="fname" required />
           </div>

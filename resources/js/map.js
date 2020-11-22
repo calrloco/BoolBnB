@@ -18,37 +18,36 @@ let map = tt.map({
 });
 $(document).ready(function() {
     var instantSearch = (function() {
-        getCoordinates($("#address-inst").html());
-        getServices();
+        if ($("#address-inst").html() != "") {
+            getCoordinates($("#address-inst").html(),$('#range-form').html());
+            getServices();
+        }
     })();
     $(".nav__search-icon-big").click(function() {
         $(".search__resoults__apartment-cards").empty();
-        getCoordinates($("#search").val());
+        getCoordinates($("#search").val(),$('#range-value').html());
     });
-
-    
 });
 //// prendi coordinate dell'input////////////////
-function getCoordinates(input) {
+function getCoordinates(input,range) {
     tt.services
         .fuzzySearch({
             key: apiKey,
-            query: input,
+            query: input
         })
         .go()
         .then(function(response) {
             map = tt.map({
                 key: apiKey,
-                style: 'tomtom://vector/1/basic-main',
-                container: 'map',
+                style: "tomtom://vector/1/basic-main",
+                container: "map",
                 center: response.results[0].position,
                 zoom: 10
-        
-              });
+            });
             var longitude = response.results[0].position["lng"];
             var latitude = response.results[0].position["lat"];
-            city = response.results[0].address['municipality'];
-            getCards(latitude, longitude, 3000);
+            city = response.results[0].address["municipality"];
+            getCards(latitude, longitude, range);
             console.log(response);
         });
 }
@@ -57,7 +56,7 @@ function getCoordinates(input) {
 function getServices() {
     $.ajax({
         url: "http://127.0.0.1:8000/api/services/all",
-        method:'GET',
+        method: "GET",
         headers: {
             KEY: "test"
         },
@@ -86,8 +85,8 @@ function getCards(lat, lng, maxDist) {
             maxDist: maxDist
         },
         success: function(risposta) {
+            console.log(risposta);
             compileHandlebars(risposta);
-           
         },
         error: function() {
             console.log("error");
@@ -113,10 +112,12 @@ function compileHandlebars(risp) {
         var city = risp[i].city;
         var price = risp[i].daily_price;
         // creo il custom marker
-        var element = document.createElement('div');
-        element.id = 'marker';
-        const marker = new tt.Marker({element: element}).setLngLat(coordinates).setPopup(new tt.Popup({offset: 35}).setHTML(address)).addTo(map);
-
+        var element = document.createElement("div");
+        element.id = "marker";
+        const marker = new tt.Marker({ element: element })
+            .setLngLat(coordinates)
+            .setPopup(new tt.Popup({ offset: 35 }).setHTML(address))
+            .addTo(map);
 
         var popupOffsets = {
             top: [0, 0],
@@ -127,51 +128,56 @@ function compileHandlebars(risp) {
             right: [-25, -35]
         };
 
-        // popup sui marker 
+        // popup sui marker
         var popup = new tt.Popup({
             offset: popupOffsets
-        }).setHTML(address + ' ' + city + ' ' + '<br>' + '<strong>' + price + '</strong>' + ' € a notte');
+        }).setHTML(
+            address +
+                " " +
+                city +
+                " " +
+                "<br>" +
+                "<strong>" +
+                price +
+                "</strong>" +
+                " € a notte"
+        );
 
         // assegno il popup
         marker.setPopup(popup);
-      
-        
 
         var htmlContext = templateCards(context);
         $(".search__resoults__apartment-cards").append(htmlContext);
         appendServices(risp[i].id);
-        var el = $('.search__resoults__apartment-cards-content');
- 
-        // cliccando su un elemento della lista a sx lo trova in mappa
-        el.on('click',
-        (function(marker) {
-            const activeItem = $(this);
-            return function() {
-                map.easeTo({
-                    center: marker.getLngLat(),
-                    zoom: 16
-                });
-                closeAllPopups();
-                // marker.togglePopup();
-            }
-        })(marker)
-    );
+        var el = $(".search__resoults__apartment-cards-content");
 
-    // richiama funzione che associa l'address con la card nel DOM
-    var details =  buildLocation(el, address);
-      
-    // cliccando sul marker aggiunge la classe selected alla card dell'appartamento corrispondente
-       marker._element.addEventListener('click',
-        (function () {           
+        // cliccando su un elemento della lista a sx lo trova in mappa
+        el.on(
+            "click",
+            (function(marker) {
+                const activeItem = $(this);
+                return function() {
+                    map.easeTo({
+                        center: marker.getLngLat(),
+                        zoom: 16
+                    });
+                    closeAllPopups();
+                    // marker.togglePopup();
+                };
+            })(marker)
+        );
+
+        // richiama funzione che associa l'address con la card nel DOM
+        var details = buildLocation(el, address);
+
+        // cliccando sul marker aggiunge la classe selected alla card dell'appartamento corrispondente
+        marker._element.addEventListener("click", function() {
             var posizione = $(this).index() - 1;
             // console.log(posizione);
-            details.removeClass('selected');
-            details.eq(posizione).addClass('selected');          
-        })
-    );
-
+            details.removeClass("selected");
+            details.eq(posizione).addClass("selected");
+        });
     }
-
 }
 /// appende i servizi all'appartamento
 function appendServices(id) {
@@ -204,10 +210,8 @@ function appendServices(id) {
     });
 }
 /// appendere le immagini allo slider
-function getImages(id){
-    $.ajax({
-
-    })
+function getImages(id) {
+    $.ajax({});
 }
 // funzione per troncare una stringa
 function troncaStringa(stringa) {
@@ -225,20 +229,25 @@ function troncaStringa(stringa) {
 }
 
 /// filtra ricerca per servizi
-$(document).on('click','.services-all',function(){
-  var serviceType = $(this).data('servicetype').toString();
-  $('.search__resoults__apartment-cards-content').each(function(){
-    var serviceHome = $(this).data('service');
-    if(serviceHome.includes(serviceType)){
-        $(this).show();
-    }else{
-        $(this).hide();
-    }
-  });
+$(document).on("click", ".services-all", function() {
+    var serviceType = $(this)
+        .data("servicetype")
+        .toString();
+    $(".search__resoults__apartment-cards-content").each(function() {
+        var serviceHome = $(this).data("service");
+        if (serviceHome.includes(serviceType)) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
 });
 //funzione che associa l'address con la card apartment nel DOM
 function buildLocation(el, text) {
-    const details =  el;
+    const details = el;
     details.innerHTML = text;
     return details;
 }
+
+
+

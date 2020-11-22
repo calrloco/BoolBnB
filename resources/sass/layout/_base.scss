@@ -26,10 +26,13 @@ button:active {
   border: none;
 }
 
-button:focus {
-  outline: 0;
-}
 main {
   min-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
   @include flex(column, flex-start, flex-start);
 }
+
+button:focus {
+  outline: 0;
+}
+/* Change the white to any color ;) */
+

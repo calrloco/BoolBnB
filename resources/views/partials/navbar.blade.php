@@ -11,20 +11,12 @@
                 <form class="nav__search-button" action="{{ route('search.store') }}" method="POST">
                     @csrf
                     @method('POST')
-<<<<<<< HEAD
                      <p id="start-search" class="">Inizia la ricerca<p>
                          <!-- tolta classe hidden da nav__search-city -->
                      <div class="nav__search-city">
                          <label for="search">Dove</label>
                          <input id="search" type="text" name="address" placeholder="dove vuoi andare" autocomplete="off">
                          <div id="auto-complete"></div>
-=======
-                    <p id="start-search" class="">Inizia la ricerca
-                    <p>
-                    <div class="nav__search-city hidden">
-                        <label for="search">Dove</label>
-                        <input id="search" type="text" name="address" placeholder="dove vuoi andare">
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
                     </div>
                     <div id="hidenav" class="nav__search-icon">
                         <i class="fas fa-search"></i>

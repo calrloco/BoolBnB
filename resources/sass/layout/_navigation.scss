@@ -49,7 +49,6 @@
             border: none;
             background-color: transparent;
             height: 100%;
-<<<<<<< HEAD
             
         }       
 
@@ -87,13 +86,6 @@
         &-city,
         &-date-start,
         &-date-end {
-=======
-        }
-        & label {
-            margin-bottom: 0.2rem;
-        }
-        &-city {
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
             @include flex(column, center, flex-start);
             cursor: pointer;
             padding: 1rem;

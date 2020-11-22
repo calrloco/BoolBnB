@@ -4977,7 +4977,6 @@ button:focus {
 }
 
 .nav__search-city {
-<<<<<<< HEAD
   position: relative;
 }
 
@@ -5007,8 +5006,6 @@ button:focus {
 .nav__search-city,
 .nav__search-date-start,
 .nav__search-date-end {
-=======
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -5020,11 +5017,15 @@ button:focus {
   flex: 1;
 }
 
-.nav__search-city:hover {
+.nav__search-city:hover,
+.nav__search-date-start:hover,
+.nav__search-date-end:hover {
   background-color: #f7f7f7;
 }
 
-.nav__search-city__search-date-start::after {
+.nav__search-city__search-date-start::after,
+.nav__search-date-start__search-date-start::after,
+.nav__search-date-end__search-date-start::after {
   width: 1rem;
   height: 10px;
   background-color: black;
@@ -5941,8 +5942,6 @@ h1 {
   background-color: #F5F5F5;
 }
 
-<<<<<<< HEAD
-=======
 .list-entry {
   border: 10px solid green;
 }
@@ -5983,7 +5982,6 @@ canvas:focus {
   border: 1px solid #e3342f;
 }
 
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
 .container-sponsor {
   width: 80%;
   margin: 0 auto;

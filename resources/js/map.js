@@ -20,35 +20,19 @@ let map = tt.map({
     style: "tomtom://vector/1/basic-main",
     zoom: 4
 });
-<<<<<<< HEAD
-
-$(document).ready(function () {
-    var instantSearch = (function () {
-        getCoordinates($("#address-inst").html());
-        getServices();
-=======
 $(document).ready(function() {
     var instantSearch = (function() {
         if ($("#address-inst").html() != "") {
             getCoordinates($("#address-inst").html(),$('#range-form').html());
             getServices();
         }
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
     })();
     $(".nav__search-icon-big").click(function () {
         $(".search__resoults__apartment-cards").empty();
-<<<<<<< HEAD
-        getCoordinates($("#search").val());
-    });
-
-
-=======
         getCoordinates($("#search").val(),$('#range-value').html());
     });
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
 });
 //// prendi coordinate dell'input////////////////
-<<<<<<< HEAD
 function getCoordinates(input) {
     var zoom = 10;
     if (input != '') {
@@ -81,29 +65,6 @@ function getCoordinates(input) {
                 getCards(latitude, longitude, zoom);
             });
     }
-=======
-function getCoordinates(input,range) {
-    tt.services
-        .fuzzySearch({
-            key: apiKey,
-            query: input
-        })
-        .go()
-        .then(function(response) {
-            map = tt.map({
-                key: apiKey,
-                style: "tomtom://vector/1/basic-main",
-                container: "map",
-                center: response.results[0].position,
-                zoom: 10
-            });
-            var longitude = response.results[0].position["lng"];
-            var latitude = response.results[0].position["lat"];
-            city = response.results[0].address["municipality"];
-            getCards(latitude, longitude, range);
-            console.log(response);
-        });
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
 }
 
 /////////// chiamata all nostro db che richiama funzione handlebars
@@ -138,15 +99,9 @@ function getCards(lat, lng, maxDist) {
             lng: lng,
             maxDist: maxDist
         },
-<<<<<<< HEAD
         success: function (risposta) {
             compileHandlebars(risposta);
 
-=======
-        success: function(risposta) {
-            console.log(risposta);
-            compileHandlebars(risposta);
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
         },
         error: function () {
             console.log("error");
@@ -172,22 +127,12 @@ function compileHandlebars(risp) {
         var city = risp[i].city;
         var price = risp[i].daily_price;
         // creo il custom marker
-<<<<<<< HEAD
-        var element = document.createElement('div');
-        element.id = 'marker';
-        const marker = new tt.Marker({
-            element: element
-        }).setLngLat(coordinates).setPopup(new tt.Popup({
-            offset: 35
-        }).setHTML(address)).addTo(map);
-=======
         var element = document.createElement("div");
         element.id = "marker";
         const marker = new tt.Marker({ element: element })
             .setLngLat(coordinates)
             .setPopup(new tt.Popup({ offset: 35 }).setHTML(address))
             .addTo(map);
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
 
         var popupOffsets = {
             top: [0, 0],
@@ -219,16 +164,6 @@ function compileHandlebars(risp) {
         var htmlContext = templateCards(context);
         $(".search__resoults__apartment-cards").append(htmlContext);
         appendServices(risp[i].id);
-<<<<<<< HEAD
-
-        var el = $('.search__resoults__apartment-cards-content');
-        var details = buildLocation(el, address);
-        // cliccando su un elemento della lista a sx lo trova in mappa
-        details.on('click',
-            (function (marker) {
-                console.log(marker);
-                return function () {
-=======
         var el = $(".search__resoults__apartment-cards-content");
 
         // cliccando su un elemento della lista a sx lo trova in mappa
@@ -237,12 +172,10 @@ function compileHandlebars(risp) {
             (function(marker) {
                 const activeItem = $(this);
                 return function() {
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
                     map.easeTo({
                         center: marker.getLngLat(),
                         zoom: 16
                     });
-<<<<<<< HEAD
                     // serve a passare da un marker all'altro nella selezione di sx
                     closeAllPopups();
                     // marker.togglePopup();
@@ -266,25 +199,6 @@ function compileHandlebars(risp) {
           
     }
     
-=======
-                    closeAllPopups();
-                    // marker.togglePopup();
-                };
-            })(marker)
-        );
-
-        // richiama funzione che associa l'address con la card nel DOM
-        var details = buildLocation(el, address);
-
-        // cliccando sul marker aggiunge la classe selected alla card dell'appartamento corrispondente
-        marker._element.addEventListener("click", function() {
-            var posizione = $(this).index() - 1;
-            // console.log(posizione);
-            details.removeClass("selected");
-            details.eq(posizione).addClass("selected");
-        });
-    }
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
 }
 /// appende i servizi all'appartamento
 function appendServices(id) {
@@ -318,13 +232,7 @@ function appendServices(id) {
 }
 /// appendere le immagini allo slider
 function getImages(id) {
-<<<<<<< HEAD
-    $.ajax({
-
-    })
-=======
     $.ajax({});
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
 }
 // funzione per troncare una stringa
 function troncaStringa(stringa) {
@@ -342,19 +250,12 @@ function troncaStringa(stringa) {
 }
 
 /// filtra ricerca per servizi
-<<<<<<< HEAD
-$(document).on('click', '.services-all', function () {
-    var serviceType = $(this).data('servicetype').toString();
-    $('.search__resoults__apartment-cards-content').each(function () {
-        var serviceHome = $(this).data('service');
-=======
 $(document).on("click", ".services-all", function() {
     var serviceType = $(this)
         .data("servicetype")
         .toString();
     $(".search__resoults__apartment-cards-content").each(function() {
         var serviceHome = $(this).data("service");
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0
         if (serviceHome.includes(serviceType)) {
             $(this).show();
         } else {
@@ -429,8 +330,5 @@ function buildLocation(el, text) {
     return details;
 }
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> d888fb0137fd26091157ff0a4abd0dadfacc57c0

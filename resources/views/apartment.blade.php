@@ -7,15 +7,15 @@
     </div>
 </section>
 <section class="slider-section">
-    <div class="slider-img">
-        <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
-        @for($i = 0; $i < $apartment->images->count('id'); $i++)
-            <input id="check-info-img" type="hidden" name="" value="{{$apartment->images}}">
-             {{-- <img class="apt-img-slider {{$i == 0 ? 'active':'hidden'}}" src="{{ $apartment->images[$i]->path }}" alt="{{$apartment->title}}">  --}}
-        @endfor
-        <img class="apt-img-slider" src="" alt="">
-        <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
-    </div>
+    <section class="slider-section">
+        <div class="apt-images">
+            <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
+            @for($i = 0; $i < $apartment->images->count('id'); $i++)
+                <img class="apt-image {{($i == 0 ? 'active first' : (($i == $apartment->images->count('id')-1) ? 'hidden last' :'hidden'))}}" src="{{ $apartment->images[$i]->path }}" alt="{{$apartment->title}}">
+            @endfor
+            <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
+        </div>
+    </section>
 </section>
 
 

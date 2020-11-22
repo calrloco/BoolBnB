@@ -64,7 +64,7 @@ class HostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
             'title' => 'required|min:10|max:300',
@@ -114,6 +114,8 @@ class HostController extends Controller
         
      
 
+
+
         return response()->json($apartment,201);
     }
 
@@ -132,7 +134,7 @@ class HostController extends Controller
         } elseif ((Auth::user()->role->role)== "host") {
             $apartment = Apartment::find($id)
             ->where('user_id', Auth::id())
-            ->get();
+            ->first();
         }
 
        return view('logged.show', compact('apartment'));

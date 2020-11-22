@@ -11,7 +11,7 @@ const {
 const APPLICATION_NAME = "My Application";
 const APPLICATION_VERSION = "1.0";
 tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
-const apiKey = "RWf0OUXl0BIHVgSlxGaXYGUTma7oPbSu";
+const apiKey = "31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk";
 
 let map = tt.map({
     key: apiKey,
@@ -165,9 +165,9 @@ function compileHandlebars(risp) {
         $(".search__resoults__apartment-cards").append(htmlContext);
         appendServices(risp[i].id);
         var el = $(".search__resoults__apartment-cards-content");
-
+        var details = buildLocation(el, address);
         // cliccando su un elemento della lista a sx lo trova in mappa
-        el.on(
+        detaails.on(
             "click",
             (function(marker) {
                 const activeItem = $(this);

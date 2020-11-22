@@ -42487,13 +42487,15 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
-__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js"); //require("./apt");
 
-__webpack_require__(/*! ./apt */ "./resources/js/apt.js");
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
+
+var _require = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js"),
+    Alert = _require.Alert;
 
 $(document).ready(function () {
   $(".nav__user-box").click(function () {
@@ -42516,41 +42518,6 @@ function hidenav() {
   $(".nav__search-icon-big").addClass("active-flex");
   $("#start-search").addClass("hidden");
 }
-
-/***/ }),
-
-/***/ "./resources/js/apt.js":
-/*!*****************************!*\
-  !*** ./resources/js/apt.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var i = 0;
-var check = $('#check-info-img').val();
-var images = JSON.parse(check);
-console.log(images);
-$('.apt-img-slider').attr('src', images[i].path);
-$(".arrow-slider-sx").on('click', function () {
-  if (i > 0) {
-    i--; // console.log(i);
-
-    $('.apt-img-slider').attr('src', images[i].path);
-  } else {
-    i = images.length - 1;
-    $('.apt-img-slider').attr('src', images[i].path);
-  }
-});
-$(".arrow-slider-dx").on('click', function () {
-  if (i < images.length - 1) {
-    i++; // console.log(i);
-
-    $('.apt-img-slider').attr('src', images[i].path);
-  } else {
-    i = 0;
-    $('.apt-img-slider').attr('src', images[i].path);
-  }
-});
 
 /***/ }),
 
@@ -42642,8 +42609,8 @@ console.log(aptId);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\lavori\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\lavori\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

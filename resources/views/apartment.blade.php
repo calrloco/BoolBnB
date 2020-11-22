@@ -11,7 +11,7 @@
         <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
         @for($i = 0; $i < $apartment->images->count('id'); $i++)
             <input id="check-info-img" type="hidden" name="" value="{{$apartment->images}}">
-            {{-- <img class="apt-img-slider {{$i==0?'active':'hidden'}}" src="{{ $apartment->images[$i]->path }}" alt="{{$apartment->title}}"> --}}
+             {{-- <img class="apt-img-slider {{$i == 0 ? 'active':'hidden'}}" src="{{ $apartment->images[$i]->path }}" alt="{{$apartment->title}}">  --}}
         @endfor
         <img class="apt-img-slider" src="" alt="">
         <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>

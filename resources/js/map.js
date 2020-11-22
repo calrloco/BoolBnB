@@ -177,8 +177,8 @@ function compileHandlebars(risp) {
                 }
             })(marker)
         );
-            console.log(details);
-         
+            // console.log(details);
+         console.log(address);
             
                  // console.log(marker._lngLat.lng);
                 // console.log(marker._lngLat.lat);
@@ -253,7 +253,6 @@ $(document).on('click', '.services-all', function () {
         var serviceHome = $(this).data('service');
         if (serviceHome.includes(serviceType)) {
             $(this).show();
-            console.log(this);
         } else {
             $(this).hide();
         }

@@ -153,3 +153,8 @@
 .control{
     border:1px solid $red;
 }
+.service-selected{
+    border:1px solid var(--pink-bnb);
+    background-color:var(--pink-bnb);
+    color: #fff;
+}

@@ -19,17 +19,17 @@ let map = tt.map({
 $(document).ready(function() {
     var instantSearch = (function() {
         if ($("#address-inst").html() != "") {
-            getCoordinates($("#address-inst").html(),$('#range-form').html());
+            getCoordinates($("#address-inst").html(), $("#range-form").html());
             getServices();
         }
     })();
     $(".nav__search-icon-big").click(function() {
         $(".search__resoults__apartment-cards").empty();
-        getCoordinates($("#search").val(),$('#range-value').html());
+        getCoordinates($("#search").val(), $("#range-value").html());
     });
 });
 //// prendi coordinate dell'input////////////////
-function getCoordinates(input,range) {
+function getCoordinates(input, range) {
     tt.services
         .fuzzySearch({
             key: apiKey,
@@ -85,7 +85,6 @@ function getCards(lat, lng, maxDist) {
             maxDist: maxDist
         },
         success: function(risposta) {
-            console.log(risposta);
             compileHandlebars(risposta);
         },
         error: function() {
@@ -229,19 +228,45 @@ function troncaStringa(stringa) {
 }
 
 /// filtra ricerca per servizi
-$(document).on("click", ".services-all", function() {
-    var serviceType = $(this)
-        .data("servicetype")
-        .toString();
-    $(".search__resoults__apartment-cards-content").each(function() {
-        var serviceHome = $(this).data("service");
-        if (serviceHome.includes(serviceType)) {
-            $(this).show();
-        } else {
-            $(this).hide();
+var serviceCheck = (function() {
+    var selectedService = [];
+    
+    $(document).on("click", ".services-all", function() {
+        var serviceType = $(this)
+            .data("servicetype")
+            .toString();
+        $(this).toggleClass("service-selected");
+        if(selectedService.length < $('.services-all').length && !selectedService.includes(serviceType)){
+            selectedService.push(serviceType);
         }
+        if(!$(this).hasClass("service-selected")){
+             selectedService = selectedService.filter(function(item){
+                   return item !== serviceType;
+             })
+        }
+       
+        $(this).toggleClass(".service-selected");
+        $(".search__resoults__apartment-cards-content").each(function() {
+            var serviceHome = $(this).data("service").toString();
+            var servicesCasa = serviceHome.split(",");
+            console.log(servicesCasa); 
+            console.log(selectedService);
+            if(selectedService.length === 0 ){
+                $(this).show();
+                $('.mapboxgl-marker').show();
+            }else if(servicesCasa.length > selectedService.length && serviceHome.includes(selectedService.toString())){
+                 $(this).show();
+                 $('.mapboxgl-marker').eq($(this).index()).show();
+            }else if (same(servicesCasa,selectedService)) {
+                $(this).show();
+                $('.mapboxgl-marker').eq($(this).index()).show();
+            } else {
+                $(this).hide();
+                $('.mapboxgl-marker').eq($(this).index()).hide();
+            }
+        });
     });
-});
+})();
 //funzione che associa l'address con la card apartment nel DOM
 function buildLocation(el, text) {
     const details = el;
@@ -249,5 +274,11 @@ function buildLocation(el, text) {
     return details;
 }
 
-
-
+// compare arrays:
+function same(arr1, arr2) {
+    if($(arr1).not(arr2).length === 0 && $(arr2).not(arr1).length === 0){
+        return true
+    }
+     return false;
+    
+}

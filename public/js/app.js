@@ -42538,20 +42538,22 @@ var slider = function () {
 
   slider.oninput = function () {
     output.innerHTML = this.value;
-  };
+  }; /// slider da 20 a cento con sfondo custom
+
+
+  function rangeslider() {
+    $('#range-hidden').val($('#range-value').html());
+    var range = (slider.value - 20) * 1.25;
+    var color = 'linear-gradient(90deg, rgb(230, 30, 77)' + range + '%, rgb(214,214,214)' + range + '%)';
+    slider.style.background = color;
+  }
 
   slider.addEventListener("mousemove", function () {
-    $('#range-hidden').val($('#range-value').html());
-    var range = (slider.value - 20) * 1.25;
-    var color = 'linear-gradient(90deg, rgb(230, 30, 77)' + range + '%, rgb(214,214,214)' + range + '%)';
-    slider.style.background = color;
+    rangeslider();
   });
   slider.addEventListener("touchmove", function () {
-    $('#range-hidden').val($('#range-value').html());
-    var range = (slider.value - 20) * 1.25;
-    var color = 'linear-gradient(90deg, rgb(230, 30, 77)' + range + '%, rgb(214,214,214)' + range + '%)';
-    slider.style.background = color;
-  });
+    rangeslider();
+  }); ///////////////////////////////////////////////////
 }(); // chiamta che prende ip dell'utente e capisce la regione per ricerca nei paraggi
 
 

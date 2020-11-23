@@ -5948,6 +5948,12 @@ canvas:focus {
   border: 1px solid #e3342f;
 }
 
+.service-selected {
+  border: 1px solid var(--pink-bnb);
+  background-color: var(--pink-bnb);
+  color: #fff;
+}
+
 .container-sponsor {
   width: 80%;
   margin: 0 auto;

@@ -10,7 +10,7 @@
 </head>
 
 <body>
-<a href="{{ route('host.edit') }}"></a>
+<a href="{{ route('host.edit', 73) }}"><h1>EDIT</h1></a>
 
 </body>
 

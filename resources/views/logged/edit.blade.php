@@ -1,48 +1,47 @@
 @extends('layouts.app')
 
 @section('content')
-@dd($apartments)
+
 <div class="container-center">
     <h2>Modifica il tuo appartamento</h2>
            
     
-    
-<form id="creazione" action="{{ route('host.store') }}" name="creazione" method="POST" enctype="multipart/form-data">
+<form id="editing" action="{{ route('host.update', $apartment->id) }}" name="editing" method="POST" enctype="multipart/form-data">
         @csrf
         @method("PATCH")
 
         <!-- TITOLO -->
         <div class="input-row">
             <label for="title">Titolo</label>
-            <input type="text" id="title" name="title" placeholder="Inserisci il titolo" class="" required />
+        <input type="text" id="title" name="title" class="" value="{{ $apartment->title }}" required />
         </div>
 
         <!-- INDIRIZZO -->
         <div class="input-row">
             <label for="address">Indirizzo</label>
-            <input type="text" id="address" name="address" placeholder="l'indirizzo del tuo appartamento" class="" required />
+            <input type="text" id="address" name="address" class="" value="{{ $apartment->address }}" required />
         </div>
 
         <div class="input-row">
             <div class="input-group">
                 <div class="label-input">
                     <label for="city">Città</label>
-                    <input id="city" type="text" name="city">
+                    <input id="city" type="text" name="city" value="{{ $apartment->city }}">
                 </div>
                 <div class="label-input">
                     <label for="postal_code">Codice Postale</label>
-                    <input  type="text" name="postal_code">
+                    <input  type="text" name="postal_code" value="{{ $apartment->postal_code }}">
                 </div>
                 <div class="label-input">
                     <label id="country" for="country">Nazione</label>
-                    <input type="text" name="country">
+                    <input type="text" name="country" value="{{ $apartment->country }}">
                 </div>
             </div>
         </div>
 
         <div class="input-row">
             <label for="description">Descrizione dell'appartamento</label>
-            <textarea name="description" rows="10"></textarea>
+            <textarea name="description" rows="10">{{ $apartment->description }}</textarea>
         </div>
 
         <!-- CARATTERISTICHE-->
@@ -50,22 +49,22 @@
             <div class="input-group">
                 <div class="label-input">
                     <label for="daily_price">Prezzo per notte</label>
-                    <input type="number" name="daily_price">
+                    <input type="number" name="daily_price" value="{{ $apartment->daily_price }}">
                 </div>  
                 <div class="label-input">
                     <label for="sm">Metri quadri</label>
-                    <input type="number" name="sm">
+                    <input type="number" name="sm" value="{{ $apartment->sm }}">
                 </div><div class="label-input">
                     <label for="rooms">Stanze</label>
-                    <input type="number" name="rooms">
+                    <input type="number" name="rooms" value="{{ $apartment->rooms }}">
                 </div>  
                 <div class="label-input">
                     <label for="beds">Posti letto</label>
-                    <input type="number" name="beds">
+                    <input type="number" name="beds" value="{{ $apartment->beds }}">
                 </div>
                 <div class="label-input">
                     <label for="bathrooms">Bagni</label>
-                    <input type="number" name="bathrooms">
+                    <input type="number" name="bathrooms" value="{{ $apartment->bathrooms }}">
                 </div>
             </div>
 
@@ -75,27 +74,33 @@
                 <div class="label-input">
                     <span><i class="{{$service->icon}}"></i></span>
                     <label for="services">{{ $service->service }}</label>
-                    <input type="checkbox" name="services" value="{{ $service->id }}">
+                    <input type="checkbox" name="services[]" value="{{ $service->id }}" {{ ($apartment->services->contains($service->id)) ? "checked" : "" }}>
                 </div>
                 @endforeach
 
             </div>
 
             <!-- IMMAGINI -->
-            <h5>aggiungi le tue immagini</h5>
+            <h5>Aggiungi immagini</h5>
             <div class="container-upload">
-                {{-- <input type="file" name="img" enctype="multipart/form-data" class="img-input form-control-file" id="img" accept="image/*"> --}}
+                {{-- CICLO LE IMMAGINI PRESENTI PER INSERIRLE NEL CAMPO INPUT --}}
                 <input type="file" name="img[]" id="img" accept="image/*" multiple>
+                
+              
             </div>
-            <a id="add-img" href="#"> <i class="fas fa-plus-circle"></i> </a>
-
+            @foreach($apartment->images as $image)
+            <div class="img-apt-box">
+                <img src="{{ asset('storage/'. $image->path) }}" alt="foto appartamento">
+                <a href="#"><i class="fas fa-times x"></i></a>
+            </div>
+            @endforeach
 
             <!-- CAMPI HIDDEN -->
 
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
            
-        <input id="latitude" type="hidden" name="latitude" value="{{$apartment}}">
-        <input id="longitude" type="hidden" name="longitude" value="{{}}">
+        <input id="latitude" type="hidden" name="latitude" value="{{$apartment->latitude}}">
+        <input id="longitude" type="hidden" name="longitude" value="{{$apartment->longitude}}">
 
        
             

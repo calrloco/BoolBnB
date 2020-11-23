@@ -95,7 +95,7 @@ class HostController extends Controller
     $apartment->services()->attach($request['services']);
     
 
-
+    // Faccio lo storage delle immagini e le inserisco nel DB 
     $images = $request->file('img');
             
     foreach ($images as $image) {
@@ -106,12 +106,7 @@ class HostController extends Controller
                 'apartment_id' => $apartment->id,
             ]
         );
-
     }
-
-
-        
-     
 
         return response()->json($apartment,201);
     }
@@ -145,9 +140,14 @@ class HostController extends Controller
      */
     public function edit($id)
     {
+        $services = Service::all();
         $apartment = Apartment::find($id);
-
-        return view('Logged.edit', compact('apartment'));
+        if ($apartment->user_id == Auth::id()) {
+            return view('Logged.edit', compact('apartment', 'services'));
+            
+        } else {
+            return abort(404);
+        }
     }
 
     /**
@@ -159,7 +159,28 @@ class HostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['updated_at'] = Carbon::now('Europe/Rome');
+        $apartment = Apartment::find($id);
+        $apartment->update($data);
+        
+        // AGGIORNAMENTO SERVIZI
+        $apartment->services()->sync($data['services']);
+
+        // AGGIUNTA IMMAGINI
+        $images = $request->file('img');
+
+        foreach ($images as $image) {
+            $image = Storage::disk('public')->put('images', $image);
+            Image::insert(
+                [
+                    'path' => $image,
+                    'apartment_id' => $apartment->id,
+                ]
+            );
+        }
+        
+        return redirect()->route('host.index')->with('status', 'Hai modificato il tuo appartamento');
     }
 
     /**

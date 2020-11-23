@@ -162,6 +162,7 @@ function compileHandlebars(risp) {
         var htmlContext = templateCards(context);
         $(".search__resoults__apartment-cards").append(htmlContext);
         appendServices(risp[i].id);
+        getImages(risp[i].id);
         var el = $(".search__resoults__apartment-cards-content");
         var details = buildLocation(el, address);
         // cliccando su un elemento della lista a sx lo trova in mappa
@@ -232,7 +233,46 @@ function appendServices(id) {
 }
 /// appendere le immagini allo slider
 function getImages(id) {
-    $.ajax({});
+    $.ajax({
+        url:'http://127.0.0.1:8000/api/images',
+        method: 'GET',
+        data: {
+          id: id
+        }, 
+        headers: {
+            KEY:'test'
+        },
+        success: function(response){
+            console.log(response);
+            
+           for (var i = 0; i <response.length; i++){
+               var clss = "hidden";
+               if(i == 0){
+                   clss = 'first'
+               }else if(i == response.length - 1){
+                  clss = 'hidden last'
+               }else{
+                clss = 'hidden'
+               }
+               appendImages(response[i],clss);
+           }
+        },
+        error: function () {
+
+        }
+    });
+}
+function appendImages(risp,clss){
+    var container  = $('.search__resoults__apartment-cards-content');
+    container.each(function(){
+       appId =  $(this).find('.aps_id').val();
+       if(appId == risp.apartment_id){
+           img =  `<img class="search__resoults__apartment-cards-content-slider-img ${clss}" 
+           src="${risp.path}">`
+          $(this).find('.search__resoults__apartment-cards-content-slider').append(img);
+       }
+       
+    });
 }
 // funzione per troncare una stringa
 function troncaStringa(stringa) {
@@ -364,3 +404,14 @@ function same(arr1, arr2) {
      return false;
     
 }
+
+// //// slider
+// $(document).on("click", ".arrow-slider-sx", function(){
+//     prevImage($('.search__resoults__apartment-cards-content-slider-img'));
+// });
+// $(document).on("click", ".arrow-slider-dx", function(){
+//     nextImage($('.search__resoults__apartment-cards-content-slider-img'));
+// });
+
+
+

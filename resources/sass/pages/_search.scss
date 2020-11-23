@@ -51,13 +51,15 @@
             &__text{
                 @include flex(column,space-between,stretch);
                 flex: 1;
+                width: 100%;
             }
 
             &-form {
                 width: 100%;
-                height: 100%;
                 flex:1;
                 @include flex(column,flex-end,flex-start);
+                justify-self: flex-end;
+                align-self: flex-end;
             }
 
             &-slider {
@@ -157,4 +159,19 @@
     border:1px solid var(--pink-bnb);
     background-color:var(--pink-bnb);
     color: #fff;
+}
+.visualizza-appartamneto{
+    @extend %button-default;
+    align-self: center;
+    
+    &:hover{
+        background-color: var(--pink-bnb);
+        color: #fff;
+        transform: translateY(-4px);
+        border:1px solid var(--pink-bnb);
+    }
+    &:active{
+        transform: translateY(0px);
+    }
+
 }

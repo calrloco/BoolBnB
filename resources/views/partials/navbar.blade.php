@@ -13,7 +13,7 @@
                     @method('POST')
                      <p id="start-search" class="">Inizia la ricerca<p>
                          <!-- tolta classe hidden da nav__search-city -->
-                     <div class="nav__search-city">
+                     <div class="nav__search-city hidden">
                          <label for="search">Dove</label>
                          <input id="search" type="text" name="address" placeholder="dove vuoi andare" autocomplete="off">
                          <div id="auto-complete"></div>

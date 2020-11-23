@@ -42565,7 +42565,7 @@ var getIp = function () {
       'api-key': 'b9bcf03b37c7c5b52f5297af16c2acf07e72d596a1cb8257ed1add0c'
     },
     success: function success(risposta) {
-      $('#ip-home-search').val(risposta.region);
+      $('#ip-home-search').val(risposta.city);
     },
     error: function error() {
       console.log(arguments);

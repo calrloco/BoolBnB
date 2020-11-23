@@ -145,8 +145,9 @@ class HostController extends Controller
      */
     public function edit($id)
     {
-        $images = Image::where('apartment_id', '=', $id )->get();
-        return view('test', compact('images'));
+        $apartment = Apartment::find($id);
+
+        return view('Logged.edit', compact('apartment'));
     }
 
     /**

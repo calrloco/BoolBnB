@@ -19,25 +19,45 @@
 .slider-section {
     width: 80%;
     align-self: center;
+    // background-color: tomato;
 
     .apt-images{
         width: 100%;
         height: 400px;
         // background-color: tomato;
-        padding: 0 10px;
         border-radius: $card-img-radius;
         @include flex(row, space-between, center);
+        position: relative;
 
         .apt-image {
             width: 100%;
             height: 100%;
-            padding: 0 20px;
             object-fit: cover;
         }
 
-        .arrow-slider-sx, .arrow-slider-dx {
-            font-size: 30px;
+        .arrow-slider-sx {
+            font-size: 15px;
             color: lightgrey;
+            position: absolute;
+            left: 10px;
+        }
+
+        .arrow-slider-sx:hover {
+            transform: scale(2);
+            color: #ff5a5f;
+        }
+
+        .arrow-slider-dx {
+            font-size: 15px;
+            color: lightgrey;
+            position: absolute;
+            right: 10px;
+
+        }
+
+        .arrow-slider-dx:hover {
+            transform: scale(2);
+            color: #ff5a5f;
         }
 
     }

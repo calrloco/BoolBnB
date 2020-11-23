@@ -20,7 +20,7 @@
             cursor: pointer;
         }
     }
- 
+
     &__search {
         @include flex(row, center, center);
 
@@ -35,7 +35,7 @@
             border: none;
             background-color: transparent;
             height: 100%;
-            
+
         }
         & label {
             margin-bottom: 0.2rem;
@@ -49,12 +49,12 @@
             border-radius: inherit;
             margin-right: 1rem;
             flex:1;
-            
-    
+
+
             &:hover {
                 background-color: #f7f7f7;
             }
-    
+
             &__search-date-start::after {
                 width: 1rem;
                 height: 10px;
@@ -81,7 +81,7 @@
                 border:none;
                 padding: 0 0;
             }
-            &-clciked {
+            &-clicked {
                 height: 66px;
             }
             &:hover {
@@ -91,7 +91,7 @@
             &-large:hover {
                border:none;
             }
-            
+
         }
         &-icon {
             @include flex(row, center, center);
@@ -183,7 +183,7 @@
                 cursor: pointer;
                 border-bottom: 1px solid rgb(118,118,118);
                 border-top: 1px solid rgb(118,118,118);
-                
+
                 &:hover{
                     border-bottom: 1px solid rgb(255,90,95);
                     border-top: 1px solid rgb(255,90,95);
@@ -230,4 +230,3 @@
         }
     }
 }
-

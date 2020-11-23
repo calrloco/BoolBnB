@@ -12,7 +12,9 @@
         @for($i = 0; $i < $apartment->images->count('id'); $i++)
             <img class="apt-image {{($i == 0 ? 'active first' : (($i == $apartment->images->count('id')-1) ? 'hidden last' :'hidden'))}}" src="{{ $apartment->images[$i]->path }}" alt="{{$apartment->title}}">
         @endfor
-        <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
+        <div class="arrow-slider-dx">
+            <i class="far fa-arrow-alt-circle-right"></i>
+        </div>
     </div>
 </section>
 
@@ -48,9 +50,10 @@
     </div>
     <div class="info-box-dx">
         <div class="send-message-box">
-            <p class="message-title">Statistiche appartamento</p>
+            <p class="message-title">Host Menù </p>
             <div class="message-form">
-                <a href="{{ route('logged.sponsor', $apartment->id )}}">Sponsorizza il tuo appartamento!</a>
+                <button type="button" class="services-all"><a href="{{ route('logged.sponsor', $apartment->id )}}">Sponsorizza il tuo appartamento!</a></button>
+                {{-- <a href="{{ route('logged.sponsor', $apartment->id )}}">Sponsorizza il tuo appartamento!</a> --}}
             </div>
         </div>
     </div>

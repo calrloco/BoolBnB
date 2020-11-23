@@ -5987,9 +5987,60 @@ canvas:focus {
   color: #fff;
 }
 
-.container-sponsor {
-  width: 80%;
+.sponsor_header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
   margin: 0 auto;
+}
+
+.sponsor_header h3 {
+  font-size: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #707070;
+}
+
+.sponsor_header h3 span {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.sponsor_header h4 {
+  font-size: 15px;
+  padding: 10px;
+}
+
+.cards_container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 4rem;
+  padding: 4rem;
+  margin: 0 auto;
+}
+
+.cards_container .pay-card {
+  font-family: "Heebo";
+  height: 20em;
+  width: 15em;
+  font-size: 1.5em;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 2em;
+  align-items: flex-end;
+  box-shadow: 0 0 5em -1em black;
+  transition: all, 2s;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.cards_container .pay-card h5 {
+  padding: 10px;
+  text-align: center;
 }
 
 .active {

@@ -38,8 +38,10 @@
             <ul class = "services">
                 @foreach ($apartment->services as $service)
                     <li class = "service">
-                        <span><i class="{{$service->icon}}"></i></span>
-                        <p class="service-title">{{ $service->service }}</p>
+                        <div class="service-head">
+                            <i class="service-icon {{$service->icon}}"></i>
+                            <p>{{ $service->service }}</p>
+                        </div>
                         <span>{{ $service->description }}</span>
                      </li>
                 @endforeach

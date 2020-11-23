@@ -1,5 +1,5 @@
 <nav class="nav-container">
-    <div class="container-center">
+    <div class="{{url()->current() == route('search.store') ? 'nav-full' : 'container-center'}}">
         <div class="nav">
             <div class="nav__logo">
                 <a href="{{ route('home') }}">
@@ -8,30 +8,28 @@
                 </a>
             </div>
             <div class="nav__search">
-                <form class="nav__search-button" action="{{route('search.store')}}" method="POST">
+                <form class="nav__search-button" action="{{ route('search.store') }}" method="POST">
                     @csrf
                     @method('POST')
-                     <p id="start-search" class="">Inizia la ricerca<p>
-                     <div class="nav__search-city hidden">
-                         <label for="search">Dove</label>
-                         <input id="search" type="text" name="address" placeholder="dove vuoi andare">
+                    <p id="start-search" class="">Inizia la ricerca
+                    <p>
+                    <div class="nav__search-city hidden">
+                        <label for="search">Dove</label>
+                        <input id="search" type="text" name="address" placeholder="dove vuoi andare">
                     </div>
-                    <div class="nav__search-date-start hidden">
-                        <label for="search">Quando vuoi partire</label>
-                        <input id="search-start" type="date" placeholder="dove vuoi andare">
-                    </div>
-                    <div class="nav__search-date-end hidden">
-                        <label for="search">Quando vuoi partire</label>
-                        <input id="search-end" type="date" placeholder="dove vuoi andare">
-                    </div>
-                    <div class="nav__search-icon nav__search-icon-big hidden">
-                        <p>Cerca</p>
+                    <div id="hidenav" class="nav__search-icon">
                         <i class="fas fa-search"></i>
                     </div>
-                     <div id="hidenav" class="nav__search-icon">
-                        <i class="fas fa-search"></i>
+                    <div class="nav__search-city hidden">
+                         <label for="search">Range: <span id="range-value"></span></label>
+                         <input type="hidden" id="range-hidden" name="range" value="">
+                         <input type="range" min="20" max="100" value="20" id="myRanges" class="sliders">
                     </div>
-                    <button type="submit" class="">vaiwadwadwad</button> 
+                    <button type="{{url()->current() == route('search.store') ? 'button' : 'submit'}}" class="nav__search-icon nav__search-icon-big hidden">
+                        Cerca
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
                 </form>
             </div>
             <div class="nav__user">
@@ -61,17 +59,28 @@
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
+                            </li>
 
-                                <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            <li class="nav__user__menu-item">
+                               <a href="{{route('messages.index')}}" class="nav-link">Messaggi</a>
+                            </li>
+                            <li class="nav__user__menu-item">
+                                <a href="{{route('host.index')}}" class="nav-link">I tuoi appartamenti</a>
+                            </li>
+                            <li class="nav__user__menu-item">
+                              <a href="{{route('host.create')}}" class="nav-link">Nuovo appartamento</a>
+                            </li>
+                            <li class="nav__user__menu-item">
+
+                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
-                                        {{  __('Logout') }}
-                                    </a>
+                                    {{ __('Logout') }}
+                                </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+
                             </li>
                         @endguest
                     </ul>

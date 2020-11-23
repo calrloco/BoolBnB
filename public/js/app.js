@@ -42487,21 +42487,23 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
-__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js"); //require("./apt");
 
-__webpack_require__(/*! ./apt */ "./resources/js/apt.js");
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
+
+var _require = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js"),
+    Alert = _require.Alert;
 
 $(document).ready(function () {
   $(".nav__user-box").click(function () {
     $(".nav__user__menu").toggleClass("active");
     getcards();
   });
-  $("#hidenav").click(function () {
-    $(this).hide();
+  $(".nav__search-button").click(function () {
+    $('#hidenav').hide();
     hidenav();
   });
 }); // animation
@@ -42517,40 +42519,59 @@ function hidenav() {
   $("#start-search").addClass("hidden");
 }
 
-/***/ }),
+$(window).bind("mousewheel", function (event) {
+  $('#hidenav').show();
+  $("nav__search-icon-big").removeClass("active-flex");
+  $(".nav__search-city").removeClass("active-flex");
+  $(".nav__search-date-start").removeClass("active-flex");
+  $(".nav__search-date-end").removeClass("active-flex");
+  $(".nav__search").removeClass("nav__search-large");
+  $(".nav__search-button").removeClass("nav__search-button-large");
+  $(".nav__search-icon-big").removeClass("active-flex");
+  $("#start-search").removeClass("hidden");
+}); // range value
 
-/***/ "./resources/js/apt.js":
-/*!*****************************!*\
-  !*** ./resources/js/apt.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+var slider = function () {
+  var slider = document.getElementById("myRanges");
+  var output = document.getElementById("range-value");
+  output.innerHTML = slider.value;
 
-var i = 0;
-var check = $('#check-info-img').val();
-var images = JSON.parse(check);
-console.log(images);
-$('.apt-img-slider').attr('src', images[i].path);
-$(".arrow-slider-sx").on('click', function () {
-  if (i > 0) {
-    i--; // console.log(i);
+  slider.oninput = function () {
+    output.innerHTML = this.value;
+  }; /// slider da 20 a cento con sfondo custom
 
-    $('.apt-img-slider').attr('src', images[i].path);
-  } else {
-    i = images.length - 1;
-    $('.apt-img-slider').attr('src', images[i].path);
+
+  function rangeslider() {
+    $('#range-hidden').val($('#range-value').html());
+    var range = (slider.value - 20) * 1.25;
+    var color = 'linear-gradient(90deg, rgb(230, 30, 77)' + range + '%, rgb(214,214,214)' + range + '%)';
+    slider.style.background = color;
   }
-});
-$(".arrow-slider-dx").on('click', function () {
-  if (i < images.length - 1) {
-    i++; // console.log(i);
 
-    $('.apt-img-slider').attr('src', images[i].path);
-  } else {
-    i = 0;
-    $('.apt-img-slider').attr('src', images[i].path);
-  }
-});
+  slider.addEventListener("mousemove", function () {
+    rangeslider();
+  });
+  slider.addEventListener("touchmove", function () {
+    rangeslider();
+  }); ///////////////////////////////////////////////////
+}(); // chiamta che prende ip dell'utente e capisce la regione per ricerca nei paraggi
+
+
+var getIp = function () {
+  $.ajax({
+    mehtod: 'GET',
+    url: 'https://api.ipdata.co',
+    data: {
+      'api-key': 'b9bcf03b37c7c5b52f5297af16c2acf07e72d596a1cb8257ed1add0c'
+    },
+    success: function success(risposta) {
+      $('#ip-home-search').val(risposta.region);
+    },
+    error: function error() {
+      console.log(arguments);
+    }
+  });
+}();
 
 /***/ }),
 

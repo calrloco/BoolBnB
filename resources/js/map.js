@@ -50,9 +50,7 @@ function getCoordinates(input, range) {
                 // condizione per selezionare lo zoom in caso di città o indirizzo specifico
                 if (streetName != undefined && city) {
                     zoom = 16;
-                } else {
-                    zoom = 10;
-                }
+                } 
                 map = tt.map({
                     key: apiKey,
                     style: 'tomtom://vector/1/basic-main',
@@ -196,6 +194,8 @@ function compileHandlebars(risp) {
                 details.eq(posizione).addClass('selected');
             })
         );
+        console.log(marker);
+
           
     }
     
@@ -258,8 +258,10 @@ $(document).on("click", ".services-all", function() {
         var serviceHome = $(this).data("service");
         if (serviceHome.includes(serviceType)) {
             $(this).show();
+            $('.mapboxgl-marker').eq($(this).index()).show();
         } else {
             $(this).hide();
+        $('.mapboxgl-marker').eq($(this).index()).hide();
         }
     });
 });

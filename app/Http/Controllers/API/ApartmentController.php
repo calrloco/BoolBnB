@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Apartment;
+use App\Image;
 use Illuminate\Support\Facades\Validator;
 
 class ApartmentController extends Controller
@@ -19,14 +20,16 @@ class ApartmentController extends Controller
         $validator = Validator::make($request->all(),[
              'lat'=>'required',
              'lng'=>'required',
-             'maxDist'=>'required',
+             'maxDist'=>'required|numeric|min:20|max:100',
         ]);
 
         if($validator->fails()){
             return response()->json($validator->messages());
         }
-        $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat), 
+    
+        $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
         point(longitude, latitude)) * .001 as distance")->having('distance','<=',$request->maxDist)->orderBy('distance','asc')->get();
+        
         return response()->json($query, 200);
     }
 
@@ -74,14 +77,13 @@ class ApartmentController extends Controller
         $apartment = Apartment::create($request->all());
         $apartment->services()->attach($request['services']);
 
-        if (!empty($request['img'])) {
-            $request['img'] = Storage::disk('public')->put('images', $request['img']);
-        }
+        // if (!empty($request['img'])) {
+        //     $request['img'] = Storage::disk('public')->put('images', $request['img']);
+        // }
 
         return response()->json($apartment,201);
-        
-    }
 
+    }
 
     /**
      * Display the specified resource.
@@ -90,7 +92,7 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Apartment $apartment){
-        return response()->json($apartment,200);
+        return response()->json($require,200);
     }
 
     /**
@@ -109,8 +111,8 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Apartment $apartment){
-         $apartment->update($request->all());
-         $apartment->services()->sync($request['services']);
+        $apartment->update($request->all());
+        $apartment->services()->sync($request['services']);
         return response()->json($apartment);
     }
 
@@ -127,6 +129,10 @@ class ApartmentController extends Controller
            'messagio' =>'appartamento numero '.$apartment->id.' cancellato con successo'
          ];
          return response()->json($message);
+    }
+
+    public function getServices($id){
+           
     }
 }
 

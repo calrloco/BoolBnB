@@ -21,13 +21,15 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = Message::join('apartments', 'messages.apartment_id', '=', 'apartments.id')
-        // ->join('images', 'images.apartment_id', '=', 'apartments.id')
+        // SELEZIONE DEI MESSAGGI DELL'UTENTE
+        $messages = Message::select('*', 'messages.id as id_msg')
+        ->join('apartments', 'messages.apartment_id', '=', 'apartments.id')
         ->where('apartments.user_id', '=', Auth::user()->id)
+        ->orderBy('read', 'asc')
         ->get();
         return view('logged.messages',compact('messages'));
     }
-   
+    
 
     /**
      * Show the form for creating a new resource.
@@ -71,7 +73,7 @@ class MessageController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -83,7 +85,14 @@ class MessageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $message = Message::find($id);
+       $read = !$message->read;
+      
+       if($message->apartment->user_id  == Auth::id()){
+              Message::where('id',$id)->update(['read'=> $read]);
+              return redirect()->route('messages.index');
+       }
+       return redirect()->back();
     }
 
     /**
@@ -93,8 +102,15 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Message $message)
-    {
-        $message->delete();
-        return view('logged.messages');
+    {   
+        if($message->apartment->user_id = Auth::id()) {
+            $message->delete();
+            return redirect()->back()->with('status', 'Hai eliminato il messaggio');
+
+        } else {
+            return redirect()->back()->with('status', 'messaggio non eliminato');
+        }
+
+
     }
 }

@@ -4617,9 +4617,11 @@ readers do not read off random characters that represent icons */
   --nav-height: 8rem;
   --footer-height: 15rem;
   --nav-height: 8rem;
+  --nav-mobile-height: 7rem;
   --color-font-black: #222222;
   --button-color-withe: #fff;
   --button-color-hover: #F7F7F7;
+  --gradient-color: radial-gradient(circle at left center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
   --form-radius: 1.1rem;
 }
 
@@ -4653,10 +4655,6 @@ button:active {
   border: none;
 }
 
-button:focus {
-  outline: 0;
-}
-
 main {
   min-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
   display: flex;
@@ -4664,6 +4662,12 @@ main {
   align-items: flex-start;
   flex-direction: column;
 }
+
+button:focus {
+  outline: 0;
+}
+
+/* Change the white to any color ;) */
 
 @media screen and (max-width: 414px) {
   .col-xs-1 {
@@ -4873,8 +4877,16 @@ main {
 
 .container-center {
   padding: 0 8rem;
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
+}
+
+@media screen and (max-width: 800px) {
+  .container-center {
+    width: 100%;
+    margin: 0;
+    padding: 0.6rem;
+  }
 }
 
 .container-fullheight {
@@ -4892,8 +4904,24 @@ main {
   align-items: center;
   flex-direction: row;
   height: var(--nav-height);
+  height: var(--nav-mobile-height);
   font-size: 1.4rem;
   background-color: inherit;
+}
+
+@media screen and (max-width: 600px) {
+  .nav {
+    justify-content: center;
+  }
+}
+
+.nav-link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 
 .nav-container {
@@ -4911,6 +4939,12 @@ main {
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
+}
+
+@media screen and (max-width: 600px) {
+  .nav__logo {
+    display: none;
+  }
 }
 
 .nav__logo img {
@@ -4940,6 +4974,33 @@ main {
 
 .nav__search label {
   margin-bottom: 0.2rem;
+}
+
+.nav__search-city {
+  position: relative;
+}
+
+.nav__search-city #auto-complete {
+  display: none;
+  position: absolute;
+  width: 300px;
+  top: 60px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 23px 0px rgba(50, 50, 50, 0.51);
+}
+
+.nav__search-city #auto-complete .complete-results {
+  padding: 5px;
+}
+
+.nav__search-city #auto-complete .complete-results:hover {
+  background-color: #f0f0f0;
+}
+
+.nav__search-city #auto-complete.active {
+  display: block;
 }
 
 .nav__search-city,
@@ -4984,8 +5045,9 @@ main {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  padding: 0 2rem;
+  padding: 0.5rem 2rem;
   color: var(--color-font-black);
+  min-width: 26rem;
 }
 
 .nav__search-button-large {
@@ -5008,6 +5070,7 @@ main {
 }
 
 .nav__search-icon {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -5030,6 +5093,7 @@ main {
   width: auto;
   align-self: center;
   margin-right: 1rem;
+  font-size: 1.4rem;
 }
 
 .nav__search-icon i {
@@ -5047,6 +5111,12 @@ main {
   position: relative;
 }
 
+@media screen and (max-width: 600px) {
+  .nav__user {
+    display: none;
+  }
+}
+
 .nav__user-box {
   display: flex;
   justify-content: space-between;
@@ -5055,10 +5125,17 @@ main {
   transition: all 0.2s;
   background-color: #fff;
   border: 1px solid #e2e2e2;
-  padding: 1rem;
-  font-size: 2.3rem;
+  padding: 0.5rem;
+  font-size: 2rem;
   border-radius: 10rem;
+  height: 4rem;
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .nav__user-box {
+    display: none;
+  }
 }
 
 .nav__user-box:hover {
@@ -5072,12 +5149,13 @@ main {
   align-items: center;
   flex-direction: row;
   height: 4.2rem;
-  border-radius: 2.1rem;
-  -webkit-border-radius: 2.1rem;
-  -moz-border-radius: 2.1rem;
-  -ms-border-radius: 2.1rem;
-  -o-border-radius: 2.1rem;
-  width: 4.2rem;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  width: 3.2rem;
+  height: 3.2rem;
   border: 1px solid #e2e2e2;
   cursor: pointer;
   background-color: #717171;
@@ -5089,7 +5167,7 @@ main {
 }
 
 .nav__user-button img {
-  height: 4rem;
+  height: 3rem;
 }
 
 .nav__user__menu {
@@ -5171,6 +5249,56 @@ main {
 
 .nav__user__menu-item:hover .nav-link {
   color: #fff;
+}
+
+.nav-full {
+  padding: 0.6rem 2.4rem;
+}
+
+@media screen and (max-width: 600px) {
+  .nav-full {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.sliders {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  background: linear-gradient(90deg, #d6d6d6 60%, #d6d6d6 60%);
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  border-radius: 12px;
+  position: relative;
+  margin-right: 2rem;
+}
+
+.sliders::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1.2rem;
+  width: 1.2rem;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sliders::-moz-slider-thumb {
+  -webkit-appearance: none;
+  height: 4rem;
+  width: 4rem;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .jumbotron {
@@ -5349,6 +5477,7 @@ textarea {
 .top-section .title-apt .address-apt {
   color: black;
   text-decoration: none;
+  font-size: 14px;
 }
 
 .slider-section {
@@ -5356,10 +5485,9 @@ textarea {
   align-self: center;
 }
 
-.slider-section .slider-img {
+.slider-section .apt-images {
   width: 100%;
-  height: 300px;
-  background-color: tomato;
+  height: 400px;
   padding: 0 10px;
   border-radius: 1.2rem;
   display: flex;
@@ -5368,12 +5496,16 @@ textarea {
   flex-direction: row;
 }
 
-.slider-section .slider-img .apt-img-slider {
-  width: 90%;
+.slider-section .apt-images .apt-image {
+  width: 100%;
   height: 100%;
+  padding: 0 20px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
-.slider-section .slider-img .far {
+.slider-section .apt-images .arrow-slider-sx,
+.slider-section .apt-images .arrow-slider-dx {
   font-size: 30px;
   color: lightgrey;
 }
@@ -5382,17 +5514,15 @@ textarea {
   width: 80%;
   min-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
   margin: 10px auto;
-  background-color: yellow;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: flex-start;
   flex-direction: row;
 }
 
 .info-apt-section .info-box-sx {
-  width: 50%;
+  width: 700px;
   height: 100%;
-  background-color: red;
 }
 
 .info-apt-section .info-box-sx .info-apt-summary {
@@ -5409,7 +5539,7 @@ textarea {
 }
 
 .info-apt-section .info-box-sx .info-apt-summary .info-apt {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .info-apt-section .info-box-sx .info-apt-summary .host-logo {
@@ -5451,9 +5581,8 @@ textarea {
 }
 
 .info-apt-section .info-box-dx {
-  width: 50%;
+  width: 400px;
   height: 100%;
-  background-color: blue;
   position: sticky;
   -webkit-position: -webkit-sticky;
   top: 100px;
@@ -5461,8 +5590,8 @@ textarea {
 }
 
 .info-apt-section .info-box-dx .send-message-box {
-  width: 80%;
-  background-color: grey;
+  width: 300px;
+  background-color: tomato;
   margin: 20px auto;
   padding: 10px 0;
   display: flex;
@@ -5535,6 +5664,8 @@ h1 {
   align-items: flex-start;
   flex-direction: row;
   padding: 50px 10px;
+  flex: 1;
+  width: 100%;
 }
 
 .signup_container .login_btn {
@@ -5616,7 +5747,7 @@ h1 {
 
 .signup_container .signup form .signup_btn {
   width: 100%;
-  background-color: #2b140b;
+  background-image: var(--gradient-color);
   color: #ffffff;
 }
 
@@ -5661,6 +5792,16 @@ h1 {
   justify-content: flex-start;
   align-items: stretch;
   flex-direction: row;
+  color: var(--color-font-black);
+}
+
+@media screen and (max-width: 800px) {
+  .container__search {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-direction: column;
+  }
 }
 
 .container__search-left {
@@ -5669,9 +5810,21 @@ h1 {
   overflow-y: scroll;
 }
 
+.container__search-left__top {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 0 2.4rem;
+  padding-top: 5rem;
+}
+
+.container__search-left__top__text {
+  font-size: 3.2rem;
+}
+
 .container__search-right {
   flex: 2;
-  background-color: aqua;
 }
 
 .container__search .search__resoults__apartment-cards {
@@ -5683,7 +5836,6 @@ h1 {
   flex-wrap: wrap;
   max-width: 100%;
   max-height: 100%;
-  overflow: hidden;
 }
 
 .container__search .search__resoults__apartment-cards-content {
@@ -5691,33 +5843,147 @@ h1 {
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  flex: 0 1 calc(100% / 3);
-  padding: 0 0.8rem;
-  height: 25rem;
-  max-height: 25rem;
+  flex: 0 0 calc(100% / 3);
+  padding: 0.8rem 0.8rem;
   cursor: pointer;
+  margin-bottom: 2rem;
+  min-height: 23.1rem;
+  border-radius: 0.8rem;
 }
 
-.container__search .search__resoults__apartment-cards-content-img {
+@media screen and (max-width: 800px) {
+  .container__search .search__resoults__apartment-cards-content {
+    flex: 0 0 calc(100%);
+  }
+}
+
+.container__search .search__resoults__apartment-cards-content__text {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-direction: column;
+  flex: 1;
+}
+
+.container__search .search__resoults__apartment-cards-content-form {
   width: 100%;
-  height: 60%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.container__search .search__resoults__apartment-cards-content-slider {
+  position: relative;
+}
+
+.container__search .search__resoults__apartment-cards-content-slider:hover .search__resoults__apartment-cards-content-slider-icons {
+  opacity: 1;
+}
+
+.container__search .search__resoults__apartment-cards-content-slider-img {
+  width: 100%;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  border-radius: 0.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.container__search .search__resoults__apartment-cards-content-slider-icons {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  background-color: #fff;
+  height: 3rem;
+  width: 3rem;
+  text-align: center;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  transition: all 0.3s;
+}
+
+.container__search .search__resoults__apartment-cards-content-slider-icons-left {
+  left: 7%;
+}
+
+.container__search .search__resoults__apartment-cards-content-slider-icons-right {
+  right: -5.5%;
+}
+
+.container__search .search__resoults__apartment-cards-content-city {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+  text-transform: capitalize;
+}
+
+.container__search .search__resoults__apartment-cards-content-description {
+  font-size: 1.6rem;
 }
 
 #marker {
-  background-image: url(/images/BnBpin.png?d0b7c65929f6ffa66833353edd6f65f5);
-  background-size: cover;
+  background-image: url(/images/pinHome.png?cde917a72c56ea4ea77e6c1ec95fd1f6);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   width: 40px;
   height: 40px;
 }
 
 .selected {
-  border: 10px solid red;
+  background-color: #F5F5F5;
 }
 
 .list-entry {
   border: 10px solid green;
+}
+
+#address-inst {
+  text-transform: capitalize;
+}
+
+.services {
+  padding: 2rem 0;
+}
+
+.services-all {
+  cursor: pointer;
+  border-radius: 3rem;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.4rem;
+  background-color: #fff;
+  border: 1px solid #b0b0b0;
+  margin-right: 8px;
+  transition: all 0.2s;
+  margin-bottom: 1rem;
+}
+
+.services-all:hover {
+  border: 1px solid var(--pink-bnb);
+  background-color: var(--pink-bnb);
+  color: #fff;
+}
+
+.mapboxgl-canvas:focus,
+canvas:focus {
+  border: none;
+  outline: none;
+}
+
+.control {
+  border: 1px solid #e3342f;
+}
+
+.container-sponsor {
+  width: 80%;
+  margin: 0 auto;
 }
 
 .active {

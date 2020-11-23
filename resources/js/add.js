@@ -1,30 +1,58 @@
 var $ = require('jquery');
+const Handlebars = require("handlebars");
 const apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk';
 
-
 // aggiunta campo input file fino ad un max di 5
-// $('#add-img').click(function() {
-//     if ( $('.img-input').length < 5) {
-//         $('.container-upload').append(`<input class="img-input" type="file" name="img[]" class="form-control-file" id="img" accept="image/*">`);
-//         if ($('.img-input').length >= 5) {
-//             $('#add-img').hide();
-//         }
-//     } 
+$('#add-img').click(function() {
+    if ( $('.img-input').length < 5) {
+        $('.container-upload').append(`<input type="file" name="img" enctype="multipart/form-data" class="img-input form-control-file" id="img" accept="image/*">`);
+        if ($('.img-input').length >= 5) {
+            $('#add-img').hide();
+        }
+    }
+});
 
-// });
 
-$('#crea').on('click', (function(event) {
+
+$('#address').focusout(function() {
+    var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
+    console.log(data);
+    tt.services.fuzzySearch({
+        key: apiKey,
+        query: data
+    }).go()
+    .then(function(response){
+        
+        $('#longitude').attr('value', response.results[0].position['lng']);
+        $('#latitude').attr('value', response.results[0].position['lat']);
+
+    
+    
+    });
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('#pippo').submit(function(event) {
+    event.preventDefault();
+
     // SALVO I VALORI DEL FORM
-    var title = $('input[data=title]');
-    var address = $('input[data=address]');
-    var city = $('input[data=city]');
-    var postalCode = $('input[data=postal-code]');
-    var country = $('input[data=country]');
-    var description = $('input[data=description]');
-    var dailyPrice = $('input[data=daily-price]');
-    var sm = $('input[data=sm]');
-    var beds = $('input[data=beds]');
-    var bathrooms = $('input[data=bathrooms]');
+    // form = document.getElementById('creazione');
+    // var formData = new FormData(form);
+    // console.log(formData);
+
+    // var form = $('#creazione').serializeArray();
+    // console.log(form);
     
     // salvo i checkbox con un ciclo
     var services = [];
@@ -34,29 +62,55 @@ $('#crea').on('click', (function(event) {
             services.push($(this).val());
         }
     }); 
-    //uguale per le immagini
-    var images = [];
-    $('input[name=img]').each(function() {
-        
-    
-    });
+    console.log(services)
 
+    //uguale per le immagini
+    var images = document.querySelectorAll($('.img-input'));
+
+    // var images = [];
+    // $('input[name=img]').each(function() {
+    //     if($(this).val() != "") {
+    //         images.push($(this).val());
+    //     }
+
+    // });
+    console.log(images);
+   
+    
+    var apartmentData = {
+    
+        title: $('input[name=title]').val(),
+        address: $('#address').val(),
+        city: $('input[name=city]').val(),
+        postalCode: $('input[name=postal-code]').val(),
+        country: $('input[name=country]').val(),
+        description: $('textarea[name=description]').val(),
+        dailyPrice: $('input[name=daily-price]').val(),
+        sm: $('input[name=sm]').val(),
+        rooms: $('input[name=rooms]').val(),
+        beds: $('input[name=beds]').val(),
+        bathrooms: $('input[name=bathrooms]').val(),
+        services: services,
+        user_id: $('input[name=user-id]').val(),
+        img: images,
+    }
+    console.log(apartmentData)
 
     var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
-    console.log(data);
+    // console.log(data);
     tt.services.fuzzySearch({
         key: apiKey,
         query: data
     }).go()
     .then(function(response){
-        console.log(response);
+       createApart(response, apartmentData)
+
         
         
         
         
     });
-    event.preventDefault();
-}));
+});
     
     
 
@@ -73,5 +127,45 @@ $('#crea').on('click', (function(event) {
     // var postalCode = response.results[0].address['postalCode'];
     // var country = response.results[0].address['country'];
         
-        
-        
+// FUNZIONI
+
+function createApart(response, apartmentData) {
+
+    $.ajax(
+        {
+            url: 'http://127.0.0.1:8000/api/apartments',
+            method: 'POST',
+            headers: {
+                KEY: 'test'
+            },
+
+            data: {
+                title: apartmentData.title,
+                address: apartmentData.address,
+                city: apartmentData.city,
+                postal_code: apartmentData.postalCode,
+                country: apartmentData.country,
+                description: apartmentData.description,
+                daily_price: apartmentData.dailyPrice,
+                sm: apartmentData.sm,
+                rooms: apartmentData.rooms,
+                beds: apartmentData.beds,
+                user_id: apartmentData.user_id,
+                bathrooms: apartmentData.bathrooms,
+                img: apartmentData.img,
+                latitude: response.results[0].position['lng'],
+                longitude: response.results[0].position['lat'],
+                
+
+            },
+            success: function(data) {
+                console.log(data);
+                alert('appartamento inserito');
+            },
+            error: function(errore) {
+               console.log(errore);
+            }
+
+        }
+    )
+}

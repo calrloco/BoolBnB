@@ -38,8 +38,14 @@
 
 .container-center {
   padding: 0 8rem;
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
+
+  @include responsive(tab){
+    width: 100%;
+    margin:0;
+    padding:.6rem;
+  }
 }
 .container-fullheight {
   height: 100%;

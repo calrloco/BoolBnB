@@ -7,12 +7,15 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\carbon;
 use App\Apartment;
 use App\Service;
+use App\Image;
 use App\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class HostController extends Controller
 {
+   
     /**
      * Create a new controller instance.
      *
@@ -31,13 +34,13 @@ class HostController extends Controller
     public function index()
     {
         // SE AMMINISTRATORE VENGONO RESTITUITI TUTTI GLI APPARTAMENTI
-        if((Auth::user()->role->role)== "admin"){
+        if ((Auth::user()->role->role) == "admin") {
 
             $apartments = Apartment::get();
-        // SE UTENTE VENGONO VISUALIZZATI GLI APPARTAMENTI DA LUI REGISTRATI
-        } elseif ((Auth::user()->role->role)== "host") {
-            $apartments = Apartment::where('apartments.user_id', '=' ,Auth::id())
-            ->get();
+            // SE UTENTE VENGONO VISUALIZZATI GLI APPARTAMENTI DA LUI REGISTRATI
+        } elseif ((Auth::user()->role->role) == "host") {
+            $apartments = Apartment::where('apartments.user_id', '=', Auth::id())
+                ->get();
             // ->orderBy('created_at','desc');
 
         }
@@ -52,7 +55,7 @@ class HostController extends Controller
     public function create()
     {
         $services = Service::all();
-        return view('logged.add', compact('services'));
+        return view('logged.create', compact('services'));
     }
 
     /**
@@ -63,7 +66,57 @@ class HostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'title' => 'required|min:10|max:300',
+            'rooms'=>'required|numeric|min:1',
+            'beds' =>'required|numeric|min:1',
+            'bathrooms'=>'required|min:1',
+            'sm'=>'required|min:1',
+            'address'=>'required|min:10',
+            'latitude'=>'required',
+            'longitude'=>'required',
+            'city'=>'required|min:1',
+            'postal_code'=>'required',
+            'country'=>'required',
+            'daily_price'=>'required',
+            'description'=>'required|min:20',
+            'user_id'=>'numeric|exists:users,id',
+        ],
+        [
+            'required'=>':attribute is a required field',
+            'numeric'=>':attribute must be a number',
+            'exists'=>'the room need to be associated to an existing user',
+        ]);
+        if($validator->fails()){
+            $error = $validator->messages();
+            return response()->json($error);
+        }
+
+    $apartment = Apartment::create($request->all());
+    $apartment->services()->attach($request['services']);
+    
+
+
+    $images = $request->file('img');
+            
+    foreach ($images as $image) {
+        $image = Storage::disk('public')->put('images', $image);
+        Image::insert(
+            [
+                'path' => $image,
+                'apartment_id' => $apartment->id,
+            ]
+        );
+
+    }
+
+
+        
+     
+
+
+
+        return response()->json($apartment,201);
     }
 
     /**
@@ -76,12 +129,12 @@ class HostController extends Controller
     {
         if((Auth::user()->role->role)== "admin"){
 
-            $apartment = Apartment::where('id', '=', $id)
+            $apartment = Apartment::find($id)
             ->get();
         } elseif ((Auth::user()->role->role)== "host") {
-            $apartment = Apartment::where('id', '=', $id)
+            $apartment = Apartment::find($id)
             ->where('user_id', Auth::id())
-            ->get();
+            ->first();
         }
 
        return view('logged.show', compact('apartment'));
@@ -95,7 +148,8 @@ class HostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $images = Image::where('apartment_id', '=', $id )->get();
+        return view('test', compact('images'));
     }
 
     /**
@@ -131,6 +185,7 @@ class HostController extends Controller
     public function sponsor($id)
     {
         $sponsors = Sponsor::all();
-        return view('logged.sponsor', compact('id','sponsors'));
+        return view('logged.sponsor', compact('id', 'sponsors'));
     }
+    
 }

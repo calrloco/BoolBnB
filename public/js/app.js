@@ -42353,28 +42353,38 @@ module.exports = function(module) {
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
-var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; // aggiunta campo input file fino ad un max di 5
-// $('#add-img').click(function() {
-//     if ( $('.img-input').length < 5) {
-//         $('.container-upload').append(`<input class="img-input" type="file" name="img[]" class="form-control-file" id="img" accept="image/*">`);
-//         if ($('.img-input').length >= 5) {
-//             $('#add-img').hide();
-//         }
-//     } 
-// });
+var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
 
-$('#crea').on('click', function (event) {
-  // SALVO I VALORI DEL FORM
-  var title = $('input[data=title]');
-  var address = $('input[data=address]');
-  var city = $('input[data=city]');
-  var postalCode = $('input[data=postal-code]');
-  var country = $('input[data=country]');
-  var description = $('input[data=description]');
-  var dailyPrice = $('input[data=daily-price]');
-  var sm = $('input[data=sm]');
-  var beds = $('input[data=beds]');
-  var bathrooms = $('input[data=bathrooms]'); // salvo i checkbox con un ciclo
+var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; // aggiunta campo input file fino ad un max di 5
+
+$('#add-img').click(function () {
+  if ($('.img-input').length < 5) {
+    $('.container-upload').append("<input type=\"file\" name=\"img\" enctype=\"multipart/form-data\" class=\"img-input form-control-file\" id=\"img\" accept=\"image/*\">");
+
+    if ($('.img-input').length >= 5) {
+      $('#add-img').hide();
+    }
+  }
+});
+$('#address').focusout(function () {
+  var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
+  console.log(data);
+  tt.services.fuzzySearch({
+    key: apiKey,
+    query: data
+  }).go().then(function (response) {
+    $('#longitude').attr('value', response.results[0].position['lng']);
+    $('#latitude').attr('value', response.results[0].position['lat']);
+  });
+});
+$('#pippo').submit(function (event) {
+  event.preventDefault(); // SALVO I VALORI DEL FORM
+  // form = document.getElementById('creazione');
+  // var formData = new FormData(form);
+  // console.log(formData);
+  // var form = $('#creazione').serializeArray();
+  // console.log(form);
+  // salvo i checkbox con un ciclo
 
   var services = [];
   $('input[name=services]').each(function () {
@@ -42383,19 +42393,42 @@ $('#crea').on('click', function (event) {
     if (ischecked) {
       services.push($(this).val());
     }
-  }); //uguale per le immagini
+  });
+  console.log(services); //uguale per le immagini
 
-  var images = [];
-  $('input[name=img]').each(function () {});
-  var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
-  console.log(data);
+  var images = document.querySelectorAll($('.img-input')); // var images = [];
+  // $('input[name=img]').each(function() {
+  //     if($(this).val() != "") {
+  //         images.push($(this).val());
+  //     }
+  // });
+
+  console.log(images);
+  var apartmentData = {
+    title: $('input[name=title]').val(),
+    address: $('#address').val(),
+    city: $('input[name=city]').val(),
+    postalCode: $('input[name=postal-code]').val(),
+    country: $('input[name=country]').val(),
+    description: $('textarea[name=description]').val(),
+    dailyPrice: $('input[name=daily-price]').val(),
+    sm: $('input[name=sm]').val(),
+    rooms: $('input[name=rooms]').val(),
+    beds: $('input[name=beds]').val(),
+    bathrooms: $('input[name=bathrooms]').val(),
+    services: services,
+    user_id: $('input[name=user-id]').val(),
+    img: images
+  };
+  console.log(apartmentData);
+  var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val(); // console.log(data);
+
   tt.services.fuzzySearch({
     key: apiKey,
     query: data
   }).go().then(function (response) {
-    console.log(response);
+    createApart(response, apartmentData);
   });
-  event.preventDefault();
 }); // se sono nel form crea apartament richiamo la funzione
 // console.log('lat' + response.results[0].position['lat']);
 // console.log('lng' + response.results[0].position['lng']);
@@ -42405,6 +42438,41 @@ $('#crea').on('click', function (event) {
 // var city = response.results[0].address['municipality'];
 // var postalCode = response.results[0].address['postalCode'];
 // var country = response.results[0].address['country'];
+// FUNZIONI
+
+function createApart(response, apartmentData) {
+  $.ajax({
+    url: 'http://127.0.0.1:8000/api/apartments',
+    method: 'POST',
+    headers: {
+      KEY: 'test'
+    },
+    data: {
+      title: apartmentData.title,
+      address: apartmentData.address,
+      city: apartmentData.city,
+      postal_code: apartmentData.postalCode,
+      country: apartmentData.country,
+      description: apartmentData.description,
+      daily_price: apartmentData.dailyPrice,
+      sm: apartmentData.sm,
+      rooms: apartmentData.rooms,
+      beds: apartmentData.beds,
+      user_id: apartmentData.user_id,
+      bathrooms: apartmentData.bathrooms,
+      img: apartmentData.img,
+      latitude: response.results[0].position['lng'],
+      longitude: response.results[0].position['lat']
+    },
+    success: function success(data) {
+      console.log(data);
+      alert('appartamento inserito');
+    },
+    error: function error(errore) {
+      console.log(errore);
+    }
+  });
+}
 
 /***/ }),
 
@@ -42419,19 +42487,23 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
-__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js"); //require("./apt");
+
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
+
+var _require = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js"),
+    Alert = _require.Alert;
 
 $(document).ready(function () {
   $(".nav__user-box").click(function () {
     $(".nav__user__menu").toggleClass("active");
     getcards();
   });
-  $("#hidenav").click(function () {
-    $(this).hide();
+  $(".nav__search-button").click(function () {
+    $('#hidenav').hide();
     hidenav();
   });
 }); // animation
@@ -42446,6 +42518,58 @@ function hidenav() {
   $(".nav__search-icon-big").addClass("active-flex");
   $("#start-search").addClass("hidden");
 }
+
+$(window).bind("mousewheel", function (event) {
+  $('#hidenav').show();
+  $("nav__search-icon-big").removeClass("active-flex");
+  $(".nav__search-city").removeClass("active-flex");
+  $(".nav__search-date-start").removeClass("active-flex");
+  $(".nav__search-date-end").removeClass("active-flex");
+  $(".nav__search").removeClass("nav__search-large");
+  $(".nav__search-button").removeClass("nav__search-button-large");
+  $(".nav__search-icon-big").removeClass("active-flex");
+  $("#start-search").removeClass("hidden");
+}); // range value
+
+var slider = function () {
+  var slider = document.getElementById("myRanges");
+  var output = document.getElementById("range-value");
+  output.innerHTML = slider.value;
+
+  slider.oninput = function () {
+    output.innerHTML = this.value;
+  };
+
+  slider.addEventListener("mousemove", function () {
+    $('#range-hidden').val($('#range-value').html());
+    var range = (slider.value - 20) * 1.25;
+    var color = 'linear-gradient(90deg, rgb(230, 30, 77)' + range + '%, rgb(214,214,214)' + range + '%)';
+    slider.style.background = color;
+  });
+  slider.addEventListener("touchmove", function () {
+    $('#range-hidden').val($('#range-value').html());
+    var range = (slider.value - 20) * 1.25;
+    var color = 'linear-gradient(90deg, rgb(230, 30, 77)' + range + '%, rgb(214,214,214)' + range + '%)';
+    slider.style.background = color;
+  });
+}(); // chiamta che prende ip dell'utente e capisce la regione per ricerca nei paraggi
+
+
+var getIp = function () {
+  $.ajax({
+    mehtod: 'GET',
+    url: 'https://api.ipdata.co',
+    data: {
+      'api-key': 'b9bcf03b37c7c5b52f5297af16c2acf07e72d596a1cb8257ed1add0c'
+    },
+    success: function success(risposta) {
+      $('#ip-home-search').val(risposta.region);
+    },
+    error: function error() {
+      console.log(arguments);
+    }
+  });
+}();
 
 /***/ }),
 

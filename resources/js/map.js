@@ -33,7 +33,7 @@ $(document).ready(function() {
     });
 });
 //// prendi coordinate dell'input////////////////
-function getCoordinates(input) {
+function getCoordinates(input, range) {
     var zoom = 10;
     if (input != '') {
         tt.services
@@ -62,7 +62,7 @@ function getCoordinates(input) {
 
                 });
 
-                getCards(latitude, longitude, zoom);
+                getCards(latitude, longitude, range);
             });
     }
 }
@@ -167,7 +167,7 @@ function compileHandlebars(risp) {
         var el = $(".search__resoults__apartment-cards-content");
         var details = buildLocation(el, address);
         // cliccando su un elemento della lista a sx lo trova in mappa
-        detaails.on(
+        details.on(
             "click",
             (function(marker) {
                 const activeItem = $(this);

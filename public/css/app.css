@@ -4977,6 +4977,35 @@ button:focus {
 }
 
 .nav__search-city {
+  position: relative;
+}
+
+.nav__search-city #auto-complete {
+  display: none;
+  position: absolute;
+  width: 300px;
+  top: 60px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 23px 0px rgba(50, 50, 50, 0.51);
+}
+
+.nav__search-city #auto-complete .complete-results {
+  padding: 5px;
+}
+
+.nav__search-city #auto-complete .complete-results:hover {
+  background-color: #f0f0f0;
+}
+
+.nav__search-city #auto-complete.active {
+  display: block;
+}
+
+.nav__search-city,
+.nav__search-date-start,
+.nav__search-date-end {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -4988,11 +5017,15 @@ button:focus {
   flex: 1;
 }
 
-.nav__search-city:hover {
+.nav__search-city:hover,
+.nav__search-date-start:hover,
+.nav__search-date-end:hover {
   background-color: #f7f7f7;
 }
 
-.nav__search-city__search-date-start::after {
+.nav__search-city__search-date-start::after,
+.nav__search-date-start__search-date-start::after,
+.nav__search-date-end__search-date-start::after {
   width: 1rem;
   height: 10px;
   background-color: black;
@@ -5452,7 +5485,7 @@ textarea {
   align-self: center;
 }
 
-.slider-section .slider-img {
+.slider-section .apt-images {
   width: 100%;
   height: 400px;
   padding: 0 10px;
@@ -5463,7 +5496,7 @@ textarea {
   flex-direction: row;
 }
 
-.slider-section .slider-img .apt-img-slider {
+.slider-section .apt-images .apt-image {
   width: 100%;
   height: 100%;
   padding: 0 20px;
@@ -5471,8 +5504,8 @@ textarea {
      object-fit: cover;
 }
 
-.slider-section .slider-img .arrow-slider-sx,
-.slider-section .slider-img .arrow-slider-dx {
+.slider-section .apt-images .arrow-slider-sx,
+.slider-section .apt-images .arrow-slider-dx {
   font-size: 30px;
   color: lightgrey;
 }

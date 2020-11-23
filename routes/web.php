@@ -41,6 +41,7 @@ Route::get('/test', function () {
 Route::get('/search', function () {
     return view('search.search');
 });
+Route::get('/apartments/{id}/sponsor', 'Logged\HostController@sponsor')->name('logged.sponsor');
 
 Route::get('/apartments', 'Logged\HostController@index');
 Route::get('/apartments/{id}/sponsor','Logged\HostController@sponsor')->name('logged.sponsor');

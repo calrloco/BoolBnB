@@ -139,10 +139,12 @@
         transition: all .2s;
         margin-bottom: 1rem;
         &:hover{
-            border:1px solid var(--pink-bnb);
-            background-color:var(--pink-bnb);
-            color: #fff;
+            padding:.8rem 1.6rem;
+            background-color:#fff;
+            border:1px solid rgb(176,176,176);
+            color:inherit;
         }
+        
     }
     
 }

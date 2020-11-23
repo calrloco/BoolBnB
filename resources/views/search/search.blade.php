@@ -7,6 +7,7 @@
             <div class="container__search-left__top__text">
                 <span class="container__search-left__top__text-heading">I tuoi risultati per</span>
                 <span id="address-inst">{{$address ?? ''}}</span>
+                <span id="range-form" class="hidden">{{$range ?? ''}}</span>
             </div>
             <div class="container__search-left__top__filters">
                 <div class="services">

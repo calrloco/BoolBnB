@@ -20,12 +20,13 @@ class ApartmentController extends Controller
         $validator = Validator::make($request->all(),[
              'lat'=>'required',
              'lng'=>'required',
-             'maxDist'=>'required',
+             'maxDist'=>'required|numeric|min:20|max:100',
         ]);
 
         if($validator->fails()){
             return response()->json($validator->messages());
         }
+    
         $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
         point(longitude, latitude)) * .001 as distance")->having('distance','<=',$request->maxDist)->orderBy('distance','asc')->get();
         

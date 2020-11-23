@@ -4,7 +4,12 @@
         <div class="container-center container-fullheight">
             <div class="jumbotron__text">
                 <p class="jumbotron__text-banner">Vicino e bello</p>
-                <button class="jumbotron__text-button">Esplora i soggiorni nei dintorni</button>
+                <form action="{{ route('search.store') }}" method="POST">
+                @csrf
+                @method('POST')
+                <button type="submit" class="jumbotron__text-button">Esplora i soggiorni nei dintorni</button>
+                <input type="hidden" name="address" id="ip-home-search" value="">
+                </form>
             </div>
         </div>
     </header>

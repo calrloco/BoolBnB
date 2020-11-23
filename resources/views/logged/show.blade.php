@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    {{-- @dd($apartment); --}}
 <section class="top-section">
     <div class="title-apt">
     <p class="title">{{ $apartment->title }}</p>
@@ -8,15 +7,14 @@
     </div>
 </section>
 <section class="slider-section">
-    <div class="slider-img">
+    <div class="apt-images">
         <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
         @for($i = 0; $i < $apartment->images->count('id'); $i++)
-            <img class="apt-img-slider {{$i==0?'active':'hidden'}}" src="{{ $apartment->images[$i]->path }}" alt="{{$apartment->title}}">
+            <img class="apt-image {{($i == 0 ? 'active first' : (($i == $apartment->images->count('id')-1) ? 'hidden last' :'hidden'))}}" src="{{ $apartment->images[$i]->path }}" alt="{{$apartment->title}}">
         @endfor
         <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
     </div>
 </section>
-
 
 <section class = "info-apt-section">
     <div class="info-box-sx">
@@ -52,13 +50,10 @@
         <div class="send-message-box">
             <p class="message-title">Statistiche appartamento</p>
             <div class="message-form">
-                {{-- <a href="{{ route('logged.messages', $apartment->id )}}">MAILBOX!</a> --}}
                 <a href="{{ route('logged.sponsor', $apartment->id )}}">Sponsorizza il tuo appartamento!</a>
             </div>
-
         </div>
     </div>
-
 </div>
 
 <section class="map-section">

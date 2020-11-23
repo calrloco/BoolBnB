@@ -1,5 +1,5 @@
 <nav class="nav-container">
-    <div class="container-center">
+    <div class="{{url()->current() == route('search.store') ? 'nav-full' : 'container-center'}}">
         <div class="nav">
             <div class="nav__logo">
                 <a href="{{ route('home') }}">
@@ -11,20 +11,26 @@
                 <form class="nav__search-button" action="{{ route('search.store') }}" method="POST">
                     @csrf
                     @method('POST')
-                    <p id="start-search" class="">Inizia la ricerca
-                    <p>
-                    <div class="nav__search-city hidden">
-                        <label for="search">Dove</label>
-                        <input id="search" type="text" name="address" placeholder="dove vuoi andare">
-                    </div>
-                    <div class="nav__search-icon nav__search-icon-big hidden">
-                        <p>Cerca</p>
-                        <i class="fas fa-search"></i>
+                     <p id="start-search" class="">Inizia la ricerca<p>
+                         <!-- tolta classe hidden da nav__search-city -->
+                     <div class="nav__search-city">
+                         <label for="search">Dove</label>
+                         <input id="search" type="text" name="address" placeholder="dove vuoi andare" autocomplete="off">
+                         <div id="auto-complete"></div>
                     </div>
                     <div id="hidenav" class="nav__search-icon">
                         <i class="fas fa-search"></i>
                     </div>
-                    <button type="submit" class="">vaiwadwadwad</button>
+                    <div class="nav__search-city hidden">
+                         <label for="search">Range: <span id="range-value"></span></label>
+                         <input type="hidden" id="range-hidden" name="range" value="">
+                         <input type="range" min="20" max="100" value="20" id="myRanges" class="sliders">
+                    </div>
+                    <button type="{{url()->current() == route('search.store') ? 'button' : 'submit'}}" class="nav__search-icon nav__search-icon-big hidden">
+                        Cerca
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
                 </form>
             </div>
             <div class="nav__user">
@@ -57,13 +63,13 @@
                             </li>
 
                             <li class="nav__user__menu-item">
-                                <a href="" class="nav-link">Messaggi</a>
+                               <a href="{{route('messages.index')}}" class="nav-link">Messaggi</a>
                             </li>
                             <li class="nav__user__menu-item">
-                                <a href="" class="nav-link">I tuoi appartamenti</a>
+                                <a href="{{route('host.index')}}" class="nav-link">I tuoi appartamenti</a>
                             </li>
                             <li class="nav__user__menu-item">
-                                <a href="" class="nav-link">Nuovo appartamento</a>
+                              <a href="{{route('host.create')}}" class="nav-link">Nuovo appartamento</a>
                             </li>
                             <li class="nav__user__menu-item">
 

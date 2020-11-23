@@ -29,7 +29,10 @@ $(document).ready(function() {
     })();
     $(".nav__search-icon-big").click(function () {
         $(".search__resoults__apartment-cards").empty();
-        getCoordinates($("#search").val(), $("#range-value").html());
+        if ($("#search").val() != "") {
+            getCoordinates($("#search").val(), $("#range-value").html()); 
+        }
+        
     });
 });
 //// prendi coordinate dell'input////////////////
@@ -300,17 +303,17 @@ $(document).on('click', '.complete-results', function () {
     var value = $(this).text();
     $('#search').val(value);
     getCoordinates($("#search").val());
-    $('#auto-complete').removeClass('active');
+    $('#auto-complete').removeClass('complete-on');
 
 });
 
 // funzione per i suggerimenti nella search
 function autoComplete(query) {
-    if (query < 3 || query == '') {
-        $('#auto-complete').removeClass('active');
+    if (query.length < 3 || query == '') {
+        $('#auto-complete').removeClass('complete-on');
     }
     if (query != '' && isNaN(query) && query.length > 3) {
-        $('#auto-complete').addClass('active');
+        $('#auto-complete').addClass('complete-on');
         tt.services.fuzzySearch({
                 key: apiKey,
                 query: query,
@@ -340,7 +343,7 @@ function autoComplete(query) {
                 }
                 document.getElementById('auto-complete').innerHTML = results;
                 if (results == '') {
-                    $('#auto-complete').removeClass('active');
+                    $('#auto-complete').removeClass('complete-on');
                 }
             });
 
@@ -364,3 +367,8 @@ function same(arr1, arr2) {
      return false;
     
 }
+
+// per chiudere l'autocomplete al click fuori
+$(document).click(function() {
+    $('#auto-complete').removeClass('complete-on');
+  });

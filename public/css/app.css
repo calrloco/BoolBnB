@@ -4999,7 +4999,7 @@ button:focus {
   background-color: #f0f0f0;
 }
 
-.nav__search-city #auto-complete.active {
+.nav__search-city #auto-complete.complete-on {
   display: block;
 }
 

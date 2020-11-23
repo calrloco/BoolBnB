@@ -42506,6 +42506,15 @@ $(document).ready(function () {
     $('#hidenav').hide();
     hidenav();
   });
+  $("#search").keyup(function () {
+    $('#auto-complete').empty();
+    autoComplete($("#search").val());
+  }); //funzione per selezionare suggerimento e restuirlo nella search
+
+  $(document).on('click', '.complete-results', function () {
+    var value = $(this).text();
+    $('#search').val(value);
+  });
 }); // animation
 
 function hidenav() {
@@ -42571,7 +42580,55 @@ var getIp = function () {
       console.log(arguments);
     }
   });
-}();
+}(); // funzione per i suggerimenti nella search
+
+
+function autoComplete(query) {
+  if (query.length < 3 || query == '') {
+    $('#auto-complete').removeClass('complete-on');
+  }
+
+  if (query != '' && isNaN(query) && query.length > 3) {
+    $('#auto-complete').addClass('complete-on');
+    tt.services.fuzzySearch({
+      key: '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk',
+      query: query
+    }).go().then(function (response) {
+      var address = [];
+      var results = '';
+
+      for (var i = 0; i < 4; i++) {
+        if (response.results[i]) {
+          // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni                
+          var streetName = response.results[i].address['streetName'];
+          var city = response.results[i].address['municipality'];
+          var countryCode = response.results[i].address['countryCode'];
+
+          if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == 'IT') {
+            address.push(streetName + ' ' + city);
+          } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == 'IT') {
+            address.push(city);
+          }
+        }
+      }
+
+      for (var _i = 0; _i < address.length; _i++) {
+        results += '<div class="complete-results">' + address[_i] + '</div>';
+      }
+
+      document.getElementById('auto-complete').innerHTML = results;
+
+      if (results == '') {
+        $('#auto-complete').removeClass('complete-on');
+      }
+    });
+  }
+} // per chiudere l'autocomplete al click fuori
+
+
+$(document).click(function () {
+  $('#auto-complete').removeClass('complete-on');
+});
 
 /***/ }),
 

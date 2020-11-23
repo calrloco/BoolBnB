@@ -51,21 +51,21 @@ output.innerHTML = slider.value;
 slider.oninput = function(){
     output.innerHTML = this.value;
 }
-slider.addEventListener("mousemove", function(){
+/// slider da 20 a cento con sfondo custom
+function rangeslider(){
     $('#range-hidden').val($('#range-value').html());
     var range = (slider.value - 20) * 1.25;
     var color = 'linear-gradient(90deg, rgb(230, 30, 77)' + range + '%, rgb(214,214,214)' + range + '%)';
     slider.style.background = color; 
+}
 
+slider.addEventListener("mousemove", function(){
+    rangeslider();
 });
 slider.addEventListener("touchmove", function(){
-    $('#range-hidden').val($('#range-value').html());
-    var range = (slider.value - 20) * 1.25;
-    var color = 'linear-gradient(90deg, rgb(230, 30, 77)' + range + '%, rgb(214,214,214)' + range + '%)';
-    slider.style.background = color;  
- 
+    rangeslider();
 });
-
+///////////////////////////////////////////////////
 })();
 // chiamta che prende ip dell'utente e capisce la regione per ricerca nei paraggi
 var getIp = (function(){

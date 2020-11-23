@@ -39,4 +39,3 @@ Route::get('/apartment', function () {
 
 Route::get('/apartments', 'Logged\HostController@index');
 Route::get('/apartments/{id}/sponsor','Logged\HostController@sponsor')->name('logged.sponsor');
-Route::get('/host/prova/{id}','Logged\HostController@edit')->name('prova.sponsor');

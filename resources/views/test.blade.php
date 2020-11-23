@@ -10,9 +10,7 @@
 </head>
 
 <body>
-    @foreach($images as $image) 
-        <img src="{{ asset('storage/' . $image->path)}}" alt="">
-    @endforeach
+<a href="{{ route('host.edit') }}"></a>
 
 </body>
 

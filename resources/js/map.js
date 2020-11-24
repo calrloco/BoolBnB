@@ -30,6 +30,7 @@ $(document).ready(function() {
     })();
     $(".nav__search-icon-big").click(function () {
         $(".search__resoults__apartment-cards").empty();
+        $('#address-inst').html($('#search').val());
         getCoordinates($("#search").val(), $("#range-value").html());
     });
 });
@@ -99,8 +100,9 @@ function getCards(lat, lng, maxDist) {
             maxDist: maxDist
         },
         success: function(risposta) {
-            compileHandlebars(risposta);
-
+            if(risposta.length > 0){
+               compileHandlebars(risposta);
+            }
         },
         error: function () {
             console.log("error");

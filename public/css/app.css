@@ -6089,9 +6089,10 @@ h1 {
 }
 
 .services-all:hover {
-  border: 1px solid var(--pink-bnb);
-  background-color: var(--pink-bnb);
-  color: #fff;
+  padding: 0.8rem 1.6rem;
+  background-color: #fff;
+  border: 1px solid #b0b0b0;
+  color: inherit;
 }
 
 .mapboxgl-canvas:focus,

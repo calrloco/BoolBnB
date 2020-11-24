@@ -42351,22 +42351,22 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+//JS PER PAGINE CREATE ED EDIT
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
 
-var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; // aggiunta campo input file fino ad un max di 5
+var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; //QUANDO ESCE DAI CAMPI INTERESSATI RICALCOLA LE COORDINATE IN CAMPI HIDDEN
 
-$('#add-img').click(function () {
-  if ($('.img-input').length < 5) {
-    $('.container-upload').append("<input type=\"file\" name=\"img\" enctype=\"multipart/form-data\" class=\"img-input form-control-file\" id=\"img\" accept=\"image/*\">");
-
-    if ($('.img-input').length >= 5) {
-      $('#add-img').hide();
-    }
-  }
+$('#address, #city, #postal').focusout(function () {
+  calcoloCoordinate();
 });
-$('#address').focusout(function () {
+$(document).on('click', '.img-detele', function () {
+  $(this).submit();
+}); // FUNZIONI
+// calcolo coordinate con chiamata all'api tomtom
+
+function calcoloCoordinate() {
   var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
   console.log(data);
   tt.services.fuzzySearch({
@@ -42375,102 +42375,6 @@ $('#address').focusout(function () {
   }).go().then(function (response) {
     $('#longitude').attr('value', response.results[0].position['lng']);
     $('#latitude').attr('value', response.results[0].position['lat']);
-  });
-});
-$('#pippo').submit(function (event) {
-  event.preventDefault(); // SALVO I VALORI DEL FORM
-  // form = document.getElementById('creazione');
-  // var formData = new FormData(form);
-  // console.log(formData);
-  // var form = $('#creazione').serializeArray();
-  // console.log(form);
-  // salvo i checkbox con un ciclo
-
-  var services = [];
-  $('input[name=services]').each(function () {
-    var ischecked = $(this).is(":checked");
-
-    if (ischecked) {
-      services.push($(this).val());
-    }
-  });
-  console.log(services); //uguale per le immagini
-
-  var images = document.querySelectorAll($('.img-input')); // var images = [];
-  // $('input[name=img]').each(function() {
-  //     if($(this).val() != "") {
-  //         images.push($(this).val());
-  //     }
-  // });
-
-  console.log(images);
-  var apartmentData = {
-    title: $('input[name=title]').val(),
-    address: $('#address').val(),
-    city: $('input[name=city]').val(),
-    postalCode: $('input[name=postal-code]').val(),
-    country: $('input[name=country]').val(),
-    description: $('textarea[name=description]').val(),
-    dailyPrice: $('input[name=daily-price]').val(),
-    sm: $('input[name=sm]').val(),
-    rooms: $('input[name=rooms]').val(),
-    beds: $('input[name=beds]').val(),
-    bathrooms: $('input[name=bathrooms]').val(),
-    services: services,
-    user_id: $('input[name=user-id]').val(),
-    img: images
-  };
-  console.log(apartmentData);
-  var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val(); // console.log(data);
-
-  tt.services.fuzzySearch({
-    key: apiKey,
-    query: data
-  }).go().then(function (response) {
-    createApart(response, apartmentData);
-  });
-}); // se sono nel form crea apartament richiamo la funzione
-// console.log('lat' + response.results[0].position['lat']);
-// console.log('lng' + response.results[0].position['lng']);
-// var address = response.results[0].address['streetName'];
-// var longitude = response.results[0].position['lng'];
-// var latitude = response.results[0].position['lat'];
-// var city = response.results[0].address['municipality'];
-// var postalCode = response.results[0].address['postalCode'];
-// var country = response.results[0].address['country'];
-// FUNZIONI
-
-function createApart(response, apartmentData) {
-  $.ajax({
-    url: 'http://127.0.0.1:8000/api/apartments',
-    method: 'POST',
-    headers: {
-      KEY: 'test'
-    },
-    data: {
-      title: apartmentData.title,
-      address: apartmentData.address,
-      city: apartmentData.city,
-      postal_code: apartmentData.postalCode,
-      country: apartmentData.country,
-      description: apartmentData.description,
-      daily_price: apartmentData.dailyPrice,
-      sm: apartmentData.sm,
-      rooms: apartmentData.rooms,
-      beds: apartmentData.beds,
-      user_id: apartmentData.user_id,
-      bathrooms: apartmentData.bathrooms,
-      img: apartmentData.img,
-      latitude: response.results[0].position['lng'],
-      longitude: response.results[0].position['lat']
-    },
-    success: function success(data) {
-      console.log(data);
-      alert('appartamento inserito');
-    },
-    error: function error(errore) {
-      console.log(errore);
-    }
   });
 }
 
@@ -42583,40 +42487,7 @@ var getIp = function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$('.arrow-slider-sx').click(function () {
-  prevImage($('.apt-image.active'));
-});
-$('.arrow-slider-dx').click(function () {
-  nextImage('.apt-image.active');
-}); //** FUNZIONI **/
-
-function nextImage() {
-  activeImage.removeClass('active');
-  activeImage.addClass('hidden');
-
-  if (activeImage.hasClass('last') == true) {
-    activeImage.first().removeClass('hidden');
-    activeImage.first().addClass('active');
-  } else {
-    //metto la classe attiva al successivo
-    activeImage.next().removeClass('hidden');
-    activeImage.next().addClass('active');
-  }
-}
-
-function prevImage() {
-  activeImage.removeClass('active');
-  activeImage.addClass('hidden');
-
-  if (activeImage.hasClass('first') == true) {
-    activeImage.last().removeClass('hidden');
-    activeImage.last().addClass('active');
-  } else {
-    //metto la classe attiva al successivo
-    activeImage.prev().removeClass('hidden');
-    activeImage.prev().addClass('active');
-  }
-}
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\resources\\js\\apt.js: Unexpected token (41:0)\n\n\u001b[0m \u001b[90m 39 | \u001b[39m    }\u001b[0m\n\u001b[0m \u001b[90m 40 | \u001b[39m}\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 41 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 42 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 43 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 44 | \u001b[39m\u001b[0m\n    at Parser._raise (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:790:17)\n    at Parser.raiseWithData (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:783:17)\n    at Parser.raise (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:777:17)\n    at Parser.unexpected (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9095:16)\n    at Parser.parseExprAtom (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:10529:20)\n    at Parser.parseExprSubscripts (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:10094:23)\n    at Parser.parseUpdate (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:10074:21)\n    at Parser.parseMaybeUnary (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:10063:17)\n    at Parser.parseExprOps (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9933:23)\n    at Parser.parseMaybeConditional (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9907:23)\n    at Parser.parseMaybeAssign (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9870:21)\n    at Parser.parseExpressionBase (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9815:23)\n    at D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9809:39\n    at Parser.allowInAnd (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:11504:16)\n    at Parser.parseExpression (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9809:17)\n    at Parser.parseStatementContent (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:11770:23)\n    at Parser.parseStatement (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:11639:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:12221:25)\n    at Parser.parseBlockBody (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:12207:10)\n    at Parser.parseTopLevel (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:11570:10)\n    at Parser.parse (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:13381:10)\n    at parse (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:13434:38)\n    at parser (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\core\\lib\\parser\\index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:99:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\core\\lib\\transform.js:27:41)\n    at transform.next (<anonymous>)\n    at step (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\gensync\\index.js:261:32)\n    at D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\gensync\\index.js:223:11)");
 
 /***/ }),
 

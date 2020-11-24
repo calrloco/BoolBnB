@@ -14,9 +14,8 @@
     @if (!empty($messages)) 
     <h2>I tuoi messaggi</h2>
     <div class=messages-deck>
-        
 
-        @foreach($messages as $message)
+    @foreach($messages as $message)
     <div class="message-card {{ (($message->read == 0) ? 'unread' : 'read') }}">
             <div class="apart-info">
                 <div class=apart-img>
@@ -38,7 +37,7 @@
                     @csrf
                     @method('PATCH')
                     <button type="submit">
-                        @If($message->read == 0) 
+                        @if($message->read == 0) 
                         <i class="fas fa-envelope"></i>
                         @else
                         <i class="fas fa-envelope-open"></i>
@@ -55,7 +54,13 @@
         </div>
         @endforeach   
     
-    </div>
+    
+    {{-- se non ha messaggi --}}
+    @else
+    <h2>Non hai messaggi</h2>
+    @endif
+
+</div>
 
 
 

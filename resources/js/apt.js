@@ -38,7 +38,3 @@ function prevImage(){
         activeImage.prev().addClass('active');
     }
 }
-
-
-
-

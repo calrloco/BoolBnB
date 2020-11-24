@@ -9,6 +9,7 @@
                 @method('POST')
                 <button type="submit" class="jumbotron__text-button">Esplora i soggiorni nei dintorni</button>
                 <input type="hidden" name="address" id="ip-home-search" value="">
+                <input type="hidden" name="range" id="ip-home-search" value="100">
                 </form>
             </div>
         </div>

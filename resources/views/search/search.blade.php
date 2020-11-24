@@ -28,13 +28,13 @@
         <script id="handlebars_cards" type="text/x-handlebars-template">
             <div class="search__resoults__apartment-cards-content" data-service="">
                 <div class="search__resoults__apartment-cards-content-slider">
-                    <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-left">
+                    <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-left arrow-slider-dx">
                         <i class="fas fa-chevron-left"></i>
                     </div>
-                    <img class="search__resoults__apartment-cards-content-slider-img" src="https://a0.muscache.com/im/pictures/bf420dc5-ca0c-42a5-84f2-d39ce2e0b597.jpg?im_w=1200">
-                    <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-right">
+                    <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-right arrow-slider-sx">
                         <i class="fas fa-chevron-right"></i>
                     </div>
+                   
                 </div>    
             </button>    
              <div class="search__resoults__apartment-cards-content__text">
@@ -48,7 +48,7 @@
                     @csrf
                     @method('POST')
                     @{{{id}}}
-                    <button type="submit" class="">cerca</button>
+                    <button type="submit" class="visualizza-appartamneto">Vai all'appartamento</button>
                 </form> 
               </div>
               

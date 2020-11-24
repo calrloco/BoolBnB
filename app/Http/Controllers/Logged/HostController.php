@@ -266,7 +266,7 @@ class HostController extends Controller
             $start = Carbon::now();
             // Data di scadenza
             $end_sponsor = Carbon::now()->addHours($sponsor_durate);
-
+           
             // Id Transazione
             $transId = $transaction->id;
 

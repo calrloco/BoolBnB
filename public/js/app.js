@@ -42487,7 +42487,40 @@ var getIp = function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\resources\\js\\apt.js: Unexpected token (41:0)\n\n\u001b[0m \u001b[90m 39 | \u001b[39m    }\u001b[0m\n\u001b[0m \u001b[90m 40 | \u001b[39m}\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 41 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 42 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 43 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 44 | \u001b[39m\u001b[0m\n    at Parser._raise (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:790:17)\n    at Parser.raiseWithData (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:783:17)\n    at Parser.raise (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:777:17)\n    at Parser.unexpected (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9095:16)\n    at Parser.parseExprAtom (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:10529:20)\n    at Parser.parseExprSubscripts (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:10094:23)\n    at Parser.parseUpdate (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:10074:21)\n    at Parser.parseMaybeUnary (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:10063:17)\n    at Parser.parseExprOps (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9933:23)\n    at Parser.parseMaybeConditional (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9907:23)\n    at Parser.parseMaybeAssign (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9870:21)\n    at Parser.parseExpressionBase (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9815:23)\n    at D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9809:39\n    at Parser.allowInAnd (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:11504:16)\n    at Parser.parseExpression (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:9809:17)\n    at Parser.parseStatementContent (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:11770:23)\n    at Parser.parseStatement (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:11639:17)\n    at Parser.parseBlockOrModuleBlockBody (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:12221:25)\n    at Parser.parseBlockBody (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:12207:10)\n    at Parser.parseTopLevel (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:11570:10)\n    at Parser.parse (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:13381:10)\n    at parse (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\parser\\lib\\index.js:13434:38)\n    at parser (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\core\\lib\\parser\\index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:99:38)\n    at normalizeFile.next (<anonymous>)\n    at run (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\@babel\\core\\lib\\transform.js:27:41)\n    at transform.next (<anonymous>)\n    at step (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\gensync\\index.js:261:32)\n    at D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (D:\\mamp-boolean\\progetto-finale-airbnb\\air-bnb\\node_modules\\gensync\\index.js:223:11)");
+$('.arrow-slider-sx').click(function () {
+  prevImage($('.apt-image.active'));
+});
+$('.arrow-slider-dx').click(function () {
+  nextImage('.apt-image.active');
+}); //** FUNZIONI **/
+
+function nextImage() {
+  activeImage.removeClass('active');
+  activeImage.addClass('hidden');
+
+  if (activeImage.hasClass('last') == true) {
+    activeImage.first().removeClass('hidden');
+    activeImage.first().addClass('active');
+  } else {
+    //metto la classe attiva al successivo
+    activeImage.next().removeClass('hidden');
+    activeImage.next().addClass('active');
+  }
+}
+
+function prevImage() {
+  activeImage.removeClass('active');
+  activeImage.addClass('hidden');
+
+  if (activeImage.hasClass('first') == true) {
+    activeImage.last().removeClass('hidden');
+    activeImage.last().addClass('active');
+  } else {
+    //metto la classe attiva al successivo
+    activeImage.prev().removeClass('hidden');
+    activeImage.prev().addClass('active');
+  }
+}
 
 /***/ }),
 

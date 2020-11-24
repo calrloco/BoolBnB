@@ -149,3 +149,51 @@ function autoComplete(query) {
 $(document).click(function() {
     $('#auto-complete').removeClass('complete-on');
   });
+
+
+// validazione
+var letterNumber = /^[0-9a-zA-Z ]+$/;
+var letter = /^[a-zA-Z ]+$/;
+var number = /^[0-9 ]+$/;
+
+
+
+$('#title').focusout(function(){
+    checkInput($('#title'), letterNumber, 10, 300);
+});
+
+
+
+
+
+
+
+// funzione per controllare lato client il form
+function checkInput(selector, kind, min, max) {
+    if (selector.val() == '' || (!matchKind(selector, kind)) || selector.val().length < min || selector.val().length > max) {
+        selector.addClass('error');
+        selector.next('.message').addClass('message-on');
+        if (selector.val() == '') {
+            selector.next('.message').text('Non hai inserito il titolo');
+        } else if (!matchKind(selector, kind)) {
+            selector.next('.message').text('Hai inserito un carattere non valido');
+        } else if (selector.val().length < min) {
+            selector.next('.message').text('Il testo è troppo breve');
+        } else if (selector.val().length > max) {
+            selector.next('.message').text('Il testo è troppo lungo');
+        }
+    } else {
+        selector.removeClass('error');
+        selector.next('.message').removeClass('message-on');
+    }
+}
+
+
+// funzione per controllare se l'input soddisfa la condizione
+function matchKind(selector, kind){
+    if(selector.val().match(kind)){
+        return true;
+    }
+    return false;
+}
+

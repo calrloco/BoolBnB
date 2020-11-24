@@ -4916,6 +4916,21 @@ button:focus {
   background-color: inherit;
 }
 
+@media screen and (max-width: 600px) {
+  .nav {
+    justify-content: center;
+  }
+}
+
+.nav-link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
 .nav-container {
   z-index: 20;
   position: -webkit-sticky;
@@ -4932,6 +4947,12 @@ button:focus {
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
+}
+
+@media screen and (max-width: 600px) {
+  .nav__logo {
+    display: none;
+  }
 }
 
 .nav__logo img {
@@ -5032,8 +5053,9 @@ button:focus {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  padding: 0 2rem;
+  padding: 0.5rem 2rem;
   color: var(--color-font-black);
+  min-width: 26rem;
 }
 
 .nav__search-button-large {
@@ -5042,7 +5064,7 @@ button:focus {
   padding: 0 0;
 }
 
-.nav__search-button-clicked {
+.nav__search-button-clciked {
   height: 66px;
 }
 
@@ -5056,6 +5078,7 @@ button:focus {
 }
 
 .nav__search-icon {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -5078,6 +5101,7 @@ button:focus {
   width: auto;
   align-self: center;
   margin-right: 1rem;
+  font-size: 1.4rem;
 }
 
 .nav__search-icon i {
@@ -5095,6 +5119,12 @@ button:focus {
   position: relative;
 }
 
+@media screen and (max-width: 600px) {
+  .nav__user {
+    display: none;
+  }
+}
+
 .nav__user-box {
   display: flex;
   justify-content: space-between;
@@ -5103,10 +5133,17 @@ button:focus {
   transition: all 0.2s;
   background-color: #fff;
   border: 1px solid #e2e2e2;
-  padding: 1rem;
-  font-size: 2.3rem;
+  padding: 0.5rem;
+  font-size: 2rem;
   border-radius: 10rem;
+  height: 4rem;
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .nav__user-box {
+    display: none;
+  }
 }
 
 .nav__user-box:hover {
@@ -5120,12 +5157,13 @@ button:focus {
   align-items: center;
   flex-direction: row;
   height: 4.2rem;
-  border-radius: 2.1rem;
-  -webkit-border-radius: 2.1rem;
-  -moz-border-radius: 2.1rem;
-  -ms-border-radius: 2.1rem;
-  -o-border-radius: 2.1rem;
-  width: 4.2rem;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  width: 3.2rem;
+  height: 3.2rem;
   border: 1px solid #e2e2e2;
   cursor: pointer;
   background-color: #717171;
@@ -5137,7 +5175,7 @@ button:focus {
 }
 
 .nav__user-button img {
-  height: 4rem;
+  height: 3rem;
 }
 
 .nav__user__menu {
@@ -5233,6 +5271,43 @@ button:focus {
     align-items: center;
     flex-direction: row;
   }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.sliders {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  background: linear-gradient(90deg, #d6d6d6 60%, #d6d6d6 60%);
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  border-radius: 12px;
+  position: relative;
+  margin-right: 2rem;
+}
+
+.sliders::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1.2rem;
+  width: 1.2rem;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sliders::-moz-slider-thumb {
+  -webkit-appearance: none;
+  height: 4rem;
+  width: 4rem;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .jumbotron {

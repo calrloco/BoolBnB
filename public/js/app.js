@@ -42487,8 +42487,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
-__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js"); //require("./apt");
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
 
+__webpack_require__(/*! ./apt */ "./resources/js/apt.js");
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
@@ -42565,13 +42566,57 @@ var getIp = function () {
       'api-key': 'b9bcf03b37c7c5b52f5297af16c2acf07e72d596a1cb8257ed1add0c'
     },
     success: function success(risposta) {
-      $('#ip-home-search').val(risposta.city);
+      $('#ip-home-search').val(risposta.region);
     },
     error: function error() {
       console.log(arguments);
     }
   });
 }();
+
+/***/ }),
+
+/***/ "./resources/js/apt.js":
+/*!*****************************!*\
+  !*** ./resources/js/apt.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('.arrow-slider-sx').click(function () {
+  prevImage($('.apt-image.active'));
+});
+$('.arrow-slider-dx').click(function () {
+  nextImage('.apt-image.active');
+}); //** FUNZIONI **/
+
+function nextImage() {
+  activeImage.removeClass('active');
+  activeImage.addClass('hidden');
+
+  if (activeImage.hasClass('last') == true) {
+    activeImage.first().removeClass('hidden');
+    activeImage.first().addClass('active');
+  } else {
+    //metto la classe attiva al successivo
+    activeImage.next().removeClass('hidden');
+    activeImage.next().addClass('active');
+  }
+}
+
+function prevImage() {
+  activeImage.removeClass('active');
+  activeImage.addClass('hidden');
+
+  if (activeImage.hasClass('first') == true) {
+    activeImage.last().removeClass('hidden');
+    activeImage.last().addClass('active');
+  } else {
+    //metto la classe attiva al successivo
+    activeImage.prev().removeClass('hidden');
+    activeImage.prev().addClass('active');
+  }
+}
 
 /***/ }),
 

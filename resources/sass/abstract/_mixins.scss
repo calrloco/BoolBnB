@@ -10,13 +10,18 @@
             @content
         }
     };
+    @if $breakpoint == small_desktop{
+        @media screen and (max-width:1462px){
+            @content
+        }
+    };
     @if $breakpoint == desktop{
         @media screen and (max-width:1920px){
             @content
         }
     };
     @if $breakpoint == large_desktop{
-        @media screen and (min-width:1921px){
+        @media screen and (min-width:2000px){
             @content
         }
     };
@@ -35,7 +40,5 @@
     font-size:1.4rem;
     background-color:#fff;
     border:1px solid rgb(176,176,176);
-    margin-right: 8px;
     transition: all .2s;
-    margin-bottom: 1rem;
 }

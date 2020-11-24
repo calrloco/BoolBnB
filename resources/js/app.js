@@ -1,7 +1,7 @@
 require("./bootstrap");
 require("./add");
 require("./sponsor");
-//require("./apt");
+require("./apt");
 var $ = require("jquery");
 const Handlebars = require("handlebars");
 const { Alert } = require("bootstrap");
@@ -76,8 +76,7 @@ $.ajax({
         'api-key':'b9bcf03b37c7c5b52f5297af16c2acf07e72d596a1cb8257ed1add0c',
     },
     success:function(risposta){
-        
-       $('#ip-home-search').val(risposta.city);
+        $('#ip-home-search').val(risposta.region);
     },
     error: function(){
         console.log(arguments);

@@ -4615,9 +4615,7 @@ readers do not read off random characters that represent icons */
   font-size: 1.4rem;
   background-color: #fff;
   border: 1px solid #b0b0b0;
-  margin-right: 8px;
   transition: all 0.2s;
-  margin-bottom: 1rem;
 }
 
 :root {
@@ -4829,7 +4827,7 @@ button:focus {
   }
 }
 
-@media screen and (min-width: 1921px) {
+@media screen and (min-width: 2000px) {
   .col-xl-1 {
     width: calc((100% / 12) * 1);
   }
@@ -4913,8 +4911,7 @@ button:focus {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  height: var(--nav-height);
-  height: var(--nav-mobile-height);
+  height: 100%;
   font-size: 1.4rem;
   background-color: inherit;
 }
@@ -4941,6 +4938,7 @@ button:focus {
   top: 0;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
+  height: var(--nav-height);
 }
 
 .nav__logo {
@@ -5262,6 +5260,7 @@ button:focus {
 }
 
 .nav-full {
+  height: var(--nav-height);
   padding: 0.6rem 2.4rem;
 }
 
@@ -5676,11 +5675,17 @@ h1 {
   background: white;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: row;
-  padding: 50px 10px;
   flex: 1;
   width: 100%;
+}
+
+@media screen and (min-width: 2000px) {
+  .signup_container {
+    align-items: flex-start;
+    margin-top: 3rem;
+  }
 }
 
 .signup_container .login_btn {
@@ -5842,6 +5847,12 @@ h1 {
   flex: 2;
 }
 
+@media screen and (max-width: 1462px) {
+  .container__search-right {
+    flex: 1;
+  }
+}
+
 .container__search .search__resoults__apartment-cards {
   display: flex;
   justify-content: flex-start;
@@ -5850,7 +5861,6 @@ h1 {
   padding: 0 2.4rem;
   flex-wrap: wrap;
   max-width: 100%;
-  max-height: 100%;
 }
 
 .container__search .search__resoults__apartment-cards-content {
@@ -5858,17 +5868,31 @@ h1 {
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  flex: 0 0 calc(100% / 3);
+  flex: 0 0 calc(100% / 2);
   padding: 0.8rem 0.8rem;
   cursor: pointer;
   margin-bottom: 2rem;
   min-height: 23.1rem;
   border-radius: 0.8rem;
+  height: 35rem;
+  max-height: 35rem;
+}
+
+@media screen and (min-width: 2000px) {
+  .container__search .search__resoults__apartment-cards-content {
+    flex: 0 0 calc(100% / 3);
+  }
 }
 
 @media screen and (max-width: 800px) {
   .container__search .search__resoults__apartment-cards-content {
-    flex: 0 0 calc(100%);
+    flex: 0 0 calc(100% / 2);
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .container__search .search__resoults__apartment-cards-content {
+    flex: 1 1 100%;
   }
 }
 
@@ -5877,16 +5901,18 @@ h1 {
   justify-content: space-between;
   align-items: stretch;
   flex-direction: column;
-  flex: 1;
+  flex: 1 0;
   width: 100%;
+  padding-top: 1.5rem;
+  max-height: 40%;
 }
 
 .container__search .search__resoults__apartment-cards-content-form {
   width: 100%;
-  flex: 1;
+  flex: 1 0;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-start;
+  align-items: flex-end;
   flex-direction: column;
   justify-self: flex-end;
   align-self: flex-end;
@@ -5894,6 +5920,15 @@ h1 {
 
 .container__search .search__resoults__apartment-cards-content-slider {
   position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  max-height: 60%;
+}
+
+@media screen and (max-width: 800px) {
+  .container__search .search__resoults__apartment-cards-content-slider {
+    height: 30rem;
+  }
 }
 
 .container__search .search__resoults__apartment-cards-content-slider:hover .search__resoults__apartment-cards-content-slider-icons {
@@ -5907,6 +5942,7 @@ h1 {
      object-fit: cover;
   border-radius: 0.8rem;
   margin-bottom: 0.6rem;
+  transition: all 0.2s;
 }
 
 .container__search .search__resoults__apartment-cards-content-slider-icons {
@@ -5927,6 +5963,14 @@ h1 {
   transition: all 0.3s;
 }
 
+.container__search .search__resoults__apartment-cards-content-slider-icons:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.container__search .search__resoults__apartment-cards-content-slider-icons:active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
 .container__search .search__resoults__apartment-cards-content-slider-icons-left {
   left: 7%;
 }
@@ -5939,10 +5983,12 @@ h1 {
   font-size: 1.4rem;
   margin-bottom: 0.6rem;
   text-transform: capitalize;
+  font-weight: 800;
 }
 
 .container__search .search__resoults__apartment-cards-content-description {
   font-size: 1.6rem;
+  margin-bottom: 1.6rem;
 }
 
 #marker {
@@ -6004,7 +6050,6 @@ canvas:focus {
   color: #fff;
 }
 
-<<<<<<< HEAD
 .visualizza-appartamneto {
   align-self: center;
 }
@@ -6020,16 +6065,12 @@ canvas:focus {
   transform: translateY(0px);
 }
 
-.container-sponsor {
-  width: 80%;
-=======
 .sponsor_header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   padding: 20px;
->>>>>>> cadb5f12978f21780633773747dea98c89d5468e
   margin: 0 auto;
 }
 

@@ -34,6 +34,7 @@
                     <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-right arrow-slider-sx">
                         <i class="fas fa-chevron-right"></i>
                     </div>
+                   
                 </div>    
             </button>    
              <div class="search__resoults__apartment-cards-content__text">

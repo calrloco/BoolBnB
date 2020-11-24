@@ -1,26 +1,22 @@
 
 
 $('.arrow-slider-sx').click(function(){
-    prevImage();
+    prevImage($('.apt-image.active'));
 });
 
 $('.arrow-slider-dx').click(function(){
-    nextImage();
+    nextImage(('.apt-image.active'));
 });
 
 //** FUNZIONI **/
-
 function nextImage(){
-    //memorizzo in una var l'immagine attiva
-    var activeImage = $('.apt-image.active');
-
-    //tolgo la classe attiva e metto classe hidden
+    
     activeImage.removeClass('active');
     activeImage.addClass('hidden');
-
+    
     if (activeImage.hasClass('last') == true) {
-        $('.apt-image.first').removeClass('hidden');
-        $('.apt-image.first').addClass('active');
+        activeImage.first().removeClass('hidden');
+        activeImage.first().addClass('active');
     } else {
         //metto la classe attiva al successivo
         activeImage.next().removeClass('hidden');
@@ -29,16 +25,13 @@ function nextImage(){
 }
 
 function prevImage(){
-    //memorizzo in una var l'immagine attiva
-    var activeImage = $('.apt-image.active');
-
-    //tolgo la classe attiva e metto classe hidden
+   
     activeImage.removeClass('active');
     activeImage.addClass('hidden');
 
     if (activeImage.hasClass('first') == true) {
-        $('.apt-image.last').removeClass('hidden');
-        $('.apt-image.last').addClass('active');
+        activeImage.last().removeClass('hidden');
+        activeImage.last().addClass('active');
     } else {
         //metto la classe attiva al successivo
         activeImage.prev().removeClass('hidden');

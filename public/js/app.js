@@ -42391,8 +42391,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
-__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js"); //require("./apt");
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
 
+__webpack_require__(/*! ./apt */ "./resources/js/apt.js");
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
@@ -42476,6 +42477,50 @@ var getIp = function () {
     }
   });
 }();
+
+/***/ }),
+
+/***/ "./resources/js/apt.js":
+/*!*****************************!*\
+  !*** ./resources/js/apt.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('.arrow-slider-sx').click(function () {
+  prevImage($('.apt-image.active'));
+});
+$('.arrow-slider-dx').click(function () {
+  nextImage('.apt-image.active');
+}); //** FUNZIONI **/
+
+function nextImage() {
+  activeImage.removeClass('active');
+  activeImage.addClass('hidden');
+
+  if (activeImage.hasClass('last') == true) {
+    activeImage.first().removeClass('hidden');
+    activeImage.first().addClass('active');
+  } else {
+    //metto la classe attiva al successivo
+    activeImage.next().removeClass('hidden');
+    activeImage.next().addClass('active');
+  }
+}
+
+function prevImage() {
+  activeImage.removeClass('active');
+  activeImage.addClass('hidden');
+
+  if (activeImage.hasClass('first') == true) {
+    activeImage.last().removeClass('hidden');
+    activeImage.last().addClass('active');
+  } else {
+    //metto la classe attiva al successivo
+    activeImage.prev().removeClass('hidden');
+    activeImage.prev().addClass('active');
+  }
+}
 
 /***/ }),
 
@@ -42606,8 +42651,13 @@ document.addEventListener("DOMContentLoaded", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/sass/app.scss */"./resources/sass/app.scss");
+>>>>>>> master
 
 
 /***/ })

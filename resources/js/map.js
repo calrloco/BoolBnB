@@ -349,7 +349,6 @@ function autoComplete(query) {
     }
 }
 
-
 //funzione che associa l'address con la card apartment nel DOM
 function buildLocation(el, text) {
     const details = el;

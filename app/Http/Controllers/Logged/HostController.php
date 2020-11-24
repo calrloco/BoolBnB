@@ -12,6 +12,7 @@ use App\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Braintree;
 
 class HostController extends Controller
 {
@@ -96,7 +97,7 @@ class HostController extends Controller
     $apartment->services()->attach($request['services']);
     
 
-
+    // Faccio lo storage delle immagini e le inserisco nel DB 
     $images = $request->file('img');
             
     foreach ($images as $image) {
@@ -107,14 +108,7 @@ class HostController extends Controller
                 'apartment_id' => $apartment->id,
             ]
         );
-
     }
-
-
-        
-     
-
-
 
         return response()->json($apartment,201);
     }
@@ -148,8 +142,14 @@ class HostController extends Controller
      */
     public function edit($id)
     {
-        $images = Image::where('apartment_id', '=', $id )->get();
-        return view('test', compact('images'));
+        $services = Service::all();
+        $apartment = Apartment::find($id);
+        if ($apartment->user_id == Auth::id()) {
+            return view('Logged.edit', compact('apartment', 'services'));
+            
+        } else {
+            return abort(404);
+        }
     }
 
     /**
@@ -161,7 +161,28 @@ class HostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['updated_at'] = Carbon::now('Europe/Rome');
+        $apartment = Apartment::find($id);
+        $apartment->update($data);
+        
+        // AGGIORNAMENTO SERVIZI
+        $apartment->services()->sync($data['services']);
+
+        // AGGIUNTA IMMAGINI
+        $images = $request->file('img');
+
+        foreach ($images as $image) {
+            $image = Storage::disk('public')->put('images', $image);
+            Image::insert(
+                [
+                    'path' => $image,
+                    'apartment_id' => $apartment->id,
+                ]
+            );
+        }
+        
+        return redirect()->route('host.index')->with('status', 'Hai modificato il tuo appartamento');
     }
 
     /**
@@ -184,8 +205,79 @@ class HostController extends Controller
      */
     public function sponsor($id)
     {
+        //trovo l'appartamento tramite il suo ID
+        $apartment = Apartment::find($id);
+        //prendo tutti i tipi di sponsorizzazione
         $sponsors = Sponsor::all();
-        return view('logged.sponsor', compact('id', 'sponsors'));
+        //creo gateway per creare nuovo TOKEN
+        $gateway = new Braintree\Gateway(config('braintree'));
+        $token = $gateway->ClientToken()->generate();
+    
+        return view('logged.sponsor', compact('apartment','token','sponsors'));
+    }
+
+
+    public function checkout(Request $request, $id)
+    {
+        //Prendo i valori dal payment form
+        $data = $request->all();
+
+        $gateway = new Braintree\Gateway(config('braintree'));
+        // da cancellare se decido di dare il prezzo di default 
+        $sponsorError = 'Nessuna sponsorship selezionata.';
+        if (empty($data['amount'])) {
+            return redirect()->back()->with('sponsorError', $sponsorError);
+        }
+        
+        //Informazioni appartamento
+        $apartment = Apartment::find($id);
+        $apartment_id = $apartment->id;
+        //Informazioni Sponsorizzazione
+        $sponsor_id = $data['sponsor_plan'];
+        $sponsor = Sponsor::find($sponsor_id);
+        $sponsor_price = $data['amount'];
+        $sponsor_durate = $sponsor->sponsor_time;
+        
+        //registro la transazione
+        $result = $gateway->transaction()->sale([
+                'amount' => $sponsor_price,
+                'paymentMethodNonce' => $request['payment_method_nonce'],
+                'customer' => [
+                    'email' => Auth::user()->email,
+                ],
+                'options' => [
+                    'submitForSettlement' => true
+                ]
+            ]);
+       
+        // Check sulla transazione
+        if ($result->success || !is_null($result->transaction)) {
+            $transaction = $result->transaction;
+
+            // Prendo la data corrente
+            $start = Carbon::now();
+            // Data di scadenza
+            $end_sponsor = Carbon::now()->addHours($sponsor_durate);
+
+            // Id Transazione
+            $transId = $transaction->id;
+
+            // Popolare La Pivot apartmentSponsor
+                $apartment->sponsors()->attach(
+                $apartment_id,
+                [
+                    'start_sponsor' => $start,
+                    'end_sponsor' => $end_sponsor,
+                    'transaction_id' => $transId,
+                    'apartment_id' => $apartment_id,
+                    'sponsor_id' => $sponsor_id
+                ]
+            );
+        } else {
+            abort('404');
+        }
+
+        return redirect()->route('home');
     }
     
 }

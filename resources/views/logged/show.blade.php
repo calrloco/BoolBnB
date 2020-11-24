@@ -56,6 +56,7 @@
             <div class="message-form">
                 <button type="button" class="btn-show services-all"><a href="{{ route('logged.sponsor', $apartment->id )}}">Sponsorizza il tuo appartamento!</a></button>
                 <button type="button" class="btn-show services-all"><a href="#">Modifica annuncio</a></button>
+                <button type="button" class="btn-show services-all"><a href="#">Modifica disponibilità</a></button>
                 <button type="button" class="btn-show services-all"><a href="#">MAILBOX!</a></button>
                 {{-- <a href="{{ route('logged.sponsor', $apartment->id )}}">Sponsorizza il tuo appartamento!</a> --}}
             </div>

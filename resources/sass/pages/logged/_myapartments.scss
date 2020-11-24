@@ -1,0 +1,103 @@
+.apt-section {
+    width: 80%;
+    margin: 20px auto;
+
+    .head {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+    }
+
+    .apartments-list {
+
+        .apt-info-general {
+            @include flex(row, flex-start, center);
+            border: 1px solid #ff5a5f;
+            border-radius: 15px;
+            margin-bottom: 10px;
+
+            .apt-info-sx {
+                @include flex(row, flex-start, center);
+
+                .apt-img-small {
+                    width: 400px;
+                    height: 300px;
+                    border-radius: 15px;
+                }
+            }
+
+            .apt-info-dx {
+                padding-left: 20px;
+                text-align: center;
+                margin: 0 auto;
+
+                .apt-description {
+                    @include flex(column, flex-start, flex-start);
+                    font-size: 24px;
+
+                    a {
+                        color: black;
+                        text-decoration: none;
+                    }
+
+                    .apt-address {
+                        font-size: 16px;
+                    }
+                }
+
+                .apt-details {
+                    padding-top: 10px;
+                    font-size: 18px;
+                }
+
+                .apt-services {
+                    @include flex(row, space-around, center);
+                    list-style-type: none;
+
+                    .service {
+                        text-align: center;
+                        font-size: 20px;
+                        margin-top: 40px;
+                        // clear:both;
+
+                        .service-title {
+                            opacity: 0;
+                        }
+
+                        .service-title:hover {
+                            opacity: 1;
+                            color:#ff5a5f;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .noapt-section {
+        margin-top: 50px;
+
+        .create-apt-section {
+            @include flex(column, center, center);
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px 0;
+            border: 1px solid #ff5a5f;
+            border-radius: 15px;
+
+            .alert-noapt {
+                font-size: 18px;
+            }
+
+            .create-apt-link {
+                font-size: 16px;
+                color: black;
+                text-decoration: none;
+            }
+
+            .create-apt-link:hover {
+                color: #ff5a5f;
+            }
+
+        }
+    }
+}

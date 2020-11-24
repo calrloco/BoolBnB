@@ -92,32 +92,34 @@ class HostController extends Controller
             $error = $validator->messages();
             return response()->json($error);
         }
-
-    $apartment = Apartment::create($request->all());
-    $apartment->services()->attach($request['services']);
     
+    // creazione dell'appartamento
+    $apartment = Apartment::create($request->all());
 
-
-    $images = $request->file('img');
-            
-    foreach ($images as $image) {
-        $image = Storage::disk('public')->put('images', $image);
-        Image::insert(
-            [
-                'path' => $image,
-                'apartment_id' => $apartment->id,
-            ]
-        );
-
+    // creazione dei servizi correlati
+    if (!empty($apartment->services())) {
+        $apartment->services()->attach($request['services']);
+    }
+    
+    // storage delle immagini e inserimento nel DB 
+    if(!empty($request->file('img'))) {
+        $images = $request->file('img');
+        foreach ($images as $image) {
+            $image = Storage::disk('public')->put('images', $image);
+            Image::insert(
+                [
+                    'created_at' => Carbon::now(),
+                    'path' => $image,
+                    'apartment_id' => $apartment->id,
+                ]
+            );
+        }
     }
 
+    
+   
 
-        
-     
-
-
-
-        return response()->json($apartment,201);
+        return redirect()->route('host.index')->with('status', 'hai creato correttamente il tuo appartamento' . $apartment->title);
     }
 
     /**
@@ -129,13 +131,12 @@ class HostController extends Controller
     public function show($id)
     {
         if((Auth::user()->role->role)== "admin"){
-
-            $apartment = Apartment::find($id)
-            ->get();
+            $apartment = Apartment::find($id);
         } elseif ((Auth::user()->role->role)== "host") {
-            $apartment = Apartment::find($id)
-            ->where('user_id', Auth::id())
-            ->first();
+            $apartment = Apartment::find($id);
+            if($apartment->user_id != Auth::id()) {
+                return abort(404);
+            }
         }
 
        return view('logged.show', compact('apartment'));
@@ -149,8 +150,14 @@ class HostController extends Controller
      */
     public function edit($id)
     {
-        $images = Image::where('apartment_id', '=', $id )->get();
-        return view('test', compact('images'));
+        $services = Service::all();
+        $apartment = Apartment::find($id);
+        if ($apartment->user_id == Auth::id()) {
+            return view('Logged.edit', compact('apartment', 'services'));
+            
+        } else {
+            return abort(404);
+        }
     }
 
     /**
@@ -162,7 +169,28 @@ class HostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['updated_at'] = Carbon::now('Europe/Rome');
+        $apartment = Apartment::find($id);
+        $apartment->update($data);
+        
+        // AGGIORNAMENTO SERVIZI
+        $apartment->services()->sync($data['services']);
+
+        // AGGIUNTA IMMAGINI
+        $images = $request->file('img');
+
+        foreach ($images as $image) {
+            $image = Storage::disk('public')->put('images', $image);
+            Image::insert(
+                [
+                    'path' => $image,
+                    'apartment_id' => $apartment->id,
+                ]
+            );
+        }
+        
+        return redirect()->route('host.index')->with('status', 'Hai modificato il tuo appartamento');
     }
 
     /**

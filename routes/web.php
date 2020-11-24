@@ -49,3 +49,11 @@ Route::get('/host/prova/{id}','Logged\HostController@edit')->name('prova.sponsor
 
 
 Route::post('apartments/sponsor/{id}', 'Logged\HostController@checkout')->name('logged.checkout');
+Route::get('/test', function () {
+    return view('test');
+});
+
+
+Route::resource('/images','Logged\ImageController');
+
+

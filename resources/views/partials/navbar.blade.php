@@ -55,11 +55,10 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav__user__menu-item">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+                            <li class="user-greetings">
+                               
+                                   Bentornata {{ Auth::user()->name }}
+                            
                             </li>
 
                             <li class="nav__user__menu-item">

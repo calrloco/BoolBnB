@@ -2,7 +2,7 @@
 
 @section('content')
 {{-- @dd($messages) --}}
-<div class="apt-section">
+<div class="container-center">
 
     <div class="head">
         {{-- <a href="{{ route('host.create')}}">crea appartamento temporaneo</a> --}}
@@ -18,15 +18,15 @@
 
             </div>
             <div class="apt-info-dx">
-                {{-- <div class="apt-title">
-                    <a href="{{ route('host.show', $apartment->id) }}"><p>{{$apartment->title}}</p></a>
-                </div> --}}
+                 <div class="apt-title">
+                   <p>{{$apartment->title}}</p>
+                </div> 
                 <div class ="apt-description">
-                    <a href="{{ route('host.show', $apartment->id) }}"><strong>{{$apartment->title}}</strong></a>
                     <p class="apt-address">{{ $apartment->city }}, {{ $apartment->country }}</p>
                     {{-- <p class="apt-city">{{ $apartment->city }}</p> --}}
                 </div>
                 <p class="apt-details"> Caratteristiche: nr. stanze: {{ $apartment->rooms }}, nr. letti: {{ $apartment->beds }} - nr. bagni: {{ $apartment->bathrooms }} - mq: {{ $apartment->sm }}</p>
+                <p class="apt-description">{{$apartment->description}}</p>
                 <ul class = "apt-services">
                     @foreach ($apartment->services as $service)
                         <li class = "service">
@@ -37,6 +37,7 @@
                 </ul>
                 {{-- <a href="{{ route('host.show', $apartment->id) }}">Vedi l'appartamento</a> --}}
             </div>
+            <a href="{{ route('host.show', $apartment->id) }}" class="apartment-button">Vai  all'appartamenoto</a>
         </div>
         @endforeach
     </div>

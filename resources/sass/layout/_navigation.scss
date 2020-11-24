@@ -185,7 +185,7 @@
             padding: .5rem;
             font-size: 2rem;
             border-radius: 10rem;
-            height: 4rem;
+            height: 4.2rem;
             cursor: pointer;
 
             @media screen and (max-width:600px){
@@ -335,4 +335,7 @@ input:-webkit-autofill:active  {
         }
     
 }
-
+.user-greetings{
+    margin-bottom:1.2rem;
+    text-align:center;
+}

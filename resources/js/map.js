@@ -27,6 +27,7 @@ $(document).ready(function() {
             getServices();
         }
     })();
+    
     $(".nav__search-icon-big").click(function () {
         $(".search__resoults__apartment-cards").empty();
         if ($("#search").val() != "") {
@@ -34,13 +35,20 @@ $(document).ready(function() {
         }
         
     });
+
+    $('#search').keydown(function(){
+        if (event.which == 13 || event.keyCode == 13){
+            if ($("#search").val() != "") {
+                getCoordinates($("#search").val(), $("#range-value").html()); 
+        }
+      }
+    });
 });
 //// prendi coordinate dell'input////////////////
 function getCoordinates(input, range) {
     var zoom = 10;
     if (input != '') {
-        tt.services
-            .fuzzySearch({
+        tt.services.fuzzySearch({
                 key: apiKey,
                 query: input,
             })
@@ -183,11 +191,6 @@ function compileHandlebars(risp) {
                 }
             })(marker)
         );
-            // console.log(details);
-         console.log(address);
-            
-                 // console.log(marker._lngLat.lng);
-                // console.log(marker._lngLat.lat);
 
         // cliccando sul marker aggiunge la classe selected alla card dell'appartamento corrispondente
         marker._element.addEventListener('click',
@@ -196,12 +199,8 @@ function compileHandlebars(risp) {
                 details.removeClass('selected');
                 details.eq(posizione).addClass('selected');
             })
-        );
-        console.log(marker);
-
-          
-    }
-    
+        );    
+    }    
 }
 /// appende i servizi all'appartamento
 function appendServices(id) {
@@ -288,6 +287,7 @@ var serviceCheck = (function() {
             } else {
                 $(this).hide();
                 $('.mapboxgl-marker').eq($(this).index()).hide();
+                $('.mapboxgl-popup').eq($(this).index()).hide();
             }
         });
     });
@@ -346,7 +346,6 @@ function autoComplete(query) {
                     $('#auto-complete').removeClass('complete-on');
                 }
             });
-
     }
 }
 
@@ -364,8 +363,7 @@ function same(arr1, arr2) {
     if($(arr1).not(arr2).length === 0 && $(arr2).not(arr1).length === 0){
         return true
     }
-     return false;
-    
+     return false;    
 }
 
 // per chiudere l'autocomplete al click fuori

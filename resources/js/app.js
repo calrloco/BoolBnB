@@ -11,6 +11,13 @@ $(document).ready(function() {
         $(".nav__user__menu").toggleClass("active");
         getcards();
     });
+    $('#search').keydown(function(){
+        if (event.which == 13 || event.keyCode == 13){
+            if ($("#search").val() != "") {
+                getCoordinates($("#search").val(), $("#range-value").html()); 
+        }
+      }
+    });
     $(".nav__search-button").click(function() {
         $('#hidenav').hide()
         hidenav();

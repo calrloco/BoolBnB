@@ -22,7 +22,7 @@
                     </div>
                     <div class="nav__search-city hidden">
                          <label for="search">Range: <span id="range-value"></span></label>
-                         <input type="hidden" id="range-hidden" name="range" value="">
+                         <input type="hidden" id="range-hidden" name="range" value="20">
                          <input type="range" min="20" max="100" value="20" id="myRanges" class="sliders">
                     </div>
                     <button type="{{url()->current() == route('search.store') ? 'button' : 'submit'}}" class="nav__search-icon nav__search-icon-big hidden">

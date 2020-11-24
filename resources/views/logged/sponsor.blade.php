@@ -10,7 +10,7 @@
 	<div class="pay-card">
 		<h5>Basic</h5>
 		<span>2,99 € per 24 ore di sponsorizzazione</span>
-		<input type="radio" name="sponsor" id="sponsorBasic" value="2.99">
+		<input type="radio" name="sponsor" id="sponsorBasic" value="2.99" checked>
 	</div>
 	<div class="pay-card">
 		<h5>Medium</h5>
@@ -30,7 +30,7 @@
 				<label for="amount">
 						<div class="input-wrapper amount-wrapper">
 							<input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="" style="display:none">
-							<h1 id="amount_preview" class="mt-4">€ 5.99</h1>
+							<h1 id="amount_preview" class="mt-4">€ 2.99</h1>
 						</div>
 				</label>
 				<div class="bt-drop-in-wrapper">

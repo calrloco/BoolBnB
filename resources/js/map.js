@@ -1,13 +1,17 @@
 require("./bootstrap");
 var $ = require("jquery");
 const Handlebars = require("handlebars");
-const { log } = require("handlebars");
-const { find } = require("lodash");
+const {
+    log
+} = require("handlebars");
+const {
+    find
+} = require("lodash");
 
 const APPLICATION_NAME = "My Application";
 const APPLICATION_VERSION = "1.0";
 tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
-const apiKey = "RWf0OUXl0BIHVgSlxGaXYGUTma7oPbSu";
+const apiKey = "31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk";
 
 let map = tt.map({
     key: apiKey,
@@ -23,7 +27,7 @@ $(document).ready(function() {
             getServices();
         }
     })();
-    $(".nav__search-icon-big").click(function() {
+    $(".nav__search-icon-big").click(function () {
         $(".search__resoults__apartment-cards").empty();
         $('#address-inst').html($('#search').val());
         getCoordinates($("#search").val(), $("#range-value").html());
@@ -31,26 +35,35 @@ $(document).ready(function() {
 });
 //// prendi coordinate dell'input////////////////
 function getCoordinates(input, range) {
-    tt.services
-        .fuzzySearch({
-            key: apiKey,
-            query: input
-        })
-        .go()
-        .then(function(response) {
-            map = tt.map({
+    var zoom = 10;
+    if (input != '') {
+        tt.services
+            .fuzzySearch({
                 key: apiKey,
-                style: "tomtom://vector/1/basic-main",
-                container: "map",
-                center: response.results[0].position,
-                zoom: 10
+                query: input,
+            })
+            .go()
+            .then(function (response) {
+                var longitude = response.results[0].position["lng"];
+                var latitude = response.results[0].position["lat"];
+                city = response.results[0].address['municipality'];
+                streetName = response.results[0].address['streetName'];
+                // condizione per selezionare lo zoom in caso di città o indirizzo specifico
+                if (streetName != undefined && city) {
+                    zoom = 16;
+                } 
+                map = tt.map({
+                    key: apiKey,
+                    style: 'tomtom://vector/1/basic-main',
+                    container: 'map',
+                    center: response.results[0].position,
+                    zoom: zoom
+
+                });
+
+                getCards(latitude, longitude, range);
             });
-            var longitude = response.results[0].position["lng"];
-            var latitude = response.results[0].position["lat"];
-            city = response.results[0].address["municipality"];
-            getCards(latitude, longitude, range);
-            console.log(response);
-        });
+    }
 }
 
 /////////// chiamata all nostro db che richiama funzione handlebars
@@ -61,13 +74,13 @@ function getServices() {
         headers: {
             KEY: "test"
         },
-        success: function(response) {
+        success: function (response) {
             for (var i = 0; i < response.length; i++) {
                 var service = `<button data-servicetype="${response[i].id}" class="services-all">${response[i].service}</button>`;
                 $(".services").append(service);
             }
         },
-        error: function() {
+        error: function () {
             console.log(arguments);
         }
     });
@@ -90,7 +103,7 @@ function getCards(lat, lng, maxDist) {
                compileHandlebars(risposta);
             }
         },
-        error: function() {
+        error: function () {
             console.log("error");
         }
     });
@@ -102,7 +115,7 @@ function compileHandlebars(risp) {
     var source = $("#handlebars_cards").html();
     var templateCards = Handlebars.compile(source);
     const markersCity = [];
-    for (var i = 0; i < risp.length; i++) {
+    for (let i = 0; i < risp.length; i++) {
         var context = {
             city: risp[i].city,
             title: troncaStringa(risp[i].title),
@@ -152,9 +165,9 @@ function compileHandlebars(risp) {
         $(".search__resoults__apartment-cards").append(htmlContext);
         appendServices(risp[i].id);
         var el = $(".search__resoults__apartment-cards-content");
-
+        var details = buildLocation(el, address);
         // cliccando su un elemento della lista a sx lo trova in mappa
-        el.on(
+        details.on(
             "click",
             (function(marker) {
                 const activeItem = $(this);
@@ -163,23 +176,31 @@ function compileHandlebars(risp) {
                         center: marker.getLngLat(),
                         zoom: 16
                     });
+                    // serve a passare da un marker all'altro nella selezione di sx
                     closeAllPopups();
                     // marker.togglePopup();
-                };
+                }
             })(marker)
         );
-
-        // richiama funzione che associa l'address con la card nel DOM
-        var details = buildLocation(el, address);
+            // console.log(details);
+         console.log(address);
+            
+                 // console.log(marker._lngLat.lng);
+                // console.log(marker._lngLat.lat);
 
         // cliccando sul marker aggiunge la classe selected alla card dell'appartamento corrispondente
-        marker._element.addEventListener("click", function() {
-            var posizione = $(this).index() - 1;
-            // console.log(posizione);
-            details.removeClass("selected");
-            details.eq(posizione).addClass("selected");
-        });
+        marker._element.addEventListener('click',
+            (function () {
+                var posizione = $(this).index() - 1;
+                details.removeClass('selected');
+                details.eq(posizione).addClass('selected');
+            })
+        );
+        console.log(marker);
+
+          
     }
+    
 }
 /// appende i servizi all'appartamento
 function appendServices(id) {
@@ -191,16 +212,16 @@ function appendServices(id) {
         data: {
             id: id
         },
-        success: function(response) {
+        success: function (response) {
             var dataAttr = [];
             for (var i = 0; i < response.length; i++) {
                 dataAttr.push(response[i].service_id);
                 $(".search__resoults__apartment-cards-content").each(
-                    function() {
+                    function () {
                         if (
                             $(this)
-                                .find($(".aps_id"))
-                                .val() == response[i].apartment_id
+                            .find($(".aps_id"))
+                            .val() == response[i].apartment_id
                         ) {
                             $(this).attr("data-service", dataAttr);
                         }
@@ -208,7 +229,7 @@ function appendServices(id) {
                 );
             }
         },
-        error: function() {}
+        error: function () {}
     });
 }
 /// appendere le immagini allo slider
@@ -270,10 +291,70 @@ var serviceCheck = (function() {
         });
     });
 })();
+
+// al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom
+$("#search").keyup(function () {
+    $('#auto-complete').empty();
+    autoComplete($("#search").val());
+});
+
+//funzione per selezionare suggerimento e restuirlo nella search
+$(document).on('click', '.complete-results', function () {
+    var value = $(this).text();
+    $('#search').val(value);
+    getCoordinates($("#search").val());
+    $('#auto-complete').removeClass('active');
+
+});
+
+// funzione per i suggerimenti nella search
+function autoComplete(query) {
+    if (query < 3 || query == '') {
+        $('#auto-complete').removeClass('active');
+    }
+    if (query != '' && isNaN(query) && query.length > 3) {
+        $('#auto-complete').addClass('active');
+        tt.services.fuzzySearch({
+                key: apiKey,
+                query: query,
+            })
+            .go()
+            .then(function (response) {
+
+                var address = [];
+                var results = '';
+
+                for (let i = 0; i < 4; i++) {
+                    if (response.results[i]) {
+                        // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni                
+                        var streetName = response.results[i].address['streetName'];
+                        var city = response.results[i].address['municipality'];
+                        var countryCode = response.results[i].address['countryCode'];
+                        if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == 'IT') {
+                            address.push(streetName + ' ' + city);
+                        } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == 'IT') {
+                            address.push(city);
+                        }
+                    }
+                }
+                for (let i = 0; i < address.length; i++) {
+                    results += '<div class="complete-results">' + address[i] + '</div>'
+
+                }
+                document.getElementById('auto-complete').innerHTML = results;
+                if (results == '') {
+                    $('#auto-complete').removeClass('active');
+                }
+            });
+
+    }
+}
+
 //funzione che associa l'address con la card apartment nel DOM
 function buildLocation(el, text) {
     const details = el;
     details.innerHTML = text;
+    // details["position"] = xy;
     return details;
 }
 

@@ -42351,22 +42351,22 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+//JS PER PAGINE CREATE ED EDIT
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
 
-var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; // aggiunta campo input file fino ad un max di 5
+var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; //QUANDO ESCE DAI CAMPI INTERESSATI RICALCOLA LE COORDINATE IN CAMPI HIDDEN
 
-$('#add-img').click(function () {
-  if ($('.img-input').length < 5) {
-    $('.container-upload').append("<input type=\"file\" name=\"img\" enctype=\"multipart/form-data\" class=\"img-input form-control-file\" id=\"img\" accept=\"image/*\">");
-
-    if ($('.img-input').length >= 5) {
-      $('#add-img').hide();
-    }
-  }
+$('#address, #city, #postal').focusout(function () {
+  calcoloCoordinate();
 });
-$('#address').focusout(function () {
+$(document).on('click', '.img-detele', function () {
+  $(this).submit();
+}); // FUNZIONI
+// calcolo coordinate con chiamata all'api tomtom
+
+function calcoloCoordinate() {
   var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
   console.log(data);
   tt.services.fuzzySearch({
@@ -42375,102 +42375,6 @@ $('#address').focusout(function () {
   }).go().then(function (response) {
     $('#longitude').attr('value', response.results[0].position['lng']);
     $('#latitude').attr('value', response.results[0].position['lat']);
-  });
-});
-$('#pippo').submit(function (event) {
-  event.preventDefault(); // SALVO I VALORI DEL FORM
-  // form = document.getElementById('creazione');
-  // var formData = new FormData(form);
-  // console.log(formData);
-  // var form = $('#creazione').serializeArray();
-  // console.log(form);
-  // salvo i checkbox con un ciclo
-
-  var services = [];
-  $('input[name=services]').each(function () {
-    var ischecked = $(this).is(":checked");
-
-    if (ischecked) {
-      services.push($(this).val());
-    }
-  });
-  console.log(services); //uguale per le immagini
-
-  var images = document.querySelectorAll($('.img-input')); // var images = [];
-  // $('input[name=img]').each(function() {
-  //     if($(this).val() != "") {
-  //         images.push($(this).val());
-  //     }
-  // });
-
-  console.log(images);
-  var apartmentData = {
-    title: $('input[name=title]').val(),
-    address: $('#address').val(),
-    city: $('input[name=city]').val(),
-    postalCode: $('input[name=postal-code]').val(),
-    country: $('input[name=country]').val(),
-    description: $('textarea[name=description]').val(),
-    dailyPrice: $('input[name=daily-price]').val(),
-    sm: $('input[name=sm]').val(),
-    rooms: $('input[name=rooms]').val(),
-    beds: $('input[name=beds]').val(),
-    bathrooms: $('input[name=bathrooms]').val(),
-    services: services,
-    user_id: $('input[name=user-id]').val(),
-    img: images
-  };
-  console.log(apartmentData);
-  var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val(); // console.log(data);
-
-  tt.services.fuzzySearch({
-    key: apiKey,
-    query: data
-  }).go().then(function (response) {
-    createApart(response, apartmentData);
-  });
-}); // se sono nel form crea apartament richiamo la funzione
-// console.log('lat' + response.results[0].position['lat']);
-// console.log('lng' + response.results[0].position['lng']);
-// var address = response.results[0].address['streetName'];
-// var longitude = response.results[0].position['lng'];
-// var latitude = response.results[0].position['lat'];
-// var city = response.results[0].address['municipality'];
-// var postalCode = response.results[0].address['postalCode'];
-// var country = response.results[0].address['country'];
-// FUNZIONI
-
-function createApart(response, apartmentData) {
-  $.ajax({
-    url: 'http://127.0.0.1:8000/api/apartments',
-    method: 'POST',
-    headers: {
-      KEY: 'test'
-    },
-    data: {
-      title: apartmentData.title,
-      address: apartmentData.address,
-      city: apartmentData.city,
-      postal_code: apartmentData.postalCode,
-      country: apartmentData.country,
-      description: apartmentData.description,
-      daily_price: apartmentData.dailyPrice,
-      sm: apartmentData.sm,
-      rooms: apartmentData.rooms,
-      beds: apartmentData.beds,
-      user_id: apartmentData.user_id,
-      bathrooms: apartmentData.bathrooms,
-      img: apartmentData.img,
-      latitude: response.results[0].position['lng'],
-      longitude: response.results[0].position['lat']
-    },
-    success: function success(data) {
-      console.log(data);
-      alert('appartamento inserito');
-    },
-    error: function error(errore) {
-      console.log(errore);
-    }
   });
 }
 
@@ -42627,21 +42531,60 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$('#sponsors-select').on('change', function () {
-  $('#summary-sponsor').empty();
-  var check = $('#sponsors-select').val();
-  var sponsor = JSON.parse(check);
-  var price = sponsor.sponsor_price;
-  $('#summary-sponsor').append(price);
-  console.log(sponsor);
-  $('#btn-sponsor').click(function () {
-    // var price = sponsor.sponsor_price;
-    // $('#summary-sponsor').append(price);
-    console.log(price);
+document.addEventListener("DOMContentLoaded", function () {
+  var form = document.querySelector('#payment-form');
+  var client_token = document.querySelector('#client_token').value;
+  var option1 = document.querySelector('#sponsorBasic');
+  var option2 = document.querySelector('#sponsorMedium');
+  var option3 = document.querySelector('#sponsorPremium');
+  var amount = document.querySelector('#amount');
+  var sponsor_plan = document.querySelector('#sponsor_plan');
+
+  option1.onclick = function () {
+    amount.value = option1.value;
+    amount_preview.innerHTML = '€' + amount.value;
+    sponsor_plan.value = 1;
+  };
+
+  option2.onclick = function () {
+    amount.value = option2.value;
+    amount_preview.innerHTML = '€' + amount.value;
+    sponsor_plan.value = 2;
+  };
+
+  option3.onclick = function () {
+    amount.value = option3.value;
+    amount_preview.innerHTML = '€' + amount.value;
+    sponsor_plan.value = 3;
+  };
+
+  braintree.dropin.create({
+    authorization: client_token,
+    selector: '#bt-dropin',
+    paypal: {
+      flow: 'vault'
+    }
+  }, function (createErr, instance) {
+    if (createErr) {
+      console.log('Create Error', createErr);
+      return;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      instance.requestPaymentMethod(function (err, payload) {
+        if (err) {
+          console.log('Request Payment Method Error', err);
+          return;
+        } // Add the nonce to the form and submit
+
+
+        document.querySelector('#nonce').value = payload.nonce;
+        form.submit();
+      });
+    });
   });
 });
-var aptId = $('#apt-id').val();
-console.log(aptId);
 
 /***/ }),
 
@@ -42663,8 +42606,13 @@ console.log(aptId);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\sass\app.scss */"./resources/sass/app.scss");
+<<<<<<< HEAD
+__webpack_require__(/*! C:\lavori\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\lavori\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/sass/app.scss */"./resources/sass/app.scss");
+>>>>>>> Sevenis'-branch
 
 
 /***/ })

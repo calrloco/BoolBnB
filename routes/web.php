@@ -41,7 +41,19 @@ Route::get('/test', function () {
 Route::get('/search', function () {
     return view('search.search');
 });
+Route::get('/apartments/{id}/sponsor', 'Logged\HostController@sponsor')->name('logged.sponsor');
 
 Route::get('/apartments', 'Logged\HostController@index');
 Route::get('/apartments/{id}/sponsor','Logged\HostController@sponsor')->name('logged.sponsor');
 Route::get('/host/prova/{id}','Logged\HostController@edit')->name('prova.sponsor');
+
+
+Route::post('apartments/sponsor/{id}', 'Logged\HostController@checkout')->name('logged.checkout');
+Route::get('/test', function () {
+    return view('test');
+});
+
+
+Route::resource('/images','Logged\ImageController');
+
+

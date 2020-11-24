@@ -19,25 +19,45 @@
 .slider-section {
     width: 80%;
     align-self: center;
+    // background-color: tomato;
 
-    .slider-img {
+    .apt-images{
         width: 100%;
         height: 400px;
         // background-color: tomato;
-        padding: 0 10px;
         border-radius: $card-img-radius;
         @include flex(row, space-between, center);
+        position: relative;
 
-        .apt-img-slider {
+        .apt-image {
             width: 100%;
             height: 100%;
-            padding: 0 20px;
             object-fit: cover;
         }
 
-        .arrow-slider-sx, .arrow-slider-dx {
-            font-size: 30px;
+        .arrow-slider-sx {
+            font-size: 15px;
             color: lightgrey;
+            position: absolute;
+            left: 10px;
+        }
+
+        .arrow-slider-sx:hover {
+            transform: scale(2);
+            color: #ff5a5f;
+        }
+
+        .arrow-slider-dx {
+            font-size: 15px;
+            color: lightgrey;
+            position: absolute;
+            right: 10px;
+
+        }
+
+        .arrow-slider-dx:hover {
+            transform: scale(2);
+            color: #ff5a5f;
         }
 
     }
@@ -61,12 +81,12 @@
             padding: 10px 20px;
 
             .info-host {
-                font-size: 20px;
+                font-size: 22px;
                 font-weight: 500;
             }
 
             .info-apt {
-                font-size: 14px;
+                font-size: 16px;
             }
 
             // .price {
@@ -89,30 +109,36 @@
 
         .apt-description {
             padding: 20px 20px;
-            font-size: 15px;
+            font-size: 16px;
         }
 
         .services-box {
             padding: 10px 20px;
 
             .services-title {
-                font-size: 20px;
+                font-size: 22px;
                 font-weight: 500;
                 padding-bottom: 10px;
             }
 
             .service {
-                font-size: 12px;
+                font-size: 16px;
                 padding: 5px;
                 list-style-type: none;
 
-                .fas{
-                    padding-right: 10px;
+                    .service-head{
+                    display: flex;
+                    flex-direction: row;
+                    padding-bottom: 5px;
+
+                        .service-icon{
+                            padding-right: 10px;
+                            color: red;
+                        }
+                    }
                 }
             }
-
         }
-    }
 
     .info-box-dx {
         width: 400px;
@@ -125,9 +151,9 @@
 
         .send-message-box {
             width: 300px;
-            background-color: tomato;
+            border: 1px solid #ff5a5f;
             margin: 20px auto;
-            padding: 10px 0;
+            padding: 20px 0;
             display: flex;
             align-items: center;
             flex-direction: column;
@@ -135,21 +161,30 @@
 
 
             .message-title {
-                font-size: 18px;
+                font-size: 22px;
                 padding-bottom: 12px;
             }
 
             .message-form {
-                label {
-                    padding-right: 5px;
-                    font-size: 12px;
-                    display: flex;
-                    align-self: center;
+                display: flex;
+                flex-direction: column;
+                align-self: center;
+                margin-right: 0px;
+
+                .btn-show {
+                    margin-right: 0px;
                 }
 
-                p {
-                    padding-bottom: 5px;
+                .btn-show a{
+                    font-size: 16px;
+                    text-decoration-line: none;
+                    color: black;
                 }
+
+                label {
+                    font-size: 16px;
+                }
+
             }
         }
     }

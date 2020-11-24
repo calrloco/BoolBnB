@@ -1,61 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-center">
-    <a href="{{ route('host.create')}}">crea appartamento temporaneo</a>
+{{-- @dd($messages) --}}
+<div class="apt-section">
 
-    @if(session('status'))
-    <p>{{ session('status') }}</p>
-    @endif
-
+    <div class="head">
+        {{-- <a href="{{ route('host.create')}}">crea appartamento temporaneo</a> --}}
+        <h2 class="title">I tuoi appartamenti</h2>
+    </div>
     @if (!empty($apartments))
-    <h2>I tuoi appartamenti</h2>
-    <div class=messages-deck>
+    <div class="apartments-list">
         @foreach($apartments as $apartment)
-        <div class="message-card">
-            <div class="apart-info">
-                <div class=apart-img>
-                    <img src="{{$apartment->title}}" alt="">
-                </div>
-                <div>
-                    <p>{{ $apartment->address }}</p>
-                <span>{{ $apartment->city }}</span>
-                </div>
+        <div class="apt-info-general">
+            <div class="apt-info-sx">
+                {{-- <div class=apt-img-small></div> --}}
+                    <img class=apt-img-small src="{{$apartment->images[0]->path}}" alt="{{$apartment->title}}">
+
             </div>
-            <div class="message-info">
-                <p> {{ $apartment->beds }} </p>
-                <p> {{ $apartment->rooms }}</p>
-                <ul>
-                    @foreach($apartment->services as $service)
-                    <li>
-                        <div class="label-input">
-                            <span> <i class="{{$service->icon}}"></i></span>
-                            <span> {{ $service->service }} </span>
-                            <span> {{ $service->id }} </span>
-                        </div>
-                    </li>
+            <div class="apt-info-dx">
+                {{-- <div class="apt-title">
+                    <a href="{{ route('host.show', $apartment->id) }}"><p>{{$apartment->title}}</p></a>
+                </div> --}}
+                <div class ="apt-description">
+                    <a href="{{ route('host.show', $apartment->id) }}"><strong>{{$apartment->title}}</strong></a>
+                    <p class="apt-address">{{ $apartment->city }}, {{ $apartment->country }}</p>
+                    {{-- <p class="apt-city">{{ $apartment->city }}</p> --}}
+                </div>
+                <p class="apt-details"> Caratteristiche: nr. stanze: {{ $apartment->rooms }}, nr. letti: {{ $apartment->beds }} - nr. bagni: {{ $apartment->bathrooms }} - mq: {{ $apartment->sm }}</p>
+                <ul class = "apt-services">
+                    @foreach ($apartment->services as $service)
+                        <li class = "service">
+                                <i class="service-icon {{$service->icon}}"></i>
+                                <p class="service-title">{{ $service->service }}</p>
+                         </li>
                     @endforeach
                 </ul>
-                <a href="{{ route('host.show', $apartment->id) }}">Vedi l'appartamento</a>
+                {{-- <a href="{{ route('host.show', $apartment->id) }}">Vedi l'appartamento</a> --}}
             </div>
         </div>
         @endforeach
-
     </div>
     @else
-    <h2>Non hai ancora registrato un appartamento</h2>
+        <div class="noapt-section">
+            <div class="create-apt-section">
+                <p class="alert-noapt">Non hai ancora registrato un appartamento</p>
+                <a class="create-apt-link" href="{{ route('host.create')}}">Crea un nuovo annuncio!</a>
+            </div>
+        </div>
     @endif
 
 </div>
-
-
-
-
-
-
-
-
-
-
 
 @endsection

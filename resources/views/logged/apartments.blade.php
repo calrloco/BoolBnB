@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- @dd($messages) --}}
 <div class="container-center">
-<a href="{{ route('host.create')}}">crea appartamento temporaneo</a>
+    <a href="{{ route('host.create')}}">crea appartamento temporaneo</a>
+
+    @if(session('status'))
+    <p>{{ session('status') }}</p>
+    @endif
+
     @if (!empty($apartments))
     <h2>I tuoi appartamenti</h2>
     <div class=messages-deck>

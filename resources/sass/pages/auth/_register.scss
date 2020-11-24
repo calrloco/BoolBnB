@@ -43,11 +43,14 @@ h1 {
 
 .signup_container {
     background: $main_background;
-    @include flex(row,center,flex-start);
-    padding: 50px 10px;
+    @include flex(row,center,center);
     flex:1;
     width: 100%;
-   
+    
+   @include responsive(large_desktop){
+       align-items:flex-start;
+       margin-top: 3rem;
+   }
 
     .login_btn {
         border: 1px solid $primary_background;

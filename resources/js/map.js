@@ -1,4 +1,5 @@
 require("./bootstrap");
+//require("./apt");
 var $ = require("jquery");
 const Handlebars = require("handlebars");
 const {
@@ -27,17 +28,28 @@ $(document).ready(function() {
             getServices();
         }
     })();
+    
     $(".nav__search-icon-big").click(function () {
         $(".search__resoults__apartment-cards").empty();
-        getCoordinates($("#search").val(), $("#range-value").html());
+        if ($("#search").val() != "") {
+            getCoordinates($("#search").val(), $("#range-value").html()); 
+        }
+        
+    });
+
+    $('#search').keydown(function(){
+        if (event.which == 13 || event.keyCode == 13){
+            if ($("#search").val() != "") {
+                getCoordinates($("#search").val(), $("#range-value").html()); 
+        }
+      }
     });
 });
 //// prendi coordinate dell'input////////////////
 function getCoordinates(input, range) {
     var zoom = 10;
     if (input != '') {
-        tt.services
-            .fuzzySearch({
+        tt.services.fuzzySearch({
                 key: apiKey,
                 query: input,
             })
@@ -98,8 +110,9 @@ function getCards(lat, lng, maxDist) {
             maxDist: maxDist
         },
         success: function(risposta) {
-            compileHandlebars(risposta);
-
+            if(risposta.length > 0){
+               compileHandlebars(risposta);
+            }
         },
         error: function () {
             console.log("error");
@@ -162,6 +175,7 @@ function compileHandlebars(risp) {
         var htmlContext = templateCards(context);
         $(".search__resoults__apartment-cards").append(htmlContext);
         appendServices(risp[i].id);
+        getImages(risp[i].id);
         var el = $(".search__resoults__apartment-cards-content");
         var details = buildLocation(el, address);
         // cliccando su un elemento della lista a sx lo trova in mappa
@@ -180,11 +194,6 @@ function compileHandlebars(risp) {
                 }
             })(marker)
         );
-            // console.log(details);
-         console.log(address);
-            
-                 // console.log(marker._lngLat.lng);
-                // console.log(marker._lngLat.lat);
 
         // cliccando sul marker aggiunge la classe selected alla card dell'appartamento corrispondente
         marker._element.addEventListener('click',
@@ -193,12 +202,8 @@ function compileHandlebars(risp) {
                 details.removeClass('selected');
                 details.eq(posizione).addClass('selected');
             })
-        );
-        console.log(marker);
-
-          
-    }
-    
+        );    
+    }    
 }
 /// appende i servizi all'appartamento
 function appendServices(id) {
@@ -232,14 +237,54 @@ function appendServices(id) {
 }
 /// appendere le immagini allo slider
 function getImages(id) {
-    $.ajax({});
+    $.ajax({
+        url:'http://127.0.0.1:8000/api/images',
+        method: 'GET',
+        data: {
+          id: id
+        }, 
+        headers: {
+            KEY:'test'
+        },
+        success: function(response){
+            console.log(response);
+            
+           for (var i = 0; i <response.length; i++){
+               var clss = "hidden";
+               if(i == 0){
+                   clss = 'first active'
+               }else if(i == response.length - 1){
+                  clss = 'hidden last'
+               }else{
+                clss = 'hidden'
+               }
+               appendImages(response[i],clss);
+           }
+        },
+        error: function () {
+
+        }
+    });
+}
+function appendImages(risp,clss){
+    var container  = $('.search__resoults__apartment-cards-content');
+    container.each(function(){
+       appId =  $(this).find('.aps_id').val();
+       if(appId == risp.apartment_id){
+           img =  `<img class="search__resoults__apartment-cards-content-slider-img apt-image ${clss}" 
+           src="${risp.path}">`
+          $(this).find('.search__resoults__apartment-cards-content-slider').append(img);
+          
+       }
+       
+    });
 }
 // funzione per troncare una stringa
 function troncaStringa(stringa) {
     var shortText = "";
     if (stringa.length != 0) {
         for (var i = 0; i < stringa.length; i++) {
-            if (stringa[i] == " " && i < 250) {
+            if (stringa[i] == " " && i <= 43) {
                 var shortText = $.trim(stringa).substring(0, i) + "...";
             }
         }
@@ -285,11 +330,11 @@ var serviceCheck = (function() {
             } else {
                 $(this).hide();
                 $('.mapboxgl-marker').eq($(this).index()).hide();
+                $('.mapboxgl-popup').eq($(this).index()).hide();
             }
         });
     });
 })();
-
 // al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom
 $("#search").keyup(function () {
     $('#auto-complete').empty();
@@ -301,17 +346,17 @@ $(document).on('click', '.complete-results', function () {
     var value = $(this).text();
     $('#search').val(value);
     getCoordinates($("#search").val());
-    $('#auto-complete').removeClass('active');
+    $('#auto-complete').removeClass('complete-on');
 
 });
 
 // funzione per i suggerimenti nella search
 function autoComplete(query) {
-    if (query < 3 || query == '') {
-        $('#auto-complete').removeClass('active');
+    if (query.length < 3 || query == '') {
+        $('#auto-complete').removeClass('complete-on');
     }
     if (query != '' && isNaN(query) && query.length > 3) {
-        $('#auto-complete').addClass('active');
+        $('#auto-complete').addClass('complete-on');
         tt.services.fuzzySearch({
                 key: apiKey,
                 query: query,
@@ -341,10 +386,9 @@ function autoComplete(query) {
                 }
                 document.getElementById('auto-complete').innerHTML = results;
                 if (results == '') {
-                    $('#auto-complete').removeClass('active');
+                    $('#auto-complete').removeClass('complete-on');
                 }
             });
-
     }
 }
 
@@ -361,6 +405,53 @@ function same(arr1, arr2) {
     if($(arr1).not(arr2).length === 0 && $(arr2).not(arr1).length === 0){
         return true
     }
-     return false;
-    
+     return false;    
 }
+
+// per chiudere l'autocomplete al click fuori
+$(document).click(function() {
+    $('#auto-complete').removeClass('complete-on');
+  });
+//slider
+$(document).on("click", ".arrow-slider-sx", function(){
+     prevImage($());
+});
+ $(document).on("click", ".arrow-slider-dx", function(){
+     nextImage($());
+});
+function nextImage(){
+    //memorizzo in una var l'immagine attiva
+    var activeImage = $('.apt-image.active');
+
+    //tolgo la classe attiva e metto classe hidden
+    activeImage.removeClass('active');
+    activeImage.addClass('hidden');
+
+    if (activeImage.hasClass('last') == true) {
+        $('.apt-image.first').removeClass('hidden');
+        $('.apt-image.first').addClass('active');
+    } else {
+        //metto la classe attiva al successivo
+        activeImage.next().removeClass('hidden');
+        activeImage.next().addClass('active');
+    }
+}
+
+function prevImage(){
+    //memorizzo in una var l'immagine attiva
+    var activeImage = $('.apt-image.active');
+
+    //tolgo la classe attiva e metto classe hidden
+    activeImage.removeClass('active');
+    activeImage.addClass('hidden');
+
+    if (activeImage.hasClass('first') == true) {
+        $('.apt-image.last').removeClass('hidden');
+        $('.apt-image.last').addClass('active');
+    } else {
+        //metto la classe attiva al successivo
+        activeImage.prev().removeClass('hidden');
+        activeImage.prev().addClass('active');
+    }
+}
+

@@ -16,6 +16,7 @@
             <div class="input-row">
                 <label for="title">Titolo</label>
                 <input type="text" id="title" name="title" placeholder="Inserisci il titolo" class="" required />
+                <p class="message"></p>
             </div>
 
             <!-- INDIRIZZO -->
@@ -23,6 +24,7 @@
                 <label for="address">Indirizzo</label>
                 <input type="text" id="address" name="address" placeholder="l'indirizzo del tuo appartamento" class=""
                     required />
+                <p class="message"></p>
             </div>
 
             <div class="input-row">
@@ -30,21 +32,25 @@
                     <div class="label-input">
                         <label for="city">Città</label>
                         <input id="city" type="text" name="city">
+                        <p class="message"></p>
                     </div>
                     <div class="label-input">
                         <label for="postal_code">Codice Postale</label>
-                        <input type="text" name="postal_code">
+                        <input id="postal-code" type="text" name="postal_code">
+                        <p class="message"></p>
                     </div>
                     <div class="label-input">
-                        <label id="country" for="country">Nazione</label>
-                        <input type="text" name="country">
+                        <label for="country">Nazione</label>
+                        <input id="country" type="text" name="country">
+                        <p class="message"></p>
                     </div>
                 </div>
             </div>
 
             <div class="input-row">
                 <label for="description">Descrizione dell'appartamento</label>
-                <textarea name="description" rows="10"></textarea>
+                <textarea id="description" name="description" rows="10"></textarea>
+                <p class="message"></p>
             </div>
 
             <!-- CARATTERISTICHE-->
@@ -52,23 +58,28 @@
                 <div class="input-group">
                     <div class="label-input">
                         <label for="daily_price">Prezzo per notte</label>
-                        <input type="number" name="daily_price">
+                        <input id="daily-price" type="number" name="daily_price">
+                        <p class="message"></p>
                     </div>
                     <div class="label-input">
                         <label for="sm">Metri quadri</label>
-                        <input type="number" name="sm">
+                        <input id="sm" type="number" name="sm">
+                        <p class="message"></p>
                     </div>
                     <div class="label-input">
                         <label for="rooms">Stanze</label>
-                        <input type="number" name="rooms">
+                        <input id="rooms" type="number" name="rooms">
+                        <p class="message"></p>
                     </div>
                     <div class="label-input">
                         <label for="beds">Posti letto</label>
-                        <input type="number" name="beds">
+                        <input id="beds" type="number" name="beds">
+                        <p class="message"></p>
                     </div>
                     <div class="label-input">
                         <label for="bathrooms">Bagni</label>
-                        <input type="number" name="bathrooms">
+                        <input id="bathrooms" type="number" name="bathrooms">
+                        <p class="message"></p>
                     </div>
                 </div>
 

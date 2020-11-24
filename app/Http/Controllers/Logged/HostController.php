@@ -133,15 +133,10 @@ class HostController extends Controller
         if((Auth::user()->role->role)== "admin"){
             $apartment = Apartment::find($id);
         } elseif ((Auth::user()->role->role)== "host") {
-            if('user_id' == Auth::id()) {
-                $apartment = Apartment::find($id);
-
-            } else {
+            $apartment = Apartment::find($id);
+            if($apartment->user_id != Auth::id()) {
                 return abort(404);
             }
-
-
-            
         }
 
        return view('logged.show', compact('apartment'));

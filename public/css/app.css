@@ -5482,6 +5482,10 @@ textarea {
   top: 7%;
 }
 
+.img-delete:hover {
+  cursor: pointer;
+}
+
 .top-section {
   width: 80%;
   margin: 0 auto;

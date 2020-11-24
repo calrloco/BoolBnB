@@ -104,6 +104,7 @@ class HostController extends Controller
         $image = Storage::disk('public')->put('images', $image);
         Image::insert(
             [
+                'created_at' => Carbon::now(),
                 'path' => $image,
                 'apartment_id' => $apartment->id,
             ]

@@ -83,39 +83,49 @@
             <!-- IMMAGINI -->
             <h5>Aggiungi immagini</h5>
             <div class="container-upload">
-                {{-- CICLO LE IMMAGINI PRESENTI PER INSERIRLE NEL CAMPO INPUT --}}
                 <input type="file" name="img[]" id="img" accept="image/*" multiple>
-                
               
             </div>
-            @foreach($apartment->images as $image)
-            <div class="img-apt-box">
-                <img src="{{ asset('storage/'. $image->path) }}" alt="foto appartamento">
-                <a href="#"><i class="fas fa-times x"></i></a>
-            </div>
-            @endforeach
 
+            
+            
             <!-- CAMPI HIDDEN -->
-
+            
             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-           
-        <input id="latitude" type="hidden" name="latitude" value="{{$apartment->latitude}}">
-        <input id="longitude" type="hidden" name="longitude" value="{{$apartment->longitude}}">
-
-       
+            
+            <input id="latitude" type="hidden" name="latitude" value="{{$apartment->latitude}}">
+            <input id="longitude" type="hidden" name="longitude" value="{{$apartment->longitude}}">
+            
+            
             
             
             
             <input type="submit" id="crea">
             
-
-
+            
+            
         </div>
     </form>
+    
+    {{-- status di avvenuta cancellazione immagine --}}
+    @if(session('status'))
+    <p>{{session('status')}}</p>
+    @endif
+    
+    <p>elimina le immagini</p>
+    {{-- ciclo per visualizzazione ed eliminazione delle immagini dell'appartamento --}}
+    @foreach($apartment->images as $image)
+    <form action="{{route('images.destroy', $image)}}" method="post" class="img-apt-box">
+        @csrf
+        @method('DELETE')
+        <img src="{{ asset('storage/'. $image->path) }}" alt="foto appartamento">
+        <button type="submit" class="img-delete"><i class="fas fa-times x"></i></button>
+    </form>
+    @endforeach
+    
 
+    
 
-
-
-
+    
 </div>
 @endsection

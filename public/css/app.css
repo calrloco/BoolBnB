@@ -5986,9 +5986,13 @@ canvas:focus {
   font-size: 24px;
 }
 
-.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description a {
+.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description .title {
   color: black;
   text-decoration: none;
+}
+
+.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description .title:hover {
+  color: #ff5a5f;
 }
 
 .apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description .apt-address {

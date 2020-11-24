@@ -22,7 +22,7 @@
                     <a href="{{ route('host.show', $apartment->id) }}"><p>{{$apartment->title}}</p></a>
                 </div> --}}
                 <div class ="apt-description">
-                    <a href="{{ route('host.show', $apartment->id) }}"><strong>{{$apartment->title}}</strong></a>
+                    <a class="title" href="{{ route('host.show', $apartment->id) }}"><strong>{{$apartment->title}}</strong></a>
                     <p class="apt-address">{{ $apartment->city }}, {{ $apartment->country }}</p>
                     {{-- <p class="apt-city">{{ $apartment->city }}</p> --}}
                 </div>

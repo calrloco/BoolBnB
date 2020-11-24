@@ -56,11 +56,6 @@
         @endforeach   
     
     </div>
-    @else
-    <h2>Non hai messaggi</h2>
-    @endif
-
-</div>
 
 
 

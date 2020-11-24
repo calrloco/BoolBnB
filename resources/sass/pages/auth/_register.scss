@@ -45,6 +45,8 @@ h1 {
     background: $main_background;
     @include flex(row,center,flex-start);
     padding: 50px 10px;
+    flex:1;
+    width: 100%;
    
 
     .login_btn {
@@ -118,7 +120,7 @@ h1 {
 
             .signup_btn {
                 width: 100%;
-                background-color: $button_background;
+                background-image: var(--gradient-color);
                 color: $primary_background;
             }
 

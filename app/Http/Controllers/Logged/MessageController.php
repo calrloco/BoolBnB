@@ -29,7 +29,7 @@ class MessageController extends Controller
         ->get();
         return view('logged.messages',compact('messages'));
     }
-   
+    
 
     /**
      * Show the form for creating a new resource.

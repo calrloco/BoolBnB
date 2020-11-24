@@ -42419,20 +42419,23 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
-__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js"); // require("./apt");
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js"); //require("./apt");
 
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
 
+var _require = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js"),
+    Alert = _require.Alert;
+
 $(document).ready(function () {
   $(".nav__user-box").click(function () {
     $(".nav__user__menu").toggleClass("active");
     getcards();
   });
-  $("#hidenav").click(function () {
-    $(this).hide();
+  $(".nav__search-button").click(function () {
+    $('#hidenav').hide();
     hidenav();
   });
 }); // animation
@@ -42447,6 +42450,60 @@ function hidenav() {
   $(".nav__search-icon-big").addClass("active-flex");
   $("#start-search").addClass("hidden");
 }
+
+$(window).bind("mousewheel", function (event) {
+  $('#hidenav').show();
+  $("nav__search-icon-big").removeClass("active-flex");
+  $(".nav__search-city").removeClass("active-flex");
+  $(".nav__search-date-start").removeClass("active-flex");
+  $(".nav__search-date-end").removeClass("active-flex");
+  $(".nav__search").removeClass("nav__search-large");
+  $(".nav__search-button").removeClass("nav__search-button-large");
+  $(".nav__search-icon-big").removeClass("active-flex");
+  $("#start-search").removeClass("hidden");
+}); // range value
+
+var slider = function () {
+  var slider = document.getElementById("myRanges");
+  var output = document.getElementById("range-value");
+  output.innerHTML = slider.value;
+
+  slider.oninput = function () {
+    output.innerHTML = this.value;
+  }; /// slider da 20 a cento con sfondo custom
+
+
+  function rangeslider() {
+    $('#range-hidden').val($('#range-value').html());
+    var range = (slider.value - 20) * 1.25;
+    var color = 'linear-gradient(90deg, rgb(230, 30, 77)' + range + '%, rgb(214,214,214)' + range + '%)';
+    slider.style.background = color;
+  }
+
+  slider.addEventListener("mousemove", function () {
+    rangeslider();
+  });
+  slider.addEventListener("touchmove", function () {
+    rangeslider();
+  }); ///////////////////////////////////////////////////
+}(); // chiamta che prende ip dell'utente e capisce la regione per ricerca nei paraggi
+
+
+var getIp = function () {
+  $.ajax({
+    mehtod: 'GET',
+    url: 'https://api.ipdata.co',
+    data: {
+      'api-key': 'b9bcf03b37c7c5b52f5297af16c2acf07e72d596a1cb8257ed1add0c'
+    },
+    success: function success(risposta) {
+      $('#ip-home-search').val(risposta.region);
+    },
+    error: function error() {
+      console.log(arguments);
+    }
+  });
+}();
 
 /***/ }),
 
@@ -42502,21 +42559,60 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$('#sponsors-select').on('change', function () {
-  $('#summary-sponsor').empty();
-  var check = $('#sponsors-select').val();
-  var sponsor = JSON.parse(check);
-  var price = sponsor.sponsor_price;
-  $('#summary-sponsor').append(price);
-  console.log(sponsor);
-  $('#btn-sponsor').click(function () {
-    // var price = sponsor.sponsor_price;
-    // $('#summary-sponsor').append(price);
-    console.log(price);
+document.addEventListener("DOMContentLoaded", function () {
+  var form = document.querySelector('#payment-form');
+  var client_token = document.querySelector('#client_token').value;
+  var option1 = document.querySelector('#sponsorBasic');
+  var option2 = document.querySelector('#sponsorMedium');
+  var option3 = document.querySelector('#sponsorPremium');
+  var amount = document.querySelector('#amount');
+  var sponsor_plan = document.querySelector('#sponsor_plan');
+
+  option1.onclick = function () {
+    amount.value = option1.value;
+    amount_preview.innerHTML = '€' + amount.value;
+    sponsor_plan.value = 1;
+  };
+
+  option2.onclick = function () {
+    amount.value = option2.value;
+    amount_preview.innerHTML = '€' + amount.value;
+    sponsor_plan.value = 2;
+  };
+
+  option3.onclick = function () {
+    amount.value = option3.value;
+    amount_preview.innerHTML = '€' + amount.value;
+    sponsor_plan.value = 3;
+  };
+
+  braintree.dropin.create({
+    authorization: client_token,
+    selector: '#bt-dropin',
+    paypal: {
+      flow: 'vault'
+    }
+  }, function (createErr, instance) {
+    if (createErr) {
+      console.log('Create Error', createErr);
+      return;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      instance.requestPaymentMethod(function (err, payload) {
+        if (err) {
+          console.log('Request Payment Method Error', err);
+          return;
+        } // Add the nonce to the form and submit
+
+
+        document.querySelector('#nonce').value = payload.nonce;
+        form.submit();
+      });
+    });
   });
 });
-var aptId = $('#apt-id').val();
-console.log(aptId);
 
 /***/ }),
 

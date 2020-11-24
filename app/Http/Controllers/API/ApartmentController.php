@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -21,14 +20,16 @@ class ApartmentController extends Controller
         $validator = Validator::make($request->all(),[
              'lat'=>'required',
              'lng'=>'required',
-             'maxDist'=>'required',
+             'maxDist'=>'required|numeric|min:20|max:100',
         ]);
 
         if($validator->fails()){
             return response()->json($validator->messages());
         }
-        $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat), 
+    
+        $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
         point(longitude, latitude)) * .001 as distance")->having('distance','<=',$request->maxDist)->orderBy('distance','asc')->get();
+        
         return response()->json($query, 200);
     }
 
@@ -46,9 +47,43 @@ class ApartmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        
-    }
 
+        $validator = Validator::make($request->all(),[
+               'title' => 'required|min:10|max:300',
+               'rooms'=>'required|numeric|min:1',
+               'beds' =>'required|numeric|min:1',
+               'bathrooms'=>'required|min:1',
+               'sm'=>'required|min:1',
+               'address'=>'required|min:10',
+               'latitude'=>'required',
+               'longitude'=>'required',
+               'city'=>'required|min:1',
+               'postal_code'=>'required',
+               'country'=>'required',
+               'daily_price'=>'required',
+               'description'=>'required|min:20',
+               'user_id'=>'numeric|exists:users,id',
+        ],
+        [
+         'required'=>':attribute is a required field',
+         'numeric'=>':attribute must be a number',
+         'exists'=>'the room need to be associated to an existing user',
+        ]
+    );
+        if($validator->fails()){
+            $error = $validator->messages();
+            return response()->json($error);
+        }
+        $apartment = Apartment::create($request->all());
+        $apartment->services()->attach($request['services']);
+
+        // if (!empty($request['img'])) {
+        //     $request['img'] = Storage::disk('public')->put('images', $request['img']);
+        // }
+
+        return response()->json($apartment,201);
+
+    }
 
     /**
      * Display the specified resource.
@@ -95,4 +130,9 @@ class ApartmentController extends Controller
          ];
          return response()->json($message);
     }
+
+    public function getServices($id){
+           
+    }
 }
+

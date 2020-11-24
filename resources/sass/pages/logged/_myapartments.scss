@@ -35,9 +35,13 @@
                     @include flex(column, flex-start, flex-start);
                     font-size: 24px;
 
-                    a {
+                    .title {
                         color: black;
                         text-decoration: none;
+                    }
+
+                    .title:hover {
+                        color: #ff5a5f;
                     }
 
                     .apt-address {

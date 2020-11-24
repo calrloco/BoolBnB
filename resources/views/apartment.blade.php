@@ -7,17 +7,14 @@
     </div>
 </section>
 <section class="slider-section">
-    <section class="slider-section">
-        <div class="apt-images">
-            <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
-            @for($i = 0; $i < $apartment->images->count('id'); $i++)
-                <img class="apt-image {{($i == 0 ? 'active first' : (($i == $apartment->images->count('id')-1) ? 'hidden last' :'hidden'))}}" src="{{ $apartment->images[$i]->path }}" alt="{{$apartment->title}}">
-            @endfor
-            <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
-        </div>
-    </section>
+    <div class="apt-images">
+        <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
+        @for($i = 0; $i < $apartment->images->count('id'); $i++)
+            <img class="apt-image {{($i == 0 ? 'active first' : (($i == $apartment->images->count('id')-1) ? 'hidden last' :'hidden'))}}" src="{{ $apartment->images[$i]->path }}" alt="{{$apartment->title}}">
+        @endfor
+        <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
+    </div>
 </section>
-
 
 <section class = "info-apt-section">
     <div class="info-box-sx">
@@ -41,8 +38,10 @@
             <ul class = "services">
                 @foreach ($apartment->services as $service)
                     <li class = "service">
-                        <span><i class="{{$service->icon}}"></i></span>
-                        <p class="service-title">{{ $service->service }}</p>
+                        <div class="service-head">
+                            <i class="service-icon {{$service->icon}}"></i>
+                            <p>{{ $service->service }}</p>
+                        </div>
                         <span>{{ $service->description }}</span>
                      </li>
                 @endforeach

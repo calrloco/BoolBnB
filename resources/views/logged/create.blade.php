@@ -95,25 +95,21 @@
 
                 </div>
 
+
+
                 <!-- IMMAGINI -->
                 <h5>aggiungi le tue immagini</h5>
                 <div class="container-upload">
-                    {{-- <input type="file" name="img" enctype="multipart/form-data"
-                        class="img-input form-control-file" id="img" accept="image/*"> --}}
                     <input type="file" name="img[]" id="img" accept="image/*" multiple>
                 </div>
-                <a id="add-img" href="#"> <i class="fas fa-plus-circle"></i> </a>
-
+                
+                    
 
                 <!-- CAMPI HIDDEN -->
-
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 
                 <input id="latitude" type="hidden" name="latitude" value="">
                 <input id="longitude" type="hidden" name="longitude" value="">
-
-
-
 
 
                 <input type="submit" id="crea">

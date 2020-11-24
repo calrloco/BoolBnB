@@ -1,7 +1,6 @@
 .nav {
     @include flex(row, space-between, center);
-    height: var(--nav-height);
-    height: var(--nav-mobile-height);
+    height: 100%;
     font-size: 1.4rem;
     background-color: inherit;
     @media screen and (max-width:600px){
@@ -18,6 +17,7 @@
         top: 0;
         background-color: #fff;
         box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
+        height: var(--nav-height);
     }
 
     &__logo {
@@ -290,6 +290,7 @@
         }
     }
     &-full{
+        height:var(--nav-height);
         padding:.6rem 2.4rem;
         @media screen and (max-width:600px){
             @include flex(row,center,center);

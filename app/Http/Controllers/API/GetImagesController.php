@@ -5,7 +5,7 @@ use App\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
 class GetImagesController extends Controller
 {
     /**
@@ -17,7 +17,14 @@ class GetImagesController extends Controller
     {
         $id = $request->id;
         $images = Image::where('apartment_id','=',$id)->get();
-        return response()->json($images);
+        $data = [];
+        foreach($images as $image){
+           $data[] = [
+               'path' => Storage::url($image->path),
+               'apartment_id'=> $image->apartment_id
+           ];
+        }
+        return response()->json($data);
     }
 
     

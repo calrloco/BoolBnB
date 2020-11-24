@@ -42351,14 +42351,20 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+//JS PER PAGINE CREATE ED EDIT
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
 
-var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk';
+var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; //QUANDO ESCE DAI CAMPI INTERESSATI RICALCOLA LE COORDINATE IN CAMPI HIDDEN
+
 $('#address, #city, #postal').focusout(function () {
   calcoloCoordinate();
 });
+$(document).on('click', '.img-detele', function () {
+  $(this).submit();
+}); // FUNZIONI
+// calcolo coordinate con chiamata all'api tomtom
 
 function calcoloCoordinate() {
   var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
@@ -42369,40 +42375,6 @@ function calcoloCoordinate() {
   }).go().then(function (response) {
     $('#longitude').attr('value', response.results[0].position['lng']);
     $('#latitude').attr('value', response.results[0].position['lat']);
-  });
-}
-
-function createApart(response, apartmentData) {
-  $.ajax({
-    url: 'http://127.0.0.1:8000/api/apartments',
-    method: 'POST',
-    headers: {
-      KEY: 'test'
-    },
-    data: {
-      title: apartmentData.title,
-      address: apartmentData.address,
-      city: apartmentData.city,
-      postal_code: apartmentData.postalCode,
-      country: apartmentData.country,
-      description: apartmentData.description,
-      daily_price: apartmentData.dailyPrice,
-      sm: apartmentData.sm,
-      rooms: apartmentData.rooms,
-      beds: apartmentData.beds,
-      user_id: apartmentData.user_id,
-      bathrooms: apartmentData.bathrooms,
-      img: apartmentData.img,
-      latitude: response.results[0].position['lng'],
-      longitude: response.results[0].position['lat']
-    },
-    success: function success(data) {
-      console.log(data);
-      alert('appartamento inserito');
-    },
-    error: function error(errore) {
-      console.log(errore);
-    }
   });
 }
 
@@ -42419,8 +42391,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
-__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js"); //require("./apt");
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
 
+__webpack_require__(/*! ./apt */ "./resources/js/apt.js");
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
@@ -42624,6 +42597,50 @@ function matchKind(selector, kind) {
 
 /***/ }),
 
+/***/ "./resources/js/apt.js":
+/*!*****************************!*\
+  !*** ./resources/js/apt.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('.arrow-slider-sx').click(function () {
+  prevImage($('.apt-image.active'));
+});
+$('.arrow-slider-dx').click(function () {
+  nextImage('.apt-image.active');
+}); //** FUNZIONI **/
+
+function nextImage() {
+  activeImage.removeClass('active');
+  activeImage.addClass('hidden');
+
+  if (activeImage.hasClass('last') == true) {
+    activeImage.first().removeClass('hidden');
+    activeImage.first().addClass('active');
+  } else {
+    //metto la classe attiva al successivo
+    activeImage.next().removeClass('hidden');
+    activeImage.next().addClass('active');
+  }
+}
+
+function prevImage() {
+  activeImage.removeClass('active');
+  activeImage.addClass('hidden');
+
+  if (activeImage.hasClass('first') == true) {
+    activeImage.last().removeClass('hidden');
+    activeImage.last().addClass('active');
+  } else {
+    //metto la classe attiva al successivo
+    activeImage.prev().removeClass('hidden');
+    activeImage.prev().addClass('active');
+  }
+}
+
+/***/ }),
+
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
@@ -42751,8 +42768,18 @@ document.addEventListener("DOMContentLoaded", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+<<<<<<< HEAD
+__webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/sass/app.scss */"./resources/sass/app.scss");
+>>>>>>> master
+>>>>>>> master
 
 
 /***/ })

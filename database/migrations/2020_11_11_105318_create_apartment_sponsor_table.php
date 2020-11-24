@@ -15,8 +15,11 @@ class CreateApartmentSponsorTable extends Migration
     {
         Schema::create('apartment_sponsor', function (Blueprint $table) {
             $table->id();
+            $table->datetime('start_sponsor')->nullable();
+            $table->datetime('end_sponsor')->nullable();
+            $table->string('transaction_id', 20);
             $table->timestamps();
-
+            
             $table->unsignedBigInteger('apartment_id');
             $table->foreign('apartment_id')
             ->references('id')
@@ -30,8 +33,6 @@ class CreateApartmentSponsorTable extends Migration
             ->on('sponsors')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-
-            $table->timestamp('end_sponsor')->nullable();
         });
     }
 

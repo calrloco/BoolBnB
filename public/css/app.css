@@ -5363,7 +5363,7 @@ input:-webkit-autofill:active {
 
 .sponsor__home {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -5384,6 +5384,7 @@ input:-webkit-autofill:active {
   align-items: flex-start;
   flex-direction: column;
   cursor: pointer;
+  height: 6rem;
 }
 
 .sponsor__home-card:not(:last-child) {
@@ -6193,7 +6194,7 @@ canvas:focus {
 
 .apartments-list {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
   flex-direction: row;
   font-size: 1.2rem;
@@ -6214,10 +6215,7 @@ canvas:focus {
   overflow: hidden;
   border-radius: 2.1rem;
   width: 31.4rem;
-}
-
-.apt-info-general:not(:last-child) {
-  margin-right: 2rem;
+  transition: all 0.2s;
 }
 
 .apt-info-general:hover .apt-info-dx {
@@ -6300,7 +6298,7 @@ canvas:focus {
   padding: 2rem;
   color: #fff;
   border-radius: 4rem;
-  background-color: rgba(0, 0, 0, 0.34);
+  background-color: rgba(255, 90, 95, 0.7);
   opacity: 0;
   transition: all 0.2s;
   font-size: 1.3rem;

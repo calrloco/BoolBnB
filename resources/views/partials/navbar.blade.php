@@ -57,7 +57,7 @@
                         @else
                             <li class="user-greetings">
                                
-                                   Bentornata {{ Auth::user()->name }}
+                                   Ciao {{ Auth::user()->name }}
                             
                             </li>
 

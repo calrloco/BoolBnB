@@ -3,12 +3,16 @@
 @section('content')
 {{-- @dd($messages) --}}
 <div class="container-center">
+   @if(session('status'))
+    <p class="sposorizzato-session">{{session('status') }}</p>
+   @endif
 
+    @if (!empty($apartments))
     <div class="head">
         {{-- <a href="{{ route('host.create')}}">crea appartamento temporaneo</a> --}}
         <h2 class="title">I tuoi appartamenti</h2>
+        <a class="create-apt-link" href="{{ route('host.create')}}">Crea un nuovo annuncio!</a>
     </div>
-    @if (!empty($apartments))
     <div class="apartments-list">
         @foreach($apartments as $apartment)
         <div class="apt-info-general">
@@ -49,6 +53,7 @@
             </div>
         </div>
     @endif
+    
 
 </div>
 

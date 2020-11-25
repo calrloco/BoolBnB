@@ -285,8 +285,8 @@ class HostController extends Controller
         } else {
             abort('404');
         }
-
-        return redirect()->route('home');
+   
+        return redirect()->route('host.index')->with('status','appartamento'.$apartment->title .'sponsorizzato con sucesso');
     }
     
 }

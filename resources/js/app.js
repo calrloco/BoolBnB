@@ -155,7 +155,7 @@ $(document).click(function() {
 var letterNumber = /^[0-9a-zA-Z ]+$/;
 var letter = /^[a-zA-Z ]+$/;
 var number = /^[0-9 ]+$/;
-var allChar = /^[a-zA-Z0-9!@#\$%\^\&*\)\( +=._-]+$/;
+var allChar = /^[a-zA-Z0-9!@#\$%\^\&*\)\( +=.,_-]+$/;
 
 
 // validazione input della pagina create
@@ -169,7 +169,7 @@ $('#city').focusout(function(){
     checkInput($(this), letter, 1, 30, "la città");
 });
 $('#postal-code').focusout(function(){
-    checkInput($(this), number, 1, 20, "il codice postale");
+    checkInput($(this), allChar, 1, 20, "il codice postale");
 });
 $('#country').focusout(function(){
     checkInput($(this), letter, 1, 30, "la nazione");
@@ -195,7 +195,22 @@ $('#bathrooms').focusout(function(){
 
 
 $('#crea').click(function(e){
-    e.preventDefault();
+    if( checkInput($('#title'), allChar, 10, 300, 'il titolo') ||
+        checkInput($('#address'), letterNumber, 10, 300, "l'indirizzo") ||
+        checkInput($('#city'), letter, 1, 30, "la città") ||
+        checkInput($('#postal-code'), allChar, 1, 20, "il codice postale") ||
+        checkInput($('#country'), letter, 1, 30, "la nazione") ||
+        checkInput($('#description'), allChar, 20, 2000, "la descrizione") ||
+        checkInput($('#daily-price'), number , 1, 2000, "il prezzo giornaliero") ||
+        checkInput($('#sm'), number , 1, 2000, "i metri quadrati") ||
+        checkInput($('#rooms'), number , 1, 2000, "le camere") ||
+        checkInput($('#beds'), number , 1, 2000, "i letti") ||
+        checkInput($('#bathrooms'), number , 1, 2000, "i bagni")
+        ){
+        e.preventDefault();
+        
+    }
+    
 });
 
 // funzione per controllare lato client il form
@@ -212,6 +227,7 @@ function checkInput(selector, kind, min, max, field) {
         } else if (selector.val().length > max) {
             selector.next('.message').text('Il campo è troppo lungo');
         }
+        return true;
     } else {
         selector.removeClass('error');
         selector.next('.message').removeClass('message-on');

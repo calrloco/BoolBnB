@@ -414,44 +414,34 @@ $(document).click(function() {
   });
 //slider
 $(document).on("click", ".arrow-slider-sx", function(){
-     prevImage($());
-});
- $(document).on("click", ".arrow-slider-dx", function(){
-     nextImage($());
-});
-function nextImage(){
-    //memorizzo in una var l'immagine attiva
-    var activeImage = $('.apt-image.active');
-
-    //tolgo la classe attiva e metto classe hidden
+     var activeImage = $(this).siblings('.apt-image.active');
     activeImage.removeClass('active');
     activeImage.addClass('hidden');
-
-    if (activeImage.hasClass('last') == true) {
-        $('.apt-image.first').removeClass('hidden');
-        $('.apt-image.first').addClass('active');
+     if (activeImage.hasClass('last') == true) {
+        activeImage.siblings('.apt-image.first').removeClass('hidden');
+        activeImage.siblings('.apt-image.first').addClass('active');
     } else {
         //metto la classe attiva al successivo
         activeImage.next().removeClass('hidden');
         activeImage.next().addClass('active');
     }
-}
 
-function prevImage(){
-    //memorizzo in una var l'immagine attiva
-    var activeImage = $('.apt-image.active');
-
-    //tolgo la classe attiva e metto classe hidden
+});
+ $(document).on("click", ".arrow-slider-dx", function(){
+    var activeImage = $(this).siblings('.apt-image.active');
+    
     activeImage.removeClass('active');
     activeImage.addClass('hidden');
-
+    
     if (activeImage.hasClass('first') == true) {
-        $('.apt-image.last').removeClass('hidden');
-        $('.apt-image.last').addClass('active');
+        activeImage.siblings('.apt-image.last').removeClass('hidden');
+        activeImage.siblings('.apt-image.last').addClass('active');
     } else {
         //metto la classe attiva al successivo
         activeImage.prev().removeClass('hidden');
         activeImage.prev().addClass('active');
     }
-}
+     
+});
+
 

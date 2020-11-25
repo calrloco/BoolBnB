@@ -155,7 +155,7 @@ $(document).click(function() {
 var letterNumber = /^[0-9a-zA-Z ]+$/;
 var letter = /^[a-zA-Z ]+$/;
 var number = /^[0-9 ]+$/;
-var allChar = /^[a-zA-Z0-9!@#\$%\^\&*\)\( +=.,_-]+$/;
+var allChar = /^[a-zA-Z0-9'!@#àèòìù\$%\^\&*\)\( +=.,_-]+$/;
 
 
 // validazione input della pagina create
@@ -163,10 +163,10 @@ $('#title').focusout(function(){
     checkInput($(this), allChar, 10, 300, 'il titolo');
 });
 $('#address').focusout(function(){
-    checkInput($(this), letterNumber, 10, 300, "l'indirizzo");
+    checkInput($(this), allChar, 10, 300, "l'indirizzo");
 });
 $('#city').focusout(function(){
-    checkInput($(this), letter, 1, 30, "la città");
+    checkInput($(this), allChar, 1, 30, "la città");
 });
 $('#postal-code').focusout(function(){
     checkInput($(this), allChar, 1, 20, "il codice postale");
@@ -193,19 +193,31 @@ $('#bathrooms').focusout(function(){
     checkInput($(this), number , 1, 2000, "i bagni");
 });
 
-
+// al click del submit controlla se i campi soddisfano le condizioni e impedisce il submit 
 $('#crea').click(function(e){
-    if( checkInput($('#title'), allChar, 10, 300, 'il titolo') ||
-        checkInput($('#address'), letterNumber, 10, 300, "l'indirizzo") ||
-        checkInput($('#city'), letter, 1, 30, "la città") ||
-        checkInput($('#postal-code'), allChar, 1, 20, "il codice postale") ||
-        checkInput($('#country'), letter, 1, 30, "la nazione") ||
-        checkInput($('#description'), allChar, 20, 2000, "la descrizione") ||
-        checkInput($('#daily-price'), number , 1, 2000, "il prezzo giornaliero") ||
-        checkInput($('#sm'), number , 1, 2000, "i metri quadrati") ||
-        checkInput($('#rooms'), number , 1, 2000, "le camere") ||
-        checkInput($('#beds'), number , 1, 2000, "i letti") ||
-        checkInput($('#bathrooms'), number , 1, 2000, "i bagni")
+    if( checkInput($('#title'), allChar, 10, 300, 'il titolo') &&
+        checkInput($('#address'), allChar, 10, 300, "l'indirizzo") &&
+        checkInput($('#city'), allChar, 1, 30, "la città") &&
+        checkInput($('#postal-code'), allChar, 1, 20, "il codice postale") &&
+        checkInput($('#country'), letter, 1, 30, "la nazione") &&
+        checkInput($('#description'), allChar, 20, 2000, "la descrizione") &&
+        checkInput($('#daily-price'), number , 1, 2000, "il prezzo giornaliero") &&
+        checkInput($('#sm'), number , 1, 2000, "i metri quadrati") &&
+        checkInput($('#rooms'), number , 1, 2000, "le camere") &&
+        checkInput($('#beds'), number , 1, 2000, "i letti") &&
+        checkInput($('#bathrooms'), number , 1, 2000, "i bagni") ||
+
+            checkInput($('#title'), allChar, 10, 300, 'il titolo') ||
+            checkInput($('#address'), allChar, 10, 300, "l'indirizzo") ||
+            checkInput($('#city'), allChar, 1, 30, "la città") ||
+            checkInput($('#postal-code'), allChar, 1, 20, "il codice postale") ||
+            checkInput($('#country'), letter, 1, 30, "la nazione") ||
+            checkInput($('#description'), allChar, 20, 2000, "la descrizione") ||
+            checkInput($('#daily-price'), number , 1, 2000, "il prezzo giornaliero") ||
+            checkInput($('#sm'), number , 1, 2000, "i metri quadrati") ||
+            checkInput($('#rooms'), number , 1, 2000, "le camere") ||
+            checkInput($('#beds'), number , 1, 2000, "i letti") ||
+            checkInput($('#bathrooms'), number , 1, 2000, "i bagni")
         ){
         e.preventDefault();
         

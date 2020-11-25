@@ -69,7 +69,6 @@ function getCoordinates(input, range) {
                     container: 'map',
                     center: response.results[0].position,
                     zoom: zoom
-
                 });
 
                 getCards(latitude, longitude, range);

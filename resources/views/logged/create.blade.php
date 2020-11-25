@@ -15,15 +15,14 @@
             <!-- TITOLO -->
             <div class="input-row">
                 <label for="title">Titolo</label>
-                <input type="text" id="title" name="title" placeholder="Inserisci il titolo" class="" required />
+                <input type="text" id="title" name="title" placeholder="Inserisci il titolo" class="" />
                 <p class="message"></p>
             </div>
 
             <!-- INDIRIZZO -->
             <div class="input-row">
                 <label for="address">Indirizzo</label>
-                <input type="text" id="address" name="address" placeholder="l'indirizzo del tuo appartamento" class=""
-                    required />
+                <input type="text" id="address" name="address" placeholder="l'indirizzo del tuo appartamento" class="" autocomplete="off" />
                 <p class="message"></p>
             </div>
 
@@ -31,12 +30,12 @@
                 <div class="input-group">
                     <div class="label-input">
                         <label for="city">Città</label>
-                        <input id="city" type="text" name="city">
+                        <input id="city" type="text" name="city" autocomplete="off">
                         <p class="message"></p>
                     </div>
                     <div class="label-input">
                         <label for="postal_code">Codice Postale</label>
-                        <input id="postal-code" type="text" name="postal_code">
+                        <input id="postal-code" type="text" name="postal_code" autocomplete="off">
                         <p class="message"></p>
                     </div>
                     <div class="label-input">

@@ -6,7 +6,7 @@ const apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk';
 
 //QUANDO ESCE DAI CAMPI INTERESSATI RICALCOLA LE COORDINATE IN CAMPI HIDDEN
 $('#address, #city, #postal').focusout(function() {
-    calcoloCoordinate()
+    calcoloCoordinate();
 })
 
 $(document).on('click', '.img-detele', function() {

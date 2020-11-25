@@ -2,6 +2,7 @@
 @section('content')
     <div class="container-center">
         <section class="top-section">
+            <span class="hidden" id="app-id">{{ $apartment->id }}</span>
             <div class="title-apt">
                 <p class="title">{{ $apartment->title }}</p>
                 <a class="address-apt" href="#">{{ $apartment->address }}, {{ $apartment->city }},
@@ -11,12 +12,12 @@
         <div class="container-slider-app">
             <section class="slider-section">
                 <div class="apt-images">
-                    <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
+                    {{-- <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
                     @for ($i = 0; $i < $apartment->images->count('id'); $i++)
                         <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
                             src="{{ $apartment->images[$i]->path }}" alt="{{ $apartment->title }}">
                     @endfor
-                    <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
+                    <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i> --}}
                 </div>
             </section>
         </div>
@@ -76,7 +77,7 @@
                             <p class "text-message">
                                 <label for="message">Testo:</label>
                                 <textarea name="message" maxlenght="500" class="message" cols="30" rows="10">
-                            </textarea>
+                                </textarea>
                             </p>
                             <p class "send-message">
                                 <input type="submit" name="mail-submit" value="Invia mail!"></input>
@@ -90,9 +91,9 @@
 
 
         <section class="map-section">
-            <div class="map-box">
-                MAPPA
-            </div>
+
+            <div class="map-apaetment" id="map"></div>
+
             {{-- <div class="message-box">
 
             </div> --}}

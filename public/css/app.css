@@ -5576,11 +5576,9 @@ textarea {
 }
 
 .info-apt-section {
-  width: 80%;
   min-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
-  margin: 10px auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
   flex-direction: row;
 }
@@ -5662,10 +5660,7 @@ textarea {
 }
 
 .info-apt-section .info-box-dx .send-message-box {
-  width: 300px;
   border: 1px solid #ff5a5f;
-  margin: 20px auto;
-  padding: 20px 0;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -5703,7 +5698,11 @@ textarea {
   width: 100%;
   height: 400px;
   margin: 10px auto;
-  background-color: green;
+}
+
+.map-apaetment {
+  width: 100%;
+  height: 100%;
 }
 
 h1 {

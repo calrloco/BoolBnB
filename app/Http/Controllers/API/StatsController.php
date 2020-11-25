@@ -26,7 +26,7 @@ class StatsController extends Controller
             ->where('apartment_id', '=', $id)
             ->groupBy('views.created_at')->get();
             $count = count($views);
-         
+
         return response()->json($views);
     }
 }

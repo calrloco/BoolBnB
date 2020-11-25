@@ -91,8 +91,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment){
-        return response()->json($require,200);
+    public function show($id){
+       $app = Apartment::where('id','=',$id)->get();
+        return response()->json($app);
     }
 
     /**

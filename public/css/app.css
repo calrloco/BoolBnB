@@ -5007,7 +5007,7 @@ button:focus {
   background-color: #f0f0f0;
 }
 
-.nav__search-city #auto-complete.active {
+.nav__search-city #auto-complete.complete-on {
   display: block;
 }
 
@@ -6229,6 +6229,7 @@ canvas:focus {
   opacity: 1;
 }
 
+<<<<<<< HEAD
 .apt-info-sx {
   position: absolute;
   left: 0;
@@ -6249,6 +6250,19 @@ canvas:focus {
   padding: 2rem;
   transition: all 0.2s;
   transform: translateY(45%);
+=======
+.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description .title {
+  color: black;
+  text-decoration: none;
+}
+
+.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description .title:hover {
+  color: #ff5a5f;
+}
+
+.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description .apt-address {
+  font-size: 16px;
+>>>>>>> 904e87d5351ea3d66600251aba9a1a10a1ff77b6
 }
 
 .apt-address {
@@ -6320,6 +6334,19 @@ canvas:focus {
   font-size: 2rem;
   font-weight: 800;
   color: var(--color-font-black);
+}
+
+.error {
+  border-color: #d60565;
+}
+
+.message {
+  display: none;
+  color: #d60565;
+}
+
+.message-on {
+  display: block;
 }
 
 .active {

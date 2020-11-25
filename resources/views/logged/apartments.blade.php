@@ -9,7 +9,6 @@
 
     @if (!empty($apartments))
     <div class="head">
-        {{-- <a href="{{ route('host.create')}}">crea appartamento temporaneo</a> --}}
         <h2 class="title">I tuoi appartamenti</h2>
         <a class="create-apt-link" href="{{ route('host.create')}}">Crea un nuovo annuncio!</a>
     </div>
@@ -17,9 +16,7 @@
         @foreach($apartments as $apartment)
         <div class="apt-info-general">
             <div class="apt-info-sx">
-                {{-- <div class=apt-img-small></div> --}}
                     <img class=apt-img-small src="{{$apartment->images[0]->path}}" alt="{{$apartment->title}}">
-
             </div>
             <div class="apt-info-dx">
                  <div class="apt-title">
@@ -27,7 +24,6 @@
                 </div> 
                 <div class ="apt-description">
                     <p class="apt-address">{{ $apartment->city }}, {{ $apartment->country }}</p>
-                    {{-- <p class="apt-city">{{ $apartment->city }}</p> --}}
                 </div>
                 <p class="apt-details"> Caratteristiche: nr. stanze: {{ $apartment->rooms }}, nr. letti: {{ $apartment->beds }} - nr. bagni: {{ $apartment->bathrooms }} - mq: {{ $apartment->sm }}</p>
                 <p class="apt-description">{{$apartment->description}}</p>
@@ -39,7 +35,6 @@
                          </li>
                     @endforeach
                 </ul>
-                {{-- <a href="{{ route('host.show', $apartment->id) }}">Vedi l'appartamento</a> --}}
             </div>
             <a href="{{ route('host.show', $apartment->id) }}" class="apartment-button">Vai  all'appartamenoto</a>
         </div>

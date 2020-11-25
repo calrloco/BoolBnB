@@ -42545,7 +42545,7 @@ $(document).click(function () {
 var letterNumber = /^[0-9a-zA-Z ]+$/;
 var letter = /^[a-zA-Z ]+$/;
 var number = /^[0-9 ]+$/;
-var allChar = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/g; // validazione input
+var allChar = /^[a-zA-Z0-9!@#\$%\^\&*\)\( +=._-]+$/; // validazione input della pagina create
 
 $('#title').focusout(function () {
   checkInput($(this), allChar, 10, 300, 'il titolo');
@@ -42564,6 +42564,24 @@ $('#country').focusout(function () {
 });
 $('#description').focusout(function () {
   checkInput($(this), allChar, 20, 2000, "la descrizione");
+});
+$('#daily-price').focusout(function () {
+  checkInput($(this), number, 1, 2000, "il prezzo giornaliero");
+});
+$('#sm').focusout(function () {
+  checkInput($(this), number, 1, 2000, "i metri quadrati");
+});
+$('#rooms').focusout(function () {
+  checkInput($(this), number, 1, 2000, "le camere");
+});
+$('#beds').focusout(function () {
+  checkInput($(this), number, 1, 2000, "i letti");
+});
+$('#bathrooms').focusout(function () {
+  checkInput($(this), number, 1, 2000, "i bagni");
+});
+$('#crea').click(function (e) {
+  e.preventDefault();
 }); // funzione per controllare lato client il form
 
 function checkInput(selector, kind, min, max, field) {
@@ -42576,15 +42594,15 @@ function checkInput(selector, kind, min, max, field) {
     } else if (!matchKind(selector, kind)) {
       selector.next('.message').text('Hai inserito un carattere non valido');
     } else if (selector.val().length < min) {
-      selector.next('.message').text('Il testo è troppo breve');
+      selector.next('.message').text('Il campo è troppo breve');
     } else if (selector.val().length > max) {
-      selector.next('.message').text('Il testo è troppo lungo');
+      selector.next('.message').text('Il campo è troppo lungo');
     }
   } else {
     selector.removeClass('error');
     selector.next('.message').removeClass('message-on');
   }
-} // funzione per controllare se l'input soddisfa la condizione
+} // funzione per controllare se l'input soddisfa la condizione di tipo
 
 
 function matchKind(selector, kind) {
@@ -42768,18 +42786,8 @@ document.addEventListener("DOMContentLoaded", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-__webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-<<<<<<< HEAD
-__webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/sass/app.scss */"./resources/sass/app.scss");
->>>>>>> master
->>>>>>> master
+__webpack_require__(/*! C:\lavori\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\lavori\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

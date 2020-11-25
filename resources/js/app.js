@@ -155,32 +155,47 @@ $(document).click(function() {
 var letterNumber = /^[0-9a-zA-Z ]+$/;
 var letter = /^[a-zA-Z ]+$/;
 var number = /^[0-9 ]+$/;
-var allChar = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/g;
+var allChar = /^[a-zA-Z0-9!@#\$%\^\&*\)\( +=._-]+$/;
 
 
-// validazione input
+// validazione input della pagina create
 $('#title').focusout(function(){
     checkInput($(this), allChar, 10, 300, 'il titolo');
 });
-
 $('#address').focusout(function(){
     checkInput($(this), letterNumber, 10, 300, "l'indirizzo");
 });
-
 $('#city').focusout(function(){
     checkInput($(this), letter, 1, 30, "la città");
 });
-
 $('#postal-code').focusout(function(){
     checkInput($(this), number, 1, 20, "il codice postale");
 });
-
 $('#country').focusout(function(){
     checkInput($(this), letter, 1, 30, "la nazione");
 });
-
 $('#description').focusout(function(){
     checkInput($(this), allChar, 20, 2000, "la descrizione");
+});
+$('#daily-price').focusout(function(){
+    checkInput($(this), number , 1, 2000, "il prezzo giornaliero");
+});
+$('#sm').focusout(function(){
+    checkInput($(this), number , 1, 2000, "i metri quadrati");
+});
+$('#rooms').focusout(function(){
+    checkInput($(this), number , 1, 2000, "le camere");
+});
+$('#beds').focusout(function(){
+    checkInput($(this), number , 1, 2000, "i letti");
+});
+$('#bathrooms').focusout(function(){
+    checkInput($(this), number , 1, 2000, "i bagni");
+});
+
+
+$('#crea').click(function(e){
+    e.preventDefault();
 });
 
 // funzione per controllare lato client il form
@@ -193,9 +208,9 @@ function checkInput(selector, kind, min, max, field) {
         } else if (!matchKind(selector, kind)) {
             selector.next('.message').text('Hai inserito un carattere non valido');
         } else if (selector.val().length < min) {
-            selector.next('.message').text('Il testo è troppo breve');
+            selector.next('.message').text('Il campo è troppo breve');
         } else if (selector.val().length > max) {
-            selector.next('.message').text('Il testo è troppo lungo');
+            selector.next('.message').text('Il campo è troppo lungo');
         }
     } else {
         selector.removeClass('error');
@@ -204,7 +219,7 @@ function checkInput(selector, kind, min, max, field) {
 }
 
 
-// funzione per controllare se l'input soddisfa la condizione
+// funzione per controllare se l'input soddisfa la condizione di tipo
 function matchKind(selector, kind){
     if(selector.val().match(kind)){
         return true;

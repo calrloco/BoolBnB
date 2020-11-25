@@ -180,18 +180,23 @@ class HostController extends Controller
         $apartment->services()->sync($data['services']);
 
         // AGGIUNTA IMMAGINI
-        $images = $request->file('img');
+        if(!empty($request->file('img'))) {
+            $images = $request->file('img');
 
-        foreach ($images as $image) {
-            $image = Storage::disk('public')->put('images', $image);
-            Image::insert(
-                [
-                    'created_at' => Carbon::now(),
-                    'path' => $image,
-                    'apartment_id' => $apartment->id,
-                ]
-            );
+            foreach ($images as $image) {
+                $image = Storage::disk('public')->put('images', $image);
+                Image::insert(
+                    [
+                        'created_at' => Carbon::now(),
+                        'path' => $image,
+                        'apartment_id' => $apartment->id,
+                    ]
+                );
+            }
+
         }
+
+        
         
         return redirect()->route('host.index')->with('status', 'Hai modificato il tuo appartamento');
     }

@@ -5363,7 +5363,7 @@ input:-webkit-autofill:active {
 
 .sponsor__home {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -5384,7 +5384,6 @@ input:-webkit-autofill:active {
   align-items: flex-start;
   flex-direction: column;
   cursor: pointer;
-  height: 6rem;
 }
 
 .sponsor__home-card:not(:last-child) {

@@ -14,8 +14,9 @@
             </div>
         </div>
     </header>
-    <div class="container-center">
+    
         <section class="highlited">
+            <div class="container-center">
             <p class="sponsor__home-title">In evidenza</p>
             <div class="sponsor__home">
                 @if(count($apartment) > 0)
@@ -31,6 +32,7 @@
                     </div>
                 @endfor
                 @endif
+            </div>
         </section>
-    </div>
+    
 @endsection

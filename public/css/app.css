@@ -5007,7 +5007,7 @@ button:focus {
   background-color: #f0f0f0;
 }
 
-.nav__search-city #auto-complete.active {
+.nav__search-city #auto-complete.complete-on {
   display: block;
 }
 
@@ -6299,6 +6299,19 @@ canvas:focus {
 
 .apt-section .noapt-section .create-apt-section .create-apt-link:hover {
   color: #ff5a5f;
+}
+
+.error {
+  border-color: #d60565;
+}
+
+.message {
+  display: none;
+  color: #d60565;
+}
+
+.message-on {
+  display: block;
 }
 
 .active {

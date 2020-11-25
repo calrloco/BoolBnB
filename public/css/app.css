@@ -5505,6 +5505,15 @@ textarea {
   cursor: pointer;
 }
 
+<<<<<<< Updated upstream
+=======
+.top-section {
+  width: 80%;
+  padding: 0 8rem;
+  margin: 0 auto;
+}
+
+>>>>>>> Stashed changes
 .top-section .title-apt {
   padding: 20px 0;
   text-align: center;
@@ -6191,7 +6200,23 @@ canvas:focus {
   text-align: center;
 }
 
+<<<<<<< Updated upstream
 .apartments-list {
+=======
+.apt-section {
+  width: 80%;
+  padding: 0 8rem;
+  margin: 20px auto;
+}
+
+.apt-section .head {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.apt-section .apartments-list .apt-info-general {
+>>>>>>> Stashed changes
   display: flex;
   justify-content: space-between;
   align-items: flex-start;

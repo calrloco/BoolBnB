@@ -75,7 +75,8 @@
         </section>
 
             <section class="chart-section">
-                <canvas id="chart"></canvas>
+                <canvas id="chart-views"></canvas>
+                <canvas id="chart-messages"></canvas>
             </section>
     </div>
 <script src="{{ asset('js/stats.js') }}"></script>

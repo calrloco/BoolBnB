@@ -6335,19 +6335,6 @@ canvas:focus {
   display: block;
 }
 
-.error {
-  border-color: #d60565;
-}
-
-.message {
-  display: none;
-  color: #d60565;
-}
-
-.message-on {
-  display: block;
-}
-
 .active {
   display: block;
 }

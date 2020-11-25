@@ -86,6 +86,7 @@ function getServices() {
             KEY: "test"
         },
         success: function (response) {
+            console.log(response);
             for (var i = 0; i < response.length; i++) {
                 var service = `<button data-servicetype="${response[i].id}" class="services-all">${response[i].service}</button>`;
                 $(".services").append(service);

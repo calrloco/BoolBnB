@@ -2,6 +2,7 @@
 @section('content')
 <section class="top-section">
     <div class="title-apt">
+
     <p class="title">{{ $apartment->title }}</p>
     <a class="address-apt" href="#">{{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->country }}</a>
     </div>

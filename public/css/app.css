@@ -4608,6 +4608,16 @@ readers do not read off random characters that represent icons */
   font-weight: 900; }
 /* media query */
 
+.visualizza-appartamneto {
+  cursor: pointer;
+  border-radius: 3rem;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.4rem;
+  background-color: #fff;
+  border: 1px solid #b0b0b0;
+  transition: all 0.2s;
+}
+
 :root {
   --pink-bnb: rgb(255,90,95);
   --turcoise-bnb: rgb(0,166,153);
@@ -4644,12 +4654,6 @@ button {
   text-shadow: 0px 0px 0px transparent;
 }
 
-button:hover {
-  box-shadow: 0px 0px 0px transparent;
-  border: 0px solid transparent;
-  text-shadow: 0px 0px 0px transparent;
-}
-
 button:active {
   outline: none;
   border: none;
@@ -4668,6 +4672,10 @@ button:focus {
 }
 
 /* Change the white to any color ;) */
+
+.active {
+  display: block;
+}
 
 @media screen and (max-width: 414px) {
   .col-xs-1 {
@@ -4819,7 +4827,7 @@ button:focus {
   }
 }
 
-@media screen and (min-width: 1921px) {
+@media screen and (min-width: 2000px) {
   .col-xl-1 {
     width: calc((100% / 12) * 1);
   }
@@ -4903,9 +4911,24 @@ button:focus {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  height: var(--nav-height);
+  height: 100%;
   font-size: 1.4rem;
   background-color: inherit;
+}
+
+@media screen and (max-width: 600px) {
+  .nav {
+    justify-content: center;
+  }
+}
+
+.nav-link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 
 .nav-container {
@@ -4915,6 +4938,7 @@ button:focus {
   top: 0;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
+  height: var(--nav-height);
 }
 
 .nav__logo {
@@ -4923,6 +4947,12 @@ button:focus {
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
+}
+
+@media screen and (max-width: 600px) {
+  .nav__logo {
+    display: none;
+  }
 }
 
 .nav__logo img {
@@ -4977,7 +5007,7 @@ button:focus {
   background-color: #f0f0f0;
 }
 
-.nav__search-city #auto-complete.active {
+.nav__search-city #auto-complete.complete-on {
   display: block;
 }
 
@@ -5023,8 +5053,9 @@ button:focus {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  padding: 0 2rem;
+  padding: 0.5rem 2rem;
   color: var(--color-font-black);
+  min-width: 26rem;
 }
 
 .nav__search-button-large {
@@ -5033,7 +5064,7 @@ button:focus {
   padding: 0 0;
 }
 
-.nav__search-button-clicked {
+.nav__search-button-clciked {
   height: 66px;
 }
 
@@ -5047,6 +5078,7 @@ button:focus {
 }
 
 .nav__search-icon {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -5069,6 +5101,7 @@ button:focus {
   width: auto;
   align-self: center;
   margin-right: 1rem;
+  font-size: 1.4rem;
 }
 
 .nav__search-icon i {
@@ -5086,6 +5119,12 @@ button:focus {
   position: relative;
 }
 
+@media screen and (max-width: 600px) {
+  .nav__user {
+    display: none;
+  }
+}
+
 .nav__user-box {
   display: flex;
   justify-content: space-between;
@@ -5094,10 +5133,17 @@ button:focus {
   transition: all 0.2s;
   background-color: #fff;
   border: 1px solid #e2e2e2;
-  padding: 1rem;
-  font-size: 2.3rem;
+  padding: 0.5rem;
+  font-size: 2rem;
   border-radius: 10rem;
+  height: 4.2rem;
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .nav__user-box {
+    display: none;
+  }
 }
 
 .nav__user-box:hover {
@@ -5111,12 +5157,13 @@ button:focus {
   align-items: center;
   flex-direction: row;
   height: 4.2rem;
-  border-radius: 2.1rem;
-  -webkit-border-radius: 2.1rem;
-  -moz-border-radius: 2.1rem;
-  -ms-border-radius: 2.1rem;
-  -o-border-radius: 2.1rem;
-  width: 4.2rem;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  width: 3.2rem;
+  height: 3.2rem;
   border: 1px solid #e2e2e2;
   cursor: pointer;
   background-color: #717171;
@@ -5128,7 +5175,7 @@ button:focus {
 }
 
 .nav__user-button img {
-  height: 4rem;
+  height: 3rem;
 }
 
 .nav__user__menu {
@@ -5212,6 +5259,62 @@ button:focus {
   color: #fff;
 }
 
+.nav-full {
+  height: var(--nav-height);
+  padding: 0.6rem 2.4rem;
+}
+
+@media screen and (max-width: 600px) {
+  .nav-full {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.sliders {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  background: linear-gradient(90deg, #d6d6d6 60%, #d6d6d6 60%);
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  border-radius: 12px;
+  position: relative;
+  margin-right: 2rem;
+}
+
+.sliders::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1.2rem;
+  width: 1.2rem;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sliders::-moz-slider-thumb {
+  -webkit-appearance: none;
+  height: 4rem;
+  width: 4rem;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.user-greetings {
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
 .jumbotron {
   background-image: url("https://images.pexels.com/photos/3757905/pexels-photo-3757905.jpeg?cs=srgb&dl=pexels-corinna-widmer-3757905.jpg&fm=jpg");
   height: 70rem;
@@ -5231,6 +5334,11 @@ button:focus {
   flex-direction: column;
   font-size: 5.2rem;
   color: var(--color-font-black);
+}
+
+.jumbotron__text-banner {
+  font-weight: 800;
+  color: #fff;
 }
 
 .jumbotron__text-button {
@@ -5372,13 +5480,43 @@ textarea {
   width: 100%;
 }
 
+.img-apt-box {
+  position: relative;
+  height: 100px;
+  width: 100px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  overflow: hidden;
+}
+
+.img-apt-box img {
+  width: 100%;
+  height: 100%;
+}
+
+.x {
+  color: red;
+  position: absolute;
+  right: 7%;
+  top: 7%;
+}
+
+.img-delete:hover {
+  cursor: pointer;
+}
+
+<<<<<<< Updated upstream
+=======
 .top-section {
   width: 80%;
+  padding: 0 8rem;
   margin: 0 auto;
 }
 
+>>>>>>> Stashed changes
 .top-section .title-apt {
   padding: 20px 0;
+  text-align: center;
 }
 
 .top-section .title-apt .title {
@@ -5391,9 +5529,17 @@ textarea {
   font-size: 14px;
 }
 
+.container-slider-app {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
 .slider-section {
-  width: 80%;
   align-self: center;
+  width: 50%;
 }
 
 .slider-section .apt-images {
@@ -5563,7 +5709,7 @@ textarea {
 }
 
 .map-section {
-  width: 80%;
+  width: 100%;
   height: 400px;
   margin: 10px auto;
   background-color: green;
@@ -5607,11 +5753,17 @@ h1 {
   background: white;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: row;
-  padding: 50px 10px;
   flex: 1;
   width: 100%;
+}
+
+@media screen and (min-width: 2000px) {
+  .signup_container {
+    align-items: flex-start;
+    margin-top: 3rem;
+  }
 }
 
 .signup_container .login_btn {
@@ -5773,6 +5925,12 @@ h1 {
   flex: 2;
 }
 
+@media screen and (max-width: 1462px) {
+  .container__search-right {
+    flex: 1;
+  }
+}
+
 .container__search .search__resoults__apartment-cards {
   display: flex;
   justify-content: flex-start;
@@ -5781,7 +5939,6 @@ h1 {
   padding: 0 2.4rem;
   flex-wrap: wrap;
   max-width: 100%;
-  max-height: 100%;
 }
 
 .container__search .search__resoults__apartment-cards-content {
@@ -5789,17 +5946,31 @@ h1 {
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  flex: 0 0 calc(100% / 3);
+  flex: 0 0 calc(100% / 2);
   padding: 0.8rem 0.8rem;
   cursor: pointer;
   margin-bottom: 2rem;
   min-height: 23.1rem;
   border-radius: 0.8rem;
+  height: 35rem;
+  max-height: 35rem;
+}
+
+@media screen and (min-width: 2000px) {
+  .container__search .search__resoults__apartment-cards-content {
+    flex: 0 0 calc(100% / 3);
+  }
 }
 
 @media screen and (max-width: 800px) {
   .container__search .search__resoults__apartment-cards-content {
-    flex: 0 0 calc(100%);
+    flex: 0 0 calc(100% / 2);
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .container__search .search__resoults__apartment-cards-content {
+    flex: 1 1 100%;
   }
 }
 
@@ -5808,21 +5979,34 @@ h1 {
   justify-content: space-between;
   align-items: stretch;
   flex-direction: column;
-  flex: 1;
+  flex: 1 0;
+  width: 100%;
+  padding-top: 1.5rem;
+  max-height: 40%;
 }
 
 .container__search .search__resoults__apartment-cards-content-form {
   width: 100%;
-  height: 100%;
-  flex: 1;
+  flex: 1 0;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-start;
+  align-items: flex-end;
   flex-direction: column;
+  justify-self: flex-end;
+  align-self: flex-end;
 }
 
 .container__search .search__resoults__apartment-cards-content-slider {
   position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  max-height: 60%;
+}
+
+@media screen and (max-width: 800px) {
+  .container__search .search__resoults__apartment-cards-content-slider {
+    height: 30rem;
+  }
 }
 
 .container__search .search__resoults__apartment-cards-content-slider:hover .search__resoults__apartment-cards-content-slider-icons {
@@ -5836,6 +6020,7 @@ h1 {
      object-fit: cover;
   border-radius: 0.8rem;
   margin-bottom: 0.6rem;
+  transition: all 0.2s;
 }
 
 .container__search .search__resoults__apartment-cards-content-slider-icons {
@@ -5856,6 +6041,14 @@ h1 {
   transition: all 0.3s;
 }
 
+.container__search .search__resoults__apartment-cards-content-slider-icons:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.container__search .search__resoults__apartment-cards-content-slider-icons:active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
 .container__search .search__resoults__apartment-cards-content-slider-icons-left {
   left: 7%;
 }
@@ -5868,10 +6061,12 @@ h1 {
   font-size: 1.4rem;
   margin-bottom: 0.6rem;
   text-transform: capitalize;
+  font-weight: 800;
 }
 
 .container__search .search__resoults__apartment-cards-content-description {
   font-size: 1.6rem;
+  margin-bottom: 1.6rem;
 }
 
 #marker {
@@ -5912,9 +6107,10 @@ h1 {
 }
 
 .services-all:hover {
-  border: 1px solid var(--pink-bnb);
-  background-color: var(--pink-bnb);
-  color: #fff;
+  padding: 0.8rem 1.6rem;
+  background-color: #fff;
+  border: 1px solid #b0b0b0;
+  color: inherit;
 }
 
 .mapboxgl-canvas:focus,
@@ -5933,13 +6129,83 @@ canvas:focus {
   color: #fff;
 }
 
-.container-sponsor {
-  width: 80%;
+.visualizza-appartamneto {
+  align-self: center;
+}
+
+.visualizza-appartamneto:hover {
+  background-color: var(--pink-bnb);
+  color: #fff;
+  transform: translateY(-4px);
+  border: 1px solid var(--pink-bnb);
+}
+
+.visualizza-appartamneto:active {
+  transform: translateY(0px);
+}
+
+.sponsor_header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
   margin: 0 auto;
 }
 
+.sponsor_header h3 {
+  font-size: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #707070;
+}
+
+.sponsor_header h3 span {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.sponsor_header h4 {
+  font-size: 15px;
+  padding: 10px;
+}
+
+.cards_container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 4rem;
+  padding: 4rem;
+  margin: 0 auto;
+}
+
+.cards_container .pay-card {
+  font-family: "Heebo";
+  height: 20em;
+  width: 15em;
+  font-size: 1.5em;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 2em;
+  align-items: flex-end;
+  box-shadow: 0 0 5em -1em black;
+  transition: all, 2s;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.cards_container .pay-card h5 {
+  padding: 10px;
+  text-align: center;
+}
+
+<<<<<<< Updated upstream
+.apartments-list {
+=======
 .apt-section {
   width: 80%;
+  padding: 0 8rem;
   margin: 20px auto;
 }
 
@@ -5950,42 +6216,67 @@ canvas:focus {
 }
 
 .apt-section .apartments-list .apt-info-general {
+>>>>>>> Stashed changes
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: row;
-  border: 1px solid #ff5a5f;
-  border-radius: 15px;
-  margin-bottom: 10px;
-}
-
-.apt-section .apartments-list .apt-info-general .apt-info-sx {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: row;
-}
-
-.apt-section .apartments-list .apt-info-general .apt-info-sx .apt-img-small {
-  width: 400px;
-  height: 300px;
-  border-radius: 15px;
-}
-
-.apt-section .apartments-list .apt-info-general .apt-info-dx {
-  padding-left: 20px;
-  text-align: center;
-  margin: 0 auto;
-}
-
-.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description {
-  display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
-  flex-direction: column;
-  font-size: 24px;
+  flex-direction: row;
+  font-size: 1.2rem;
+  flex-wrap: wrap;
+  height: 100%;
+  color: var(--color-font-black);
 }
 
+.apt-info-general {
+  height: 44rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 2.1rem;
+  width: 31.4rem;
+  transition: all 0.2s;
+}
+
+.apt-info-general:hover .apt-info-dx {
+  transform: translateY(0%);
+}
+
+.apt-info-general:hover .apt-img-small {
+  filter: blur(3px);
+}
+
+.apt-info-general:hover .apartment-button {
+  opacity: 1;
+}
+
+.apt-info-sx {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.apt-info-dx {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  flex: 0 0 50%;
+  z-index: 2;
+  background-color: #f5f5f5;
+  padding: 2rem;
+  transition: all 0.2s;
+  transform: translateY(45%);
+}
+
+<<<<<<< HEAD
 .apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description .title {
   color: black;
   text-decoration: none;
@@ -5997,64 +6288,90 @@ canvas:focus {
 
 .apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description .apt-address {
   font-size: 16px;
+=======
+.apt-address {
+  margin-bottom: 0.3rem;
 }
 
-.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-details {
-  padding-top: 10px;
-  font-size: 18px;
+.apt-description {
+  margin-bottom: 0.3rem;
+>>>>>>> master
 }
 
-.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-services {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
-  list-style-type: none;
-}
-
-.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-services .service {
+.apt-title {
+  font-size: 1.4rem;
+  font-weight: 700;
   text-align: center;
-  font-size: 20px;
-  margin-top: 40px;
+  margin-bottom: 0.3rem;
 }
 
-.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-services .service .service-title {
-  opacity: 0;
+.apt-img-small {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: all 0.2s;
 }
 
-.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-services .service .service-title:hover {
-  opacity: 1;
-  color: #ff5a5f;
-}
-
-.apt-section .noapt-section {
-  margin-top: 50px;
-}
-
-.apt-section .noapt-section .create-apt-section {
+.apt-services {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.service {
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  width: 500px;
-  margin: 0 auto;
-  padding: 20px 0;
-  border: 1px solid #ff5a5f;
-  border-radius: 15px;
 }
 
-.apt-section .noapt-section .create-apt-section .alert-noapt {
-  font-size: 18px;
-}
-
-.apt-section .noapt-section .create-apt-section .create-apt-link {
-  font-size: 16px;
-  color: black;
+.apartment-button {
+  position: absolute;
+  z-index: 3;
+  top: 20%;
   text-decoration: none;
+  border: 3px solid #fff;
+  padding: 2rem;
+  color: #fff;
+  border-radius: 4rem;
+  background-color: rgba(255, 90, 95, 0.7);
+  opacity: 0;
+  transition: all 0.2s;
+  font-size: 1.3rem;
 }
 
-.apt-section .noapt-section .create-apt-section .create-apt-link:hover {
-  color: #ff5a5f;
+.apartment-button:hover {
+  transform: translateY(-0.5rem);
+}
+
+.apartment-button:active {
+  transform: translateY(0rem);
+}
+
+.head {
+  padding: 3rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-font-black);
+}
+
+.error {
+  border-color: #d60565;
+}
+
+.message {
+  display: none;
+  color: #d60565;
+}
+
+.message-on {
+  display: block;
 }
 
 .active {

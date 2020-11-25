@@ -42351,22 +42351,22 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+//JS PER PAGINE CREATE ED EDIT
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
 
-var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; // aggiunta campo input file fino ad un max di 5
+var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; //QUANDO ESCE DAI CAMPI INTERESSATI RICALCOLA LE COORDINATE IN CAMPI HIDDEN
 
-$('#add-img').click(function () {
-  if ($('.img-input').length < 5) {
-    $('.container-upload').append("<input type=\"file\" name=\"img\" enctype=\"multipart/form-data\" class=\"img-input form-control-file\" id=\"img\" accept=\"image/*\">");
-
-    if ($('.img-input').length >= 5) {
-      $('#add-img').hide();
-    }
-  }
+$('#address, #city, #postal').focusout(function () {
+  calcoloCoordinate();
 });
-$('#address').focusout(function () {
+$(document).on('click', '.img-detele', function () {
+  $(this).submit();
+}); // FUNZIONI
+// calcolo coordinate con chiamata all'api tomtom
+
+function calcoloCoordinate() {
   var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
   console.log(data);
   tt.services.fuzzySearch({
@@ -42375,102 +42375,6 @@ $('#address').focusout(function () {
   }).go().then(function (response) {
     $('#longitude').attr('value', response.results[0].position['lng']);
     $('#latitude').attr('value', response.results[0].position['lat']);
-  });
-});
-$('#pippo').submit(function (event) {
-  event.preventDefault(); // SALVO I VALORI DEL FORM
-  // form = document.getElementById('creazione');
-  // var formData = new FormData(form);
-  // console.log(formData);
-  // var form = $('#creazione').serializeArray();
-  // console.log(form);
-  // salvo i checkbox con un ciclo
-
-  var services = [];
-  $('input[name=services]').each(function () {
-    var ischecked = $(this).is(":checked");
-
-    if (ischecked) {
-      services.push($(this).val());
-    }
-  });
-  console.log(services); //uguale per le immagini
-
-  var images = document.querySelectorAll($('.img-input')); // var images = [];
-  // $('input[name=img]').each(function() {
-  //     if($(this).val() != "") {
-  //         images.push($(this).val());
-  //     }
-  // });
-
-  console.log(images);
-  var apartmentData = {
-    title: $('input[name=title]').val(),
-    address: $('#address').val(),
-    city: $('input[name=city]').val(),
-    postalCode: $('input[name=postal-code]').val(),
-    country: $('input[name=country]').val(),
-    description: $('textarea[name=description]').val(),
-    dailyPrice: $('input[name=daily-price]').val(),
-    sm: $('input[name=sm]').val(),
-    rooms: $('input[name=rooms]').val(),
-    beds: $('input[name=beds]').val(),
-    bathrooms: $('input[name=bathrooms]').val(),
-    services: services,
-    user_id: $('input[name=user-id]').val(),
-    img: images
-  };
-  console.log(apartmentData);
-  var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val(); // console.log(data);
-
-  tt.services.fuzzySearch({
-    key: apiKey,
-    query: data
-  }).go().then(function (response) {
-    createApart(response, apartmentData);
-  });
-}); // se sono nel form crea apartament richiamo la funzione
-// console.log('lat' + response.results[0].position['lat']);
-// console.log('lng' + response.results[0].position['lng']);
-// var address = response.results[0].address['streetName'];
-// var longitude = response.results[0].position['lng'];
-// var latitude = response.results[0].position['lat'];
-// var city = response.results[0].address['municipality'];
-// var postalCode = response.results[0].address['postalCode'];
-// var country = response.results[0].address['country'];
-// FUNZIONI
-
-function createApart(response, apartmentData) {
-  $.ajax({
-    url: 'http://127.0.0.1:8000/api/apartments',
-    method: 'POST',
-    headers: {
-      KEY: 'test'
-    },
-    data: {
-      title: apartmentData.title,
-      address: apartmentData.address,
-      city: apartmentData.city,
-      postal_code: apartmentData.postalCode,
-      country: apartmentData.country,
-      description: apartmentData.description,
-      daily_price: apartmentData.dailyPrice,
-      sm: apartmentData.sm,
-      rooms: apartmentData.rooms,
-      beds: apartmentData.beds,
-      user_id: apartmentData.user_id,
-      bathrooms: apartmentData.bathrooms,
-      img: apartmentData.img,
-      latitude: response.results[0].position['lng'],
-      longitude: response.results[0].position['lat']
-    },
-    success: function success(data) {
-      console.log(data);
-      alert('appartamento inserito');
-    },
-    error: function error(errore) {
-      console.log(errore);
-    }
   });
 }
 
@@ -42487,8 +42391,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
-__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js"); //require("./apt");
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
 
+__webpack_require__(/*! ./apt */ "./resources/js/apt.js");
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
@@ -42502,9 +42407,25 @@ $(document).ready(function () {
     $(".nav__user__menu").toggleClass("active");
     getcards();
   });
+  $('#search').keydown(function () {
+    if (event.which == 13 || event.keyCode == 13) {
+      if ($("#search").val() != "") {
+        getCoordinates($("#search").val(), $("#range-value").html());
+      }
+    }
+  });
   $(".nav__search-button").click(function () {
     $('#hidenav').hide();
     hidenav();
+  });
+  $("#search").keyup(function () {
+    $('#auto-complete').empty();
+    autoComplete($("#search").val());
+  }); //funzione per selezionare suggerimento e restuirlo nella search
+
+  $(document).on('click', '.complete-results', function () {
+    var value = $(this).text();
+    $('#search').val(value);
   });
 }); // animation
 
@@ -42571,7 +42492,174 @@ var getIp = function () {
       console.log(arguments);
     }
   });
-}();
+}(); // funzione per i suggerimenti nella search
+
+
+function autoComplete(query) {
+  if (query.length < 3 || query == '') {
+    $('#auto-complete').removeClass('complete-on');
+  }
+
+  if (query != '' && isNaN(query) && query.length > 3) {
+    $('#auto-complete').addClass('complete-on');
+    tt.services.fuzzySearch({
+      key: '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk',
+      query: query
+    }).go().then(function (response) {
+      var address = [];
+      var results = '';
+
+      for (var i = 0; i < 4; i++) {
+        if (response.results[i]) {
+          // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni                
+          var streetName = response.results[i].address['streetName'];
+          var city = response.results[i].address['municipality'];
+          var countryCode = response.results[i].address['countryCode'];
+
+          if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == 'IT') {
+            address.push(streetName + ' ' + city);
+          } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == 'IT') {
+            address.push(city);
+          }
+        }
+      }
+
+      for (var _i = 0; _i < address.length; _i++) {
+        results += '<div class="complete-results">' + address[_i] + '</div>';
+      }
+
+      document.getElementById('auto-complete').innerHTML = results;
+
+      if (results == '') {
+        $('#auto-complete').removeClass('complete-on');
+      }
+    });
+  }
+} // per chiudere l'autocomplete al click fuori
+
+
+$(document).click(function () {
+  $('#auto-complete').removeClass('complete-on');
+}); // validazione tipi
+
+var letterNumber = /^[0-9a-zA-Z ]+$/;
+var letter = /^[a-zA-Z ]+$/;
+var number = /^[0-9 ]+$/;
+var allChar = /^[a-zA-Z0-9!@#\$%\^\&*\)\( +=.,_-]+$/; // validazione input della pagina create
+
+$('#title').focusout(function () {
+  checkInput($(this), allChar, 10, 300, 'il titolo');
+});
+$('#address').focusout(function () {
+  checkInput($(this), letterNumber, 10, 300, "l'indirizzo");
+});
+$('#city').focusout(function () {
+  checkInput($(this), letter, 1, 30, "la città");
+});
+$('#postal-code').focusout(function () {
+  checkInput($(this), allChar, 1, 20, "il codice postale");
+});
+$('#country').focusout(function () {
+  checkInput($(this), letter, 1, 30, "la nazione");
+});
+$('#description').focusout(function () {
+  checkInput($(this), allChar, 20, 2000, "la descrizione");
+});
+$('#daily-price').focusout(function () {
+  checkInput($(this), number, 1, 2000, "il prezzo giornaliero");
+});
+$('#sm').focusout(function () {
+  checkInput($(this), number, 1, 2000, "i metri quadrati");
+});
+$('#rooms').focusout(function () {
+  checkInput($(this), number, 1, 2000, "le camere");
+});
+$('#beds').focusout(function () {
+  checkInput($(this), number, 1, 2000, "i letti");
+});
+$('#bathrooms').focusout(function () {
+  checkInput($(this), number, 1, 2000, "i bagni");
+});
+$('#crea').click(function (e) {
+  if (checkInput($('#title'), allChar, 10, 300, 'il titolo') || checkInput($('#address'), letterNumber, 10, 300, "l'indirizzo") || checkInput($('#city'), letter, 1, 30, "la città") || checkInput($('#postal-code'), allChar, 1, 20, "il codice postale") || checkInput($('#country'), letter, 1, 30, "la nazione") || checkInput($('#description'), allChar, 20, 2000, "la descrizione") || checkInput($('#daily-price'), number, 1, 2000, "il prezzo giornaliero") || checkInput($('#sm'), number, 1, 2000, "i metri quadrati") || checkInput($('#rooms'), number, 1, 2000, "le camere") || checkInput($('#beds'), number, 1, 2000, "i letti") || checkInput($('#bathrooms'), number, 1, 2000, "i bagni")) {
+    e.preventDefault();
+  }
+}); // funzione per controllare lato client il form
+
+function checkInput(selector, kind, min, max, field) {
+  if (selector.val() == '' || !matchKind(selector, kind) || selector.val().length < min || selector.val().length > max) {
+    selector.addClass('error');
+    selector.next('.message').addClass('message-on');
+
+    if (selector.val() == '') {
+      selector.next('.message').text('Non hai inserito ' + field);
+    } else if (!matchKind(selector, kind)) {
+      selector.next('.message').text('Hai inserito un carattere non valido');
+    } else if (selector.val().length < min) {
+      selector.next('.message').text('Il campo è troppo breve');
+    } else if (selector.val().length > max) {
+      selector.next('.message').text('Il campo è troppo lungo');
+    }
+
+    return true;
+  } else {
+    selector.removeClass('error');
+    selector.next('.message').removeClass('message-on');
+  }
+} // funzione per controllare se l'input soddisfa la condizione di tipo
+
+
+function matchKind(selector, kind) {
+  if (selector.val().match(kind)) {
+    return true;
+  }
+
+  return false;
+}
+
+/***/ }),
+
+/***/ "./resources/js/apt.js":
+/*!*****************************!*\
+  !*** ./resources/js/apt.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$('.arrow-slider-sx').click(function () {
+  prevImage($('.apt-image.active'));
+});
+$('.arrow-slider-dx').click(function () {
+  nextImage('.apt-image.active');
+}); //** FUNZIONI **/
+
+function nextImage() {
+  activeImage.removeClass('active');
+  activeImage.addClass('hidden');
+
+  if (activeImage.hasClass('last') == true) {
+    activeImage.first().removeClass('hidden');
+    activeImage.first().addClass('active');
+  } else {
+    //metto la classe attiva al successivo
+    activeImage.next().removeClass('hidden');
+    activeImage.next().addClass('active');
+  }
+}
+
+function prevImage() {
+  activeImage.removeClass('active');
+  activeImage.addClass('hidden');
+
+  if (activeImage.hasClass('first') == true) {
+    activeImage.last().removeClass('hidden');
+    activeImage.last().addClass('active');
+  } else {
+    //metto la classe attiva al successivo
+    activeImage.prev().removeClass('hidden');
+    activeImage.prev().addClass('active');
+  }
+}
 
 /***/ }),
 
@@ -42627,21 +42715,60 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$('#sponsors-select').on('change', function () {
-  $('#summary-sponsor').empty();
-  var check = $('#sponsors-select').val();
-  var sponsor = JSON.parse(check);
-  var price = sponsor.sponsor_price;
-  $('#summary-sponsor').append(price);
-  console.log(sponsor);
-  $('#btn-sponsor').click(function () {
-    // var price = sponsor.sponsor_price;
-    // $('#summary-sponsor').append(price);
-    console.log(price);
+document.addEventListener("DOMContentLoaded", function () {
+  var form = document.querySelector('#payment-form');
+  var client_token = document.querySelector('#client_token').value;
+  var option1 = document.querySelector('#sponsorBasic');
+  var option2 = document.querySelector('#sponsorMedium');
+  var option3 = document.querySelector('#sponsorPremium');
+  var amount = document.querySelector('#amount');
+  var sponsor_plan = document.querySelector('#sponsor_plan');
+
+  option1.onclick = function () {
+    amount.value = option1.value;
+    amount_preview.innerHTML = '€' + amount.value;
+    sponsor_plan.value = 1;
+  };
+
+  option2.onclick = function () {
+    amount.value = option2.value;
+    amount_preview.innerHTML = '€' + amount.value;
+    sponsor_plan.value = 2;
+  };
+
+  option3.onclick = function () {
+    amount.value = option3.value;
+    amount_preview.innerHTML = '€' + amount.value;
+    sponsor_plan.value = 3;
+  };
+
+  braintree.dropin.create({
+    authorization: client_token,
+    selector: '#bt-dropin',
+    paypal: {
+      flow: 'vault'
+    }
+  }, function (createErr, instance) {
+    if (createErr) {
+      console.log('Create Error', createErr);
+      return;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      instance.requestPaymentMethod(function (err, payload) {
+        if (err) {
+          console.log('Request Payment Method Error', err);
+          return;
+        } // Add the nonce to the form and submit
+
+
+        document.querySelector('#nonce').value = payload.nonce;
+        form.submit();
+      });
+    });
   });
 });
-var aptId = $('#apt-id').val();
-console.log(aptId);
 
 /***/ }),
 
@@ -42663,8 +42790,8 @@ console.log(aptId);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

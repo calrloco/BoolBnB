@@ -42791,11 +42791,16 @@ document.addEventListener("DOMContentLoaded", function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __webpack_require__(/*! D:\pay\BoolBnB\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! D:\pay\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 =======
 __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> master
+=======
+__webpack_require__(/*! C:\lavori\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\lavori\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 >>>>>>> master
 
 

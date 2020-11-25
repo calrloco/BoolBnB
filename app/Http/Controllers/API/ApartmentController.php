@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Apartment;
 use App\Image;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\Builder;
 
 class ApartmentController extends Controller
 {
@@ -26,10 +27,19 @@ class ApartmentController extends Controller
         if($validator->fails()){
             return response()->json($validator->messages());
         }
-
+        $q = $request->services;
         $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
-        point(longitude, latitude)) * .001 as distance")->having('distance','<=',$request->maxDist)->orderBy('distance','asc')->get();
+        point(longitude, latitude)) * .001 as distance")
+        ->having('distance','<=',$request->maxDist)
+        ->orderBy('distance','asc')
+        ->whereHas('services', function (Builder $q) {
+            $q->where('apartment_id', 'apartments.id');
+        })
+        ->get();
         
+                
+
+
         return response()->json($query, 200);
     }
 
@@ -134,5 +144,8 @@ class ApartmentController extends Controller
     public function getServices($id){
            
     }
+
+
+
 }
 

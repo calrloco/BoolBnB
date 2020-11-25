@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="container__search">
         <div class="container__search-left">
         <div class="container__search-left__top">

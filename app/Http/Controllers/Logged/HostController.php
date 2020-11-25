@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Braintree;
+use Illuminate\Support\Facades\DB;
+
 
 class HostController extends Controller
 {
@@ -184,6 +186,7 @@ class HostController extends Controller
             $image = Storage::disk('public')->put('images', $image);
             Image::insert(
                 [
+                    'created_at' => Carbon::now(),
                     'path' => $image,
                     'apartment_id' => $apartment->id,
                 ]
@@ -264,8 +267,23 @@ class HostController extends Controller
 
             // Prendo la data corrente
             $start = Carbon::now();
-            // Data di scadenza
-            $end_sponsor = Carbon::now()->addHours($sponsor_durate);
+
+            // Data di scadenza con check su precedenti sponsorizzazioni attive
+            $checkSponsor = Apartment::join('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
+            ->where('apartment_sponsor.apartment_id', '=', $id)
+            ->where('apartment_sponsor.end_sponsor', '>=', Carbon::now())
+            ->orderBy('apartment_sponsor.end_sponsor', 'desc')
+            ->limit(1)
+            ->get();
+
+            if(!empty($checkSponsor)) {
+                $end_sponsor = Carbon::parse($checkSponsor[0]->end_sponsor)->addHours($sponsor_durate);
+
+            } else {
+
+                $end_sponsor = Carbon::now()->addHours($sponsor_durate);
+            }
+
 
             // Id Transazione
             $transId = $transaction->id;

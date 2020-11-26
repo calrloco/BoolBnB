@@ -97,7 +97,7 @@
 
         <section class="map-section">
 
-            <div class="map-apaetment" id="map"></div>
+            <div class="map-apartment" id="map"></div>
 
             {{-- <div class="message-box">
 

@@ -31,27 +31,28 @@ class ApartmentController extends Controller
         }
         $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
         point(longitude, latitude)) * .001 as distance")
-        ->having('distance','<=',$request->maxDist);
-        // FILTRO per servizi se presenti        
+        ->having('distance','<=',$request->maxDist)
+        ->where('attivo', '=', '1');
+        // FILTRO per servizi se presenti
         if($request['services']) {
             $serv = $request['services'];
             foreach($serv as $ser) {
                 $query->whereHas('services', function (Builder $b) use ($ser) {
                 $b->where('services.id', '=', $ser );
-    
+
                 });
             }
         }
 
 
         $query = $query->orderBy('distance','asc')->get();
-            
+
         // ->get();
 
-        
 
 
-        
+
+
 
         return response()->json($query, 200);
     }
@@ -156,10 +157,9 @@ class ApartmentController extends Controller
     }
 
     public function getServices($id){
-           
+
     }
 
 
 
 }
-

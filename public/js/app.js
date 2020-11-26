@@ -42406,7 +42406,6 @@ var _require2 = __webpack_require__(/*! handlebars */ "./node_modules/handlebars
 $(document).ready(function () {
   $(".nav__user-box").click(function () {
     $(".nav__user__menu").toggleClass("active");
-    getcards();
   });
   $("#search").keydown(function () {
     if (event.which == 13 || event.keyCode == 13) {
@@ -42831,8 +42830,13 @@ document.addEventListener("DOMContentLoaded", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> master
 
 
 /***/ })

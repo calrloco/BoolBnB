@@ -4641,6 +4641,8 @@ readers do not read off random characters that represent icons */
   --button-color-hover: #F7F7F7;
   --gradient-color: radial-gradient(circle at left center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
   --form-radius: 1.1rem;
+  --margin-big: 5rem;
+  --margin-small: 1.5rem;
 }
 
 *,
@@ -5672,7 +5674,6 @@ textarea {
 }
 
 .info-apt-section .info-box-dx {
-  width: 400px;
   height: 100%;
   position: sticky;
   -webkit-position: -webkit-sticky;
@@ -5682,7 +5683,7 @@ textarea {
 
 .info-apt-section .info-box-dx .send-message-box {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   flex-direction: column;
   border-radius: 1.2rem;
 }
@@ -5690,12 +5691,14 @@ textarea {
 .info-apt-section .info-box-dx .send-message-box .message-title {
   font-size: 22px;
   padding-bottom: 12px;
+  width: 100%;
+  text-align: center;
 }
 
 .info-apt-section .info-box-dx .send-message-box .message-form {
   display: flex;
   flex-direction: column;
-  align-self: center;
+  align-self: flex-end;
   margin-right: 0px;
 }
 
@@ -5723,6 +5726,13 @@ textarea {
 .map-apaetment {
   width: 100%;
   height: 100%;
+}
+
+.firstname-message,
+.lastname-message,
+.email-message,
+.message {
+  margin-bottom: 1rem;
 }
 
 h1 {

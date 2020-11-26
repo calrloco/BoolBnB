@@ -2,6 +2,7 @@
 @section('content')
     <div class="container-center">
         <section class="top-section">
+            <span class="hidden" id="app-id">{{ $apartment->id }}</span>
             <div class="title-apt">
                 <p class="title">{{ $apartment->title }}</p>
                 <a class="address-apt" href="#">{{ $apartment->address }}, {{ $apartment->city }},
@@ -11,12 +12,12 @@
         <div class="container-slider-app">
             <section class="slider-section">
                 <div class="apt-images">
-                    <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
+                    {{-- <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
                     @for ($i = 0; $i < $apartment->images->count('id'); $i++)
                         <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
                             src="{{ $apartment->images[$i]->path }}" alt="{{ $apartment->title }}">
                     @endfor
-                    <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
+                    <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i> --}}
                 </div>
             </section>
         </div>
@@ -63,23 +64,23 @@
                         <form class="" action="" method="post">
                             <p class "firstname-message">
                                 <label for="fname">Nome:</label>
-                                <input type="text" id="fname" name="fname">
+                            <input type="text" id="fname" value="{{Auth::check() ? Auth::user()->name : ''}}" name="fname">
                             </p>
                             <p class "lastname-message">
                                 <label for="lname">Cognome:</label>
-                                <input type="text" id="lname" name="lname">
+                                <input type="text" id="lname" value="{{Auth::check() ? Auth::user()->lastname : ''}}" name="lname">
                             </p>
                             <p class "email-message">
                                 <label for="email">Email:</label>
-                                <input type="email" id="email" name="email">
+                                <input type="email" id="email" value="{{Auth::check() ? Auth::user()->email : ''}}" name="email">
                             </p>
-                            <p class "text-message">
-                                <label for="message">Testo:</label>
-                                <textarea name="message" maxlenght="500" class="message" cols="30" rows="10">
+                           
+                            <label for="message">Messagio</label>
+                            <textarea rows="10" cols="25">
                             </textarea>
-                            </p>
+                            
                             <p class "send-message">
-                                <input type="submit" name="mail-submit" value="Invia mail!"></input>
+                                <input type="submit"  rows="10" cols="25" name="mail-submit" value="Invia mail!"></input>
                             </p>
                         </form>
                     </div>
@@ -90,12 +91,13 @@
 
 
         <section class="map-section">
-            <div class="map-box">
-                MAPPA
-            </div>
+
+            <div class="map-apaetment" id="map"></div>
+
             {{-- <div class="message-box">
 
             </div> --}}
         </section>
     </div>
+    <script src="{{ asset('js/apt.js')}}"></script>
 @endsection

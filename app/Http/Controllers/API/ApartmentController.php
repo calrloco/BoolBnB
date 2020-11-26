@@ -30,6 +30,8 @@ class ApartmentController extends Controller
         $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
         point(longitude, latitude)) * .001 as distance")->having('distance','<=',$request->maxDist)->orderBy('distance','asc')->get();
         
+        
+
         return response()->json($query, 200);
     }
 
@@ -91,8 +93,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment){
-        return response()->json($require,200);
+    public function show($id){
+       $app = Apartment::where('id','=',$id)->get();
+        return response()->json($app);
     }
 
     /**

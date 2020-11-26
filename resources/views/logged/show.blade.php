@@ -14,7 +14,7 @@
                 <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
                 @for ($i = 0; $i < $apartment->images->count('id'); $i++)
                     <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
-                        src="{{ $apartment->images[$i]->path }}" alt="{{ $apartment->title }}">
+                        src="{{ asset('storage/'.$apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
                 @endfor
                 <div class="arrow-slider-dx">
                     <i class="far fa-arrow-alt-circle-right"></i>

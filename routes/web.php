@@ -31,6 +31,7 @@ Route::resource('/host','Logged\HostController');
 // Route::get('/prova', function () {
 //     return view('logged.messages');
 // });
+Route::post('/send-message','SendMessageController@store')->name('send.message');
 Route::resource('/view','ViewsController');
 Route::get('/apartment', function () {
     return view('apartment');

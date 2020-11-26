@@ -9,8 +9,8 @@ const { Alert } = require("bootstrap");
 $(document).ready(function() {
     $(".nav__user-box").click(function() {
         $(".nav__user__menu").toggleClass("active");
-        getcards();
     });
+
     $("#search").keydown(function() {
         if (event.which == 13 || event.keyCode == 13) {
             if ($("#search").val() != "") {
@@ -119,51 +119,51 @@ function autoComplete(query) {
             .go()
             .then(function(response) {
                 if (response.length > 0) {
-                   
-                
-                var address = [];
-                var results = "";
+                    var address = [];
+                    var results = "";
 
-                for (let i = 0; i < 4; i++) {
-                    if (response.results[i]) {
-                        // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
-                        var streetName =
-                            response.results[i].address["streetName"];
-                        var city = response.results[i].address["municipality"];
-                        var countryCode =
-                            response.results[i].address["countryCode"];
-                        if (
-                            streetName != undefined &&
-                            !address.includes(streetName) &&
-                            city != undefined &&
-                            !address.includes(city) &&
-                            countryCode == "IT"
-                        ) {
-                            address.push(streetName + " " + city);
-                        } else if (
-                            streetName == undefined &&
-                            city != undefined &&
-                            !address.includes(city) &&
-                            countryCode == "IT"
-                        ) {
-                            address.push(city);
+                    for (let i = 0; i < 4; i++) {
+                        if (response.results[i]) {
+                            // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
+                            var streetName =
+                                response.results[i].address["streetName"];
+                            var city =
+                                response.results[i].address["municipality"];
+                            var countryCode =
+                                response.results[i].address["countryCode"];
+                            if (
+                                streetName != undefined &&
+                                !address.includes(streetName) &&
+                                city != undefined &&
+                                !address.includes(city) &&
+                                countryCode == "IT"
+                            ) {
+                                address.push(streetName + " " + city);
+                            } else if (
+                                streetName == undefined &&
+                                city != undefined &&
+                                !address.includes(city) &&
+                                countryCode == "IT"
+                            ) {
+                                address.push(city);
+                            }
                         }
                     }
+                    for (let i = 0; i < address.length; i++) {
+                        results +=
+                            '<div class="complete-results">' +
+                            address[i] +
+                            "</div>";
+                    }
+                    document.getElementById(
+                        "auto-complete"
+                    ).innerHTML = results;
+                    if (results == "") {
+                        $("#auto-complete").removeClass("complete-on");
+                    }
+                    $("#auto-complete").addClass("complete-on");
                 }
-                for (let i = 0; i < address.length; i++) {
-                    results +=
-                        '<div class="complete-results">' +
-                        address[i] +
-                        "</div>";
-                }
-                document.getElementById("auto-complete").innerHTML = results;
-                if (results == "") {
-                    $("#auto-complete").removeClass("complete-on");
-                }
-                $("#auto-complete").addClass("complete-on");
-            }
             });
-            
     }
 }
 

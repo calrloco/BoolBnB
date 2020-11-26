@@ -42794,7 +42794,7 @@ $(function () {
   });
   $(".pay").click(function () {
     setTimeout(function () {
-      $(".form-container").addClass("active");
+      $(".form-container").addClass("acti");
     }, 500);
   });
 });

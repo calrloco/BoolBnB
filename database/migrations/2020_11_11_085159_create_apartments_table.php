@@ -28,6 +28,7 @@ class CreateApartmentsTable extends Migration
             $table->string('country');
             $table->float('daily_price', 6, 2);
             $table->text('description');
+            $table->boolean('attivo')->default(1);
             $table->timestamps();
 
             $table->unsignedBigInteger('user_id');

@@ -53,8 +53,8 @@ Route::get('/test', function () {
     return view('test');
 });
 
+Route::patch('host/visibility/{id}', 'Logged\HostController@visibility')->name('logged.visibility');
+
 
 
 Route::resource('/images','Logged\ImageController');
-
-

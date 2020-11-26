@@ -42400,6 +42400,9 @@ var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebar
 var _require = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js"),
     Alert = _require.Alert;
 
+var _require2 = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js"),
+    log = _require2.log;
+
 $(document).ready(function () {
   $(".nav__user-box").click(function () {
     $(".nav__user__menu").toggleClass("active");
@@ -42540,21 +42543,23 @@ function autoComplete(query) {
 
 $(document).click(function () {
   $("#auto-complete").removeClass("complete-on");
-}); // validazione tipi
+}); // VALIDAZIONE FORM
 
 var letterNumber = /^[0-9a-zA-Z ]+$/;
-var letter = /^[a-zA-Z ]+$/;
+var letter = /^[a-zA-Z' ]+$/;
 var number = /^[0-9 ]+$/;
-var allChar = /^[a-zA-Z0-9!@#\$%\^\&*\)\( +=.,_-]+$/; // validazione input della pagina create
+var allChar = /^[a-zA-Z0-9'!@#àèòìù\$%\^\&*\)\( +=.,_-]+$/;
+var dateR = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+var emailR = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; // validazione input della pagina create e edit apartment
 
-$("#title").focusout(function () {
-  checkInput($(this), allChar, 10, 300, "il titolo");
+$('#title').focusout(function () {
+  checkInput($(this), allChar, 10, 300, 'il titolo');
 });
-$("#address").focusout(function () {
-  checkInput($(this), letterNumber, 10, 300, "l'indirizzo");
+$('#address').focusout(function () {
+  checkInput($(this), allChar, 3, 300, "l'indirizzo");
 });
-$("#city").focusout(function () {
-  checkInput($(this), letter, 1, 30, "la città");
+$('#city').focusout(function () {
+  checkInput($(this), allChar, 1, 30, "la città");
 });
 $("#postal-code").focusout(function () {
   checkInput($(this), allChar, 1, 20, "il codice postale");
@@ -42565,8 +42570,8 @@ $("#country").focusout(function () {
 $("#description").focusout(function () {
   checkInput($(this), allChar, 20, 2000, "la descrizione");
 });
-$("#daily-price").focusout(function () {
-  checkInput($(this), number, 1, 2000, "il prezzo giornaliero");
+$('#daily-price').focusout(function () {
+  checkInput($(this), number, 1, 2000, "il prezzo");
 });
 $("#sm").focusout(function () {
   checkInput($(this), number, 1, 2000, "i metri quadrati");
@@ -42579,12 +42584,63 @@ $("#beds").focusout(function () {
 });
 $("#bathrooms").focusout(function () {
   checkInput($(this), number, 1, 2000, "i bagni");
-});
-$("#crea").click(function (e) {
-  if (checkInput($("#title"), allChar, 10, 300, "il titolo") || checkInput($("#address"), letterNumber, 10, 300, "l'indirizzo") || checkInput($("#city"), letter, 1, 30, "la città") || checkInput($("#postal-code"), allChar, 1, 20, "il codice postale") || checkInput($("#country"), letter, 1, 30, "la nazione") || checkInput($("#description"), allChar, 20, 2000, "la descrizione") || checkInput($("#daily-price"), number, 1, 2000, "il prezzo giornaliero") || checkInput($("#sm"), number, 1, 2000, "i metri quadrati") || checkInput($("#rooms"), number, 1, 2000, "le camere") || checkInput($("#beds"), number, 1, 2000, "i letti") || checkInput($("#bathrooms"), number, 1, 2000, "i bagni")) {
+}); // al click del submit controlla se i campi soddisfano le condizioni e impedisce il submit del create e del edit apartment
+
+$('#crea').click(function (e) {
+  if (checkInput($('#title'), allChar, 10, 300, 'il titolo') && checkInput($('#address'), allChar, 3, 300, "l'indirizzo") && checkInput($('#city'), allChar, 1, 30, "la città") && checkInput($('#postal-code'), allChar, 1, 20, "il codice postale") && checkInput($('#country'), letter, 1, 30, "la nazione") && checkInput($('#description'), allChar, 20, 2000, "la descrizione") && checkInput($('#daily-price'), number, 1, 2000, "il prezzo prezzo") && checkInput($('#sm'), number, 1, 2000, "i metri quadrati") && checkInput($('#rooms'), number, 1, 2000, "le camere") && checkInput($('#beds'), number, 1, 2000, "i letti") && checkInput($('#bathrooms'), number, 1, 2000, "i bagni") || checkInput($('#title'), allChar, 10, 300, 'il titolo') || checkInput($('#address'), allChar, 3, 300, "l'indirizzo") || checkInput($('#city'), allChar, 1, 30, "la città") || checkInput($('#postal-code'), allChar, 1, 20, "il codice postale") || checkInput($('#country'), letter, 1, 30, "la nazione") || checkInput($('#description'), allChar, 20, 2000, "la descrizione") || checkInput($('#daily-price'), number, 1, 2000, "il prezzo") || checkInput($('#sm'), number, 1, 2000, "i metri quadrati") || checkInput($('#rooms'), number, 1, 2000, "le camere") || checkInput($('#beds'), number, 1, 2000, "i letti") || checkInput($('#bathrooms'), number, 1, 2000, "i bagni")) {
     e.preventDefault();
   }
-}); // funzione per controllare lato client il form
+}); // validazione input della pagina register
+
+$('#firstnameR').focusout(function () {
+  checkInput($(this), letter, 2, 50, 'il nome');
+});
+$('#lastnameR').focusout(function () {
+  checkInput($(this), letter, 2, 50, 'il cognome');
+});
+$('#emailR').focusout(function () {
+  checkInput($(this), emailR, 2, 255, 'la mail');
+});
+$('#passwordR').focusout(function () {
+  checkInput($(this), allChar, 8, 255, 'la password');
+});
+$('#password-confirmR').focusout(function () {
+  if ($('#password-confirmR').val() != $('#passwordR').val() || $('#password-confirmR').val() == '') {
+    $(this).addClass('error');
+    $(this).next('.message').addClass('message-on');
+    $(this).next('.message').text('Le password non sono uguali');
+  }
+});
+$('#dateR').focusout(function () {
+  if ($('#dateR').val() == '') {
+    $(this).addClass('error');
+    $(this).next('.message').addClass('message-on');
+    $(this).next('.message').text('Non hai inserito la data');
+  } else {
+    $(this).removeClass('error');
+    $(this).next('.message').removeClass('message-on');
+  }
+}); // Al click del form register controlla se tutte le condizione sono soddisfatte
+
+$('#registerR').click(function (e) {
+  if (checkInput($('#firstnameR'), letter, 2, 50, 'il nome') && checkInput($('#lastnameR'), letter, 2, 50, 'il cognome') && checkInput($('#emailR'), emailR, 2, 255, 'la mail') && checkInput($('#passwordR'), allChar, 8, 255, 'la password') && $('#password-confirmR').val() != $('#passwordR').val() && $('#password-confirmR').val() == '' && $('#dateR').val() == '' || checkInput($('#firstnameR'), letter, 2, 50, 'il nome') || checkInput($('#lastnameR'), letter, 2, 50, 'il cognome') || checkInput($('#emailR'), emailR, 2, 255, 'la mail') || checkInput($('#passwordR'), allChar, 8, 255, 'la password') || $('#password-confirmR').val() != $('#passwordR').val() || $('#password-confirmR').val() == '' || $('#dateR').val() == '') {
+    e.preventDefault();
+  }
+}); // fine pagina register
+// validazione pagina login
+
+$('#emailL').focusout(function () {
+  checkInput($(this), emailR, 2, 255, 'la mail');
+});
+$('#passwordL').focusout(function () {
+  checkInput($(this), allChar, 8, 255, 'la password');
+});
+$('#registerL').click(function (e) {
+  if (checkInput($('#emailL'), emailR, 2, 255, 'la mail') && checkInput($('#passwordL'), allChar, 8, 255, 'la password') || checkInput($('#emailL'), emailR, 2, 255, 'la mail') || checkInput($('#passwordL'), allChar, 8, 255, 'la password')) {
+    e.preventDefault();
+  }
+}); // fine validazione pagina login
+// funzione per controllare lato client il form
 
 function checkInput(selector, kind, min, max, field) {
   if (selector.val() == "" || !matchKind(selector, kind) || selector.val().length < min || selector.val().length > max) {
@@ -42594,7 +42650,7 @@ function checkInput(selector, kind, min, max, field) {
     if (selector.val() == "") {
       selector.next(".message").text("Non hai inserito " + field);
     } else if (!matchKind(selector, kind)) {
-      selector.next(".message").text("Hai inserito un carattere non valido");
+      selector.next('.message').text('Hai inserito un formato non valido');
     } else if (selector.val().length < min) {
       selector.next(".message").text("Il campo è troppo breve");
     } else if (selector.val().length > max) {
@@ -42616,6 +42672,46 @@ function matchKind(selector, kind) {
 
   return false;
 }
+
+$(".openB").click(function () {
+  $(".left").addClass("open");
+  setTimeout(function () {
+    $(".right").addClass("open");
+  }, 250);
+  setTimeout(function () {
+    $(".back").addClass("open");
+    $(".front").addClass("display");
+  }, 350);
+  $(".closeB").delay(1000).fadeIn();
+});
+$(".closeB").click(function () {
+  setTimeout(function () {
+    $(".left").removeClass("open");
+  }, 250);
+  $(".right").removeClass("open");
+  setTimeout(function () {
+    $(".back").removeClass("open");
+    $(".front").removeClass("display");
+  }, 600);
+  $(".closeB").fadeOut();
+});
+$(".pay").click(function () {
+  setTimeout(function () {
+    $(".form-container").addClass("acti");
+  }, 500);
+});
+$("#sponsorBasic").click(function () {
+  $('#amount').val([2.99]);
+  $('#sponsor_plan').val([1]);
+});
+$("#sponsorMedium").click(function () {
+  $('#amount').val([5.99]);
+  $('#sponsor_plan').val([2]);
+});
+$("#sponsorPremium").click(function () {
+  $('#amount').val([9.99]);
+  $('#sponsor_plan').val([3]);
+});
 
 /***/ }),
 
@@ -42674,30 +42770,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 document.addEventListener("DOMContentLoaded", function () {
   var form = document.querySelector('#payment-form');
   var client_token = document.querySelector('#client_token').value;
-  var option1 = document.querySelector('#sponsorBasic');
-  var option2 = document.querySelector('#sponsorMedium');
-  var option3 = document.querySelector('#sponsorPremium');
-  var amount = document.querySelector('#amount');
-  var sponsor_plan = document.querySelector('#sponsor_plan');
-
-  option1.onclick = function () {
-    amount.value = option1.value;
-    amount_preview.innerHTML = '€' + amount.value;
-    sponsor_plan.value = 1;
-  };
-
-  option2.onclick = function () {
-    amount.value = option2.value;
-    amount_preview.innerHTML = '€' + amount.value;
-    sponsor_plan.value = 2;
-  };
-
-  option3.onclick = function () {
-    amount.value = option3.value;
-    amount_preview.innerHTML = '€' + amount.value;
-    sponsor_plan.value = 3;
-  };
-
   braintree.dropin.create({
     authorization: client_token,
     selector: '#bt-dropin',
@@ -42746,8 +42818,8 @@ document.addEventListener("DOMContentLoaded", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\pay\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\pay\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

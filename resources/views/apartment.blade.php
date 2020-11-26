@@ -64,23 +64,23 @@
                         <form class="" action="" method="post">
                             <p class "firstname-message">
                                 <label for="fname">Nome:</label>
-                                <input type="text" id="fname" name="fname">
+                            <input type="text" id="fname" value="{{Auth::check() ? Auth::user()->name : ''}}" name="fname">
                             </p>
                             <p class "lastname-message">
                                 <label for="lname">Cognome:</label>
-                                <input type="text" id="lname" name="lname">
+                                <input type="text" id="lname" value="{{Auth::check() ? Auth::user()->lastname : ''}}" name="lname">
                             </p>
                             <p class "email-message">
                                 <label for="email">Email:</label>
-                                <input type="email" id="email" name="email">
+                                <input type="email" id="email" value="{{Auth::check() ? Auth::user()->email : ''}}" name="email">
                             </p>
-                            <p class "text-message">
-                                <label for="message">Testo:</label>
-                                <textarea name="message" maxlenght="500" class="message" cols="30" rows="10">
-                                </textarea>
-                            </p>
+                           
+                            <label for="message">Messagio</label>
+                            <textarea rows="10" cols="25">
+                            </textarea>
+                            
                             <p class "send-message">
-                                <input type="submit" name="mail-submit" value="Invia mail!"></input>
+                                <input type="submit"  rows="10" cols="25" name="mail-submit" value="Invia mail!"></input>
                             </p>
                         </form>
                     </div>
@@ -99,4 +99,5 @@
             </div> --}}
         </section>
     </div>
+    <script src="{{ asset('js/apt.js')}}"></script>
 @endsection

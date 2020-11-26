@@ -38,3 +38,4 @@ class StatsController extends Controller
         return response()->json($response);
     }
 }
+

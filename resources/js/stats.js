@@ -33,14 +33,14 @@ var myfunction = (function () {
      }
   });
   })();
-  function compileChartViews(label,dataset,chart,title,label){
+  function compileChartViews(label,dataset,chart,title){
   var views = chart;
   var statChart = new Chart(views,{
        type: "line",
        data:{
            labels:label,
            datasets:[{
-               label:label+' Annuali',
+               label:'Annuali',
                data:dataset,
                borderColor:'rgb(252,100,45)',
                backgroundColor:'rgba(0,166,153,.4)'

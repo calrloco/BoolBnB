@@ -1,7 +1,7 @@
 require("./bootstrap");
 require("./add");
 require("./sponsor");
-require("./apt");
+
 var $ = require("jquery");
 const Handlebars = require("handlebars");
 const { Alert } = require("bootstrap");

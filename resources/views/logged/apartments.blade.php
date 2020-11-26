@@ -16,7 +16,7 @@
         @foreach($apartments as $apartment)
         <div class="apt-info-general">
             <div class="apt-info-sx">
-                    <img class=apt-img-small src="{{$apartment->images[0]->path}}" alt="{{$apartment->title}}">
+                    <img class=apt-img-small src="{{asset('storage/'. $apartment->images[0]->path)}}" alt="{{$apartment->title}}">
             </div>
             <div class="apt-info-dx">
                  <div class="apt-title">

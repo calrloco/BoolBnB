@@ -5,7 +5,9 @@ use App\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
+
 
 
 class StatsController extends Controller
@@ -37,5 +39,20 @@ class StatsController extends Controller
          
         return response()->json($response);
     }
+
+    public function unreadMessages(Request $request)
+    {
+        $response = User::selectRaw('COUNT(messages.read = 1) AS unread')
+        ->join('apartments', 'users.id', '=', 'apartments.user_id')
+        ->join('messages', 'apartments.id', '=', 'messages.apartment_id')
+        ->where('users.id', '=', $request->id )
+        ->groupBy('messages.id')
+        ->get();
+
+        return response()->json($response);
+    }
+
+
+
 }
 

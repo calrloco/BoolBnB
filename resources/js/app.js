@@ -263,7 +263,14 @@ $('#dateR').focusout(function(){
 
 
 $('#registerR').click(function(e){
-    if(checkInput($('#firstnameR'), letter, 2, 50, 'il nome') ||
+    if(checkInput($('#firstnameR'), letter, 2, 50, 'il nome') &&
+        checkInput($('#lastnameR'), letter, 2, 50, 'il cognome') &&
+        checkInput($('#emailR'), emailR, 2, 255, 'la mail') &&
+        checkInput($('#passwordR'), allChar, 8, 255, 'la password') &&
+        $('#password-confirmR').val() != $('#passwordR').val() &&
+        $('#dateR').val() == '' ||
+
+        checkInput($('#firstnameR'), letter, 2, 50, 'il nome') ||
         checkInput($('#lastnameR'), letter, 2, 50, 'il cognome') ||
         checkInput($('#emailR'), emailR, 2, 255, 'la mail') ||
         checkInput($('#passwordR'), allChar, 8, 255, 'la password') ||

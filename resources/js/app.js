@@ -166,7 +166,7 @@ $('#title').focusout(function(){
     checkInput($(this), allChar, 10, 300, 'il titolo');
 });
 $('#address').focusout(function(){
-    checkInput($(this), allChar, 10, 300, "l'indirizzo");
+    checkInput($(this), allChar, 3, 300, "l'indirizzo");
 });
 $('#city').focusout(function(){
     checkInput($(this), allChar, 1, 30, "la città");
@@ -181,7 +181,7 @@ $('#description').focusout(function(){
     checkInput($(this), allChar, 20, 2000, "la descrizione");
 });
 $('#daily-price').focusout(function(){
-    checkInput($(this), number , 1, 2000, "il prezzo giornaliero");
+    checkInput($(this), number , 1, 2000, "il prezzo");
 });
 $('#sm').focusout(function(){
     checkInput($(this), number , 1, 2000, "i metri quadrati");
@@ -199,24 +199,24 @@ $('#bathrooms').focusout(function(){
 // al click del submit controlla se i campi soddisfano le condizioni e impedisce il submit del create e del edit apartment
 $('#crea').click(function(e){
     if( checkInput($('#title'), allChar, 10, 300, 'il titolo') &&
-        checkInput($('#address'), allChar, 10, 300, "l'indirizzo") &&
+        checkInput($('#address'), allChar, 3, 300, "l'indirizzo") &&
         checkInput($('#city'), allChar, 1, 30, "la città") &&
         checkInput($('#postal-code'), allChar, 1, 20, "il codice postale") &&
         checkInput($('#country'), letter, 1, 30, "la nazione") &&
         checkInput($('#description'), allChar, 20, 2000, "la descrizione") &&
-        checkInput($('#daily-price'), number , 1, 2000, "il prezzo giornaliero") &&
+        checkInput($('#daily-price'), number , 1, 2000, "il prezzo prezzo") &&
         checkInput($('#sm'), number , 1, 2000, "i metri quadrati") &&
         checkInput($('#rooms'), number , 1, 2000, "le camere") &&
         checkInput($('#beds'), number , 1, 2000, "i letti") &&
         checkInput($('#bathrooms'), number , 1, 2000, "i bagni") ||
 
             checkInput($('#title'), allChar, 10, 300, 'il titolo') ||
-            checkInput($('#address'), allChar, 10, 300, "l'indirizzo") ||
+            checkInput($('#address'), allChar, 3, 300, "l'indirizzo") ||
             checkInput($('#city'), allChar, 1, 30, "la città") ||
             checkInput($('#postal-code'), allChar, 1, 20, "il codice postale") ||
             checkInput($('#country'), letter, 1, 30, "la nazione") ||
             checkInput($('#description'), allChar, 20, 2000, "la descrizione") ||
-            checkInput($('#daily-price'), number , 1, 2000, "il prezzo giornaliero") ||
+            checkInput($('#daily-price'), number , 1, 2000, "il prezzo") ||
             checkInput($('#sm'), number , 1, 2000, "i metri quadrati") ||
             checkInput($('#rooms'), number , 1, 2000, "le camere") ||
             checkInput($('#beds'), number , 1, 2000, "i letti") ||
@@ -242,7 +242,7 @@ $('#passwordR').focusout(function(){
     checkInput($(this), allChar, 8, 255, 'la password');
 });
 $('#password-confirmR').focusout(function(){
-    if($('#password-confirmR').val() != $('#passwordR').val()){
+    if($('#password-confirmR').val() != $('#passwordR').val() || $('#password-confirmR').val() == ''){
         $(this).addClass('error');
         $(this).next('.message').addClass('message-on');
         $(this).next('.message').text('Le password non sono uguali');
@@ -257,17 +257,16 @@ $('#dateR').focusout(function(){
     $(this).removeClass('error');
     $(this).next('.message').removeClass('message-on');
    }
-    console.log($('#dateR').val());
-
 });
 
-
+// Al click del form register controlla se tutte le condizione sono soddisfatte
 $('#registerR').click(function(e){
     if(checkInput($('#firstnameR'), letter, 2, 50, 'il nome') &&
         checkInput($('#lastnameR'), letter, 2, 50, 'il cognome') &&
         checkInput($('#emailR'), emailR, 2, 255, 'la mail') &&
         checkInput($('#passwordR'), allChar, 8, 255, 'la password') &&
-        $('#password-confirmR').val() != $('#passwordR').val() &&
+        $('#password-confirmR').val() != $('#passwordR').val() && 
+        $('#password-confirmR').val() == '' &&
         $('#dateR').val() == '' ||
 
         checkInput($('#firstnameR'), letter, 2, 50, 'il nome') ||
@@ -275,11 +274,33 @@ $('#registerR').click(function(e){
         checkInput($('#emailR'), emailR, 2, 255, 'la mail') ||
         checkInput($('#passwordR'), allChar, 8, 255, 'la password') ||
         $('#password-confirmR').val() != $('#passwordR').val() ||
+        $('#password-confirmR').val() == '' ||
         $('#dateR').val() == ''
     ){
         e.preventDefault(); 
     }
 });
+// fine pagina register
+
+// validazione pagina login
+$('#emailL').focusout(function(){
+    checkInput($(this), emailR, 2, 255, 'la mail');
+});
+$('#passwordL').focusout(function(){
+    checkInput($(this), allChar, 8, 255, 'la password');
+});
+
+$('#registerL').click(function(e){
+    if(checkInput($('#emailL'), emailR, 2, 255, 'la mail') &&
+    checkInput($('#passwordL'), allChar, 8, 255, 'la password') ||
+
+    checkInput($('#emailL'), emailR, 2, 255, 'la mail') ||
+    checkInput($('#passwordL'), allChar, 8, 255, 'la password')
+    ){
+        e.preventDefault();
+    }
+});
+// fine validazione pagina login
 
 // funzione per controllare lato client il form
 function checkInput(selector, kind, min, max, field) {

@@ -4,7 +4,7 @@
 <div class="signup_container">
     <div class="signup">
       <p>Sign Up for an Account</p>
-      <form method="POST" id="creazione" action="{{ route('register') }}"> 
+      <form method="POST" id="creazione" action="{{ route('register') }}" > 
         @csrf
         <div class="name_inputs">
           <!-- first name -->

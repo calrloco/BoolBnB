@@ -13,12 +13,17 @@
         <div class="container-slider-app">
             <section class="slider-section">
                 <div class="apt-images">
-                     <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
+                    <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-left arrow-slider-dx">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                  
                     @for ($i = 0; $i < $apartment->images->count('id'); $i++)
                         <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
                             src="{{asset('storage/'.$apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
                     @endfor
-                    <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i> 
+                    <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-right arrow-slider-sx">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
                 </div>
             </section>
         </div>

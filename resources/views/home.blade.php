@@ -21,10 +21,13 @@
             <p class="sponsor__home-title">In evidenza</p>
             <div class="sponsor__home">
                 @if (count($apartment) > 0)
-                @for ($i = 0; $i < 4 && $i < count($apartment); $i++)
+                    @for ($i = 0; $i < 4 && $i < count($apartment); $i++)
                         <div class="sponsor__home-card">
                             <div class="sponsor__home-card-img">
-                                <img src="{{ asset('storage/'.$apartment[$i]->images[0]->path) }}" alt="{{ $apartment[$i]->title }}" alt="">
+                                @if ($apartment[$i]->images[0]->path)
+                                    <img src="{{ asset('storage/' . $apartment[$i]->images[0]->path) }}"
+                                        alt="{{ $apartment[$i]->title }}" alt="">
+                                @endif
                             </div>
                             <div class="sponsor__home-card-text">
                                 <p>{{ $apartment[$i]->title }}</p>

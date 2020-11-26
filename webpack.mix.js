@@ -16,4 +16,5 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/stats.js','public/js')
     .js('resources/js/sponsor.js','public/js')
     .js('resources/js/apt.js','public/js')
+    .js('resources/js/aptSlider.js','public/js')
     .sass('resources/sass/app.scss', 'public/css');

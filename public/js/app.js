@@ -42403,7 +42403,6 @@ var _require = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/di
 $(document).ready(function () {
   $(".nav__user-box").click(function () {
     $(".nav__user__menu").toggleClass("active");
-    getcards();
   });
   $("#search").keydown(function () {
     if (event.which == 13 || event.keyCode == 13) {

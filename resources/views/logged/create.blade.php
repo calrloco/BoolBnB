@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="signup_container">
+    <div class="container-center create-update">
         <h2>Registra il tuo appartamento</h2>
 
 
@@ -53,7 +53,7 @@
             </div>
 
             <!-- CARATTERISTICHE-->
-            <div class="input row">
+            <div class="input row caratteristiche">
                 <div class="input-group">
                     <div class="label-input">
                         <label for="daily_price">Prezzo per notte</label>
@@ -111,7 +111,7 @@
                 <input id="longitude" type="hidden" name="longitude" value="">
 
 
-                <input type="submit" id="crea">
+                <input type="submit" id="crea" value="Registra">
 
 
 

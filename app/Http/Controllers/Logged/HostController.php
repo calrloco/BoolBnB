@@ -232,7 +232,6 @@ class HostController extends Controller
         return view('logged.sponsor', compact('apartment','token','sponsors'));
     }
 
-
     public function checkout(Request $request, $id)
     {
         //Prendo i valori dal payment form
@@ -244,7 +243,7 @@ class HostController extends Controller
         if (empty($data['amount'])) {
             return redirect()->back()->with('sponsorError', $sponsorError);
         }
-        
+
         //Informazioni appartamento
         $apartment = Apartment::find($id);
         $apartment_id = $apartment->id;
@@ -253,36 +252,36 @@ class HostController extends Controller
         $sponsor = Sponsor::find($sponsor_id);
         $sponsor_price = $data['amount'];
         $sponsor_durate = $sponsor->sponsor_time;
-        
+
         //registro la transazione
         $result = $gateway->transaction()->sale([
-                'amount' => $sponsor_price,
-                'paymentMethodNonce' => $request['payment_method_nonce'],
-                'customer' => [
-                    'email' => Auth::user()->email,
-                ],
-                'options' => [
-                    'submitForSettlement' => true
-                ]
-            ]);
-       
+            'amount' => $sponsor_price,
+            'paymentMethodNonce' => $request['payment_method_nonce'],
+            'customer' => [
+                'email' => Auth::user()->email,
+            ],
+            'options' => [
+                'submitForSettlement' => true
+            ]
+        ]);
+        
+
         // Check sulla transazione
         if ($result->success || !is_null($result->transaction)) {
             $transaction = $result->transaction;
 
             // Prendo la data corrente
             $start = Carbon::now();
+
             // Data di scadenza con check su precedenti sponsorizzazioni attive
             $checkSponsor = Apartment::join('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
             ->where('apartment_sponsor.apartment_id', '=', $id)
-            ->where('apartment_sponsor.end_sponsor', '>=', Carbon::now())
-            ->orderBy('apartment_sponsor.end_sponsor', 'desc')
-            ->limit(1)
-            ->get();
-
-            if(!empty($checkSponsor)) {
+                ->where('apartment_sponsor.end_sponsor', '>=', Carbon::now())
+                ->orderBy('apartment_sponsor.end_sponsor', 'desc')
+                ->limit(1)
+                ->get();
+            if (empty($checkSponsor)) {
                 $end_sponsor = Carbon::parse($checkSponsor[0]->end_sponsor)->addHours($sponsor_durate);
-
             } else {
 
                 $end_sponsor = Carbon::now()->addHours($sponsor_durate);
@@ -293,7 +292,7 @@ class HostController extends Controller
             $transId = $transaction->id;
 
             // Popolare La Pivot apartmentSponsor
-                $apartment->sponsors()->attach(
+            $apartment->sponsors()->attach(
                 $apartment_id,
                 [
                     'start_sponsor' => $start,
@@ -306,8 +305,9 @@ class HostController extends Controller
         } else {
             abort('404');
         }
-   
-        return redirect()->route('host.index')->with('status','appartamento'.$apartment->title .'sponsorizzato con sucesso');
+
+        return redirect()->route('host.index')->with('status', 'appartamento' . $apartment->title . 'sponsorizzato con sucesso');
     }
-    
 }
+    
+

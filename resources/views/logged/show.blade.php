@@ -14,7 +14,7 @@
                 <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
                 @for ($i = 0; $i < $apartment->images->count('id'); $i++)
                     <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
-                        src="{{ $apartment->images[$i]->path }}" alt="{{ $apartment->title }}">
+                        src="{{ asset('storage/'.$apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
                 @endfor
                 <div class="arrow-slider-dx">
                     <i class="far fa-arrow-alt-circle-right"></i>
@@ -64,7 +64,18 @@
                                 href="{{ route('logged.sponsor', $apartment->id) }}">Sponsorizza il tuo
                                 appartamento!</a></button>
                         <button type="button" class="btn-show services-all visualizza-appartamneto"><a href="#">Modifica annuncio</a></button>
-                        <button type="button" class="btn-show services-all visualizza-appartamneto"><a href="#">Modifica disponibilità</a></button>
+                        {{-- <button type="button" class="btn-show services-all visualizza-appartamneto"><a href="#">Modifica disponibilità</a></button> --}}
+                        <form action="{{ route('logged.visibility', $apartment->id) }}" method="post">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class= "btn-show services-all visualizza-appartamneto">
+                                @if($apartment->attivo == 0)
+                                    Attiva annuncio!
+                                @else
+                                    Disattiva annuncio!
+                                @endif
+                            </button>
+                        </form>
                         <button type="button" class="btn-show services-all visualizza-appartamneto"><a href="#">MAILBOX!</a></button>
                         {{-- <a
                             href="{{ route('logged.sponsor', $apartment->id) }}">Sponsorizza il tuo appartamento!</a>

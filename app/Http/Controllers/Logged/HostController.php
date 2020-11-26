@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 
 class HostController extends Controller
 {
-   
+
     /**
      * Create a new controller instance.
      *
@@ -94,7 +94,7 @@ class HostController extends Controller
             $error = $validator->messages();
             return response()->json($error);
         }
-    
+
     // creazione dell'appartamento
     $apartment = Apartment::create($request->all());
 
@@ -102,8 +102,8 @@ class HostController extends Controller
     if (!empty($apartment->services())) {
         $apartment->services()->attach($request['services']);
     }
-    
-    // storage delle immagini e inserimento nel DB 
+
+    // storage delle immagini e inserimento nel DB
     if(!empty($request->file('img'))) {
         $images = $request->file('img');
         foreach ($images as $image) {
@@ -118,8 +118,8 @@ class HostController extends Controller
         }
     }
 
-    
-   
+
+
 
         return redirect()->route('host.index')->with('status', 'hai creato correttamente il tuo appartamento' . $apartment->title);
     }
@@ -156,7 +156,7 @@ class HostController extends Controller
         $apartment = Apartment::find($id);
         if ($apartment->user_id == Auth::id()) {
             return view('Logged.edit', compact('apartment', 'services'));
-            
+
         } else {
             return abort(404);
         }
@@ -175,7 +175,7 @@ class HostController extends Controller
         $data['updated_at'] = Carbon::now('Europe/Rome');
         $apartment = Apartment::find($id);
         $apartment->update($data);
-        
+
         // AGGIORNAMENTO SERVIZI
         $apartment->services()->sync($data['services']);
 
@@ -196,8 +196,8 @@ class HostController extends Controller
 
         }
 
-        
-        
+
+
         return redirect()->route('host.index')->with('status', 'Hai modificato il tuo appartamento');
     }
 
@@ -228,9 +228,21 @@ class HostController extends Controller
         //creo gateway per creare nuovo TOKEN
         $gateway = new Braintree\Gateway(config('braintree'));
         $token = $gateway->ClientToken()->generate();
-    
+
         return view('logged.sponsor', compact('apartment','token','sponsors'));
     }
+
+    public function visibility ($id){
+        $apt = Apartment::find($id);
+        $visibility = !($apt->attivo);
+
+        if($apt->user_id == Auth::id()){
+            Apartment::where('id',$id)->update(['attivo'=>$visibility]);
+            return redirect()->route('host.index');
+        }
+        return redirect()->back();
+    }
+
 
     public function checkout(Request $request, $id)
     {
@@ -238,7 +250,7 @@ class HostController extends Controller
         $data = $request->all();
 
         $gateway = new Braintree\Gateway(config('braintree'));
-        // da cancellare se decido di dare il prezzo di default 
+        // da cancellare se decido di dare il prezzo di default
         $sponsorError = 'Nessuna sponsorship selezionata.';
         if (empty($data['amount'])) {
             return redirect()->back()->with('sponsorError', $sponsorError);
@@ -255,16 +267,15 @@ class HostController extends Controller
 
         //registro la transazione
         $result = $gateway->transaction()->sale([
-            'amount' => $sponsor_price,
-            'paymentMethodNonce' => $request['payment_method_nonce'],
-            'customer' => [
-                'email' => Auth::user()->email,
-            ],
-            'options' => [
-                'submitForSettlement' => true
-            ]
-        ]);
-        
+                'amount' => $sponsor_price,
+                'paymentMethodNonce' => $request['payment_method_nonce'],
+                'customer' => [
+                    'email' => Auth::user()->email,
+                ],
+                'options' => [
+                    'submitForSettlement' => true
+                ]
+            ]);
 
         // Check sulla transazione
         if ($result->success || !is_null($result->transaction)) {
@@ -306,8 +317,9 @@ class HostController extends Controller
             abort('404');
         }
 
-        return redirect()->route('host.index')->with('status', 'appartamento' . $apartment->title . 'sponsorizzato con sucesso');
+        return redirect()->route('host.index')->with('status','appartamento'.$apartment->title .'sponsorizzato con sucesso');
     }
+
 }
     
 

@@ -76,7 +76,7 @@ h1 {
         p {
             text-align: center;
             font-size: 14px;
-            margin: 20px 0;
+            margin: 4px 0;
         }
 
         form {
@@ -89,7 +89,7 @@ h1 {
             input {
                 padding: 15px 20px;
                 border-radius: 3px;
-                border: 2px solid $input_border_color;
+                // border: 2px solid $input_border_color;
                 width: 100%;
                 margin: 5px 0;
 
@@ -148,4 +148,19 @@ h1 {
                 }
         }
     }
+}
+
+// controllo form
+.error{
+    border: 0.3rem solid#d60565;
+}
+
+.message{
+    display: block;
+    color: white;
+    font-size: 1rem;
+}
+
+.message-on{
+    color: #d60565;
 }

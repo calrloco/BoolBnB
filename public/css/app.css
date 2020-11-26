@@ -4641,6 +4641,8 @@ readers do not read off random characters that represent icons */
   --button-color-hover: #F7F7F7;
   --gradient-color: radial-gradient(circle at left center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
   --form-radius: 1.1rem;
+  --margin-big: 5rem;
+  --margin-small: 1.5rem;
 }
 
 *,
@@ -5469,20 +5471,44 @@ input:-webkit-autofill:active {
   flex-direction: columns;
 }
 
-input {
+.create-update h2 {
+  margin-top: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.create-update input {
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 3px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.create-update textarea {
+  padding: 15px 20px;
+  border-radius: 3px;
   width: 100%;
 }
 
-.input-row {
+.create-update label {
+  font-size: 1.4rem;
+}
+
+.create-update .caratteristiche {
+  padding-bottom: 1rem;
+}
+
+.create-update .input-row {
   width: 100%;
-  margin-top: 10px;
+  margin: 1rem 0;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
 }
 
-.input-group {
+.create-update .input-group {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -5490,11 +5516,32 @@ input {
   flex-direction: row;
 }
 
-textarea {
-  width: 100%;
+.create-update .caratteristiche .label-input:not(:last-child) {
+  margin-right: 4rem;
 }
 
-.img-apt-box {
+.create-update .caratteristiche input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.create-update #crea {
+  padding: 0.8em 3.5em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  outline: none;
+  border: none;
+  letter-spacing: 1px;
+  width: 100%;
+  background-image: var(--gradient-color);
+  color: #ffffff;
+}
+
+.create-update .img-apt-box {
   position: relative;
   height: 100px;
   width: 100px;
@@ -5503,20 +5550,33 @@ textarea {
   overflow: hidden;
 }
 
-.img-apt-box img {
+.create-update .img-apt-box img {
   width: 100%;
   height: 100%;
 }
 
-.x {
+.create-update .x {
   color: red;
   position: absolute;
   right: 7%;
   top: 7%;
 }
 
-.img-delete:hover {
+.create-update .img-delete:hover {
   cursor: pointer;
+}
+
+.error {
+  border: 0.3rem solid #d60565;
+}
+
+.message {
+  display: block;
+  color: white;
+}
+
+.message-on {
+  color: #d60565;
 }
 
 .top-section .title-apt {
@@ -5672,7 +5732,6 @@ textarea {
 }
 
 .info-apt-section .info-box-dx {
-  width: 400px;
   height: 100%;
   position: sticky;
   -webkit-position: -webkit-sticky;
@@ -5682,7 +5741,7 @@ textarea {
 
 .info-apt-section .info-box-dx .send-message-box {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   flex-direction: column;
   border-radius: 1.2rem;
 }
@@ -5690,12 +5749,14 @@ textarea {
 .info-apt-section .info-box-dx .send-message-box .message-title {
   font-size: 22px;
   padding-bottom: 12px;
+  width: 100%;
+  text-align: center;
 }
 
 .info-apt-section .info-box-dx .send-message-box .message-form {
   display: flex;
   flex-direction: column;
-  align-self: center;
+  align-self: flex-end;
   margin-right: 0px;
 }
 
@@ -5723,6 +5784,13 @@ textarea {
 .map-apaetment {
   width: 100%;
   height: 100%;
+}
+
+.firstname-message,
+.lastname-message,
+.email-message,
+.message {
+  margin-bottom: 1rem;
 }
 
 h1 {
@@ -5799,7 +5867,7 @@ h1 {
 .signup_container .signup p {
   text-align: center;
   font-size: 14px;
-  margin: 20px 0;
+  margin: 4px 0;
 }
 
 .signup_container .signup form label {
@@ -5811,7 +5879,6 @@ h1 {
 .signup_container .signup form input {
   padding: 15px 20px;
   border-radius: 3px;
-  border: 2px solid #DCDFF1;
   width: 100%;
   margin: 5px 0;
 }
@@ -5882,6 +5949,20 @@ h1 {
   color: #2b140b;
 }
 
+.error {
+  border: 0.3rem solid #d60565;
+}
+
+.message {
+  display: block;
+  color: white;
+  font-size: 1rem;
+}
+
+.message-on {
+  color: #d60565;
+}
+
 .forgot_password {
   text-decoration: underline;
   text-align: center;
@@ -5889,6 +5970,20 @@ h1 {
   display: flex;
   justify-content: center;
   padding: 15px;
+}
+
+.error {
+  border: 0.3rem solid #d60565;
+}
+
+.message {
+  display: block;
+  color: white;
+  font-size: 1rem;
+}
+
+.message-on {
+  color: #d60565;
 }
 
 .container__search {
@@ -6562,19 +6657,6 @@ hr {
 
 .btn-show {
   width: 100%;
-}
-
-.error {
-  border-color: #d60565;
-}
-
-.message {
-  display: none;
-  color: #d60565;
-}
-
-.message-on {
-  display: block;
 }
 
 .active {

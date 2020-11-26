@@ -10,34 +10,39 @@
           <!-- first name -->
           <div class="input-row">
             <label for="name">First Name</label><br />
-            <input type="text" name="name" placeholder="Your first name" class="fname" required />
+            <input id="firstnameR" type="text" name="name" placeholder="Your first name" class="fname" />
+            <p class="message"></p>
           </div>
 
           <!-- last name -->
           <div>
             <label for="lastname">Last Name</label><br />
-            <input type="text" name="lastname" placeholder="Your last name" class="lname" required />
+            <input id="lastnameR" type="text" name="lastname" placeholder="Your last name" class="lname" />
+            <p class="message"></p>
           </div>
         </div>
 
         <!-- email -->
         <div>
           <label for="email">Email</label><br />
-          <input type="email" name="email" placeholder="Enter your email" />
+          <input id="emailR" type="email" name="email" placeholder="Enter your email" />
+          <p class="message"></p>
         </div>
 
         <!-- password -->
         <div>
           <label for="password">Password</label><br />
           <div class="password">
-            <input type="password" name="password" placeholder="Enter your password" />
+            <input id="passwordR" type="password" name="password" placeholder="Enter your password" />
+            <p class="message"></p>
           </div>
         </div>
 
         <div>
           <label for="password-confirm">Confirm Password</label><br />
           <div class="password">
-            <input type="password" name="password_confirmation" placeholder="Confirm your password" />
+            <input id="password-confirmR" type="password" name="password_confirmation" placeholder="Confirm your password" />
+            <p class="message"></p>
           </div>
         </div>
 
@@ -45,10 +50,11 @@
         <div class="date">
           <label for="birth">Date Of Birth</label><br />
           <div class="password">
-            <input type="date" name="date_of_birth" placeholder="Confirm your password" />
+            <input id="dateR" type="date" name="date_of_birth" placeholder="Confirm your password" />
+            <p class="message"></p>
           </div>
         </div>
-        <button type="submit" class="signup_btn">{{ __('Register') }}</button>
+        <button id="registerR" type="submit" class="signup_btn">{{ __('Register') }}</button>
       </form>
 
        <!-- Social icons -->

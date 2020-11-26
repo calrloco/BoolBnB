@@ -5,6 +5,7 @@ require("./apt");
 var $ = require("jquery");
 const Handlebars = require("handlebars");
 const { Alert } = require("bootstrap");
+const { log } = require("handlebars");
 
 $(document).ready(function() {
     $(".nav__user-box").click(function() {
@@ -151,14 +152,16 @@ $(document).click(function() {
   });
 
 
-// validazione tipi
+// VALIDAZIONE FORM
 var letterNumber = /^[0-9a-zA-Z ]+$/;
-var letter = /^[a-zA-Z ]+$/;
+var letter = /^[a-zA-Z' ]+$/;
 var number = /^[0-9 ]+$/;
 var allChar = /^[a-zA-Z0-9'!@#àèòìù\$%\^\&*\)\( +=.,_-]+$/;
+var dateR = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+var emailR = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
-// validazione input della pagina create
+// validazione input della pagina create e edit apartment
 $('#title').focusout(function(){
     checkInput($(this), allChar, 10, 300, 'il titolo');
 });
@@ -193,7 +196,7 @@ $('#bathrooms').focusout(function(){
     checkInput($(this), number , 1, 2000, "i bagni");
 });
 
-// al click del submit controlla se i campi soddisfano le condizioni e impedisce il submit 
+// al click del submit controlla se i campi soddisfano le condizioni e impedisce il submit del create e del edit apartment
 $('#crea').click(function(e){
     if( checkInput($('#title'), allChar, 10, 300, 'il titolo') &&
         checkInput($('#address'), allChar, 10, 300, "l'indirizzo") &&
@@ -225,6 +228,52 @@ $('#crea').click(function(e){
     
 });
 
+// validazione input della pagina register
+$('#firstnameR').focusout(function(){
+    checkInput($(this), letter, 2, 50, 'il nome');
+});
+$('#lastnameR').focusout(function(){
+    checkInput($(this), letter, 2, 50, 'il cognome');
+});
+$('#emailR').focusout(function(){
+    checkInput($(this), emailR, 2, 255, 'la mail');
+});
+$('#passwordR').focusout(function(){
+    checkInput($(this), allChar, 8, 255, 'la password');
+});
+$('#password-confirmR').focusout(function(){
+    if($('#password-confirmR').val() != $('#passwordR').val()){
+        $(this).addClass('error');
+        $(this).next('.message').addClass('message-on');
+        $(this).next('.message').text('Le password non sono uguali');
+    }
+});
+$('#dateR').focusout(function(){
+   if($('#dateR').val() == ''){
+    $(this).addClass('error');
+    $(this).next('.message').addClass('message-on');
+    $(this).next('.message').text('Non hai inserito la data');
+   }else{
+    $(this).removeClass('error');
+    $(this).next('.message').removeClass('message-on');
+   }
+    console.log($('#dateR').val());
+
+});
+
+
+$('#registerR').click(function(e){
+    if(checkInput($('#firstnameR'), letter, 2, 50, 'il nome') ||
+        checkInput($('#lastnameR'), letter, 2, 50, 'il cognome') ||
+        checkInput($('#emailR'), emailR, 2, 255, 'la mail') ||
+        checkInput($('#passwordR'), allChar, 8, 255, 'la password') ||
+        $('#password-confirmR').val() != $('#passwordR').val() ||
+        $('#dateR').val() == ''
+    ){
+        e.preventDefault(); 
+    }
+});
+
 // funzione per controllare lato client il form
 function checkInput(selector, kind, min, max, field) {
     if (selector.val() == '' || (!matchKind(selector, kind)) || selector.val().length < min || selector.val().length > max) {
@@ -233,7 +282,7 @@ function checkInput(selector, kind, min, max, field) {
         if (selector.val() == '') {
             selector.next('.message').text('Non hai inserito ' + field);
         } else if (!matchKind(selector, kind)) {
-            selector.next('.message').text('Hai inserito un carattere non valido');
+            selector.next('.message').text('Hai inserito un formato non valido');
         } else if (selector.val().length < min) {
             selector.next('.message').text('Il campo è troppo breve');
         } else if (selector.val().length > max) {

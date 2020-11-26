@@ -16,12 +16,17 @@
         @foreach($apartments as $apartment)
         <div class="apt-info-general">
             <div class="apt-info-sx">
-                    <img class=apt-img-small src="{{asset('storage/'. $apartment->images[0]->path)}}" alt="{{$apartment->title}}">
+                @if(isset($apartment->images[0]->path))
+                <img class=apt-img-small src= "{{ asset('storage/' . $apartment->images[0]->path) }}" alt="{{$apartment->title}}">
+                @endif
+                {{-- @dd($apartment->images[0]['path']); --}}
+                {{-- @dd($apartment->images->first()['path']); --}}
+
             </div>
             <div class="apt-info-dx">
                  <div class="apt-title">
                    <p>{{$apartment->title}}</p>
-                </div> 
+                </div>
                 <div class ="apt-description">
                     <p class="apt-address">{{ $apartment->city }}, {{ $apartment->country }}</p>
                 </div>
@@ -48,7 +53,7 @@
             </div>
         </div>
     @endif
-    
+
 
 </div>
 

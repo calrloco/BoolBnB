@@ -74,11 +74,11 @@
                                 <label for="email">Email:</label>
                                 <input type="email" id="email" value="{{Auth::check() ? Auth::user()->email : ''}}" name="email">
                             </p>
-                           
+
                             <label for="message">Messagio</label>
                             <textarea rows="10" cols="25">
                             </textarea>
-                            
+
                             <p class "send-message">
                                 <input type="submit"  rows="10" cols="25" name="mail-submit" value="Invia mail!"></input>
                             </p>
@@ -92,7 +92,7 @@
 
         <section class="map-section">
 
-            <div class="map-apaetment" id="map"></div>
+            <div class="map-apartment" id="map"></div>
 
             {{-- <div class="message-box">
 

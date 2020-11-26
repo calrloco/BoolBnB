@@ -23,12 +23,12 @@
             <div class="apt-info-dx">
                  <div class="apt-title">
                    <p>{{$apartment->title}}</p>
-                </div> 
+                </div>
                 <div class ="apt-description">
                     <p class="apt-address">{{ $apartment->city }}, {{ $apartment->country }}</p>
                 </div>
                 <p class="apt-details"> Caratteristiche: nr. stanze: {{ $apartment->rooms }}, nr. letti: {{ $apartment->beds }} - nr. bagni: {{ $apartment->bathrooms }} - mq: {{ $apartment->sm }}</p>
-                <p class="apt-description">{{$apartment->description}}</p>
+                <p class="apt-description-text">{{$apartment->description}}</p>
                 <ul class = "apt-services">
                     @foreach ($apartment->services as $service)
                         <li class = "service">
@@ -50,7 +50,7 @@
             </div>
         </div>
     @endif
-    
+
 
 </div>
 

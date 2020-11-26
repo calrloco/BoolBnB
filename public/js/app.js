@@ -42393,8 +42393,6 @@ __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
 __webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
 
-__webpack_require__(/*! ./apt */ "./resources/js/apt.js");
-
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
 var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
@@ -42410,7 +42408,7 @@ $(document).ready(function () {
     $(".nav__user__menu").toggleClass("active");
     getcards();
   });
-  $('#search').keydown(function () {
+  $("#search").keydown(function () {
     if (event.which == 13 || event.keyCode == 13) {
       if ($("#search").val() != "") {
         getCoordinates($("#search").val(), $("#range-value").html());
@@ -42418,17 +42416,17 @@ $(document).ready(function () {
     }
   });
   $(".nav__search-button").click(function () {
-    $('#hidenav').hide();
+    $("#hidenav").hide();
     hidenav();
   });
   $("#search").keyup(function () {
-    $('#auto-complete').empty();
+    $("#auto-complete").empty();
     autoComplete($("#search").val());
   }); //funzione per selezionare suggerimento e restuirlo nella search
 
-  $(document).on('click', '.complete-results', function () {
+  $(document).on("click", ".complete-results", function () {
     var value = $(this).text();
-    $('#search').val(value);
+    $("#search").val(value);
   });
 }); // animation
 
@@ -42444,7 +42442,7 @@ function hidenav() {
 }
 
 $(window).bind("mousewheel", function (event) {
-  $('#hidenav').show();
+  $("#hidenav").show();
   $("nav__search-icon-big").removeClass("active-flex");
   $(".nav__search-city").removeClass("active-flex");
   $(".nav__search-date-start").removeClass("active-flex");
@@ -42466,9 +42464,9 @@ var slider = function () {
 
 
   function rangeslider() {
-    $('#range-hidden').val($('#range-value').html());
+    $("#range-hidden").val($("#range-value").html());
     var range = (slider.value - 20) * 1.25;
-    var color = 'linear-gradient(90deg, rgb(230, 30, 77)' + range + '%, rgb(214,214,214)' + range + '%)';
+    var color = "linear-gradient(90deg, rgb(230, 30, 77)" + range + "%, rgb(214,214,214)" + range + "%)";
     slider.style.background = color;
   }
 
@@ -42483,13 +42481,13 @@ var slider = function () {
 
 var getIp = function () {
   $.ajax({
-    mehtod: 'GET',
-    url: 'https://api.ipdata.co',
+    mehtod: "GET",
+    url: "https://api.ipdata.co",
     data: {
-      'api-key': 'b9bcf03b37c7c5b52f5297af16c2acf07e72d596a1cb8257ed1add0c'
+      "api-key": "b9bcf03b37c7c5b52f5297af16c2acf07e72d596a1cb8257ed1add0c"
     },
     success: function success(risposta) {
-      $('#ip-home-search').val(risposta.region);
+      $("#ip-home-search").val(risposta.region);
     },
     error: function error() {
       console.log(arguments);
@@ -42499,42 +42497,45 @@ var getIp = function () {
 
 
 function autoComplete(query) {
-  if (query.length < 3 || query == '') {
-    $('#auto-complete').removeClass('complete-on');
+  if (query.length < 3 || query == "") {
+    $("#auto-complete").removeClass("complete-on");
   }
 
-  if (query != '' && isNaN(query) && query.length > 3) {
-    $('#auto-complete').addClass('complete-on');
+  if (query != "" && isNaN(query) && query.length > 3) {
     tt.services.fuzzySearch({
-      key: '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk',
+      key: "31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk",
       query: query
     }).go().then(function (response) {
-      var address = [];
-      var results = '';
+      if (response.length > 0) {
+        var address = [];
+        var results = "";
 
-      for (var i = 0; i < 4; i++) {
-        if (response.results[i]) {
-          // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni                
-          var streetName = response.results[i].address['streetName'];
-          var city = response.results[i].address['municipality'];
-          var countryCode = response.results[i].address['countryCode'];
+        for (var i = 0; i < 4; i++) {
+          if (response.results[i]) {
+            // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
+            var streetName = response.results[i].address["streetName"];
+            var city = response.results[i].address["municipality"];
+            var countryCode = response.results[i].address["countryCode"];
 
-          if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == 'IT') {
-            address.push(streetName + ' ' + city);
-          } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == 'IT') {
-            address.push(city);
+            if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == "IT") {
+              address.push(streetName + " " + city);
+            } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == "IT") {
+              address.push(city);
+            }
           }
         }
-      }
 
-      for (var _i = 0; _i < address.length; _i++) {
-        results += '<div class="complete-results">' + address[_i] + '</div>';
-      }
+        for (var _i = 0; _i < address.length; _i++) {
+          results += '<div class="complete-results">' + address[_i] + "</div>";
+        }
 
-      document.getElementById('auto-complete').innerHTML = results;
+        document.getElementById("auto-complete").innerHTML = results;
 
-      if (results == '') {
-        $('#auto-complete').removeClass('complete-on');
+        if (results == "") {
+          $("#auto-complete").removeClass("complete-on");
+        }
+
+        $("#auto-complete").addClass("complete-on");
       }
     });
   }
@@ -42542,8 +42543,13 @@ function autoComplete(query) {
 
 
 $(document).click(function () {
+<<<<<<< HEAD
   $('#auto-complete').removeClass('complete-on');
 }); // VALIDAZIONE FORM
+=======
+  $("#auto-complete").removeClass("complete-on");
+}); // validazione tipi
+>>>>>>> master
 
 var letterNumber = /^[0-9a-zA-Z ]+$/;
 var letter = /^[a-zA-Z' ]+$/;
@@ -42552,38 +42558,52 @@ var allChar = /^[a-zA-Z0-9'!@#àèòìù\$%\^\&*\)\( +=.,_-]+$/;
 var dateR = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
 var emailR = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; // validazione input della pagina create e edit apartment
 
-$('#title').focusout(function () {
-  checkInput($(this), allChar, 10, 300, 'il titolo');
+$("#title").focusout(function () {
+  checkInput($(this), allChar, 10, 300, "il titolo");
 });
+<<<<<<< HEAD
 $('#address').focusout(function () {
   checkInput($(this), allChar, 3, 300, "l'indirizzo");
 });
 $('#city').focusout(function () {
   checkInput($(this), allChar, 1, 30, "la città");
+=======
+$("#address").focusout(function () {
+  checkInput($(this), letterNumber, 10, 300, "l'indirizzo");
 });
-$('#postal-code').focusout(function () {
+$("#city").focusout(function () {
+  checkInput($(this), letter, 1, 30, "la città");
+>>>>>>> master
+});
+$("#postal-code").focusout(function () {
   checkInput($(this), allChar, 1, 20, "il codice postale");
 });
-$('#country').focusout(function () {
+$("#country").focusout(function () {
   checkInput($(this), letter, 1, 30, "la nazione");
 });
-$('#description').focusout(function () {
+$("#description").focusout(function () {
   checkInput($(this), allChar, 20, 2000, "la descrizione");
 });
+<<<<<<< HEAD
 $('#daily-price').focusout(function () {
   checkInput($(this), number, 1, 2000, "il prezzo");
+=======
+$("#daily-price").focusout(function () {
+  checkInput($(this), number, 1, 2000, "il prezzo giornaliero");
+>>>>>>> master
 });
-$('#sm').focusout(function () {
+$("#sm").focusout(function () {
   checkInput($(this), number, 1, 2000, "i metri quadrati");
 });
-$('#rooms').focusout(function () {
+$("#rooms").focusout(function () {
   checkInput($(this), number, 1, 2000, "le camere");
 });
-$('#beds').focusout(function () {
+$("#beds").focusout(function () {
   checkInput($(this), number, 1, 2000, "i letti");
 });
-$('#bathrooms').focusout(function () {
+$("#bathrooms").focusout(function () {
   checkInput($(this), number, 1, 2000, "i bagni");
+<<<<<<< HEAD
 }); // al click del submit controlla se i campi soddisfano le condizioni e impedisce il submit del create e del edit apartment
 
 $('#crea').click(function (e) {
@@ -42637,30 +42657,39 @@ $('#passwordL').focusout(function () {
 });
 $('#registerL').click(function (e) {
   if (checkInput($('#emailL'), emailR, 2, 255, 'la mail') && checkInput($('#passwordL'), allChar, 8, 255, 'la password') || checkInput($('#emailL'), emailR, 2, 255, 'la mail') || checkInput($('#passwordL'), allChar, 8, 255, 'la password')) {
+=======
+});
+$("#crea").click(function (e) {
+  if (checkInput($("#title"), allChar, 10, 300, "il titolo") || checkInput($("#address"), letterNumber, 10, 300, "l'indirizzo") || checkInput($("#city"), letter, 1, 30, "la città") || checkInput($("#postal-code"), allChar, 1, 20, "il codice postale") || checkInput($("#country"), letter, 1, 30, "la nazione") || checkInput($("#description"), allChar, 20, 2000, "la descrizione") || checkInput($("#daily-price"), number, 1, 2000, "il prezzo giornaliero") || checkInput($("#sm"), number, 1, 2000, "i metri quadrati") || checkInput($("#rooms"), number, 1, 2000, "le camere") || checkInput($("#beds"), number, 1, 2000, "i letti") || checkInput($("#bathrooms"), number, 1, 2000, "i bagni")) {
+>>>>>>> master
     e.preventDefault();
   }
 }); // fine validazione pagina login
 // funzione per controllare lato client il form
 
 function checkInput(selector, kind, min, max, field) {
-  if (selector.val() == '' || !matchKind(selector, kind) || selector.val().length < min || selector.val().length > max) {
-    selector.addClass('error');
-    selector.next('.message').addClass('message-on');
+  if (selector.val() == "" || !matchKind(selector, kind) || selector.val().length < min || selector.val().length > max) {
+    selector.addClass("error");
+    selector.next(".message").addClass("message-on");
 
-    if (selector.val() == '') {
-      selector.next('.message').text('Non hai inserito ' + field);
+    if (selector.val() == "") {
+      selector.next(".message").text("Non hai inserito " + field);
     } else if (!matchKind(selector, kind)) {
+<<<<<<< HEAD
       selector.next('.message').text('Hai inserito un formato non valido');
+=======
+      selector.next(".message").text("Hai inserito un carattere non valido");
+>>>>>>> master
     } else if (selector.val().length < min) {
-      selector.next('.message').text('Il campo è troppo breve');
+      selector.next(".message").text("Il campo è troppo breve");
     } else if (selector.val().length > max) {
-      selector.next('.message').text('Il campo è troppo lungo');
+      selector.next(".message").text("Il campo è troppo lungo");
     }
 
     return true;
   } else {
-    selector.removeClass('error');
-    selector.next('.message').removeClass('message-on');
+    selector.removeClass("error");
+    selector.next(".message").removeClass("message-on");
   }
 } // funzione per controllare se l'input soddisfa la condizione di tipo
 
@@ -42671,50 +42700,6 @@ function matchKind(selector, kind) {
   }
 
   return false;
-}
-
-/***/ }),
-
-/***/ "./resources/js/apt.js":
-/*!*****************************!*\
-  !*** ./resources/js/apt.js ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$('.arrow-slider-sx').click(function () {
-  prevImage($('.apt-image.active'));
-});
-$('.arrow-slider-dx').click(function () {
-  nextImage('.apt-image.active');
-}); //** FUNZIONI **/
-
-function nextImage() {
-  activeImage.removeClass('active');
-  activeImage.addClass('hidden');
-
-  if (activeImage.hasClass('last') == true) {
-    activeImage.first().removeClass('hidden');
-    activeImage.first().addClass('active');
-  } else {
-    //metto la classe attiva al successivo
-    activeImage.next().removeClass('hidden');
-    activeImage.next().addClass('active');
-  }
-}
-
-function prevImage() {
-  activeImage.removeClass('active');
-  activeImage.addClass('hidden');
-
-  if (activeImage.hasClass('first') == true) {
-    activeImage.last().removeClass('hidden');
-    activeImage.last().addClass('active');
-  } else {
-    //metto la classe attiva al successivo
-    activeImage.prev().removeClass('hidden');
-    activeImage.prev().addClass('active');
-  }
 }
 
 /***/ }),

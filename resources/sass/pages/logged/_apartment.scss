@@ -33,12 +33,22 @@
     
 
 }
-
 .message-info {
     width: 80%;
     min-height: 150px;
     height: 100%;
     @include flex(columns, flex-start, center);
-
+}
+.chart-section{
+    @include flex(column,flex-start,stretch);
+}
+#chart-views{
+    max-width: 100%;
     
+}
+#chart-messages{
+    max-width: 100%;
+}
+.btn-show{
+    width:100%
 }

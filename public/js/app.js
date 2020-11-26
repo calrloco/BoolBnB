@@ -42769,6 +42769,35 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+$(function () {
+  $(".openB").click(function () {
+    $(".left").addClass("open");
+    setTimeout(function () {
+      $(".right").addClass("open");
+    }, 250);
+    setTimeout(function () {
+      $(".back").addClass("open");
+      $(".front").addClass("display");
+    }, 350);
+    $(".closeB").delay(1000).fadeIn();
+  });
+  $(".closeB").click(function () {
+    setTimeout(function () {
+      $(".left").removeClass("open");
+    }, 250);
+    $(".right").removeClass("open");
+    setTimeout(function () {
+      $(".back").removeClass("open");
+      $(".front").removeClass("display");
+    }, 600);
+    $(".closeB").fadeOut();
+  });
+  $(".pay").click(function () {
+    setTimeout(function () {
+      $(".form-container").addClass("active");
+    }, 500);
+  });
+});
 
 /***/ }),
 
@@ -42790,18 +42819,8 @@ document.addEventListener("DOMContentLoaded", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 __webpack_require__(/*! D:\pay\BoolBnB\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! D:\pay\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> master
-=======
-__webpack_require__(/*! C:\lavori\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\lavori\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> master
 
 
 /***/ })

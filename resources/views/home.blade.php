@@ -24,7 +24,9 @@
                 @for ($i = 0; $i < 4 && $i < count($apartment); $i++)
                         <div class="sponsor__home-card">
                             <div class="sponsor__home-card-img">
-                                <img src="{{ asset('storage/'.$apartment[$i]->images[0]->path) }}" alt="{{ $apartment[$i]->title }}" alt="">
+                                @if (isset($apartment[$i]->images[0]->path))
+                                  <img src="{{ asset('storage/'.$apartment[$i]->images[0]->path) }}" alt="{{ $apartment[$i]->title }}" alt="">
+                                @endif
                             </div>
                             <div class="sponsor__home-card-text">
                                 <p>{{ $apartment[$i]->title }}</p>

@@ -1,4 +1,5 @@
 require("./bootstrap");
+require("./aptSlider");
 var $ = require("jquery");
 var myfunction = (function () {
     var labels = [];

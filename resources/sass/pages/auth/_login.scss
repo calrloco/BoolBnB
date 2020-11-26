@@ -7,3 +7,17 @@
     padding: 15px;
 }
 
+// controllo form
+.error{
+    border: 0.3rem solid#d60565;
+}
+
+.message{
+    display: block;
+    color: white;
+    font-size: 1rem;
+}
+
+.message-on{
+    color: #d60565;
+}

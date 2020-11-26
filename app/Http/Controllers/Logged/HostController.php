@@ -287,14 +287,12 @@ class HostController extends Controller
             // Data di scadenza con check su precedenti sponsorizzazioni attive
             $checkSponsor = Apartment::join('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
             ->where('apartment_sponsor.apartment_id', '=', $id)
-            ->where('apartment_sponsor.end_sponsor', '>=', Carbon::now())
-            ->orderBy('apartment_sponsor.end_sponsor', 'desc')
-            ->limit(1)
-            ->get();
-
-            if(!empty($checkSponsor)) {
+                ->where('apartment_sponsor.end_sponsor', '>=', Carbon::now())
+                ->orderBy('apartment_sponsor.end_sponsor', 'desc')
+                ->limit(1)
+                ->get();
+            if (empty($checkSponsor)) {
                 $end_sponsor = Carbon::parse($checkSponsor[0]->end_sponsor)->addHours($sponsor_durate);
-
             } else {
 
                 $end_sponsor = Carbon::now()->addHours($sponsor_durate);
@@ -305,7 +303,7 @@ class HostController extends Controller
             $transId = $transaction->id;
 
             // Popolare La Pivot apartmentSponsor
-                $apartment->sponsors()->attach(
+            $apartment->sponsors()->attach(
                 $apartment_id,
                 [
                     'start_sponsor' => $start,
@@ -323,3 +321,5 @@ class HostController extends Controller
     }
 
 }
+    
+

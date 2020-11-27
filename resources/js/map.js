@@ -19,7 +19,7 @@ let map = tt.map({
 $(document).ready(function() {
     var instantSearch = (function() {
         if ($("#address-inst").html() != "") {
-            getCoordinates($("#address-inst").html(), $("#range-form").html());
+            getCoordinates($("#address-inst").html(), $("#range-form").html(),false);
             getServices();
         }
     })();
@@ -28,21 +28,22 @@ $(document).ready(function() {
         $(".search__resoults__apartment-cards").empty();
         $(".search__resoults__apartment-cards.sponsor").empty();
         if ($("#search").val() != "") {
-            getCoordinates($("#search").val(), $("#range-value").html());
-            $('#address-inst').text($("#search").val());
+            getCoordinates($("#search").val(), $("#range-value").html(), false);
+            $("#address-inst").text($("#search").val());
         }
     });
 
     $("#search").keydown(function() {
         if (event.which == 13 || event.keyCode == 13) {
             if ($("#search").val() != "") {
-                getCoordinates($("#search").val(), $("#range-value").html());
+                getCoordinates($("#search").val(), $("#range-value").html(), false);
             }
         }
     });
 });
 //// prendi coordinate dell'input////////////////
-function getCoordinates(input, range) {
+function getCoordinates(input, range, serviceFilter) {
+    var service = serviceFilter;
     var zoom = 10;
     if (input != "") {
         tt.services
@@ -67,8 +68,13 @@ function getCoordinates(input, range) {
                     center: response.results[0].position,
                     zoom: zoom
                 });
-                getSponsored(latitude, longitude, range, 1);
-                getCards(latitude, longitude, range, 0);
+                if (service == false) {
+                    getSponsored(latitude, longitude, range, 1);
+                    getCards(latitude, longitude, range, 0);
+                }else{
+                   getFilter(latitude, longitude, range, 1,service);
+                   getFilter(latitude, longitude, range, 0,service);
+                }
             });
     }
 }
@@ -82,15 +88,12 @@ function getServices() {
             KEY: "test"
         },
         success: function(response) {
-            
             for (var i = 0; i < response.length; i++) {
                 var service = `<button data-servicetype="${response[i].id}" class="services-all">${response[i].service}</button>`;
                 $(".services").append(service);
             }
         },
-        error: function() {
-            
-        }
+        error: function() {}
     });
 }
 function getSponsored(lat, lng, maxDist, sponsor) {
@@ -127,7 +130,7 @@ function getCards(lat, lng, maxDist, sponsor) {
             lat: lat,
             lng: lng,
             maxDist: maxDist,
-            sponsor: sponsor,
+            sponsor: sponsor
         },
         success: function(risposta) {
             if (risposta.length > 0) {
@@ -139,7 +142,35 @@ function getCards(lat, lng, maxDist, sponsor) {
         }
     });
 }
-
+///////////////////////////////
+///////////////////////////
+function getFilter(lat, lng, maxDist, sponsor, services) {
+    
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/apartments",
+        method: "GET",
+        headers: {
+            KEY: "test"
+        },
+        data: {
+            lat: lat,
+            lng: lng,
+            maxDist: maxDist,
+            sponsor: sponsor,
+            services: services
+        },
+        success: function(risposta) {
+            console.log(risposta);
+            if (risposta.length > 0) {
+                
+                compileHandlebars(risposta, sponsor);
+            }
+        },
+        error: function() {
+            console.log("error");
+        }
+    });
+}
 ////////////////////////////////////
 /// funzione per inserire le card della ricerca nel dom e creare i marker associati nella mappa
 function compileHandlebars(risp, sponsor) {
@@ -153,12 +184,11 @@ function compileHandlebars(risp, sponsor) {
     var templateCards = Handlebars.compile(source);
     const markersCity = [];
     for (let i = 0; i < risp.length; i++) {
-       
         var context = {
             city: risp[i].city,
             title: troncaStringa(risp[i].title),
             id: `<input class="aps_id" type="hidden" data-sponsor="${sponsor}" name="apartment_id" value=${risp[i].id}>`,
-            sponsor: sponsor,
+            sponsor: sponsor
         };
 
         var coordinates = [risp[i].longitude, risp[i].latitude];
@@ -234,8 +264,8 @@ function compileHandlebars(risp, sponsor) {
 }
 /// appende i servizi selezionabili
 function appendServices(id) {
-    var icona = '';
-    
+    var icona = "";
+
     $.ajax({
         url: "http://127.0.0.1:8000/api/services",
         headers: {
@@ -245,22 +275,22 @@ function appendServices(id) {
             id: id
         },
         success: function(response) {
-            
             for (var i = 0; i < response.length; i++) {
                 icona += `<i class='${response[i].icon}'><i/>`;
-              
             }
-            $('.search__resoults__apartment-cards-content').each(function(){
-                if($(this).find('.aps_id').val() == id){
-                     $(this).find('.services-icons').append(icona);
-            } 
-            
+            $(".search__resoults__apartment-cards-content").each(function() {
+                if (
+                    $(this)
+                        .find(".aps_id")
+                        .val() == id
+                ) {
+                    $(this)
+                        .find(".services-icons")
+                        .append(icona);
+                }
             });
-            
         },
-        error: function() {
-
-        }
+        error: function() {}
     });
 }
 /// appendere le immagini allo slider
@@ -275,8 +305,6 @@ function getImages(id, sponsor) {
             KEY: "test"
         },
         success: function(response) {
-            
-
             for (var i = 0; i < response.length; i++) {
                 var clss = "hidden";
                 if (i == 0) {
@@ -326,12 +354,9 @@ function troncaStringa(stringa) {
 
 /// filtra ricerca per servizi
 var serviceCheck = (function() {
+   
     var selectedService = [];
-
     $(document).on("click", ".services-all", function() {
-        var serviceType = $(this)
-            .data("servicetype")
-            .toString();
         $(this).toggleClass("service-selected");
         if (
             selectedService.length < $(".services-all").length &&
@@ -344,40 +369,12 @@ var serviceCheck = (function() {
                 return item !== serviceType;
             });
         }
-
-        $(this).toggleClass(".service-selected");
-        $(".search__resoults__apartment-cards-content").each(function() {
-            var serviceHome = $(this)
-                .data("service")
-                .toString();
-            var servicesCasa = serviceHome.split(",");
-           
-            if (selectedService.length === 0) {
-                $(this).show();
-                $(".mapboxgl-marker").show();
-            } else if (
-                servicesCasa.length > selectedService.length &&
-                serviceHome.includes(selectedService.toString())
-            ) {
-                $(this).show();
-                $(".mapboxgl-marker")
-                    .eq($(this).index())
-                    .show();
-            } else if (same(servicesCasa, selectedService)) {
-                $(this).show();
-                $(".mapboxgl-marker")
-                    .eq($(this).index())
-                    .show();
-            } else {
-                $(this).hide();
-                $(".mapboxgl-marker")
-                    .eq($(this).index())
-                    .hide();
-                $(".mapboxgl-popup")
-                    .eq($(this).index())
-                    .hide();
-            }
-        });
+        
+    });
+    $('#carca-flitri').click(function() {
+        $(".search__resoults__apartment-cards").empty();
+        $(".search__resoults__apartment-cards.sponsor").empty();
+        getCoordinates($("#address-inst").text(), $("#range-value").html(), selectedService);
     });
 })();
 // al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom

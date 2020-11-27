@@ -5380,7 +5380,7 @@ input:-webkit-autofill:active {
 .sponsor__home {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: row;
   flex-wrap: nowrap;
   height: 100%;
@@ -5393,7 +5393,8 @@ input:-webkit-autofill:active {
 }
 
 .sponsor__home-card {
-  flex: 0 1 calc(100% / 4);
+  flex: 0 0 calc(100% / 4);
+  overflow: hidden;
   font-size: 1.8rem;
   display: flex;
   justify-content: flex-start;
@@ -5407,8 +5408,10 @@ input:-webkit-autofill:active {
 }
 
 .sponsor__home-card-img {
-  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
   margin-bottom: 0.8rem;
+  height: 25rem;
 }
 
 .sponsor__home-card-img img {
@@ -5664,7 +5667,7 @@ input:-webkit-autofill:active {
   flex-direction: row;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1376px) {
   .info-apt-section {
     display: flex;
     justify-content: center;
@@ -5740,6 +5743,12 @@ input:-webkit-autofill:active {
   -webkit-position: -webkit-sticky;
   top: 10rem;
   z-index: 2;
+}
+
+@media screen and (max-width: 1376px) {
+  .info-apt-section .info-box-dx {
+    flex: 1 1 100%;
+  }
 }
 
 .info-apt-section .info-box-dx .send-message-box {

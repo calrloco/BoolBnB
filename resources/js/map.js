@@ -9,6 +9,7 @@ const {
     find
 } = require("lodash");
 
+
 const APPLICATION_NAME = "My Application";
 const APPLICATION_VERSION = "1.0";
 tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
@@ -21,6 +22,7 @@ let map = tt.map({
     style: "tomtom://vector/1/basic-main",
     zoom: 4
 });
+
 $(document).ready(function() {
     var instantSearch = (function() {
         if ($("#address-inst").html() != "") {

@@ -73,10 +73,11 @@
     font-size:1.4rem;
     margin-bottom: 5rem;
     @include flex(row, space-between, flex-start);
-
-    @include responsive(tab){
+     
+    @media screen and (max-width:1376px){
         @include flex(column, center,center);
     }
+   
 
     .info-box-sx {
         flex: 1;
@@ -152,7 +153,9 @@
         -webkit-position: sticky;
         top: 10rem;
         z-index:2;
-
+        @media screen and (max-width:1376px){
+            flex:1 1 100%;
+        }
         .send-message-box {
             display: flex;
             align-items: flex-end;

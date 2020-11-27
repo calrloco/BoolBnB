@@ -6290,6 +6290,22 @@ canvas:focus {
   transform: translateY(0px);
 }
 
+.services-icons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+
+.services-icons i {
+  font-size: 2rem;
+  color: var(--pink-bnb);
+}
+
+.services-icons i:not(:last-child) {
+  margin-right: 1rem;
+}
+
 .wrapper {
   display: flex;
   justify-content: center;

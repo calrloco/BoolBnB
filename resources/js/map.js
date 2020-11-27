@@ -115,7 +115,7 @@ function getSponsored(lat, lng, maxDist, sponsor) {
             }
         },
         error: function() {
-            console.log("error");
+            
         }
     });
 }
@@ -138,7 +138,7 @@ function getCards(lat, lng, maxDist, sponsor) {
             }
         },
         error: function() {
-            console.log("error");
+           
         }
     });
 }
@@ -160,14 +160,14 @@ function getFilter(lat, lng, maxDist, sponsor, services) {
             services: services
         },
         success: function(risposta) {
-            console.log(risposta);
+           
             if (risposta.length > 0) {
                 
                 compileHandlebars(risposta, sponsor);
             }
         },
         error: function() {
-            console.log("error");
+            
         }
     });
 }
@@ -261,11 +261,10 @@ function compileHandlebars(risp, sponsor) {
             details.eq(posizione).addClass("selected");
         });
     }
+    setServices();
 }
 /// appende i servizi selezionabili
 function appendServices(id) {
-    var icona = "";
-
     $.ajax({
         url: "http://127.0.0.1:8000/api/services",
         headers: {
@@ -275,20 +274,47 @@ function appendServices(id) {
             id: id
         },
         success: function(response) {
+            var ids = '';
             for (var i = 0; i < response.length; i++) {
-                icona += `<i class='${response[i].icon}'><i/>`;
+                if(ids.length === 0){
+                     ids = response[i].id;
+                }else{
+                   ids +=','+response[i].id;
+                }
+               
             }
             $(".search__resoults__apartment-cards-content").each(function() {
-                if (
-                    $(this)
-                        .find(".aps_id")
-                        .val() == id
-                ) {
-                    $(this)
-                        .find(".services-icons")
-                        .append(icona);
+                if ($(this).find(".aps_id").val() == id) {
+                     $(this).attr("data-service",ids);
                 }
             });
+        },
+        error: function() {}
+    });
+}
+function setServices() {
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/services/all",
+        method: "GET",
+        headers: {
+            KEY: "test"
+        },
+        success: function(response) {
+            for (var i = 0; i < response.length; i++) {
+               
+                var icon =`<i class="fas ${response[i].icon}"></i>`;
+                var clas = '.'+response[i].icon;
+                id = response[i].id;
+                $(".search__resoults__apartment-cards-content").each(function() {
+                    
+                    
+                    if ($(this).attr("data-service").includes(id) && $(this).find(clas).length == 0) {
+                        
+                        $(this).find('.services-icons').append(icon);
+                    }
+                });
+                
+            }
         },
         error: function() {}
     });
@@ -298,6 +324,7 @@ function getImages(id, sponsor) {
     $.ajax({
         url: "http://127.0.0.1:8000/api/images",
         method: "GET",
+        async:false,
         data: {
             id: id
         },
@@ -340,7 +367,6 @@ function appendImages(risp, clss, sponsor) {
 // funzione per troncare una stringa
 function troncaStringa(stringa) {
     var shortText = stringa;
-    console.log(shortText);
     if (stringa.length > 28) {
         for (var i = 28; i > 0; i--) {
             if (stringa[i] == " ") {
@@ -357,6 +383,8 @@ var serviceCheck = (function() {
    
     var selectedService = [];
     $(document).on("click", ".services-all", function() {
+        var serviceType = $(this).attr('data-servicetype');
+        
         $(this).toggleClass("service-selected");
         if (
             selectedService.length < $(".services-all").length &&

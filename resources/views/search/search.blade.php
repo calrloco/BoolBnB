@@ -9,13 +9,13 @@
                 <span id="range-form" class="hidden">{{$range ?? ''}}</span>
             </div>
             <div class="container__search-left__top__filters">
-                <div class="services">
+                <div class="services hidden">
                     <button id="carca-flitri" class="services-all">Cerca con filtri</button>
                 </div>
             </div>
         </div>
             <div class="search__resoults__apartment">
-                <div class="search__resoults__apartment-cards " id="sponsor">
+                <div class="search__resoults__apartment-cards" id="sponsor">
                     
                 </div>
                 <div class="search__resoults__apartment-cards " id="no-sponsor">
@@ -28,7 +28,7 @@
     </div>
  
         <script id="handlebars_cards" type="text/x-handlebars-template">
-        <div class="search__resoults__apartment-cards-content sponsor-@{{sponsor}}" data-service="">
+        <div class="search__resoults__apartment-cards-content sponsor-@{{sponsor}}" id="@{{sp}}" data-service="">
                 <div class="search__resoults__apartment-cards-content-slider">
                     <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-left arrow-slider-dx">
                         <i class="fas fa-chevron-left"></i>

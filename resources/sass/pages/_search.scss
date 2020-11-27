@@ -213,3 +213,17 @@
     }
 
 }
+.services-icons {
+    @include flex(row,flex-start, center);
+    & i{
+        font-size:2rem;
+        
+        color:var(--pink-bnb);
+
+        &:not(:last-child) {
+            margin-right:1rem;
+        }
+    }
+    
+}
+

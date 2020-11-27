@@ -4,6 +4,11 @@
     flex-wrap: wrap;
     height: 100%;
     color: var(--color-font-black);
+
+    
+    @include responsive(tab){
+        @include flex(row, center, center);
+    }
 }
 
 .apt-info {
@@ -117,6 +122,14 @@
     font-size: 2rem;
     font-weight: 800;
     color: var(--color-font-black);
+
+    @include responsive(tab){
+        @include flex(column, center, center);
+
+        & h2{
+            margin-bottom: 1.5rem;
+        }
+    }
 }
 .create-apt-link {
     @extend %button-default;

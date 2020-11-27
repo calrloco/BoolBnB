@@ -5664,8 +5664,17 @@ input:-webkit-autofill:active {
   flex-direction: row;
 }
 
+@media screen and (max-width: 800px) {
+  .info-apt-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
 .info-apt-section .info-box-sx {
-  width: 700px;
+  flex: 1;
   height: 100%;
 }
 
@@ -5690,13 +5699,6 @@ input:-webkit-autofill:active {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: black;
-}
-
-.info-apt-section .info-box-sx .split-line {
-  width: 95%;
-  margin: 0 auto;
-  border-bottom: 1px solid grey;
 }
 
 .info-apt-section .info-box-sx .apt-description {
@@ -5733,6 +5735,7 @@ input:-webkit-autofill:active {
 
 .info-apt-section .info-box-dx {
   height: 100%;
+  flex: 0.5;
   position: sticky;
   -webkit-position: -webkit-sticky;
   top: 10rem;
@@ -5791,6 +5794,22 @@ input:-webkit-autofill:active {
 .email-message,
 .message {
   margin-bottom: 1rem;
+}
+
+.services {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.img-apartment-host {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: inherit;
 }
 
 h1 {
@@ -6437,6 +6456,15 @@ hr {
   color: var(--color-font-black);
 }
 
+@media screen and (max-width: 800px) {
+  .apartments-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
 .apt-info-general {
   height: 44rem;
   display: flex;
@@ -6576,6 +6604,19 @@ hr {
   font-size: 2rem;
   font-weight: 800;
   color: var(--color-font-black);
+}
+
+@media screen and (max-width: 800px) {
+  .head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .head h2 {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .create-apt-link {

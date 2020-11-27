@@ -47,7 +47,7 @@
                     @{{ title }}
                 </p>
                 <div class="services-icons">
-                    @{{{ service }}}
+                   
                 </div>
                 <form action="{{route('view.store')}}" class="search__resoults__apartment-cards-content-form" method="POST">
                     @csrf

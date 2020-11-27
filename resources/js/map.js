@@ -29,6 +29,7 @@ $(document).ready(function() {
         $(".search__resoults__apartment-cards.sponsor").empty();
         if ($("#search").val() != "") {
             getCoordinates($("#search").val(), $("#range-value").html());
+            $('#address-inst').text($("#search").val());
         }
     });
 
@@ -81,14 +82,14 @@ function getServices() {
             KEY: "test"
         },
         success: function(response) {
-            console.log(response);
+            
             for (var i = 0; i < response.length; i++) {
                 var service = `<button data-servicetype="${response[i].id}" class="services-all">${response[i].service}</button>`;
                 $(".services").append(service);
             }
         },
         error: function() {
-            console.log(arguments);
+            
         }
     });
 }
@@ -126,7 +127,7 @@ function getCards(lat, lng, maxDist, sponsor) {
             lat: lat,
             lng: lng,
             maxDist: maxDist,
-            sponsor: sponsor
+            sponsor: sponsor,
         },
         success: function(risposta) {
             if (risposta.length > 0) {
@@ -152,14 +153,12 @@ function compileHandlebars(risp, sponsor) {
     var templateCards = Handlebars.compile(source);
     const markersCity = [];
     for (let i = 0; i < risp.length; i++) {
-        var servizi = appendServices(risp[i].id);
-        console.log('servizio = '+servizi);
+       
         var context = {
             city: risp[i].city,
             title: troncaStringa(risp[i].title),
             id: `<input class="aps_id" type="hidden" data-sponsor="${sponsor}" name="apartment_id" value=${risp[i].id}>`,
             sponsor: sponsor,
-            service:servizi,
         };
 
         var coordinates = [risp[i].longitude, risp[i].latitude];
@@ -204,7 +203,7 @@ function compileHandlebars(risp, sponsor) {
         var htmlContext = templateCards(context);
 
         containerCards.append(htmlContext);
-        
+        appendServices(risp[i].id);
         getImages(risp[i].id, sponsor);
         var el = $(".search__resoults__apartment-cards-content");
         var details = buildLocation(el, address);
@@ -236,6 +235,7 @@ function compileHandlebars(risp, sponsor) {
 /// appende i servizi selezionabili
 function appendServices(id) {
     var icona = '';
+    
     $.ajax({
         url: "http://127.0.0.1:8000/api/services",
         headers: {
@@ -245,16 +245,18 @@ function appendServices(id) {
             id: id
         },
         success: function(response) {
-            console.log('ciao');
-            console.log(response);
-            console.log('ciao');
+            
             for (var i = 0; i < response.length; i++) {
-                
-                icona +=response[i].icon;
-                console.log('icona = '+icona);
-                    
+                icona += `<i class='${response[i].icon}'><i/>`;
+              
             }
-            return icona
+            $('.search__resoults__apartment-cards-content').each(function(){
+                if($(this).find('.aps_id').val() == id){
+                     $(this).find('.services-icons').append(icona);
+            } 
+            
+            });
+            
         },
         error: function() {
 
@@ -273,7 +275,7 @@ function getImages(id, sponsor) {
             KEY: "test"
         },
         success: function(response) {
-            console.log(response);
+            
 
             for (var i = 0; i < response.length; i++) {
                 var clss = "hidden";
@@ -349,8 +351,7 @@ var serviceCheck = (function() {
                 .data("service")
                 .toString();
             var servicesCasa = serviceHome.split(",");
-            console.log(servicesCasa);
-            console.log(selectedService);
+           
             if (selectedService.length === 0) {
                 $(this).show();
                 $(".mapboxgl-marker").show();

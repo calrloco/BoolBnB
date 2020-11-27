@@ -9,7 +9,7 @@ use App\Image;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
-
+use Carbon\carbon;
 
 class ApartmentController extends Controller
 {
@@ -24,15 +24,34 @@ class ApartmentController extends Controller
              'lat'=>'required',
              'lng'=>'required',
              'maxDist'=>'required|numeric|min:20|max:100',
+             'sponsored' =>'boolean',
         ]);
 
         if($validator->fails()){
             return response()->json($validator->messages());
         }
-        $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
-        point(longitude, latitude)) * .001 as distance")
-        ->having('distance','<=',$request->maxDist)
-        ->where('attivo', '=', '1');
+
+
+
+        //controllo di $request->sponsored per la selezione della query
+        if($request->sponsored) {
+            //se sono richiesti gli sponsorizzati
+            $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
+            point(longitude, latitude)) * .001 as distance")
+            ->having('distance','<=',$request->maxDist)
+            ->where('attivo', '=', '1')
+            ->whereHas('sponsors',function($q){
+                $q->where('end_sponsor','>=', Carbon::now());
+            })->inRandomOrder();
+            
+        } else {
+            //se sono richiesti tutti gli appartamenti
+            $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
+            point(longitude, latitude)) * .001 as distance")
+            ->having('distance','<=',$request->maxDist)
+            ->where('attivo', '=', '1');
+        }
+        
         // FILTRO per servizi se presenti
         if($request['services']) {
             $serv = $request['services'];
@@ -43,6 +62,7 @@ class ApartmentController extends Controller
                 });
             }
         }
+        
 
 
         $query = $query->orderBy('distance','asc')->get();

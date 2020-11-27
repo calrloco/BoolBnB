@@ -291,7 +291,7 @@ class HostController extends Controller
                 ->orderBy('apartment_sponsor.end_sponsor', 'desc')
                 ->limit(1)
                 ->get();
-            if (empty($checkSponsor)) {
+            if (count($checkSponsor) > 0) {
                 $end_sponsor = Carbon::parse($checkSponsor[0]->end_sponsor)->addHours($sponsor_durate);
             } else {
 

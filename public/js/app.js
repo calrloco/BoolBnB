@@ -42491,6 +42491,42 @@ var getIp = function () {
       console.log(arguments);
     }
   });
+}(); // chiamata api per controllare messaggi non letti
+
+
+var unreadMessages = function () {
+  var id = $('#nav_user-id').val();
+  $.ajax({
+    url: "http://127.0.0.1:8000/api/unread",
+    method: "GET",
+    headers: {
+      KEY: "test"
+    },
+    data: {
+      id: id
+    },
+    success: function success(risposta) {
+      if (risposta.length > 0) {
+        // messaggio per count 1
+        if (risposta[0].unread == 1) {
+          $('#unread-msg').empty();
+          $('#unread-msg').append(risposta[0].unread + ' nuovo messaggio');
+          $('#unread-msg').append("<i class=\"dot fas fa-circle\"></i>"); // messaggio per count > 1
+        } else {
+          $('#unread-msg').empty();
+          $('#unread-msg').append(risposta[0].unread + ' nuovi messaggi');
+          $('#unread-msg').append("<i class=\"dot fas fa-circle\"></i>");
+        }
+      } else {
+        $('#unread-msg').empty();
+        $('#unread-msg').append('Messaggi');
+      }
+    },
+    error: function error() {
+      consol.log(arguments);
+      alert('errore');
+    }
+  });
 }(); // funzione per i suggerimenti nella search
 
 

@@ -35,8 +35,7 @@
                         </div>
                     @endfor
                 @endif
+            </div>
         </section>
-    </div>
 
-
-@endsection
+    @endsection

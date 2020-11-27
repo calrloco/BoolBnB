@@ -8,8 +8,6 @@ const {
 const {
     find
 } = require("lodash");
-
-
 const APPLICATION_NAME = "My Application";
 const APPLICATION_VERSION = "1.0";
 tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
@@ -22,7 +20,6 @@ let map = tt.map({
     style: "tomtom://vector/1/basic-main",
     zoom: 4
 });
-
 $(document).ready(function() {
     var instantSearch = (function() {
         if ($("#address-inst").html() != "") {
@@ -33,6 +30,7 @@ $(document).ready(function() {
     
     $(".nav__search-icon-big").click(function () {
         $(".search__resoults__apartment-cards").empty();
+        $('.search__resoults__apartment-cards.sponsor').empty();
         if ($("#search").val() != "") {
             getCoordinates($("#search").val(), $("#range-value").html()); 
         }
@@ -72,8 +70,9 @@ function getCoordinates(input, range) {
                     center: response.results[0].position,
                     zoom: zoom
                 });
-
-                getCards(latitude, longitude, range);
+                getSponsored(latitude, longitude, range,1);
+                getCards(latitude, longitude, range,0);
+                
             });
     }
 }
@@ -98,8 +97,7 @@ function getServices() {
         }
     });
 }
-
-function getCards(lat, lng, maxDist) {
+function getSponsored(lat, lng, maxDist,sponsor) {
     $.ajax({
         url: "http://127.0.0.1:8000/api/apartments",
         method: "GET",
@@ -109,11 +107,35 @@ function getCards(lat, lng, maxDist) {
         data: {
             lat: lat,
             lng: lng,
-            maxDist: maxDist
+            maxDist: maxDist,
+            sponsored: sponsor
         },
         success: function(risposta) {
             if(risposta.length > 0){
-               compileHandlebars(risposta);
+               compileHandlebars(risposta,sponsor);
+            }
+        },
+        error: function () {
+            console.log("error");
+        }
+    });
+}
+function getCards(lat, lng, maxDist,sponsor) {
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/apartments",
+        method: "GET",
+        headers: {
+            KEY: "test"
+        },
+        data: {
+            lat: lat,
+            lng: lng,
+            maxDist: maxDist,
+            sponsor: sponsor
+        },
+        success: function(risposta) {
+            if(risposta.length > 0){
+               compileHandlebars(risposta,sponsor);
             }
         },
         error: function () {
@@ -124,7 +146,13 @@ function getCards(lat, lng, maxDist) {
 
 ////////////////////////////////////
 /// funzione per inserire le card della ricerca nel dom e creare i marker associati nella mappa
-function compileHandlebars(risp) {
+function compileHandlebars(risp,sponsor) {
+    var containerCards = '';
+    if(sponsor == 1){
+         containerCards = $("#sponsor");
+    }else{
+         containerCards = $("#no-sponsor");
+    }
     var source = $("#handlebars_cards").html();
     var templateCards = Handlebars.compile(source);
     const markersCity = [];
@@ -132,7 +160,8 @@ function compileHandlebars(risp) {
         var context = {
             city: risp[i].city,
             title: troncaStringa(risp[i].title),
-            id: `<input class="aps_id" type="hidden" name="apartment_id" value=${risp[i].id}>`
+            id: `<input class="aps_id" type="hidden" data-sponsor="${sponsor}" name="apartment_id" value=${risp[i].id}>`,
+            sponsor:sponsor
         };
 
         var coordinates = [risp[i].longitude, risp[i].latitude];
@@ -175,9 +204,10 @@ function compileHandlebars(risp) {
         marker.setPopup(popup);
 
         var htmlContext = templateCards(context);
-        $(".search__resoults__apartment-cards").append(htmlContext);
+        
+        containerCards.append(htmlContext);
         appendServices(risp[i].id);
-        getImages(risp[i].id);
+        getImages(risp[i].id,sponsor);
         var el = $(".search__resoults__apartment-cards-content");
         var details = buildLocation(el, address);
         // cliccando su un elemento della lista a sx lo trova in mappa
@@ -238,7 +268,7 @@ function appendServices(id) {
     });
 }
 /// appendere le immagini allo slider
-function getImages(id) {
+function getImages(id,sponsor) {
     $.ajax({
         url:'http://127.0.0.1:8000/api/images',
         method: 'GET',
@@ -260,7 +290,7 @@ function getImages(id) {
                }else{
                 clss = 'hidden'
                }
-               appendImages(response[i],clss);
+               appendImages(response[i],clss,sponsor);
            }
         },
         error: function () {
@@ -268,8 +298,8 @@ function getImages(id) {
         }
     });
 }
-function appendImages(risp,clss){
-    var container  = $('.search__resoults__apartment-cards-content');
+function appendImages(risp,clss,sponsor){
+    var container  = $('.search__resoults__apartment-cards-content.sponsor-'+sponsor);
     container.each(function(){
        appId =  $(this).find('.aps_id').val();
        if(appId == risp.apartment_id){

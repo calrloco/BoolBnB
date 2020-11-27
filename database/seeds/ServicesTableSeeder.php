@@ -19,7 +19,7 @@ class ServicesTableSeeder extends Seeder
             'vasca da bagno',
             'riscaldamento',
             'cucina',
-            'happy handing'
+            'happy ending'
         ];
 
         $descriptions = [

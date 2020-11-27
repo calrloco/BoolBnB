@@ -98,7 +98,7 @@ class ApartmentController extends Controller
                'beds' =>'required|numeric|min:1',
                'bathrooms'=>'required|min:1',
                'sm'=>'required|min:1',
-               'address'=>'required|min:10',
+               'address'=>'required|min:3',
                'latitude'=>'required',
                'longitude'=>'required',
                'city'=>'required|min:1',

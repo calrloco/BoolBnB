@@ -2,12 +2,8 @@ require("./bootstrap");
 //require("./apt");
 var $ = require("jquery");
 const Handlebars = require("handlebars");
-const {
-    log
-} = require("handlebars");
-const {
-    find
-} = require("lodash");
+const { log } = require("handlebars");
+const { find } = require("lodash");
 const APPLICATION_NAME = "My Application";
 const APPLICATION_VERSION = "1.0";
 tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
@@ -27,52 +23,51 @@ $(document).ready(function() {
             getServices();
         }
     })();
-    
-    $(".nav__search-icon-big").click(function () {
+
+    $(".nav__search-icon-big").click(function() {
         $(".search__resoults__apartment-cards").empty();
-        $('.search__resoults__apartment-cards.sponsor').empty();
+        $(".search__resoults__apartment-cards.sponsor").empty();
         if ($("#search").val() != "") {
-            getCoordinates($("#search").val(), $("#range-value").html()); 
+            getCoordinates($("#search").val(), $("#range-value").html());
         }
-        
     });
 
-    $('#search').keydown(function(){
-        if (event.which == 13 || event.keyCode == 13){
+    $("#search").keydown(function() {
+        if (event.which == 13 || event.keyCode == 13) {
             if ($("#search").val() != "") {
-                getCoordinates($("#search").val(), $("#range-value").html()); 
+                getCoordinates($("#search").val(), $("#range-value").html());
+            }
         }
-      }
     });
 });
 //// prendi coordinate dell'input////////////////
 function getCoordinates(input, range) {
     var zoom = 10;
-    if (input != '') {
-        tt.services.fuzzySearch({
+    if (input != "") {
+        tt.services
+            .fuzzySearch({
                 key: apiKey,
-                query: input,
+                query: input
             })
             .go()
-            .then(function (response) {
+            .then(function(response) {
                 var longitude = response.results[0].position["lng"];
                 var latitude = response.results[0].position["lat"];
-                city = response.results[0].address['municipality'];
-                streetName = response.results[0].address['streetName'];
+                city = response.results[0].address["municipality"];
+                streetName = response.results[0].address["streetName"];
                 // condizione per selezionare lo zoom in caso di città o indirizzo specifico
                 if (streetName != undefined && city) {
                     zoom = 16;
-                } 
+                }
                 map = tt.map({
                     key: apiKey,
-                    style: 'tomtom://vector/1/basic-main',
-                    container: 'map',
+                    style: "tomtom://vector/1/basic-main",
+                    container: "map",
                     center: response.results[0].position,
                     zoom: zoom
                 });
-                getSponsored(latitude, longitude, range,1);
-                getCards(latitude, longitude, range,0);
-                
+                getSponsored(latitude, longitude, range, 1);
+                getCards(latitude, longitude, range, 0);
             });
     }
 }
@@ -85,19 +80,19 @@ function getServices() {
         headers: {
             KEY: "test"
         },
-        success: function (response) {
+        success: function(response) {
             console.log(response);
             for (var i = 0; i < response.length; i++) {
                 var service = `<button data-servicetype="${response[i].id}" class="services-all">${response[i].service}</button>`;
                 $(".services").append(service);
             }
         },
-        error: function () {
+        error: function() {
             console.log(arguments);
         }
     });
 }
-function getSponsored(lat, lng, maxDist,sponsor) {
+function getSponsored(lat, lng, maxDist, sponsor) {
     $.ajax({
         url: "http://127.0.0.1:8000/api/apartments",
         method: "GET",
@@ -111,16 +106,16 @@ function getSponsored(lat, lng, maxDist,sponsor) {
             sponsored: sponsor
         },
         success: function(risposta) {
-            if(risposta.length > 0){
-               compileHandlebars(risposta,sponsor);
+            if (risposta.length > 0) {
+                compileHandlebars(risposta, sponsor);
             }
         },
-        error: function () {
+        error: function() {
             console.log("error");
         }
     });
 }
-function getCards(lat, lng, maxDist,sponsor) {
+function getCards(lat, lng, maxDist, sponsor) {
     $.ajax({
         url: "http://127.0.0.1:8000/api/apartments",
         method: "GET",
@@ -134,11 +129,11 @@ function getCards(lat, lng, maxDist,sponsor) {
             sponsor: sponsor
         },
         success: function(risposta) {
-            if(risposta.length > 0){
-               compileHandlebars(risposta,sponsor);
+            if (risposta.length > 0) {
+                compileHandlebars(risposta, sponsor);
             }
         },
-        error: function () {
+        error: function() {
             console.log("error");
         }
     });
@@ -146,22 +141,25 @@ function getCards(lat, lng, maxDist,sponsor) {
 
 ////////////////////////////////////
 /// funzione per inserire le card della ricerca nel dom e creare i marker associati nella mappa
-function compileHandlebars(risp,sponsor) {
-    var containerCards = '';
-    if(sponsor == 1){
-         containerCards = $("#sponsor");
-    }else{
-         containerCards = $("#no-sponsor");
+function compileHandlebars(risp, sponsor) {
+    var containerCards = "";
+    if (sponsor == 1) {
+        containerCards = $("#sponsor");
+    } else {
+        containerCards = $("#no-sponsor");
     }
     var source = $("#handlebars_cards").html();
     var templateCards = Handlebars.compile(source);
     const markersCity = [];
     for (let i = 0; i < risp.length; i++) {
+        var servizi = appendServices(risp[i].id);
+        console.log('servizio = '+servizi);
         var context = {
             city: risp[i].city,
             title: troncaStringa(risp[i].title),
             id: `<input class="aps_id" type="hidden" data-sponsor="${sponsor}" name="apartment_id" value=${risp[i].id}>`,
-            sponsor:sponsor
+            sponsor: sponsor,
+            service:servizi,
         };
 
         var coordinates = [risp[i].longitude, risp[i].latitude];
@@ -204,10 +202,10 @@ function compileHandlebars(risp,sponsor) {
         marker.setPopup(popup);
 
         var htmlContext = templateCards(context);
-        
+
         containerCards.append(htmlContext);
-        appendServices(risp[i].id);
-        getImages(risp[i].id,sponsor);
+        
+        getImages(risp[i].id, sponsor);
         var el = $(".search__resoults__apartment-cards-content");
         var details = buildLocation(el, address);
         // cliccando su un elemento della lista a sx lo trova in mappa
@@ -223,22 +221,21 @@ function compileHandlebars(risp,sponsor) {
                     // serve a passare da un marker all'altro nella selezione di sx
                     closeAllPopups();
                     // marker.togglePopup();
-                }
+                };
             })(marker)
         );
 
         // cliccando sul marker aggiunge la classe selected alla card dell'appartamento corrispondente
-        marker._element.addEventListener('click',
-            (function () {
-                var posizione = $(this).index() - 1;
-                details.removeClass('selected');
-                details.eq(posizione).addClass('selected');
-            })
-        );    
-    }    
+        marker._element.addEventListener("click", function() {
+            var posizione = $(this).index() - 1;
+            details.removeClass("selected");
+            details.eq(posizione).addClass("selected");
+        });
+    }
 }
-/// appende i servizi all'appartamento
+/// appende i servizi selezionabili
 function appendServices(id) {
+    var icona = '';
     $.ajax({
         url: "http://127.0.0.1:8000/api/services",
         headers: {
@@ -247,81 +244,80 @@ function appendServices(id) {
         data: {
             id: id
         },
-        success: function (response) {
-            var dataAttr = [];
-            for (var i = 0; i < response.length; i++) {
-                dataAttr.push(response[i].service_id);
-                $(".search__resoults__apartment-cards-content").each(
-                    function () {
-                        if (
-                            $(this)
-                            .find($(".aps_id"))
-                            .val() == response[i].apartment_id
-                        ) {
-                            $(this).attr("data-service", dataAttr);
-                        }
-                    }
-                );
-            }
-        },
-        error: function () {}
-    });
-}
-/// appendere le immagini allo slider
-function getImages(id,sponsor) {
-    $.ajax({
-        url:'http://127.0.0.1:8000/api/images',
-        method: 'GET',
-        data: {
-          id: id
-        }, 
-        headers: {
-            KEY:'test'
-        },
-        success: function(response){
+        success: function(response) {
+            console.log('ciao');
             console.log(response);
-            
-           for (var i = 0; i <response.length; i++){
-               var clss = "hidden";
-               if(i == 0){
-                   clss = 'first active'
-               }else if(i == response.length - 1){
-                  clss = 'hidden last'
-               }else{
-                clss = 'hidden'
-               }
-               appendImages(response[i],clss,sponsor);
-           }
+            console.log('ciao');
+            for (var i = 0; i < response.length; i++) {
+                
+                icona +=response[i].icon;
+                console.log('icona = '+icona);
+                    
+            }
+            return icona
         },
-        error: function () {
+        error: function() {
 
         }
     });
 }
-function appendImages(risp,clss,sponsor){
-    var container  = $('.search__resoults__apartment-cards-content.sponsor-'+sponsor);
-    container.each(function(){
-       appId =  $(this).find('.aps_id').val();
-       if(appId == risp.apartment_id){
-           img =  `<img class="search__resoults__apartment-cards-content-slider-img apt-image ${clss}" 
-           src="${risp.path}">`
-          $(this).find('.search__resoults__apartment-cards-content-slider').append(img);
-          
-       }
-       
+/// appendere le immagini allo slider
+function getImages(id, sponsor) {
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/images",
+        method: "GET",
+        data: {
+            id: id
+        },
+        headers: {
+            KEY: "test"
+        },
+        success: function(response) {
+            console.log(response);
+
+            for (var i = 0; i < response.length; i++) {
+                var clss = "hidden";
+                if (i == 0) {
+                    clss = "first active";
+                } else if (i == response.length - 1) {
+                    clss = "hidden last";
+                } else {
+                    clss = "hidden";
+                }
+                appendImages(response[i], clss, sponsor);
+            }
+        },
+        error: function() {}
+    });
+}
+function appendImages(risp, clss, sponsor) {
+    var container = $(
+        ".search__resoults__apartment-cards-content.sponsor-" + sponsor
+    );
+    container.each(function() {
+        appId = $(this)
+            .find(".aps_id")
+            .val();
+        if (appId == risp.apartment_id) {
+            img = `<img class="search__resoults__apartment-cards-content-slider-img apt-image ${clss}" 
+           src="${risp.path}">`;
+            $(this)
+                .find(".search__resoults__apartment-cards-content-slider")
+                .append(img);
+        }
     });
 }
 // funzione per troncare una stringa
 function troncaStringa(stringa) {
-    var shortText = "";
-    if (stringa.length != 0) {
-        for (var i = 0; i < stringa.length; i++) {
-            if (stringa[i] == " " && i <= 43) {
-                var shortText = $.trim(stringa).substring(0, i) + "...";
+    var shortText = stringa;
+    console.log(shortText);
+    if (stringa.length > 28) {
+        for (var i = 28; i > 0; i--) {
+            if (stringa[i] == " ") {
+                shortText = stringa.substring(0, i) + "...";
+                i = 0;
             }
         }
-    } else {
-        shortText = "Descrizione non disponibile";
     }
     return shortText;
 }
@@ -329,96 +325,126 @@ function troncaStringa(stringa) {
 /// filtra ricerca per servizi
 var serviceCheck = (function() {
     var selectedService = [];
-    
+
     $(document).on("click", ".services-all", function() {
         var serviceType = $(this)
             .data("servicetype")
             .toString();
         $(this).toggleClass("service-selected");
-        if(selectedService.length < $('.services-all').length && !selectedService.includes(serviceType)){
+        if (
+            selectedService.length < $(".services-all").length &&
+            !selectedService.includes(serviceType)
+        ) {
             selectedService.push(serviceType);
         }
-        if(!$(this).hasClass("service-selected")){
-             selectedService = selectedService.filter(function(item){
-                   return item !== serviceType;
-             })
+        if (!$(this).hasClass("service-selected")) {
+            selectedService = selectedService.filter(function(item) {
+                return item !== serviceType;
+            });
         }
-       
+
         $(this).toggleClass(".service-selected");
         $(".search__resoults__apartment-cards-content").each(function() {
-            var serviceHome = $(this).data("service").toString();
+            var serviceHome = $(this)
+                .data("service")
+                .toString();
             var servicesCasa = serviceHome.split(",");
-            console.log(servicesCasa); 
+            console.log(servicesCasa);
             console.log(selectedService);
-            if(selectedService.length === 0 ){
+            if (selectedService.length === 0) {
                 $(this).show();
-                $('.mapboxgl-marker').show();
-            }else if(servicesCasa.length > selectedService.length && serviceHome.includes(selectedService.toString())){
-                 $(this).show();
-                 $('.mapboxgl-marker').eq($(this).index()).show();
-            }else if (same(servicesCasa,selectedService)) {
+                $(".mapboxgl-marker").show();
+            } else if (
+                servicesCasa.length > selectedService.length &&
+                serviceHome.includes(selectedService.toString())
+            ) {
                 $(this).show();
-                $('.mapboxgl-marker').eq($(this).index()).show();
+                $(".mapboxgl-marker")
+                    .eq($(this).index())
+                    .show();
+            } else if (same(servicesCasa, selectedService)) {
+                $(this).show();
+                $(".mapboxgl-marker")
+                    .eq($(this).index())
+                    .show();
             } else {
                 $(this).hide();
-                $('.mapboxgl-marker').eq($(this).index()).hide();
-                $('.mapboxgl-popup').eq($(this).index()).hide();
+                $(".mapboxgl-marker")
+                    .eq($(this).index())
+                    .hide();
+                $(".mapboxgl-popup")
+                    .eq($(this).index())
+                    .hide();
             }
         });
     });
 })();
 // al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom
-$("#search").keyup(function () {
-    $('#auto-complete').empty();
+$("#search").keyup(function() {
+    $("#auto-complete").empty();
     autoComplete($("#search").val());
 });
 
 //funzione per selezionare suggerimento e restuirlo nella search
-$(document).on('click', '.complete-results', function () {
+$(document).on("click", ".complete-results", function() {
     var value = $(this).text();
-    $('#search').val(value);
+    $("#search").val(value);
     getCoordinates($("#search").val());
-    $('#auto-complete').removeClass('complete-on');
-
+    $("#auto-complete").removeClass("complete-on");
 });
 
 // funzione per i suggerimenti nella search
 function autoComplete(query) {
-    if (query.length < 3 || query == '') {
-        $('#auto-complete').removeClass('complete-on');
+    if (query.length < 3 || query == "") {
+        $("#auto-complete").removeClass("complete-on");
     }
-    if (query != '' && isNaN(query) && query.length > 3) {
-        $('#auto-complete').addClass('complete-on');
-        tt.services.fuzzySearch({
+    if (query != "" && isNaN(query) && query.length > 3) {
+        $("#auto-complete").addClass("complete-on");
+        tt.services
+            .fuzzySearch({
                 key: apiKey,
-                query: query,
+                query: query
             })
             .go()
-            .then(function (response) {
-
+            .then(function(response) {
                 var address = [];
-                var results = '';
+                var results = "";
 
                 for (let i = 0; i < 4; i++) {
                     if (response.results[i]) {
-                        // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni                
-                        var streetName = response.results[i].address['streetName'];
-                        var city = response.results[i].address['municipality'];
-                        var countryCode = response.results[i].address['countryCode'];
-                        if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == 'IT') {
-                            address.push(streetName + ' ' + city);
-                        } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == 'IT') {
+                        // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
+                        var streetName =
+                            response.results[i].address["streetName"];
+                        var city = response.results[i].address["municipality"];
+                        var countryCode =
+                            response.results[i].address["countryCode"];
+                        if (
+                            streetName != undefined &&
+                            !address.includes(streetName) &&
+                            city != undefined &&
+                            !address.includes(city) &&
+                            countryCode == "IT"
+                        ) {
+                            address.push(streetName + " " + city);
+                        } else if (
+                            streetName == undefined &&
+                            city != undefined &&
+                            !address.includes(city) &&
+                            countryCode == "IT"
+                        ) {
                             address.push(city);
                         }
                     }
                 }
                 for (let i = 0; i < address.length; i++) {
-                    results += '<div class="complete-results">' + address[i] + '</div>'
-
+                    results +=
+                        '<div class="complete-results">' +
+                        address[i] +
+                        "</div>";
                 }
-                document.getElementById('auto-complete').innerHTML = results;
-                if (results == '') {
-                    $('#auto-complete').removeClass('complete-on');
+                document.getElementById("auto-complete").innerHTML = results;
+                if (results == "") {
+                    $("#auto-complete").removeClass("complete-on");
                 }
             });
     }
@@ -434,46 +460,42 @@ function buildLocation(el, text) {
 
 // compare arrays:
 function same(arr1, arr2) {
-    if($(arr1).not(arr2).length === 0 && $(arr2).not(arr1).length === 0){
-        return true
+    if ($(arr1).not(arr2).length === 0 && $(arr2).not(arr1).length === 0) {
+        return true;
     }
-     return false;    
+    return false;
 }
 
 // per chiudere l'autocomplete al click fuori
 $(document).click(function() {
-    $('#auto-complete').removeClass('complete-on');
-  });
+    $("#auto-complete").removeClass("complete-on");
+});
 //slider
-$(document).on("click", ".arrow-slider-sx", function(){
-     var activeImage = $(this).siblings('.apt-image.active');
-    activeImage.removeClass('active');
-    activeImage.addClass('hidden');
-     if (activeImage.hasClass('last') == true) {
-        activeImage.siblings('.apt-image.first').removeClass('hidden');
-        activeImage.siblings('.apt-image.first').addClass('active');
+$(document).on("click", ".arrow-slider-sx", function() {
+    var activeImage = $(this).siblings(".apt-image.active");
+    activeImage.removeClass("active");
+    activeImage.addClass("hidden");
+    if (activeImage.hasClass("last") == true) {
+        activeImage.siblings(".apt-image.first").removeClass("hidden");
+        activeImage.siblings(".apt-image.first").addClass("active");
     } else {
         //metto la classe attiva al successivo
-        activeImage.next().removeClass('hidden');
-        activeImage.next().addClass('active');
+        activeImage.next().removeClass("hidden");
+        activeImage.next().addClass("active");
     }
-
 });
- $(document).on("click", ".arrow-slider-dx", function(){
-    var activeImage = $(this).siblings('.apt-image.active');
-    
-    activeImage.removeClass('active');
-    activeImage.addClass('hidden');
-    
-    if (activeImage.hasClass('first') == true) {
-        activeImage.siblings('.apt-image.last').removeClass('hidden');
-        activeImage.siblings('.apt-image.last').addClass('active');
+$(document).on("click", ".arrow-slider-dx", function() {
+    var activeImage = $(this).siblings(".apt-image.active");
+
+    activeImage.removeClass("active");
+    activeImage.addClass("hidden");
+
+    if (activeImage.hasClass("first") == true) {
+        activeImage.siblings(".apt-image.last").removeClass("hidden");
+        activeImage.siblings(".apt-image.last").addClass("active");
     } else {
         //metto la classe attiva al successivo
-        activeImage.prev().removeClass('hidden');
-        activeImage.prev().addClass('active');
+        activeImage.prev().removeClass("hidden");
+        activeImage.prev().addClass("active");
     }
-     
 });
-
-

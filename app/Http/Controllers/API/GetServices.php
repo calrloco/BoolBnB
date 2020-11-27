@@ -16,9 +16,12 @@ class GetServices extends Controller
     public function index(Request $request)
     {
         $id =$request->id;
-        $services = DB::table('apartment_service')->where('apartment_id','=',$id)->get();
+        $services = Service::whereHas('apartments',function($q) use ($id){
+           $q->where('apartments.id','=',$id);
+        })->get();
         return response()->json($services);
     }
+  
 
    
     public function getAll()

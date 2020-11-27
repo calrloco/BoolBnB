@@ -42496,45 +42496,42 @@ var getIp = function () {
 
 
 function autoComplete(query) {
-  if (query.length < 3 || query == "") {
-    $("#auto-complete").removeClass("complete-on");
+  if (query.length < 3 || query == '') {
+    $('#auto-complete').removeClass('complete-on');
   }
 
-  if (query != "" && isNaN(query) && query.length > 3) {
+  if (query != '' && isNaN(query) && query.length > 3) {
+    $('#auto-complete').addClass('complete-on');
     tt.services.fuzzySearch({
       key: "31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk",
       query: query
     }).go().then(function (response) {
-      if (response.length > 0) {
-        var address = [];
-        var results = "";
+      var address = [];
+      var results = '';
 
-        for (var i = 0; i < 4; i++) {
-          if (response.results[i]) {
-            // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
-            var streetName = response.results[i].address["streetName"];
-            var city = response.results[i].address["municipality"];
-            var countryCode = response.results[i].address["countryCode"];
+      for (var i = 0; i < 4; i++) {
+        if (response.results[i]) {
+          // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni                
+          var streetName = response.results[i].address['streetName'];
+          var city = response.results[i].address['municipality'];
+          var countryCode = response.results[i].address['countryCode'];
 
-            if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == "IT") {
-              address.push(streetName + " " + city);
-            } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == "IT") {
-              address.push(city);
-            }
+          if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == 'IT') {
+            address.push(streetName + ' ' + city);
+          } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == 'IT') {
+            address.push(city);
           }
         }
+      }
 
-        for (var _i = 0; _i < address.length; _i++) {
-          results += '<div class="complete-results">' + address[_i] + "</div>";
-        }
+      for (var _i = 0; _i < address.length; _i++) {
+        results += '<div class="complete-results">' + address[_i] + '</div>';
+      }
 
-        document.getElementById("auto-complete").innerHTML = results;
+      document.getElementById('auto-complete').innerHTML = results;
 
-        if (results == "") {
-          $("#auto-complete").removeClass("complete-on");
-        }
-
-        $("#auto-complete").addClass("complete-on");
+      if (results == '') {
+        $('#auto-complete').removeClass('complete-on');
       }
     });
   }

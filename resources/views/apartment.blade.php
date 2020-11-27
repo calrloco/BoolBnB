@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <div class="container-center">
-        {{$messageInviato ?? ''}}
+        @if (session('status'))
+        {{session('status')}}
+        @endif
         <section class="top-section">
             <span class="hidden" id="app-id">{{ $apartment->id }}</span>
             <div class="title-apt">

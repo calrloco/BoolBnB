@@ -341,7 +341,7 @@ $("#search").keyup(function () {
     autoComplete($("#search").val());
 });
 
-//funzione per selezionare suggerimento e restuirlo nella search
+// //funzione per selezionare suggerimento e restuirlo nella search
 $(document).on('click', '.complete-results', function () {
     var value = $(this).text();
     $('#search').val(value);

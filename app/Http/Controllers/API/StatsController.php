@@ -42,14 +42,15 @@ class StatsController extends Controller
 
     public function unreadMessages(Request $request)
     {
-        $response = User::selectRaw('COUNT(messages.read = 1) AS unread')
+        $response = User::selectRaw('COUNT(messages.read) AS unread')
         ->join('apartments', 'users.id', '=', 'apartments.user_id')
         ->join('messages', 'apartments.id', '=', 'messages.apartment_id')
         ->where('users.id', '=', $request->id )
+        ->where('messages.read', '=', '0' )
         ->groupBy('messages.id')
         ->get();
 
-        return response()->json($response);
+        return response()->json($response, 200);
     }
 
 

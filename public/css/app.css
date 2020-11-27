@@ -5225,7 +5225,7 @@ button:focus {
   margin-bottom: 0.2rem;
   cursor: pointer;
   border-bottom: 1px solid #767676;
-  border-top: 1px solid #767676;
+  border-top: 1px solid #b41717;
 }
 
 .nav__user__menu-item:hover {
@@ -5272,6 +5272,19 @@ button:focus {
 }
 
 .nav__user__menu-item:hover .nav-link {
+  color: #fff;
+}
+
+.nav__user__menu-item .dot {
+  color: #ff5a5f;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 50%;
+  z-index: 2;
+}
+
+.nav__user__menu-item:hover .dot {
   color: #fff;
 }
 

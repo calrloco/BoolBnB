@@ -121,10 +121,12 @@ var unreadMessages = (function() {
         },
         success: function(risposta) {
             if(risposta.length > 0) {
+                // messaggio per count 1
                 if(risposta[0].unread == 1) {
                     $('#unread-msg').empty();
-                    $('#unread-msg').append(`<i class="dot fas fa-circle"></i>`);
                     $('#unread-msg').append(risposta[0].unread + ' nuovo messaggio');
+                    $('#unread-msg').append(`<i class="dot fas fa-circle"></i>`);
+                // messaggio per count > 1
                 } else {
                     $('#unread-msg').empty();
                     $('#unread-msg').append(risposta[0].unread + ' nuovi messaggi');
@@ -132,7 +134,12 @@ var unreadMessages = (function() {
                 }
 
 
+            } else {
+                $('#unread-msg').empty();
+                $('#unread-msg').append('Messaggi');
             }
+             
+
             },
         error: function() {
             consol.log(arguments);

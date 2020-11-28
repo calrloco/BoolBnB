@@ -1,5 +1,5 @@
 .top-section {
-    
+
 
     .title-apt {
         padding: 20px 0;
@@ -156,6 +156,7 @@
             align-items: flex-end;
             flex-direction: column;
             border-radius: $card-img-radius;
+            border: 1px solid #ff5a5f;
 
 
             .message-title {
@@ -171,7 +172,7 @@
                 align-self: flex-end;
                 margin-right: 0px;
 
-                 
+
 
                 .btn-show {
                     margin-right: 0px;

@@ -5432,58 +5432,6 @@ input:-webkit-autofill:active {
   border-radius: 1.2rem;
 }
 
-.container-center {
-  height: 100%;
-}
-
-.message-deck {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-}
-
-.message-card {
-  width: 60%;
-  min-height: 100px;
-  margin-top: 10px;
-  border: 1px solid #e2e2e2;
-  border-radius: 1.2rem;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: row;
-}
-
-.apart-info {
-  width: 20%;
-  min-height: 100px;
-  height: 100%;
-  border-right: 1px solid #e2e2e2;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: column;
-}
-
-.apart-info .apart-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.message-info {
-  width: 80%;
-  min-height: 150px;
-  height: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: columns;
-}
-
 .create-update h2 {
   margin-top: 1.5rem;
   font-size: 2rem;
@@ -5757,6 +5705,7 @@ input:-webkit-autofill:active {
   align-items: flex-end;
   flex-direction: column;
   border-radius: 1.2rem;
+  border: 1px solid #ff5a5f;
 }
 
 .info-apt-section .info-box-dx .send-message-box .message-title {
@@ -6670,6 +6619,201 @@ hr {
 
 .btn-show {
   width: 100%;
+}
+
+.container-center .title {
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container-center .messages-box {
+  height: 100%;
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 414px) {
+  .container-center .messages-box {
+    padding: 0;
+  }
+}
+
+.container-center .messages-box .message-card {
+  min-height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  border: 1px solid #ff5a5f;
+  border-radius: 15px;
+}
+
+@media screen and (max-width: 414px) {
+  .container-center .messages-box .message-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.container-center .messages-box .message-card .message-card-sx {
+  width: 20%;
+  height: 100%;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container-center .messages-box .message-card .message-card-sx .apart-img img {
+  display: flex;
+  width: 150px;
+  height: 150px;
+  border-radius: 15px;
+}
+
+@media screen and (max-width: 414px) {
+  .container-center .messages-box .message-card .message-card-sx .apart-img img {
+    padding-top: 10px;
+  }
+}
+
+.container-center .messages-box .message-card .message-card-center {
+  width: 70%;
+  height: 100%;
+  min-height: 100px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 414px) {
+  .container-center .messages-box .message-card .message-card-center {
+    width: 90%;
+  }
+}
+
+.container-center .messages-box .message-card .message-card-center .sender-details-up {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container-center .messages-box .message-card .message-card-center .sender-details-up .details-sender {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 414px) {
+  .container-center .messages-box .message-card .message-card-center .sender-details-up .details-sender {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 0;
+  }
+}
+
+.container-center .messages-box .message-card .message-card-center .sender-details-up .details-sender .details {
+  font-size: 18px;
+}
+
+@media screen and (max-width: 414px) {
+  .container-center .messages-box .message-card .message-card-center .sender-details-up .details-sender .details {
+    text-align: center;
+  }
+}
+
+.container-center .messages-box .message-card .message-card-center .sender-details-up .details-apt {
+  padding-top: 10px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.container-center .messages-box .message-card .message-card-center .sender-details-up .details-apt .apt-link {
+  color: black;
+  text-decoration: none;
+}
+
+.container-center .messages-box .message-card .message-card-center .sender-details-up .details-apt a:hover {
+  color: #ff5a5f;
+}
+
+.container-center .messages-box .message-card .message-card-center .sender-details-down {
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 414px) {
+  .container-center .messages-box .message-card .message-card-center .sender-details-down {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 0 5px;
+  }
+}
+
+.container-center .messages-box .message-card .message-card-center .sender-details-down .message {
+  padding-top: 15px;
+  font-size: 16px;
+  color: black;
+  border-top: 1px solid #ff5a5f;
+  max-height: 1000px;
+  text-align: justify;
+}
+
+.container-center .messages-box .message-card .message-card-dx {
+  width: 10%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+@media screen and (max-width: 414px) {
+  .container-center .messages-box .message-card .message-card-dx {
+    width: 100%;
+  }
+}
+
+.container-center .messages-box .message-card .message-card-dx .button-section .buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 414px) {
+  .container-center .messages-box .message-card .message-card-dx .button-section .buttons {
+    height: 100%;
+    padding-bottom: 10px;
+  }
+}
+
+.container-center .messages-box .message-card .message-card-dx .button-section .buttons .msg-btn {
+  color: gray;
+  font-size: 20px;
 }
 
 .active {

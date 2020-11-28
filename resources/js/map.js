@@ -315,9 +315,8 @@ var serviceCheck = (function() {
         $(this).toggleClass(".service-selected");
         $(".search__resoults__apartment-cards-content").each(function() {
             var serviceHome = $(this).data("service").toString();
+            console.log(serviceHome);
             var servicesCasa = serviceHome.split(",");
-            console.log(servicesCasa); 
-            console.log(selectedService);
             if(selectedService.length === 0 ){
                 $(this).show();
                 $('.mapboxgl-marker').show();

@@ -2,7 +2,8 @@
 
 @section('content')
 
-    <div class="container-center create-update">
+<div class="container-center create-update">
+    <div class="card-container">
         <h2>Registra il tuo appartamento</h2>
 
 
@@ -15,14 +16,14 @@
             <!-- TITOLO -->
             <div class="input-row">
                 <label for="title">Titolo</label>
-                <input type="text" id="title" name="title" placeholder="Inserisci il titolo" class="" />
+                <input type="text" id="title" name="title" class="" />
                 <p class="message"></p>
             </div>
 
             <!-- INDIRIZZO -->
             <div class="input-row">
                 <label for="address">Indirizzo</label>
-                <input type="text" id="address" name="address" placeholder="l'indirizzo del tuo appartamento" class="" autocomplete="off" />
+                <input type="text" id="address" name="address" class="" autocomplete="off" />
                 <p class="message"></p>
             </div>
 
@@ -53,15 +54,15 @@
             </div>
 
             <!-- CARATTERISTICHE-->
-            <div class="input row caratteristiche">
-                <div class="input-group">
+            <div class="input row">
+                <div class="input-group caratteristiche">
                     <div class="label-input">
-                        <label for="daily_price">Prezzo per notte</label>
+                        <label for="daily_price">Prezzo/notte</label>
                         <input id="daily-price" type="number" name="daily_price">
                         <p class="message"></p>
                     </div>
                     <div class="label-input">
-                        <label for="sm">Metri quadri</label>
+                        <label for="sm">Mq</label>
                         <input id="sm" type="number" name="sm">
                         <p class="message"></p>
                     </div>
@@ -83,13 +84,13 @@
                 </div>
 
                 <!-- SERVIZI -->
-                <div class="input-group">
+                <div class="input-group all-services">
                     @foreach ($services as $service)
-                        <div class="label-input">
-                            <span><i class="{{ $service->icon }}"></i></span>
-                            <label for="services">{{ $service->service }}</label>
-                            <input type="checkbox" name="services[]" value="{{ $service->id }}">
-                        </div>
+                    <div class="label-input service">
+                        <span><i class="{{ $service->icon }}"></i></span>
+                        <label for="services">{{ $service->service }}</label>
+                        <input type="checkbox" name="services[]" value="{{ $service->id }}">
+                    </div>
                     @endforeach
 
                 </div>
@@ -97,12 +98,12 @@
 
 
                 <!-- IMMAGINI -->
-                <h5>aggiungi le tue immagini</h5>
+                <h3>Aggiungi le tue immagini</h3>
                 <div class="container-upload">
                     <input type="file" name="img[]" id="img" accept="image/*" multiple>
                 </div>
-                
-                    
+
+
 
                 <!-- CAMPI HIDDEN -->
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -118,9 +119,12 @@
             </div>
         </form>
 
-
-
-
-
     </div>
+
+
+
+
+
+
+</div>
 @endsection

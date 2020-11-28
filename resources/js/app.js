@@ -308,7 +308,7 @@ $('#registerR').click(function(e){
         checkInput($('#lastnameR'), letter, 2, 50, 'il cognome') &&
         checkInput($('#emailR'), emailR, 2, 255, 'la mail') &&
         checkInput($('#passwordR'), allChar, 8, 255, 'la password') &&
-        $('#password-confirmR').val() != $('#passwordR').val() && 
+        $('#password-confirmR').val() != $('#passwordR').val() &&
         $('#password-confirmR').val() == '' &&
         $('#dateR').val() == '' ||
 
@@ -320,7 +320,7 @@ $('#registerR').click(function(e){
         $('#password-confirmR').val() == '' ||
         $('#dateR').val() == ''
     ){
-        e.preventDefault(); 
+        e.preventDefault();
     }
 });
 // fine pagina register

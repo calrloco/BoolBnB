@@ -33,7 +33,7 @@
 
 
     <div class="container-page">
-        {{-- @include('partials/mobilemenu') --}}
+         {{-- @include('partials/mobilemenu')  --}}
         @include('partials/navbar')
 
         <main class="">

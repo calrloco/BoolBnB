@@ -249,7 +249,7 @@ $('#crea').click(function(e){
         checkInput($('#postal-code'), allChar, 1, 20, "il codice postale") &&
         checkInput($('#country'), letter, 1, 30, "la nazione") &&
         checkInput($('#description'), allChar, 20, 2000, "la descrizione") &&
-        checkInput($('#daily-price'), number , 1, 2000, "il prezzo prezzo") &&
+        checkInput($('#daily-price'), number , 1, 2000, "il prezzo") &&
         checkInput($('#sm'), number , 1, 2000, "i metri quadrati") &&
         checkInput($('#rooms'), number , 1, 2000, "le camere") &&
         checkInput($('#beds'), number , 1, 2000, "i letti") &&

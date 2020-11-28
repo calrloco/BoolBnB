@@ -56,12 +56,12 @@
             <div class="input row">
                 <div class="input-group caratteristiche">
                     <div class="label-input">
-                        <label for="daily_price">Prezzo per notte</label>
+                        <label for="daily_price">Prezzo/notte</label>
                         <input id="daily-price" type="number" name="daily_price" value="{{ $apartment->daily_price }}">
                         <p class="message"></p>
                     </div>
                     <div class="label-input">
-                        <label for="sm">Metri quadri</label>
+                        <label for="sm">Mq</label>
                         <input id="sm" type="number" name="sm" value="{{ $apartment->sm }}">
                         <p class="message"></p>
                     </div>

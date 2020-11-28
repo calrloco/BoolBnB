@@ -62,7 +62,7 @@
                         <p class="message"></p>
                     </div>
                     <div class="label-input">
-                        <label for="sm">Metri quadri</label>
+                        <label for="sm">Mq</label>
                         <input id="sm" type="number" name="sm">
                         <p class="message"></p>
                     </div>
@@ -89,7 +89,7 @@
                     <div class="label-input service">
                         <span><i class="{{ $service->icon }}"></i></span>
                         <label for="services">{{ $service->service }}</label>
-                        <input type="checkbox" name="services" value="{{ $service->id }}">
+                        <input type="checkbox" name="services[]" value="{{ $service->id }}">
                     </div>
                     @endforeach
 

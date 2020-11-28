@@ -152,13 +152,7 @@ function getCards(lat, lng, maxDist, sponsor) {
 ///////////////////////////////
 ///////////////////////////
 function getFilter(lat, lng, maxDist, sponsor, services) {
-    console.log('//////////////');
-    console.log(lat);
-    console.log(lng);
-    console.log(maxDist);
-    console.log(sponsor);
-    console.log(services);
-    console.log('//////////////');
+    var 
     $.ajax({
         url: "http://127.0.0.1:8000/api/apartments",
         method: "GET",
@@ -169,8 +163,8 @@ function getFilter(lat, lng, maxDist, sponsor, services) {
             lat: lat,
             lng: lng,
             maxDist: maxDist,
-            sponsor: sponsor,
             services: Array.from(services),
+            sponsor: sponsor
         },
         
         success: function(risposta) {

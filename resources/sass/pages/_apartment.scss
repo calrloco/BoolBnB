@@ -81,7 +81,8 @@
 
         .info-apt-summary {
             @include flex(row, space-between, center);
-            padding: 10px 20px;
+            padding: 10px 0;
+            border-bottom: 1px solid #ff5a5f;
 
             .info-host {
                 font-size: 22px;
@@ -92,10 +93,6 @@
                 font-size: 16px;
             }
 
-            // .price {
-            //     font-size: 12px;
-            // }
-
             .host-logo {
                 width: 50px;
                 height: 50px;
@@ -104,42 +101,43 @@
             }
         }
 
-        .split-line {
-            width: 95%;
-            margin: 0 auto;
-            border-bottom: 1px solid grey;
-        }
-
         .apt-description {
-            padding: 20px 20px;
+            padding: 20px 0;
             font-size: 16px;
+            border-bottom: 1px solid #ff5a5f;
         }
 
         .services-box {
-            padding: 10px 20px;
+            padding: 10px 0;
+            
 
-            .services-title {
+            .services{
+                          
+            .services-title {         
                 font-size: 22px;
                 font-weight: 500;
                 padding-bottom: 10px;
             }
 
-            .service {
+            .service-list {
                 font-size: 16px;
                 padding: 5px;
+                margin-bottom: 1rem;
                 list-style-type: none;
 
                     .service-head{
                     display: flex;
                     flex-direction: row;
+                    justify-content: flex-start;
                     padding-bottom: 5px;
 
                         .service-icon{
                             padding-right: 10px;
-                            color: red;
+                            color: #df1362;
                         }
                     }
                 }
+            }
             }
         }
 
@@ -156,14 +154,15 @@
             align-items: flex-end;
             flex-direction: column;
             border-radius: $card-img-radius;
-            border: 1px solid #ff5a5f;
+            padding: 2rem;
+            margin-left: 1rem;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 
 
             .message-title {
                 font-size: 22px;
                 padding-bottom: 12px;
                 width: 100%;
-                text-align: center;
             }
 
             .message-form {
@@ -172,6 +171,30 @@
                 align-self: flex-end;
                 margin-right: 0px;
 
+             
+            input, textarea{
+                width: 100%;
+                padding: 7.5px 15px;
+                border-radius: 3px;
+                margin-top: 5px;
+            }    
+
+            #send-message{
+                padding: 0.8em 3.5em;
+                text-transform: uppercase;
+                border-radius: 3px;
+                display: inline-block;
+                font-size: 14px;
+                font-weight: bold;
+                box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                outline: none;
+                border: none;
+                letter-spacing: 1px;
+                width: 100%;
+                background-image: var(--gradient-color);
+                color: #ffffff;
+            }    
 
 
                 .btn-show {
@@ -186,6 +209,7 @@
 
                 label {
                     font-size: 16px;
+                    display: block;
                 }
 
             }

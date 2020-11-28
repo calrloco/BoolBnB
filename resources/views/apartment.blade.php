@@ -40,16 +40,14 @@
                         <img src="" alt="">
                     </div>
                 </div>
-                <hr class="split-line">
                 <div class="apt-description">
                     <p>{{ $apartment->description }}</p>
                 </div>
-                <hr class="split-line">
                 <div class="services-box">
                     <p class="services-title">Servizi</p>
                     <ul class="services">
                         @foreach ($apartment->services as $service)
-                            <li class="service">
+                            <li class="service-list">
                                 <div class="service-head">
                                     <i class="service-icon {{ $service->icon }}"></i>
                                     <p>{{ $service->service }}</p>
@@ -86,8 +84,8 @@
                             <label for="message">Messaggio</label>
                             <textarea  name="message" id="message"  rows="10">{{ Auth::check() ?'Buongiorno sono '. Auth::user()->name : '' }}</textarea>
                             <input type="hidden" value="{{ $apartment->id }}" name="apartment_id">
-                            <p class "send-message">
-                                <input type="submit"></input>
+                            <p class ="send-message">
+                                <input id="send-message" type="submit" value="Contatta l'host"></input>
                             </p>
                         </form>
                     </div>

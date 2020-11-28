@@ -20,7 +20,7 @@
                         <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
                             src="{{asset('storage/'.$apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
                     @endfor
-                    <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i> 
+                    <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
                 </div>
             </section>
         </div>
@@ -83,7 +83,7 @@
                                     name="email">
                             </p>
 
-                            <label for="message">Messagio</label>
+                            <label for="message">Messaggio</label>
                             <textarea  name="message" id="message"  rows="10">{{ Auth::check() ?'Buongiorno sono '. Auth::user()->name : '' }}</textarea>
                             <input type="hidden" value="{{ $apartment->id }}" name="apartment_id">
                             <p class "send-message">

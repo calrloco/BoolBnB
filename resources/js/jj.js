@@ -4,7 +4,6 @@ var $ = require("jquery");
 const Handlebars = require("handlebars");
 const { log } = require("handlebars");
 const { find } = require("lodash");
-
 const APPLICATION_NAME = "My Application";
 const APPLICATION_VERSION = "1.0";
 tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
@@ -17,9 +16,12 @@ let map = tt.map({
     style: "tomtom://vector/1/basic-main",
     zoom: 4
 });
+
+//// eventi che fanno paritre la ricerca
 $(document).ready(function() {
     var instantSearch = (function() {
         if ($("#address-inst").html() != "") {
+            //getcoordinates prende l'adress il range e un boolean per sapere se vuoi filtrare per servizi
             getCoordinates(
                 $("#address-inst").html(),
                 $("#range-form").html(),
@@ -31,8 +33,10 @@ $(document).ready(function() {
 
     $(".nav__search-icon-big").click(function() {
         $(".search__resoults__apartment-cards").empty();
+        $(".search__resoults__apartment-cards.sponsor").empty();
         if ($("#search").val() != "") {
             getCoordinates($("#search").val(), $("#range-value").html(), false);
+            $("#address-inst").text($("#search").val());
         }
     });
 
@@ -49,7 +53,8 @@ $(document).ready(function() {
     });
 });
 //// prendi coordinate dell'input////////////////
-function getCoordinates(input, range, services) {
+function getCoordinates(input, range, serviceFilter) {
+    var service = serviceFilter;
     var zoom = 10;
     if (input != "") {
         tt.services
@@ -74,36 +79,40 @@ function getCoordinates(input, range, services) {
                     center: response.results[0].position,
                     zoom: zoom
                 });
-                console.log(services);
-                if (services == false) {
-                    getCards(latitude, longitude, range, 1);
+                if (service == false) {
+                    getSponsored(latitude, longitude, range, 1);
                     getCards(latitude, longitude, range, 0);
                 } else {
-                    getCardsFilter(latitude, longitude, range, 1, services);
-                    getCardsFilter(latitude, longitude, range, 0, services);
+                    getFilter(latitude, longitude, range, 1, service);
+                    getFilter(latitude, longitude, range, 0, service);
                 }
             });
     }
 }
 
 /////////// chiamata all nostro db che richiama funzione handlebars
-function getServices() {
+
+function getSponsored(lat, lng, maxDist, sponsor) {
     $.ajax({
-        url: "http://127.0.0.1:8000/api/services/all",
+        url: "http://127.0.0.1:8000/api/apartments",
         method: "GET",
         headers: {
             KEY: "test"
         },
-        success: function(response) {
-            for (var i = 0; i < response.length; i++) {
-                var service = `<button data-servicetype="${response[i].id}" class="services-all">${response[i].service}</button>`;
-                $(".services").append(service);
+        data: {
+            lat: lat,
+            lng: lng,
+            maxDist: maxDist,
+            sponsored: sponsor
+        },
+        success: function(risposta) {
+            if (risposta.length > 0) {
+                compileHandlebars(risposta, sponsor);
             }
         },
         error: function() {}
     });
 }
-
 function getCards(lat, lng, maxDist, sponsor) {
     $.ajax({
         url: "http://127.0.0.1:8000/api/apartments",
@@ -115,7 +124,7 @@ function getCards(lat, lng, maxDist, sponsor) {
             lat: lat,
             lng: lng,
             maxDist: maxDist,
-            sponsored: sponsor
+            sponsor: sponsor
         },
         success: function(risposta) {
             if (risposta.length > 0) {
@@ -125,7 +134,10 @@ function getCards(lat, lng, maxDist, sponsor) {
         error: function() {}
     });
 }
-function getCardsFilter(lat, lng, maxDist, sponsor, services) {
+///////////////////////////////
+///////////////////////////
+function getFilter(lat, lng, maxDist, sponsor, services) {
+    var 
     $.ajax({
         url: "http://127.0.0.1:8000/api/apartments",
         method: "GET",
@@ -137,9 +149,11 @@ function getCardsFilter(lat, lng, maxDist, sponsor, services) {
             lng: lng,
             maxDist: maxDist,
             services: Array.from(services),
-            sponsored: sponsor
+            sponsor: sponsor
         },
+        
         success: function(risposta) {
+            console.log(risposta);
             if (risposta.length > 0) {
                 compileHandlebars(risposta, sponsor);
             }
@@ -150,10 +164,11 @@ function getCardsFilter(lat, lng, maxDist, sponsor, services) {
 ////////////////////////////////////
 /// funzione per inserire le card della ricerca nel dom e creare i marker associati nella mappa
 function compileHandlebars(risp, sponsor) {
+    var containerCards = "";
     if (sponsor == 1) {
-        var containerCards = $("#sponsor");
+        containerCards = $("#sponsor");
     } else {
-        var containerCards = $("#no-sponsor");
+        containerCards = $("#no-sponsor");
     }
     var source = $("#handlebars_cards").html();
     var templateCards = Handlebars.compile(source);
@@ -162,9 +177,8 @@ function compileHandlebars(risp, sponsor) {
         var context = {
             city: risp[i].city,
             title: troncaStringa(risp[i].title),
-            id: `<input class="aps_id" type="hidden" name="apartment_id" value=${risp[i].id}>`,
-            sponsor: sponsor,
-            dataId: risp[i].id
+            id: `<input class="aps_id" type="hidden" data-sponsor="${sponsor}" name="apartment_id" value=${risp[i].id}>`,
+            sponsor: sponsor
         };
 
         var coordinates = [risp[i].longitude, risp[i].latitude];
@@ -207,7 +221,9 @@ function compileHandlebars(risp, sponsor) {
         marker.setPopup(popup);
 
         var htmlContext = templateCards(context);
+
         containerCards.append(htmlContext);
+        appendServices(risp[i].id);
         getImages(risp[i].id, sponsor);
         var el = $(".search__resoults__apartment-cards-content");
         var details = buildLocation(el, address);
@@ -235,13 +251,16 @@ function compileHandlebars(risp, sponsor) {
             details.eq(posizione).addClass("selected");
         });
     }
+    setServices();
 }
+/// appende i servizi selezionabili
 
 /// appendere le immagini allo slider
 function getImages(id, sponsor) {
     $.ajax({
         url: "http://127.0.0.1:8000/api/images",
         method: "GET",
+
         data: {
             id: id
         },
@@ -249,9 +268,8 @@ function getImages(id, sponsor) {
             KEY: "test"
         },
         success: function(response) {
-            var clss = "";
             for (var i = 0; i < response.length; i++) {
-                var img = (clss = "hidden");
+                var clss = "hidden";
                 if (i == 0) {
                     clss = "first active";
                 } else if (i == response.length - 1) {
@@ -260,20 +278,18 @@ function getImages(id, sponsor) {
                     clss = "hidden";
                 }
                 appendImages(response[i], clss, sponsor);
+                
             }
         },
         error: function() {}
     });
 }
 function appendImages(risp, clss, sponsor) {
-    var container = $(".sponsor-" + sponsor);
+    var container = $(
+        ".search__resoults__apartment-cards-content.sponsor-" + sponsor
+    );
     container.each(function() {
-        var appId = $(this)
-            .find(".aps_id")
-            .val();
-        console.log("aaaaaa");
-        console.log(appId);
-        console.log("aaaaaa");
+        appId = $(this).find(".aps_id").val();
         if (appId == risp.apartment_id) {
             img = `<img class="search__resoults__apartment-cards-content-slider-img apt-image ${clss}" 
            src="${risp.path}">`;
@@ -285,15 +301,14 @@ function appendImages(risp, clss, sponsor) {
 }
 // funzione per troncare una stringa
 function troncaStringa(stringa) {
-    var shortText = "";
-    if (stringa.length != 0) {
-        for (var i = 0; i < stringa.length; i++) {
-            if (stringa[i] == " " && i <= 43) {
-                var shortText = $.trim(stringa).substring(0, i) + "...";
+    var shortText = stringa;
+    if (stringa.length > 28) {
+        for (var i = 28; i > 0; i--) {
+            if (stringa[i] == " ") {
+                shortText = stringa.substring(0, i) + "...";
+                i = 0;
             }
         }
-    } else {
-        shortText = "Descrizione non disponibile";
     }
     return shortText;
 }
@@ -301,11 +316,9 @@ function troncaStringa(stringa) {
 /// filtra ricerca per servizi
 var serviceCheck = (function() {
     var selectedService = [];
-
     $(document).on("click", ".services-all", function() {
-        var serviceType = $(this)
-            .data("servicetype")
-            .toString();
+        var serviceType = parseInt($(this).attr("data-servicetype"));
+
         $(this).toggleClass("service-selected");
         if (
             selectedService.length < $(".services-all").length &&
@@ -315,126 +328,15 @@ var serviceCheck = (function() {
         }
         if (!$(this).hasClass("service-selected")) {
             selectedService = selectedService.filter(function(item) {
-                return item != serviceType;
+                return item !== serviceType;
             });
         }
+        
     });
-
     $("#cerca-filtri").click(function() {
-        $("#no-sponsor").empty();
-        $("#sponsor").empty();
-        getCoordinates("roma", $("#range-value").html(), selectedService);
+        $(".search__resoults__apartment-cards").empty();
+        $(".search__resoults__apartment-cards.sponsor").empty();
+        getCoordinates($("#address-inst").text(),$("#range-value").html(),selectedService
+        );
     });
 })();
-// al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom
-$("#search").keyup(function() {
-    $("#auto-complete").empty();
-    autoComplete($("#search").val());
-});
-
-// //funzione per selezionare suggerimento e restuirlo nella search
-$(document).on("click", ".complete-results", function() {
-    var value = $(this).text();
-    $("#search").val(value);
-    getCoordinates($("#search").val());
-    $("#auto-complete").removeClass("complete-on");
-});
-
-// funzione per i suggerimenti nella search
-function autoComplete(query) {
-    if (query.length < 3 || query == "") {
-        $("#auto-complete").removeClass("complete-on");
-    }
-    if (query != "" && isNaN(query) && query.length > 3) {
-        $("#auto-complete").addClass("complete-on");
-        tt.services
-            .fuzzySearch({
-                key: apiKey,
-                query: query
-            })
-            .go()
-            .then(function(response) {
-                var address = [];
-                var results = "";
-
-                for (let i = 0; i < 4; i++) {
-                    if (response.results[i]) {
-                        // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
-                        var streetName =
-                            response.results[i].address["streetName"];
-                        var city = response.results[i].address["municipality"];
-                        var countryCode =
-                            response.results[i].address["countryCode"];
-                        if (
-                            streetName != undefined &&
-                            !address.includes(streetName) &&
-                            city != undefined &&
-                            !address.includes(city) &&
-                            countryCode == "IT"
-                        ) {
-                            address.push(streetName + " " + city);
-                        } else if (
-                            streetName == undefined &&
-                            city != undefined &&
-                            !address.includes(city) &&
-                            countryCode == "IT"
-                        ) {
-                            address.push(city);
-                        }
-                    }
-                }
-                for (let i = 0; i < address.length; i++) {
-                    results +=
-                        '<div class="complete-results">' +
-                        address[i] +
-                        "</div>";
-                }
-                document.getElementById("auto-complete").innerHTML = results;
-                if (results == "") {
-                    $("#auto-complete").removeClass("complete-on");
-                }
-            });
-    }
-}
-
-//funzione che associa l'address con la card apartment nel DOM
-function buildLocation(el, text) {
-    const details = el;
-    details.innerHTML = text;
-    // details["position"] = xy;
-    return details;
-}
-
-// per chiudere l'autocomplete al click fuori
-$(document).click(function() {
-    $("#auto-complete").removeClass("complete-on");
-});
-//slider
-$(document).on("click", ".arrow-slider-sx", function() {
-    var activeImage = $(this).siblings(".apt-image.active");
-    activeImage.removeClass("active");
-    activeImage.addClass("hidden");
-    if (activeImage.hasClass("last") == true) {
-        activeImage.siblings(".apt-image.first").removeClass("hidden");
-        activeImage.siblings(".apt-image.first").addClass("active");
-    } else {
-        //metto la classe attiva al successivo
-        activeImage.next().removeClass("hidden");
-        activeImage.next().addClass("active");
-    }
-});
-$(document).on("click", ".arrow-slider-dx", function() {
-    var activeImage = $(this).siblings(".apt-image.active");
-
-    activeImage.removeClass("active");
-    activeImage.addClass("hidden");
-
-    if (activeImage.hasClass("first") == true) {
-        activeImage.siblings(".apt-image.last").removeClass("hidden");
-        activeImage.siblings(".apt-image.last").addClass("active");
-    } else {
-        //metto la classe attiva al successivo
-        activeImage.prev().removeClass("hidden");
-        activeImage.prev().addClass("active");
-    }
-});

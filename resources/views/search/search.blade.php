@@ -48,6 +48,7 @@
                 <p class="search__resoults__apartment-cards-content-description">
                     @{{ title }}
                 </p>
+                <p>Stanze: @{{ rooms }} Bagni: @{{ bathroom }}</p>
                 <div class="services-icons" serv-id="@{{dataId}}">
                    
                 </div>

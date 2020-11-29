@@ -319,8 +319,8 @@ function appendImages(risp, clss, sponsor) {
 function troncaStringa(stringa) {
     var shortText = "";
     if (stringa.length != 0) {
-        for (var i = 0; i < stringa.length; i++) {
-            if (stringa[i] == " " && i <= 43) {
+        for (var i = 25; i > 0; i--) {
+            if (stringa[i] == " ") {
                 var shortText = $.trim(stringa).substring(0, i) + "...";
             }
         }

@@ -79,7 +79,7 @@
             }
 
             .label-input{
-                min-height: 114.8px;
+                min-height: 126px;
                 @include responsive(phone){
                     min-height: 68.8px;
                 }
@@ -110,6 +110,9 @@
         .service{
             @include flex(column, flex-start, center);
             transition: all 0.1s;
+            label{
+                font-size: 1rem;
+            }
             @include responsive(tab){
                 label{
                     display: none;

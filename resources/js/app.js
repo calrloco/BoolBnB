@@ -433,3 +433,11 @@ var getIp = (function() {
         }
     });
 })();
+
+$('.hamburger-menu').click(function () {
+    $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
+    $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
+    $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
+    $('.hamburger-menu').toggleClass('hamburger-menu-animated');
+    $('.mobile-menu').toggleClass('hidden');
+});

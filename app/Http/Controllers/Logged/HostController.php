@@ -53,7 +53,7 @@ class HostController extends Controller
         // })->where('apartments.user_id', '=', Auth::id())
         // ->get();
         // dd($sponsorizzati);
-        
+
         $spons = DB::table('apartment_sponsor')
         ->where('end_sponsor', '>', Carbon::now())
         ->orderBy('end_sponsor', 'desc')
@@ -133,7 +133,7 @@ class HostController extends Controller
 
 
 
-        return redirect()->route('host.index')->with('status', 'hai creato correttamente il tuo appartamento' . $apartment->title);
+        return redirect()->route('host.index')->with('status', 'Hai creato correttamente il tuo annuncio "' . $apartment->title . '"');
     }
 
     /**
@@ -276,12 +276,12 @@ class HostController extends Controller
         $apartment_id = $apartment->id;
         //Informazioni Sponsorizzazione
         $sponsor_id = $data['sponsor_plan'];
-        
+
         $sponsor = Sponsor::find($sponsor_id);
         $sponsor_price = $data['amount'];
         $sponsor_durate = $sponsor->sponsor_time;
-        
-        
+
+
         //registro la transazione
         $result = $gateway->transaction()->sale([
                 'amount' => $sponsor_price,
@@ -293,12 +293,12 @@ class HostController extends Controller
                     'submitForSettlement' => true
                 ]
             ]);
-            
+
 
         // Check sulla transazione
         if ($result->success || !is_null($result->transaction)) {
             $transaction = $result->transaction;
-    
+
             // Prendo la data corrente
             $start = Carbon::now();
 
@@ -309,7 +309,7 @@ class HostController extends Controller
                 ->orderBy('apartment_sponsor.end_sponsor', 'desc')
                 ->limit(1)
                 ->get();
-            
+
             if (count($checkSponsor) > 0) {
                 $end_sponsor = Carbon::parse($checkSponsor[0]->end_sponsor)->addHours($sponsor_durate);
             } else {
@@ -335,7 +335,7 @@ class HostController extends Controller
             abort('404');
         }
 
-        return redirect()->route('host.index')->with('status','appartamento'.$apartment->title .'sponsorizzato con sucesso');
+        return redirect()->route('host.index')->with('status','Appartamento "'.$apartment->title .'" sponsorizzato con successo!');
     }
 
 }

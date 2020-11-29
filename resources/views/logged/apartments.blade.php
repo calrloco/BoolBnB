@@ -15,7 +15,7 @@
             <div class="apartments-list">
                 @foreach ($apartments as $apartment)
             <div class="apt-info-general">
-                        {{-- faccio un ternario per vedere se l'appartamento è inattivo ed uno per vedere se sponsorizzato 
+                        {{-- faccio un ternario per vedere se l'appartamento è inattivo ed uno per vedere se sponsorizzato
                         e nel caso assegno caratteristiche --}}
                         <div class="overlay {{ ($apartment->attivo == 1) ? 'active-apt' : 'inactive-apt'}}"></div>
 
@@ -34,7 +34,7 @@
                         </div>
                         <div class="apt-info-dx">
                             <div class="apt-title">
-                               
+
                                 <p>{{ strlen($apartment->title) <= 25 ? $apartment->title : substr($apartment->title,0,18).'...' }}</p>
                             </div>
                             <div class="apt-description">
@@ -53,7 +53,7 @@
                             </ul>
                         </div>
                         <a href="{{ route('host.show', $apartment->id) }}" class="apartment-button">Vai
-                            all'appartamenoto</a>
+                            all'appartamento</a>
                     </div>
                 @endforeach
             </div>

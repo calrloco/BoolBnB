@@ -5,7 +5,7 @@
     height: 100%;
     color: var(--color-font-black);
 
-    
+
     @include responsive(tab){
         @include flex(row, center, center);
     }
@@ -13,8 +13,8 @@
 
 .apt-info-general {
     position: relative;
-   
-} 
+
+}
 
 .overlay {
     position: absolute;
@@ -27,7 +27,7 @@
 
 .inactive-apt {
     background-color: rgba(0, 0, 0, 0.8);
-    
+
 }
 
 .inactive-msg {
@@ -98,7 +98,7 @@
     margin-bottom: 0.3rem;
     max-height: 20%;
     min-height: 20%;
-   
+
     &-text {
         opacity: 0;
         word-break: break-all;
@@ -121,13 +121,15 @@
     object-fit: cover;
     transition: all 0.2s;
 }
-.apt-services {
-    @include flex(row, flex-start, flex-start);
+.apt-services-show {
+    width:100%;
+    @include flex(row, space-around, center);
 }
 
 .service {
-    @include flex(column, flex-start, center);
+    @include flex(row, space-around, center);
 }
+
 .apartment-button {
     position: absolute;
     z-index: 3;

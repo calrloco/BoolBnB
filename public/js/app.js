@@ -42495,7 +42495,7 @@ var getIp = function () {
 
 
 var unreadMessages = function () {
-  var id = $('#nav_user-id').val();
+  var id = $("#nav_user-id").val();
   $.ajax({
     url: "http://127.0.0.1:8000/api/unread",
     method: "GET",
@@ -42509,64 +42509,64 @@ var unreadMessages = function () {
       if (risposta.length > 0) {
         // messaggio per count 1
         if (risposta[0].unread == 1) {
-          $('#unread-msg').empty();
-          $('#unread-msg').append(risposta[0].unread + ' nuovo messaggio');
-          $('#unread-msg').append("<i class=\"dot fas fa-circle\"></i>"); // messaggio per count > 1
+          $("#unread-msg").empty();
+          $("#unread-msg").append(risposta[0].unread + " nuovo messaggio");
+          $("#unread-msg").append("<i class=\"dot fas fa-circle\"></i>"); // messaggio per count > 1
         } else {
-          $('#unread-msg').empty();
-          $('#unread-msg').append(risposta[0].unread + ' nuovi messaggi');
-          $('#unread-msg').append("<i class=\"dot fas fa-circle\"></i>");
+          $("#unread-msg").empty();
+          $("#unread-msg").append(risposta[0].unread + " nuovi messaggi");
+          $("#unread-msg").append("<i class=\"dot fas fa-circle\"></i>");
         }
       } else {
-        $('#unread-msg').empty();
-        $('#unread-msg').append('Messaggi');
+        $("#unread-msg").empty();
+        $("#unread-msg").append("Messaggi");
       }
     },
     error: function error() {
       consol.log(arguments);
-      alert('errore');
+      alert("errore");
     }
   });
 }(); // funzione per i suggerimenti nella search
 
 
 function autoComplete(query) {
-  if (query.length < 3 || query == '') {
-    $('#auto-complete').removeClass('complete-on');
+  if (query.length < 3 || query == "") {
+    $("#auto-complete").removeClass("complete-on");
   }
 
-  if (query != '' && isNaN(query) && query.length > 3) {
-    $('#auto-complete').addClass('complete-on');
+  if (query != "" && isNaN(query) && query.length > 3) {
     tt.services.fuzzySearch({
       key: "31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk",
       query: query
     }).go().then(function (response) {
       var address = [];
-      var results = '';
+      var results = "";
 
       for (var i = 0; i < 4; i++) {
         if (response.results[i]) {
-          // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni                
-          var streetName = response.results[i].address['streetName'];
-          var city = response.results[i].address['municipality'];
-          var countryCode = response.results[i].address['countryCode'];
+          // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
+          var streetName = response.results[i].address["streetName"];
+          var city = response.results[i].address["municipality"];
+          var countryCode = response.results[i].address["countryCode"];
 
-          if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == 'IT') {
-            address.push(streetName + ' ' + city);
-          } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == 'IT') {
+          if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == "IT") {
+            address.push(streetName + " " + city);
+          } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == "IT") {
             address.push(city);
           }
         }
       }
 
       for (var _i = 0; _i < address.length; _i++) {
-        results += '<div class="complete-results">' + address[_i] + '</div>';
+        results += '<div class="complete-results">' + address[_i] + "</div>";
       }
 
-      document.getElementById('auto-complete').innerHTML = results;
-
-      if (results == '') {
-        $('#auto-complete').removeClass('complete-on');
+      if (address.length != 0) {
+        document.getElementById("auto-complete").innerHTML = results;
+        $("#auto-complete").addClass("complete-on");
+      } else {
+        $("#auto-complete").removeClass("complete-on");
       }
     });
   }
@@ -42749,12 +42749,12 @@ $("#sponsorPremium").click(function () {
   $("#amount").val([9.99]);
   $("#sponsor_plan").val([3]);
 });
-$('.hamburger-menu').click(function () {
-  $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
-  $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
-  $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
-  $('.hamburger-menu').toggleClass('hamburger-menu-animated');
-  $('.mobile-menu').toggleClass('hidden');
+$(".hamburger-menu").click(function () {
+  $(".hamburger-menu-bars-top").toggleClass("hamburger-menu-bars-top-animated");
+  $(".hamburger-menu-bars-bottom").toggleClass("hamburger-menu-bars-bottom-animated");
+  $(".hamburger-menu-bars").toggleClass("hamburger-menu-bars-animated");
+  $(".hamburger-menu").toggleClass("hamburger-menu-animated");
+  $(".mobile-menu").toggleClass("hidden");
 }); // chiamta che prende ip dell'utente e capisce la regione per ricerca nei paraggi
 
 var getIp = function () {

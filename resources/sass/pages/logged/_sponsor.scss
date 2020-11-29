@@ -1,3 +1,7 @@
+// Colors
+$color-three: #F68657;
+$color-four: #F6B352;
+
 .payment-checkout {
   display: flex;
   justify-content: center;
@@ -49,15 +53,17 @@
                   cursor:pointer;
                   border: 1px solid gray;
                   margin-top: 5px;
+                  border-radius: 5px;
+                  &:hover {
+                    background: gray;
+                  }
                 }
               }
         }  
     }
 
 
-// Colors
-$color-three: #F68657;
-$color-four: #F6B352;
+
 
 *, *:before, *:after {
   box-sizing: border-box;

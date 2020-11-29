@@ -6325,6 +6325,11 @@ canvas:focus {
   cursor: pointer;
   border: 1px solid gray;
   margin-top: 5px;
+  border-radius: 5px;
+}
+
+.payment-checkout .payment-checkout-form .pay-button .btn-succes:hover {
+  background: gray;
 }
 
 *,

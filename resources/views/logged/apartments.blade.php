@@ -20,14 +20,13 @@
                         <div class="overlay {{ ($apartment->attivo == 1) ? 'active-apt' : 'inactive-apt'}}"></div>
 
                         <div class="apt-info-sx">
-                            @foreach($sponsorizzati as $spons)
-                            
-                            @if($apartment->id == $spons->id)
-                            <i class="fas fa-star"></i>
-                            <div>sponsorizzato fino al: {{ $spons->end_sponsor }}</div>
-                            
-                        @endif
-                            @endforeach
+                        @for($i = 0; $i < count($spons); $i++)
+                            @if($apartment->id == $spons[$i]->apartment_id)
+                                <i class="fas fa-star"></i>
+                                <div>sponsorizzato fino al: {{ $spons[$i]->end_sponsor }}</div>
+                                <?php $i = count($spons) ?>
+                            @endif
+                        @endfor
                             <div class="inactive-msg">{{ ($apartment->attivo == 1) ? '' : 'annuncio inattivo'}}</div>
                             @if (isset($apartment->images[0]->path))
                                 <img class=apt-img-small src="{{ asset('storage/' . $apartment->images[0]->path) }}" alt="{{ $apartment->title }}">

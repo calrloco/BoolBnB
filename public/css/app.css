@@ -7012,6 +7012,7 @@ canvas:focus {
 ul,
 li {
   list-style: none;
+  margin: 10px;
 }
 
 .messaggi {
@@ -7047,6 +7048,13 @@ li {
   margin: 0 0 1rem;
 }
 
+.CommentForm .comment-wrap .comment-time i,
+.commentlist .comment-wrap .comment-time i,
+.comment ul .comment-wrap .comment-time i {
+  padding-right: 5px;
+  color: #929090;
+}
+
 .CommentForm .comment-wrap .article-content,
 .commentlist .comment-wrap .article-content,
 .comment ul .comment-wrap .article-content {
@@ -7059,6 +7067,14 @@ li {
 .commentlist .comment-wrap .comment-content,
 .comment ul .comment-wrap .comment-content {
   padding-top: 10px;
+  padding-right: 5px;
+}
+
+.CommentForm .comment-wrap .comment-content i,
+.commentlist .comment-wrap .comment-content i,
+.comment ul .comment-wrap .comment-content i {
+  padding-right: 5px;
+  color: #929090;
 }
 
 .CommentForm .comment-wrap .comment-actions,

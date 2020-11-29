@@ -10,7 +10,7 @@
         <li class="comment even thread-even depth-1 buried" id="li-comment-466098">
     <div class="comment-wrap" id="comment-466098">
         <div class="author-avatar">
-        <img src="{{asset('storage/' .$message->apartment->images[0]['path'] )}}" loading="lazy" class="lazyload-gravatar" alt="Apartment " style="" width="100" height="100">
+        <img src="{{asset('storage/' .$message->apartment->images[0]['path'] )}}" loading="lazy" class="lazyload-gravatar" alt="Apartment " style="" width="130" height="130">
         </div>
     <div class="comment-body">
         <div class="comment-author-wrap vcard">
@@ -25,7 +25,7 @@
            
         </div>
         <div class="comment-content article-content">
-          <i class="fas fa-envelope-open"></i> {{$message->message}}
+          <i class="fas fa-envelope-open"></i> <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, temporibus numquam. In aspernatur tempora labore molestiae modi neque quae ab facere hic? Vitae ab recusandae placeat eveniet quisquam accusantium consequuntur!</p>
         </div>
     </div>
     <div class="comment-actions">

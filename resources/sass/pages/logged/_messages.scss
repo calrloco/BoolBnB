@@ -1,5 +1,6 @@
 ul,li{
     list-style: none;
+    margin: 10px;
 }
 .messaggi{
     padding: 10px;
@@ -23,6 +24,10 @@ ul,li{
 }
 .comment-time {
     margin: 0 0 1rem;
+    i{
+        padding-right: 5px;
+        color: rgb(146, 144, 144);
+    }
 }
 .article-content {
     overflow-wrap: break-word;
@@ -31,6 +36,11 @@ ul,li{
 }
 .comment-content{
     padding-top: 10px;
+    padding-right: 5px;
+    i{
+        padding-right: 5px;
+        color: rgb(146, 144, 144);
+    }
 }
 .comment-actions{
     display: flex;

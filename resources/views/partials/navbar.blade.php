@@ -20,7 +20,7 @@
                     <div id="hidenav" class="nav__search-icon">
                         <i class="fas fa-search"></i>
                     </div>
-                    <div class="nav__search-city hidden">
+                    <div class="nav__search-city hidden" id="range-slider-wrapper">
                          <label for="search">Range: <span id="range-value"></span></label>
                          <input type="hidden" id="range-hidden" name="range" value="20">
                          <input type="range" min="20" max="100" value="20" id="myRanges" class="sliders">

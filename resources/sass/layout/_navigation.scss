@@ -83,15 +83,16 @@
             }
         }
 
-        &-city,
-        &-date-start,
-        &-date-end {
+        
+        &-city{
             @include flex(column, center, flex-start);
             cursor: pointer;
             padding: 1rem;
             border-radius: inherit;
             margin-right: 1rem;
             flex: 1;
+
+           
 
             &:hover {
                 background-color: #f7f7f7;
@@ -242,7 +243,7 @@
                 margin-bottom: 0.2rem;
                 cursor: pointer;
                 border-bottom: 1px solid rgb(118, 118, 118);
-                border-top: 1px solid rgb(180, 23, 23);
+                border-top: 1px solid rgb(118, 118, 118);
 
                 &:hover {
                     border-bottom: 1px solid rgb(255, 90, 95);
@@ -355,4 +356,12 @@ input:-webkit-autofill:active  {
 .user-greetings{
     margin-bottom:1.2rem;
     text-align:center;
+}
+#range-slider-wrapper{
+    @media (max-width:448px){
+        display: none;
+    }
+}
+#logout-form{
+    display: none;
 }

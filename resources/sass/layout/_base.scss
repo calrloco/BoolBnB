@@ -32,4 +32,9 @@ button:focus {
 .active{
   display: block;
 }
-
+form{
+  box-shadow: none;
+  border-color: none;
+  background-color:none;
+  outline: none;
+}

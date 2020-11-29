@@ -39,8 +39,10 @@
 
 .container-center {
   padding: 0 8rem;
+  height: 100%;
   width: 70%;
   margin: 0 auto;
+  height: 100%;
   @include responsive(large_desktop){
     width: 55%;
   }

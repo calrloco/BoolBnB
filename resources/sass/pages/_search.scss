@@ -175,15 +175,19 @@
         margin-right: 8px;
         transition: all .2s;
         margin-bottom: 1rem;
-        &:hover{
-            padding:.8rem 1.6rem;
-            background-color:#fff;
-            border:1px solid rgb(176,176,176);
-            color:inherit;
-        }
+        
         
     }
     
+}
+.filter-search{
+    @include flex(row, center,center);
+    margin-bottom: 2rem;
+    @extend %button-default;
+    width:fit-content;
+    padding:.8rem 1.6rem;
+    background-image: var(--gradient-color);
+    color: #fff;
 }
 .mapboxgl-canvas:focus, canvas:focus{
     border:none;
@@ -213,3 +217,25 @@
     }
 
 }
+.services-icons {
+    @include flex(row,flex-start, center);
+    & i{
+        font-size:2rem;
+        
+        color:var(--pink-bnb);
+
+        &:not(:last-child) {
+            margin-right:1rem;
+        }
+    }
+    
+}
+.filter-toggle{
+    margin-top:2rem;
+    font-size:1.6rem;
+    cursor: pointer;
+    @extend %button-default;
+    width:fit-content;
+    
+}
+

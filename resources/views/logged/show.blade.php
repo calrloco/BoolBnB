@@ -45,15 +45,14 @@
 
                 <div class="services-box">
                     <p class="services-title">Servizi</p>
-
                     <ul class="services">
                         @foreach ($apartment->services as $service)
-                            <li class="service">
+                            <li class="service-list">
                                 <div class="service-head">
                                     <i class="service-icon {{ $service->icon }}"></i>
                                     <p>{{ $service->service }}</p>
                                 </div>
-                                <span>{{ $service->description }}</span>
+                                <span id="service-descr">{{ $service->description }}</span>
                             </li>
                         @endforeach
                     </ul>

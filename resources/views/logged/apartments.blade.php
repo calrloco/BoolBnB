@@ -4,7 +4,7 @@
     {{-- @dd($messages) --}}
     <div class="container-center">
         @if (session('status'))
-            <p class="sposorizzato-session">{{ session('status') }}</p>
+            <p class="status-msg">{{ session('status') }}</p>
         @endif
 
         @if (!empty($apartments))
@@ -14,8 +14,20 @@
             </div>
             <div class="apartments-list">
                 @foreach ($apartments as $apartment)
-                    <div class="apt-info-general">
+            <div class="apt-info-general">
+                        {{-- faccio un ternario per vedere se l'appartamento è inattivo ed uno per vedere se sponsorizzato 
+                        e nel caso assegno caratteristiche --}}
+                        <div class="overlay {{ ($apartment->attivo == 1) ? 'active-apt' : 'inactive-apt'}}"></div>
+
                         <div class="apt-info-sx">
+                        @for($i = 0; $i < count($spons); $i++)
+                            @if($apartment->id == $spons[$i]->apartment_id)
+                                <i class="fas fa-star"></i>
+                                <div>sponsorizzato fino al: {{ $spons[$i]->end_sponsor }}</div>
+                                <?php $i = count($spons) ?>
+                            @endif
+                        @endfor
+                            <div class="inactive-msg">{{ ($apartment->attivo == 1) ? '' : 'annuncio inattivo'}}</div>
                             @if (isset($apartment->images[0]->path))
                                 <img class=apt-img-small src="{{ asset('storage/' . $apartment->images[0]->path) }}" alt="{{ $apartment->title }}">
                             @endif

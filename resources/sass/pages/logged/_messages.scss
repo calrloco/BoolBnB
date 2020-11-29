@@ -60,7 +60,7 @@
                 .sender-details-up {
                     width:100%;
                     padding: 20px 0;
-                    @include flex(column, space-between, center);
+                    @include flex(column, center, center);
 
                     .details-sender{
                         width:100%;

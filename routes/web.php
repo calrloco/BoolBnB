@@ -46,9 +46,10 @@ Route::get('/apartments/{id}/sponsor', 'Logged\HostController@sponsor')->name('l
 
 Route::get('/apartments', 'Logged\HostController@index');
 Route::get('/apartments/{id}/sponsor','Logged\HostController@sponsor')->name('logged.sponsor');
+Route::get('/apartments/{id}/pay/{id_sponsor}/{price}','Logged\HostController@pay')->name('logged.pay');
 Route::get('/host/prova/{id}','Logged\HostController@edit')->name('prova.sponsor');
 
-Route::post('apartments/sponsor/{id}', 'Logged\HostController@checkout')->name('logged.checkout');
+Route::post('apartments/{id}', 'Logged\HostController@checkout')->name('logged.checkout');
 Route::get('/test', function () {
     return view('test');
 });

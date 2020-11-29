@@ -2,7 +2,10 @@
 @section('content')
     <div class="container-center">
         @if (session('status'))
-        {{session('status')}}
+            <div class="status-msg">
+                <p>{{session('status')}}</p>
+                {{-- <p>Messaggio cancellato correttamente.</p> --}}
+            </div>
         @endif
         <section class="top-section">
             <span class="hidden" id="app-id">{{ $apartment->id }}</span>
@@ -18,7 +21,7 @@
                     <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-left arrow-slider-dx">
                         <i class="fas fa-chevron-right"></i>
                     </div>
-                  
+
                     @for ($i = 0; $i < $apartment->images->count('id'); $i++)
                         <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
                             src="{{asset('storage/'.$apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
@@ -39,25 +42,20 @@
                         {{-- <p class="price">Prezzo giornaliero:
                             €{{ $apartment->daily_price }}</p> --}}
                     </div>
-                    <div class="host-logo">
-                        <img src="" alt="">
-                    </div>
                 </div>
-              
                 <div class="apt-description">
                     <p>{{ $apartment->description }}</p>
                 </div>
-              
                 <div class="services-box">
                     <p class="services-title">Servizi</p>
                     <ul class="services-show">
                         @foreach ($apartment->services as $service)
-                            <li class="services-show-service">
+                            <li class="service-list">
                                 <div class="service-head">
                                     <i class="service-icon fas {{ $service->icon }}"></i>
                                     <p>{{ $service->service }}</p>
                                 </div>
-                                <span>{{ $service->description }}</span>
+                                <span id="service-descr">{{ $service->description }}</span>
                             </li>
                         @endforeach
                     </ul>
@@ -93,8 +91,8 @@
                             <textarea  name="message" id="message"  rows="10">{{ Auth::check() ?'Buongiorno sono '. Auth::user()->name : '' }}</textarea>
                             <div class="input-aps-group">
                             <input type="hidden" value="{{ $apartment->id }}" name="apartment_id">
-                            <p class "send-message">
-                                <input type="submit"></input>
+                            <p class ="send-message">
+                                <input id="send-message" type="submit" value="Invia messaggio"></input>
                             </p>
                         </form>
                     </div>

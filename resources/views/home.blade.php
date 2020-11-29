@@ -15,28 +15,38 @@
         </div>
     </header>
 
-
-    <div class="container-center">
-        <section class="highlited">
-            <p class="sponsor__home-title">In evidenza</p>
-            <div class="sponsor__home">
-                @if (count($apartment) > 0)
+<div class="container-center">
+    <section class="highlited">
+        <p class="sponsor__home-title">In evidenza</p>
+        <div class="sponsor__home">
+            @if (count($apartment) > 0)
                 @for ($i = 0; $i < 4 && $i < count($apartment); $i++)
-            <a href="{{ route('search.show', $apartment[$i]->id) }}" class="sponsor__home-card">
+                    @if ( Auth::user())
+                        <a href="{{ route('host.show', $apartment[$i]->id) }}" class="sponsor__home-card">
                             <div class="sponsor__home-card-img">
-                                @if ($apartment[$i]->images[0]->path)
-                                    <img src="{{ asset('storage/' . $apartment[$i]->images[0]->path) }}"
-                                        alt="{{ $apartment[$i]->title }}" alt="">
+                                @if (isset($apartment[$i]->images[0]->path))
+                                    <img src="{{ asset('storage/'.$apartment[$i]->images[0]->path) }}" alt="{{ $apartment[$i]->title }}" alt="">
                                 @endif
                             </div>
                             <div class="sponsor__home-card-text">
-                                <p>{{ strlen($apartment[$i]->title) <= 25 ? $apartment[$i]->title : substr($apartment[$i]->title,0,18).'...' }}</p>
-                                
+                                <p class="home-apt-title">{{ strlen($apartment[$i]->title) <= 25 ? $apartment[$i]->title : substr($apartment[$i]->title,0,18).'...' }}</p>
+
                             </div>
                         </a>
-                    @endfor
-                @endif
-            </div>
-        </section>
-
-    @endsection
+                    @else
+                        <a href="{{ route('search.show', $apartment[$i]->id) }}" class="sponsor__home-card">
+                            <div class="sponsor__home-card-img">
+                                @if (isset($apartment[$i]->images[0]->path))
+                                    <img src="{{ asset('storage/'.$apartment[$i]->images[0]->path) }}" alt="{{ $apartment[$i]->title }}" alt="">
+                                @endif
+                            </div>
+                            <div class="sponsor__home-card-text">
+                                <p>{{ $apartment[$i]->title }}</p>
+                            </div>
+                        </a>
+                    @endif
+                @endfor
+            @endif
+    </section>
+</div>
+@endsection

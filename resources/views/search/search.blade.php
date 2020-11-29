@@ -25,6 +25,7 @@
                 </div>
             </div>
         </div>
+        {{-- MAPPA --}}
         <div class="container__search-right" id="map"></div>
         
     </div>
@@ -48,7 +49,7 @@
                 <p class="search__resoults__apartment-cards-content-description">
                     @{{ title }}
                 </p>
-                <p>Stanze: @{{ rooms }} Bagni: @{{ bathroom }}</p>
+                <p>Prezzo: @{{ price }} Mq: @{{ mq }} Stanze: @{{ rooms }} Posti letto: @{{ beds }} Bagni: @{{ bathrooms }}</p>
                 <div class="services-icons" serv-id="@{{dataId}}">
                    
                 </div>

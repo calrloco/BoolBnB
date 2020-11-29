@@ -35,7 +35,6 @@
                                 <p>{{ $apartment[$i]->title }}</p>
                             </div>
                         </a>
-                    
                 @endfor
             @endif
     </section>

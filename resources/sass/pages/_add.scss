@@ -1,7 +1,7 @@
 // PER PAGINE CREATE ED EDIT
 .create-update{
     .card-container{
-        width: 80%;
+        @include flex(column, flex-start, flex-start);
         margin: 0 auto;
         padding: 1.5rem 2rem;
         box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -17,37 +17,54 @@
         
         input {
             width: 100%;
-            padding: 15px 20px;
+            padding: 10px 15px;
             border-radius: 3px;
             width: 100%;
-            margin: 5px 0; 
+            margin: .5rem 0; 
             @include responsive(phone){
                 padding: 5px 7.5px;
             } 
         }
         
         textarea {
-            padding: 15px 20px;
+            padding: 10px 15px;
             border-radius: 3px;
             width: 100%;
         }
         
         label{
-            font-size: 1.4rem;
+            font-size: 1.3rem;
         }
 
         .input-row {
             width: 100%;
             margin: 1rem 0;
+            min-height: 82.8px;
             @include flex(column, flex-start, flex-start);
-           
+            @include responsive(phone){
+                min-height: 68.8px;
+            }
+
+
         }
         
         .input-group {
             width: 100%;
             @include flex(row, space-between, center);
+            
         }
         
+        .city-info{
+            @include responsive(phone){
+                display: block;
+                #city,
+                #postal-code,
+                #country{
+                    width: 100%;
+                }
+            }
+        }
+
         .caratteristiche{
             padding-bottom: 1rem;
             @include responsive(phone){
@@ -57,18 +74,30 @@
                     width: 100%;
                 }
             }
+
+            .label-input{
+                min-height: 114.8px;
+                @include responsive(phone){
+                    min-height: 68.8px;
+                }
+            }
+
             .label-input:not(:last-child){
-                margin-right: 2rem;
+                margin-right: .5rem;
+                @include responsive(tab){
+                    margin-right: 0;
+                }
                
             }
             input[type=number] {
                 -moz-appearance: textfield;
-              }   
+              } 
+            
         }
 
         .all-services{
             justify-content: space-around;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             i{
                 font-size: 2rem;
                 margin-bottom: .5rem;
@@ -85,7 +114,6 @@
             } 
         }
         .service:hover {
-            transform: scale(1.2);
             color: #de1362;
             }
         }
@@ -142,18 +170,6 @@
 }
 
 
-// controllo form
-.error{
-    border: 0.3rem solid#d60565;
-}
 
-.message{
-    display: block;
-    color: white;
-}
-
-.message-on{
-    color: #d60565;
-}
 
 

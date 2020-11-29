@@ -220,7 +220,7 @@ $("#city").focusout(function() {
     checkInput($(this), checkForm.allChar, 1, 30, "la città");
 });
 $("#postal-code").focusout(function() {
-    checkInput($(this), checkForm.allChar, 1, 20, "il codice postale");
+    checkInput($(this), checkForm.allChar, 1, 20, "il cap");
 });
 $("#country").focusout(function() {
     checkInput($(this), checkForm.letter, 1, 30, "la nazione");
@@ -255,7 +255,7 @@ $("#crea").click(function(e) {
                 checkForm.allChar,
                 1,
                 20,
-                "il codice postale"
+                "il cap"
             ) &&
             checkInput($("#country"), checkForm.letter, 1, 30, "la nazione") &&
             checkInput(
@@ -279,7 +279,7 @@ $("#crea").click(function(e) {
         checkInput($("#title"), checkForm.allChar, 10, 300, "il titolo") ||
         checkInput($("#address"), checkForm.allChar, 3, 300, "l'indirizzo") ||
         checkInput($("#city"), checkForm.allChar, 1, 30, "la città") ||
-        checkInput($("#postal-code"), checkForm.allChar, 1, 20, "il codice postale") ||
+        checkInput($("#postal-code"), checkForm.allChar, 1, 20, "il cap") ||
         checkInput($("#country"), checkForm.letter, 1, 30, "la nazione") ||
         checkInput($("#description"), checkForm.allChar, 20, 2000, "la descrizione") ||
         checkInput($("#daily-price"), checkForm.number, 1, 2000, "il prezzo") ||
@@ -312,10 +312,10 @@ $("#password-confirmR").focusout(function() {
     ) {
         $(this).addClass("error");
         $(this)
-            .next(".message")
+            .next(".message-E")
             .addClass("message-on");
         $(this)
-            .next(".message")
+            .next(".message-E")
             .text("Le password non sono uguali");
     }
 });
@@ -323,15 +323,15 @@ $("#dateR").focusout(function() {
     if ($("#dateR").val() == "") {
         $(this).addClass("error");
         $(this)
-            .next(".message")
+            .next(".message-E")
             .addClass("message-on");
         $(this)
-            .next(".message")
+            .next(".message-E")
             .text("Non hai inserito la data");
     } else {
         $(this).removeClass("error");
         $(this)
-            .next(".message")
+            .next(".message-E")
             .removeClass("message-on");
     }
 });
@@ -361,23 +361,55 @@ $("#registerR").click(function(e) {
 
 // validazione pagina login
 $("#emailL").focusout(function() {
-    checkInput($(this), emailR, 2, 255, "la mail");
+    checkInput($(this), checkForm.emailR, 2, 255, "la mail");
 });
 $("#passwordL").focusout(function() {
-    checkInput($(this), allChar, 8, 255, "la password");
+    checkInput($(this), checkForm.allChar, 8, 255, "la password");
 });
 
 $("#registerL").click(function(e) {
     if (
-        (checkInput($("#emailL"), emailR, 2, 255, "la mail") &&
-            checkInput($("#passwordL"), allChar, 8, 255, "la password")) ||
-        checkInput($("#emailL"), emailR, 2, 255, "la mail") ||
-        checkInput($("#passwordL"), allChar, 8, 255, "la password")
+        (checkInput($("#emailL"), checkForm.emailR, 2, 255, "la mail") &&
+            checkInput($("#passwordL"), checkForm.allChar, 8, 255, "la password")) ||
+        checkInput($("#emailL"), checkForm.emailR, 2, 255, "la mail") ||
+        checkInput($("#passwordL"), checkForm.allChar, 8, 255, "la password")
     ) {
         e.preventDefault();
     }
 });
 // fine validazione pagina login
+
+// validazione invio messaggio pagina apartment 
+$("#firstnameM").focusout(function() {
+    checkInput($(this), checkForm.letter, 2, 50, "il nome");
+});
+$("#lastnameM").focusout(function() {
+    checkInput($(this), checkForm.letter, 2, 50, "il cognome");
+});
+$("#emailM").focusout(function() {
+    checkInput($(this), checkForm.emailR, 2, 255, "la mail");
+}); 
+
+$("#messageM").focusout(function() {
+    checkInput($(this), checkForm.allChar, 2, 2000, "il messsaggio");
+});
+
+$("#send-message").click(function(e) {
+    if (
+        checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") &&
+        checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") &&
+        checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") &&
+        checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messsaggio") ||
+
+        checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") ||
+        checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") ||
+        checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") ||
+        checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messsaggio") 
+    ) {
+        e.preventDefault();
+    }
+});
+// fine validazione messaggio
 
 // funzione per controllare lato client il form
 function checkInput(selector, kind, min, max, field) {
@@ -388,22 +420,22 @@ function checkInput(selector, kind, min, max, field) {
         selector.val().length > max
     ) {
         selector.addClass("error");
-        selector.next(".message").addClass("message-on");
+        selector.next(".message-E").addClass("message-on");
         if (selector.val() == "") {
-            selector.next(".message").text("Non hai inserito " + field);
+            selector.next(".message-E").text("Non hai inserito " + field);
         } else if (!matchKind(selector, kind)) {
             selector
-                .next(".message")
+                .next(".message-E")
                 .text("Hai inserito un formato non valido");
         } else if (selector.val().length < min) {
-            selector.next(".message").text("Il campo è troppo breve");
+            selector.next(".message-E").text("Il campo è troppo breve");
         } else if (selector.val().length > max) {
-            selector.next(".message").text("Il campo è troppo lungo");
+            selector.next(".message-E").text("Il campo è troppo lungo");
         }
         return true;
     } else {
         selector.removeClass("error");
-        selector.next(".message").removeClass("message-on");
+        selector.next(".message-E").removeClass("message-on");
     }
 }
 

@@ -48,11 +48,11 @@
                 </div>
                 <div class="services-box">
                     <p class="services-title">Servizi</p>
-                    <ul class="services-show">
+                    <ul class="services">
                         @foreach ($apartment->services as $service)
                             <li class="service-list">
                                 <div class="service-head">
-                                    <i class="service-icon fas {{ $service->icon }}"></i>
+                                    <i class="service-icon {{ $service->icon }}"></i>
                                     <p>{{ $service->service }}</p>
                                 </div>
                                 <span id="service-descr">{{ $service->description }}</span>
@@ -71,24 +71,28 @@
                             <div class="input-aps-group">
                                 <p class="firstname-message"></p>
                                 <label for="fname">Nome:</label>
-                                <input type="text" id="firstname" name="name" value="{{ Auth::check() ? Auth::user()->name : '' }}"
+                                <input type="text" id="firstnameM" name="name" value="{{ Auth::check() ? Auth::user()->name : '' }}"
                                     name="firstname">
+                                <p class="message-E">error</p>    
                             </div>
                             <div class="input-aps-group">
                                 <p class="lastname-message"></p>
                                 <label for="lname">Cognome:</label>
-                                <input type="text" id="lastname" name="lastname" value="{{ Auth::check() ? Auth::user()->lastname : '' }}"
+                                <input type="text" id="lastnameM" name="lastname" value="{{ Auth::check() ? Auth::user()->lastname : '' }}"
                                     name="lastname">
+                                <p class="message-E">error</p>    
                             </div>
                             <div class="input-aps-group">
                                 <p class="email-message">  </p>
                                 <label for="email">Email:</label>
-                                <input type="email" id="email" value="{{ Auth::check() ? Auth::user()->email : '' }}"
+                                <input type="email" id="emailM" value="{{ Auth::check() ? Auth::user()->email : '' }}"
                                     name="email">
+                                <p class="message-E">error</p>    
                             </p>
 
                             <label for="message">Messaggio</label>
-                            <textarea  name="message" id="message"  rows="10">{{ Auth::check() ?'Buongiorno sono '. Auth::user()->name : '' }}</textarea>
+                            <textarea  name="message" id="messageM"  rows="10">{{ Auth::check() ?'Buongiorno sono '. Auth::user()->name : '' }}</textarea>
+                            <p class="message-E">error</p>
                             <div class="input-aps-group">
                             <input type="hidden" value="{{ $apartment->id }}" name="apartment_id">
                             <p class ="send-message">

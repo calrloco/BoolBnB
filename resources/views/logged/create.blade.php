@@ -17,32 +17,32 @@
             <div class="input-row">
                 <label for="title">Titolo</label>
                 <input type="text" id="title" name="title" class="" />
-                <p class="message"></p>
+                <p class="message-E"></p>
             </div>
 
             <!-- INDIRIZZO -->
             <div class="input-row">
                 <label for="address">Indirizzo</label>
                 <input type="text" id="address" name="address" class="" autocomplete="off" />
-                <p class="message"></p>
+                <p class="message-E"></p>
             </div>
 
             <div class="input-row">
-                <div class="input-group">
+                <div class="input-group city-info">
                     <div class="label-input">
                         <label for="city">Città</label>
                         <input id="city" type="text" name="city" autocomplete="off">
-                        <p class="message"></p>
+                        <p class="message-E">errore</p>
                     </div>
                     <div class="label-input">
                         <label for="postal_code">Codice Postale</label>
                         <input id="postal-code" type="text" name="postal_code" autocomplete="off">
-                        <p class="message"></p>
+                        <p class="message-E">errore</p>
                     </div>
                     <div class="label-input">
                         <label for="country">Nazione</label>
                         <input id="country" type="text" name="country">
-                        <p class="message"></p>
+                        <p class="message-E">errore</p>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
             <div class="input-row">
                 <label for="description">Descrizione dell'appartamento</label>
                 <textarea id="description" name="description" rows="10"></textarea>
-                <p class="message"></p>
+                <p class="message-E">Errore</p>
             </div>
 
             <!-- CARATTERISTICHE-->
@@ -59,27 +59,27 @@
                     <div class="label-input">
                         <label for="daily_price">Prezzo/notte</label>
                         <input id="daily-price" type="number" name="daily_price">
-                        <p class="message"></p>
+                        <p class="message-E"></p>
                     </div>
                     <div class="label-input">
                         <label for="sm">Mq</label>
                         <input id="sm" type="number" name="sm">
-                        <p class="message"></p>
+                        <p class="message-E"></p>
                     </div>
                     <div class="label-input">
                         <label for="rooms">Stanze</label>
                         <input id="rooms" type="number" name="rooms">
-                        <p class="message"></p>
+                        <p class="message-E"></p>
                     </div>
                     <div class="label-input">
                         <label for="beds">Posti letto</label>
                         <input id="beds" type="number" name="beds">
-                        <p class="message"></p>
+                        <p class="message-E"></p>
                     </div>
                     <div class="label-input">
                         <label for="bathrooms">Bagni</label>
                         <input id="bathrooms" type="number" name="bathrooms">
-                        <p class="message"></p>
+                        <p class="message-E"></p>
                     </div>
                 </div>
 

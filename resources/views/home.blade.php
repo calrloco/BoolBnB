@@ -34,7 +34,11 @@
                             </div>
                         </a>
                     @else
+                        @if($apartment[$i]->user_id != Auth::id())
                         <a href="{{ route('search.show', $apartment[$i]->id) }}" class="sponsor__home-card">
+                        @else
+                        <a href="{{ route('host.show', $apartment[$i]->id) }}" class="sponsor__home-card">
+                        @endif    
                             <div class="sponsor__home-card-img">
                                 @if (isset($apartment[$i]->images[0]->path))
                                     <img src="{{ asset('storage/'.$apartment[$i]->images[0]->path) }}" alt="{{ $apartment[$i]->title }}" alt="">

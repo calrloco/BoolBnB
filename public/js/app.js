@@ -42755,7 +42755,22 @@ $('.hamburger-menu').click(function () {
   $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
   $('.hamburger-menu').toggleClass('hamburger-menu-animated');
   $('.mobile-menu').toggleClass('hidden');
-});
+}); // chiamta che prende ip dell'utente e capisce la regione per ricerca nei paraggi
+
+var getIp = function () {
+  $.ajax({
+    mehtod: "GET",
+    url: "https://api.ipdata.co/",
+    data: {
+      "api-key": "1777abd71f2ebf5cdeb8cc5089569063908fa10482d91cfff26ae02a"
+    },
+    success: function success(risposta) {
+      console.log(risposta);
+      $("#ip-home-search").val(risposta.region);
+    },
+    error: function error() {}
+  });
+}();
 
 /***/ }),
 

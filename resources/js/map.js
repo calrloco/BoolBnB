@@ -75,7 +75,7 @@ function getCoordinates(input, range, services) {
                     center: response.results[0].position,
                     zoom: zoom
                 });
-                console.log(services);
+                
                 if (services == false) {
                     getCards(latitude, longitude, range, 1);
                     getCards(latitude, longitude, range, 0);
@@ -272,9 +272,7 @@ function appendImages(risp, clss, sponsor) {
         var appId = $(this)
             .find(".aps_id")
             .val();
-        console.log("aaaaaa");
-        console.log(appId);
-        console.log("aaaaaa");
+      
         if (appId == risp.apartment_id) {
             img = `<img class="search__resoults__apartment-cards-content-slider-img apt-image ${clss}" 
            src="${risp.path}">`;

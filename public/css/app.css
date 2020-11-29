@@ -7009,199 +7009,79 @@ canvas:focus {
   transform: scale(1);
 }
 
-.container-center .title {
-  font-size: 22px;
+ul,
+li {
+  list-style: none;
+}
+
+.messaggi {
+  padding: 10px;
   text-align: center;
-  margin-bottom: 20px;
 }
 
-.container-center .messages-box {
-  height: 100%;
-  width: 100%;
-  padding: 10px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.CommentForm .comment-wrap,
+.commentlist .comment-wrap,
+.comment ul .comment-wrap {
+  position: relative;
+  display: grid;
+  grid-template-columns: 130px minmax(120px, 1fr) 25px;
+  grid-gap: 2rem;
+  background: white;
+  color: black;
+  box-shadow: 0 4px 10px #686868;
+  padding: 2rem;
+  border-radius: 16px;
 }
 
-@media screen and (max-width: 414px) {
-  .container-center .messages-box {
-    padding: 0;
-  }
+.CommentForm .comment-wrap .comment-author,
+.commentlist .comment-wrap .comment-author,
+.comment ul .comment-wrap .comment-author {
+  color: black;
+  font-weight: 700;
+  font-size: 24px;
 }
 
-.container-center .messages-box .message-card {
-  min-height: 100px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  border: 1px solid #ff5a5f;
-  border-radius: 15px;
+.CommentForm .comment-wrap .comment-time,
+.commentlist .comment-wrap .comment-time,
+.comment ul .comment-wrap .comment-time {
+  margin: 0 0 1rem;
 }
 
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+.CommentForm .comment-wrap .article-content,
+.commentlist .comment-wrap .article-content,
+.comment ul .comment-wrap .article-content {
+  overflow-wrap: break-word;
+  margin: 0 0 1.5rem;
+  border-radius: 8px;
 }
 
-.container-center .messages-box .message-card .message-card-sx {
-  width: 20%;
-  height: 100%;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.container-center .messages-box .message-card .message-card-sx .apart-img img {
-  display: flex;
-  width: 150px;
-  height: 150px;
-  border-radius: 15px;
-}
-
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-sx .apart-img img {
-    padding-top: 10px;
-  }
-}
-
-.container-center .messages-box .message-card .message-card-center {
-  width: 70%;
-  height: 100%;
-  min-height: 100px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-}
-
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-center {
-    width: 90%;
-  }
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-up {
-  width: 100%;
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-up .details-sender {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
-}
-
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-center .sender-details-up .details-sender {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 10px 0;
-  }
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-up .details-sender .details {
-  font-size: 18px;
-}
-
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-center .sender-details-up .details-sender .details {
-    text-align: center;
-  }
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-up .details-apt {
+.CommentForm .comment-wrap .comment-content,
+.commentlist .comment-wrap .comment-content,
+.comment ul .comment-wrap .comment-content {
   padding-top: 10px;
-  font-size: 12px;
-  text-align: center;
 }
 
-.container-center .messages-box .message-card .message-card-center .sender-details-up .details-apt .apt-link {
-  color: black;
-  text-decoration: none;
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-up .details-apt a:hover {
-  color: #ff5a5f;
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-down {
-  padding: 0 20px;
+.CommentForm .comment-wrap .comment-actions,
+.commentlist .comment-wrap .comment-actions,
+.comment ul .comment-wrap .comment-actions {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-}
-
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-center .sender-details-down {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    padding: 0 5px;
-  }
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-down .message {
-  padding-top: 15px;
-  font-size: 16px;
-  color: black;
-  border-top: 1px solid #ff5a5f;
-  max-height: 1000px;
-  text-align: justify;
-}
-
-.container-center .messages-box .message-card .message-card-dx {
-  width: 10%;
-  height: 100%;
-  border-radius: 15px;
-}
-
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-dx {
-    width: 100%;
-  }
-}
-
-.container-center .messages-box .message-card .message-card-dx .button-section .buttons {
-  width: 100%;
-  display: flex;
+  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
 }
 
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-dx .button-section .buttons {
-    height: 100%;
-    padding-bottom: 10px;
-  }
+.CommentForm .comment-wrap .delete i,
+.commentlist .comment-wrap .delete i,
+.comment ul .comment-wrap .delete i {
+  font-size: 18px;
+  color: black;
+  cursor: pointer;
+  padding: 10px;
 }
 
-.container-center .messages-box .message-card .message-card-dx .button-section .buttons .msg-btn {
-  color: gray;
-  font-size: 20px;
+.CommentForm .comment-wrap .comment-body,
+.commentlist .comment-wrap .comment-body,
+.comment ul .comment-wrap .comment-body {
+  border-right: 1px solid gray;
 }
 
 .active {

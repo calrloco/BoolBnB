@@ -370,7 +370,7 @@ var serviceCheck = (function() {
 })();
 // al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom
 $("#search").keyup(function() {
-    $("#auto-complete").empty();
+    $(".complete-results").empty();
     autoComplete($("#search").val());
 });
 
@@ -388,7 +388,6 @@ function autoComplete(query) {
         $("#auto-complete").removeClass("complete-on");
     }
     if (query != "" && isNaN(query) && query.length > 3) {
-        $("#auto-complete").addClass("complete-on");
         tt.services
             .fuzzySearch({
                 key: apiKey,
@@ -426,13 +425,13 @@ function autoComplete(query) {
                     }
                 }
                 for (let i = 0; i < address.length; i++) {
-                    results +=
-                        '<div class="complete-results">' +
-                        address[i] +
-                        "</div>";
+                    results +='<div class="complete-results">' + address[i] + '</div>';
                 }
-                document.getElementById("auto-complete").innerHTML = results;
-                if (results == "") {
+                
+                if (address.length > 0) {
+                    $("#auto-complete").addClass("complete-on");
+                    document.getElementById("auto-complete").innerHTML = results;                  
+                }else{
                     $("#auto-complete").removeClass("complete-on");
                 }
             });

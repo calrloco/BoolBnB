@@ -255,7 +255,6 @@ function compileServices(id) {
             id: id,
         },
         success: function(risposta) {
-            console.log(risposta);
             if (risposta.length > 0) {
                 $('[serv-id="'+ id +'"]').empty();
                 for(i = 0; i < risposta.length; i++) {

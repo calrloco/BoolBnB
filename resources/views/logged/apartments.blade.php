@@ -21,7 +21,7 @@
 
                         <div class="apt-info-sx">
                             @foreach($sponsorizzati as $spons)
-                            @dd($spons)
+                            
                             @if($apartment->id == $spons->id)
                             <i class="fas fa-star"></i>
                             <div>sponsorizzato fino al: {{ $spons->end_sponsor }}</div>

@@ -13,7 +13,7 @@
             @else
                  <li class="mobile-menu-list-item">
                     <input id="nav_user-id" type="hidden" value="{{ Auth::user()->id }}">
-                    <a href="{{ route('messages.index') }}" class="mobile-menu-list-item-link"><span id="unread-msg">Messaggi</span></a>
+                    <a href="{{ route('messages.index') }}" class="mobile-menu-list-item-link"><span class="msg-msg">Messaggi</span></a>
                 </li>
                 <li class="mobile-menu-list-item">
                     <a href="{{ route('host.index') }}" class="mobile-menu-list-item-link">I tuoi appartamenti</a>

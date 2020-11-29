@@ -350,6 +350,7 @@ var serviceCheck = (function() {
                 return item != serviceType;
             });
         }
+        console.log(selectedService);
     });
     /////// fa prtire la ricerca con i servizi selezionati
     $("#cerca-filtri").click(function() {

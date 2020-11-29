@@ -42525,17 +42525,17 @@ var unreadMessages = function () {
       if (risposta.length > 0) {
         // messaggio per count 1
         if (risposta[0].unread == 1) {
-          $('#unread-msg').empty();
-          $('#unread-msg').append(risposta[0].unread + ' nuovo messaggio');
-          $('#unread-msg').append("<i class=\"dot fas fa-circle\"></i>"); // messaggio per count > 1
+          $('.msg-msg').empty();
+          $('.msg-msg').append(risposta[0].unread + ' nuovo messaggio');
+          $('.msg-msg').append("<i class=\"dot fas fa-circle\"></i>"); // messaggio per count > 1
         } else {
-          $('#unread-msg').empty();
-          $('#unread-msg').append(risposta[0].unread + ' nuovi messaggi');
-          $('#unread-msg').append("<i class=\"dot fas fa-circle\"></i>");
+          $('.msg-msg').empty();
+          $('.msg-msg').append(risposta[0].unread + ' nuovi messaggi');
+          $('.msg-msg').append("<i class=\"dot fas fa-circle\"></i>");
         }
       } else {
-        $('#unread-msg').empty();
-        $('#unread-msg').append('Messaggi');
+        $('.msg-msg').empty();
+        $('.msg-msg').append('Messaggi');
       }
     },
     error: function error() {
@@ -42855,13 +42855,8 @@ document.addEventListener("DOMContentLoaded", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< Updated upstream
-__webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/sass/app.scss */"./resources/sass/app.scss");
-=======
 __webpack_require__(/*! C:\lavori\BoolBnB\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\lavori\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> Stashed changes
 
 
 /***/ })

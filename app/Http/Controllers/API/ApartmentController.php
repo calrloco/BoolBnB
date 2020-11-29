@@ -62,16 +62,8 @@ class ApartmentController extends Controller
                 });
             }
         }
-        
-
 
         $query = $query->orderBy('distance','asc')->get();
-
-        // ->get();
-
-
-
-
 
 
         return response()->json($query, 200);

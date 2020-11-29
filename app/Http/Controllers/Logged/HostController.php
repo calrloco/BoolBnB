@@ -54,12 +54,12 @@ class HostController extends Controller
         // ->get();
         // dd($sponsorizzati);
         
-        $sponsorizzati = DB::table('apartment_sponsor')
+        $spons = DB::table('apartment_sponsor')
         ->where('end_sponsor', '>', Carbon::now())
         ->orderBy('end_sponsor', 'desc')
         ->get();
 
-        return view('logged.apartments', compact('apartments', 'sponsorizzati'));
+        return view('logged.apartments', compact('apartments', 'spons'));
     }
 
     /**

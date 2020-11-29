@@ -11,7 +11,7 @@
     }
     &-left {
         flex: 1;
-        max-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
+        max-height:  calc(100vh -  var(--nav-height));
         overflow-y: scroll;
         
           
@@ -30,6 +30,8 @@
     }
     &-right {
         flex: 2;
+        max-height:  calc(100vh -  var(--nav-height));
+        min-height: calc(100vh -  var(--nav-height));
         @include responsive(small_desktop){
                flex: 1;
          }

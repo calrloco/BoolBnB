@@ -4931,6 +4931,74 @@ form {
 .footer {
   height: var(--footer-height);
   background-color: #f7f7f7;
+  color: var(--color-font-black);
+}
+
+.footer-header {
+  font-weight: 800;
+}
+
+.footer__content {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  font-size: 1.4rem;
+  padding: 1rem 0;
+}
+
+.footer-list {
+  height: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.footer-li {
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+}
+
+.footer-li::after {
+  position: absolute;
+  bottom: -1px;
+  left: -2%;
+  content: "";
+  width: 105%;
+  height: 1px;
+  background-color: var(--color-font-black);
+  transition: all 0.2s;
+  z-index: -1;
+}
+
+.footer-li:hover:after {
+  height: 100%;
+  background-color: var(--pink-bnb);
+}
+
+.footer-li:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
+
+.footer-li:active {
+  transform: scale(1.1);
+}
+
+.footer-icons {
+  margin-right: 1rem;
+  z-index: 2;
+  font-size: 1.5rem;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: inherit;
+  z-index: 2;
 }
 
 .nav {

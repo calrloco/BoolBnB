@@ -6934,18 +6934,19 @@ canvas:focus {
   transition: all 0.2s;
 }
 
-.apt-services {
+.apt-services-show {
+  width: 100%;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: space-around;
+  align-items: center;
   flex-direction: row;
 }
 
 .service {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .apartment-button {

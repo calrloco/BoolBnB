@@ -7,7 +7,7 @@
             <p class="status-msg">{{ session('status') }}</p>
         @endif
 
-        @if (count($apartments) > 0)
+        @if(count($apartments) > 0)
             <div class="head">
                 <h2 class="title">I tuoi appartamenti</h2>
                 <a class="create-apt-link" href="{{ route('host.create') }}">Crea un nuovo annuncio!</a>
@@ -60,10 +60,21 @@
                                 @endforeach
                             </ul>
                         </div>
-                        <a href="{{ route('host.show', $apartment->id) }}" class="apartment-button">Vai
-                            all'appartamenoto</a>
+                        <p class="apt-details"> Caratteristiche: nr. stanze: {{ $apartment->rooms }}, nr. letti:
+                            {{ $apartment->beds }} - nr. bagni: {{ $apartment->bathrooms }} - mq: {{ $apartment->sm }}
+                        </p>
+                        <p class="apt-description-text">{{ $apartment->description }}</p>
+                        <ul class="apt-services-show">
+                            @foreach ($apartment->services as $service)
+                                <li class="service">
+                                    <i class="service-icon-appartments fas {{ $service->icon }}"></i>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
-                @endforeach
+                    <a href="{{ route('host.show', $apartment->id) }}" class="apartment-button">Vai all'appartamento</a>
+                </div>
+            @endforeach
             </div>
         @else
             <div class="noapt-section">

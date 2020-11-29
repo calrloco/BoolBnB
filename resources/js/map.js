@@ -168,6 +168,12 @@ function compileHandlebars(risp, sponsor) {
             id: `<input class="aps_id" type="hidden" name="apartment_id" value=${risp[i].id}>`,
             sponsor: sponsor,
             dataId: risp[i].id,
+            price: risp[i].daily_price,
+            mq: risp[i].sm,
+            rooms: risp[i].rooms,
+            beds: risp[i].beds,
+            bathrooms: risp[i].bathrooms
+
         };
 
         var coordinates = [risp[i].longitude, risp[i].latitude];
@@ -319,15 +325,18 @@ function appendImages(risp, clss, sponsor) {
 // funzione per troncare una stringa
 function troncaStringa(stringa) {
     var shortText = "";
-    if (stringa.length != 0) {
-        for (var i = 0; i < stringa.length; i++) {
-            if (stringa[i] == " " && i <= 43) {
-                var shortText = $.trim(stringa).substring(0, i) + "...";
+    if(stringa.length > 28) {
+        for (var i = 28; i > 0; i--) {
+            if (stringa[i] == " ") {
+                shortText = $.trim(stringa).substring(0, i) + "...";
+                i = 0;
             }
-        }
+        } 
     } else {
-        shortText = "Descrizione non disponibile";
+        shortText = stringa;
+        
     }
+
     return shortText;
 }
 
@@ -351,6 +360,7 @@ var serviceCheck = (function() {
                 return item != serviceType;
             });
         }
+        console.log(selectedService);
     });
     /////// fa prtire la ricerca con i servizi selezionati
     $("#cerca-filtri").click(function() {
@@ -361,7 +371,7 @@ var serviceCheck = (function() {
 })();
 // al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom
 $("#search").keyup(function() {
-    $("#auto-complete").empty();
+    $(".complete-results").empty();
     autoComplete($("#search").val());
 });
 
@@ -379,7 +389,6 @@ function autoComplete(query) {
         $("#auto-complete").removeClass("complete-on");
     }
     if (query != "" && isNaN(query) && query.length > 3) {
-        $("#auto-complete").addClass("complete-on");
         tt.services
             .fuzzySearch({
                 key: apiKey,
@@ -417,13 +426,13 @@ function autoComplete(query) {
                     }
                 }
                 for (let i = 0; i < address.length; i++) {
-                    results +=
-                        '<div class="complete-results">' +
-                        address[i] +
-                        "</div>";
+                    results +='<div class="complete-results">' + address[i] + '</div>';
                 }
-                document.getElementById("auto-complete").innerHTML = results;
-                if (results == "") {
+                
+                if (address.length > 0) {
+                    $("#auto-complete").addClass("complete-on");
+                    document.getElementById("auto-complete").innerHTML = results;                  
+                }else{
                     $("#auto-complete").removeClass("complete-on");
                 }
             });

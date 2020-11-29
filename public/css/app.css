@@ -5193,7 +5193,6 @@ form {
   position: absolute;
   width: 300px;
   top: 60px;
-  padding: 10px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 0px 23px 0px rgba(50, 50, 50, 0.51);
@@ -5201,6 +5200,7 @@ form {
 
 .nav__search-city #auto-complete .complete-results {
   padding: 5px;
+  border-radius: 10px;
 }
 
 .nav__search-city #auto-complete .complete-results:hover {
@@ -5889,7 +5889,10 @@ a {
 }
 
 .create-update .card-container {
-  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
   margin: 0 auto;
   padding: 1.5rem 2rem;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -5909,10 +5912,10 @@ a {
 
 .create-update .card-container input {
   width: 100%;
-  padding: 15px 20px;
+  padding: 10px 15px;
   border-radius: 3px;
   width: 100%;
-  margin: 5px 0;
+  margin: 0.5rem 0;
 }
 
 @media screen and (max-width: 414px) {
@@ -5922,22 +5925,29 @@ a {
 }
 
 .create-update .card-container textarea {
-  padding: 15px 20px;
+  padding: 10px 15px;
   border-radius: 3px;
   width: 100%;
 }
 
 .create-update .card-container label {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .create-update .card-container .input-row {
   width: 100%;
   margin: 1rem 0;
+  min-height: 82.8px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
+}
+
+@media screen and (max-width: 414px) {
+  .create-update .card-container .input-row {
+    min-height: 68.8px;
+  }
 }
 
 .create-update .card-container .input-group {
@@ -5946,6 +5956,22 @@ a {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+}
+
+.create-update .card-container .city-info .label-input {
+  min-height: 95.6px;
+}
+
+@media screen and (max-width: 414px) {
+  .create-update .card-container .city-info {
+    display: block;
+  }
+
+  .create-update .card-container .city-info #city,
+  .create-update .card-container .city-info #postal-code,
+  .create-update .card-container .city-info #country {
+    width: 100%;
+  }
 }
 
 .create-update .card-container .caratteristiche {
@@ -5966,8 +5992,24 @@ a {
   }
 }
 
+.create-update .card-container .caratteristiche .label-input {
+  min-height: 126px;
+}
+
+@media screen and (max-width: 414px) {
+  .create-update .card-container .caratteristiche .label-input {
+    min-height: 68.8px;
+  }
+}
+
 .create-update .card-container .caratteristiche .label-input:not(:last-child) {
-  margin-right: 2rem;
+  margin-right: 0.5rem;
+}
+
+@media screen and (max-width: 800px) {
+  .create-update .card-container .caratteristiche .label-input:not(:last-child) {
+    margin-right: 0;
+  }
 }
 
 .create-update .card-container .caratteristiche input[type=number] {
@@ -5976,7 +6018,7 @@ a {
 
 .create-update .card-container .all-services {
   justify-content: space-around;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .create-update .card-container .all-services i {
@@ -5992,6 +6034,10 @@ a {
   transition: all 0.1s;
 }
 
+.create-update .card-container .all-services .service label {
+  font-size: 1rem;
+}
+
 @media screen and (max-width: 800px) {
   .create-update .card-container .all-services .service label {
     display: none;
@@ -5999,7 +6045,6 @@ a {
 }
 
 .create-update .card-container .all-services .service:hover {
-  transform: scale(1.2);
   color: #de1362;
 }
 
@@ -6051,19 +6096,6 @@ a {
 
 .create-update .card-container .img-delete:hover {
   cursor: pointer;
-}
-
-.error {
-  border: 0.3rem solid #d60565;
-}
-
-.message {
-  display: block;
-  color: white;
-}
-
-.message-on {
-  color: #d60565;
 }
 
 .status-msg {
@@ -6164,9 +6196,10 @@ a {
   flex-direction: row;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .info-apt-section {
-    flex-direction: column;
+    display: block;
+    text-align: center;
   }
 }
 
@@ -6175,18 +6208,7 @@ a {
   height: 100%;
 }
 
-@media screen and (max-width: 600px) {
-  .info-apt-section .info-box-sx {
-    flex-grow: 1;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 800px) {
   .info-apt-section .info-box-sx {
     width: 100%;
   }
@@ -6199,6 +6221,12 @@ a {
   flex-direction: row;
   padding: 10px 0;
   border-bottom: 1px solid #ff5a5f;
+}
+
+@media screen and (max-width: 800px) {
+  .info-apt-section .info-box-sx .info-apt-summary {
+    justify-content: center;
+  }
 }
 
 .info-apt-section .info-box-sx .info-apt-summary .info-host {
@@ -6221,23 +6249,8 @@ a {
   padding: 10px 0;
 }
 
-@media screen and (max-width: 600px) {
-  .info-apt-section .info-box-sx .services-box .services {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: row;
-  }
-}
-
-.info-apt-section .info-box-sx .services-box .services .services-title {
-  font-size: 22px;
-  font-weight: 500;
-  padding-bottom: 10px;
-}
-
-@media screen and (max-width: 600px) {
-  .info-apt-section .info-box-sx .services-box .services .services-title {
+@media screen and (max-width: 800px) {
+  .info-apt-section .info-box-sx .services-box ul.services {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6245,33 +6258,34 @@ a {
   }
 }
 
-.info-apt-section .info-box-sx .services-box .services .service-list {
+.info-apt-section .info-box-sx .services-box ul.services .services-title {
+  font-size: 22px;
+  font-weight: 500;
+  padding-bottom: 10px;
+}
+
+.info-apt-section .info-box-sx .services-box ul.services .service-list {
   font-size: 16px;
   padding: 5px;
   margin-bottom: 1rem;
   list-style-type: none;
 }
 
-@media screen and (max-width: 600px) {
-  .info-apt-section .info-box-sx .services-box .services .service-list {
-    flex: 0 0 calc(100% / 3);
-  }
-}
-
-.info-apt-section .info-box-sx .services-box .services .service-list .service-head {
+.info-apt-section .info-box-sx .services-box ul.services .service-list .service-head {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   padding-bottom: 5px;
 }
 
-.info-apt-section .info-box-sx .services-box .services .service-list .service-head .service-icon {
+.info-apt-section .info-box-sx .services-box ul.services .service-list .service-head .service-icon {
   padding-right: 10px;
+  font-size: 3rem;
   color: #df1362;
 }
 
-@media screen and (max-width: 414px) {
-  .info-apt-section .info-box-sx .services-box .services .service-list #service-descr {
+@media screen and (max-width: 800px) {
+  .info-apt-section .info-box-sx .services-box ul.services .service-list #service-descr {
     display: none;
   }
 }
@@ -6494,7 +6508,7 @@ h1 {
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-.signup_container .signup p {
+.signup_container .signup .register-title {
   text-align: center;
   font-size: 14px;
   margin: 4px 0;
@@ -6580,13 +6594,12 @@ h1 {
 }
 
 .error {
-  border: 0.3rem solid #d60565;
+  border: 0.2rem solid #d60565;
 }
 
-.message {
-  display: block;
+.message-E {
+  font-size: 1.2rem;
   color: white;
-  font-size: 1rem;
 }
 
 .message-on {
@@ -6600,20 +6613,6 @@ h1 {
   display: flex;
   justify-content: center;
   padding: 15px;
-}
-
-.error {
-  border: 0.3rem solid #d60565;
-}
-
-.message {
-  display: block;
-  color: white;
-  font-size: 1rem;
-}
-
-.message-on {
-  color: #d60565;
 }
 
 .container__search {
@@ -7267,18 +7266,19 @@ canvas:focus {
   transition: all 0.2s;
 }
 
-.apt-services {
+.apt-services-show {
+  width: 100%;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: space-around;
+  align-items: center;
   flex-direction: row;
 }
 
 .service {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .apartment-button {

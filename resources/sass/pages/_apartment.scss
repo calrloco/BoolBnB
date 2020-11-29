@@ -35,12 +35,10 @@
     margin-bottom: 6rem;
     height: 60rem !important;
     @include flex(row,center,center);
-    // background-color: tomato;
     height: 40rem;
     .apt-images{
         width: 100%;
         height: 100%;
-        // background-color: tomato;
         border-radius: $card-img-radius;
         @include flex(row, space-between, center);
         position: relative;
@@ -83,20 +81,16 @@
     font-size:1.4rem;
     margin-bottom:9rem;
     @include flex(row, space-between, flex-start);
-    @media screen and (max-width:600px){
-        flex-direction:column;
+    @include responsive(tab){
+        display: block;
+        text-align: center;
     }
     
 
     .info-box-sx {
         width: 65%;
         height: 100%;
-        @media screen and (max-width:600px){
-            flex-grow:1;
-            width: 100%;
-            @include flex(column, center, center);
-        }
-        @include responsive(phone){
+        @include responsive(tab){
             width: 100%;
         }
 
@@ -104,6 +98,9 @@
             @include flex(row, space-between, center);
             padding: 10px 0;
             border-bottom: 1px solid #ff5a5f;
+            @include responsive(tab){
+                justify-content: center;
+            }
 
             .info-host {
                 font-size: 22px;
@@ -126,48 +123,42 @@
             padding: 10px 0;
             
 
-            .services{
-                @media screen and (max-width:600px){
-                    @include flex(row, flex-start, center);
-                }  
-            .services-title {         
-                font-size: 22px;
-                font-weight: 500;
-                padding-bottom: 10px;
-
-                @media screen and (max-width:600px){
+            ul.services{    
+                @include responsive(tab){
                     @include flex(row, center, center);
+                    }
+                .services-title {         
+                    font-size: 22px;
+                    font-weight: 500;
+                    padding-bottom: 10px;
                 }
-              
-            }
 
-            .service-list {
-                font-size: 16px;
-                padding: 5px;
-                margin-bottom: 1rem;
-                list-style-type: none;
-                @media screen and (max-width:600px){
-                    flex: 0 0 calc(100% / 3);
-                }  
-                    .service-head{
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: flex-start;
-                    padding-bottom: 5px;
+                .service-list {
+                    font-size: 16px;
+                    padding: 5px;
+                    margin-bottom: 1rem;
+                    list-style-type: none;
 
-                        .service-icon{
-                            padding-right: 10px;
-                            color: #df1362;
+                        .service-head{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-start;
+                        padding-bottom: 5px;
+
+                            .service-icon{
+                                padding-right: 10px;
+                                font-size: 3rem;
+                                color: #df1362;
+                            }
+                        }
+                        #service-descr{
+                            @include responsive(tab){
+                                display: none;
+                                } 
+                            }
                         }
                     }
-                    #service-descr{
-                        @include responsive(phone){
-                            display: none;
-                            } 
-                        }
-                    }
                 }
-            }
         }
 
     .info-box-dx {

@@ -13,7 +13,7 @@
                 text-align: center;
                 .bt-drop-in-wrapper {
                     #bt-dropin {
-                      padding: 50px 0 20px;
+                      padding: 35px 0 10px;
                        @media (max-width: 768px) {
                         padding: 0;
                       }
@@ -35,7 +35,7 @@
                     width: 0%;
                 }
                  .braintree-option__paypal{
-                   
+                  // display: none;/*  */
                  }
               }
             } .pay-button{
@@ -44,12 +44,11 @@
                 .btn-succes {
                   background-color:transparent;
                   padding:13px;
-
                   opacity:.7;
                   transition:.2s ease-in-out;
                   cursor:pointer;
                   border: 1px solid gray;
-                  margin-top: 10px;
+                  margin-top: 5px;
                 }
               }
         }  

@@ -42706,47 +42706,6 @@ function matchKind(selector, kind) {
   return false;
 }
 
-$(".openB").click(function () {
-  $(".left").addClass("open");
-  setTimeout(function () {
-    $(".right").addClass("open");
-  }, 250);
-  setTimeout(function () {
-    $(".back").addClass("open");
-    $(".front").addClass("display");
-  }, 350);
-  $(".closeB").delay(1000).fadeIn();
-});
-$(".closeB").click(function () {
-  setTimeout(function () {
-    $(".left").removeClass("open");
-  }, 250);
-  $(".right").removeClass("open");
-  setTimeout(function () {
-    $(".back").removeClass("open");
-    $(".front").removeClass("display");
-  }, 600);
-  $(".closeB").fadeOut();
-});
-$(".pay").click(function () {
-  setTimeout(function () {
-    $(".form-container").addClass("acti");
-  }, 500);
-});
-$("#sponsorBasic").click(function () {
-  $('#amount').val([4.99]);
-  $('#sponsor_plan').val([2]);
-});
-$("#sponsorMedium").click(function () {
-  $('#amount').val([5.99]);
-  $('#sponsor_plan').val([2]);
-});
-$("#sponsorPremium").click(function () {
-  var amount = 9;
-  $('#sponsor_plan').val([3]);
-  console.log(amount);
-});
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

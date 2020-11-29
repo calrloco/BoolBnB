@@ -47,7 +47,19 @@ class HostController extends Controller
             // ->orderBy('created_at','desc');
 
         }
-        return view('logged.apartments', compact('apartments'));
+
+        // $sponsorizzati = Apartment::whereHas('sponsors',function($q){
+        //     $q->where('end_sponsor','>=', Carbon::now());
+        // })->where('apartments.user_id', '=', Auth::id())
+        // ->get();
+        // dd($sponsorizzati);
+
+        $spons = DB::table('apartment_sponsor')
+        ->where('end_sponsor', '>', Carbon::now())
+        ->orderBy('end_sponsor', 'desc')
+        ->get();
+
+        return view('logged.apartments', compact('apartments', 'spons'));
     }
 
     /**
@@ -121,7 +133,7 @@ class HostController extends Controller
 
 
 
-        return redirect()->route('host.index')->with('status', 'hai creato correttamente il tuo appartamento' . $apartment->title);
+        return redirect()->route('host.index')->with('status', 'Hai creato correttamente il tuo annuncio "' . $apartment->title . '"');
     }
 
     /**
@@ -225,11 +237,21 @@ class HostController extends Controller
         $apartment = Apartment::find($id);
         //prendo tutti i tipi di sponsorizzazione
         $sponsors = Sponsor::all();
+
+        return view('logged.sponsor', compact('apartment','sponsors'));
+    }
+
+    public function pay($id,$id_sponsor,$price)
+    {
+        //trovo l'appartamento tramite il suo ID
+        $apartment = Apartment::find($id);
+        //prendo tutti i tipi di sponsorizzazione
+        $sponsors = Sponsor::all();
         //creo gateway per creare nuovo TOKEN
         $gateway = new Braintree\Gateway(config('braintree'));
         $token = $gateway->ClientToken()->generate();
 
-        return view('logged.sponsor', compact('apartment','token','sponsors'));
+        return view('logged.pay', compact('apartment','token','sponsors','price','id_sponsor'));
     }
 
     public function visibility ($id){
@@ -248,24 +270,18 @@ class HostController extends Controller
     {
         //Prendo i valori dal payment form
         $data = $request->all();
-
         $gateway = new Braintree\Gateway(config('braintree'));
-        // da cancellare se decido di dare il prezzo di default
-        $sponsorError = 'Nessuna sponsorship selezionata.';
-        if (empty($data['amount'])) {
-            return redirect()->back()->with('sponsorError', $sponsorError);
-        }
-
         //Informazioni appartamento
         $apartment = Apartment::find($id);
         $apartment_id = $apartment->id;
         //Informazioni Sponsorizzazione
         $sponsor_id = $data['sponsor_plan'];
+
         $sponsor = Sponsor::find($sponsor_id);
         $sponsor_price = $data['amount'];
         $sponsor_durate = $sponsor->sponsor_time;
-        
-        
+
+
         //registro la transazione
         $result = $gateway->transaction()->sale([
                 'amount' => $sponsor_price,
@@ -277,12 +293,12 @@ class HostController extends Controller
                     'submitForSettlement' => true
                 ]
             ]);
-            
+
 
         // Check sulla transazione
         if ($result->success || !is_null($result->transaction)) {
             $transaction = $result->transaction;
-    
+
             // Prendo la data corrente
             $start = Carbon::now();
 
@@ -293,7 +309,7 @@ class HostController extends Controller
                 ->orderBy('apartment_sponsor.end_sponsor', 'desc')
                 ->limit(1)
                 ->get();
-            
+
             if (count($checkSponsor) > 0) {
                 $end_sponsor = Carbon::parse($checkSponsor[0]->end_sponsor)->addHours($sponsor_durate);
             } else {
@@ -319,7 +335,7 @@ class HostController extends Controller
             abort('404');
         }
 
-        return redirect()->route('host.index')->with('status','appartamento'.$apartment->title .'sponsorizzato con sucesso');
+        return redirect()->route('host.index')->with('status','Appartamento "'.$apartment->title .'" sponsorizzato con successo!');
     }
 
 }

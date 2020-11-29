@@ -105,6 +105,7 @@ function getServices() {
     });
 }
 
+//chiamata per gli appartamenti senza filtro servizi
 function getCards(lat, lng, maxDist, sponsor) {
     $.ajax({
         url: "http://127.0.0.1:8000/api/apartments",
@@ -126,6 +127,7 @@ function getCards(lat, lng, maxDist, sponsor) {
         error: function() {}
     });
 }
+//chiamata per gli appartamenti con filtro servizi
 function getCardsFilter(lat, lng, maxDist, sponsor, services) {
     $.ajax({
         url: "http://127.0.0.1:8000/api/apartments",
@@ -165,7 +167,13 @@ function compileHandlebars(risp, sponsor) {
             title: troncaStringa(risp[i].title),
             id: `<input class="aps_id" type="hidden" name="apartment_id" value=${risp[i].id}>`,
             sponsor: sponsor,
-            dataId: risp[i].id
+            dataId: risp[i].id,
+            price: risp[i].daily_price,
+            mq: risp[i].sm,
+            rooms: risp[i].rooms,
+            beds: risp[i].beds,
+            bathrooms: risp[i].bathrooms
+
         };
 
         var coordinates = [risp[i].longitude, risp[i].latitude];
@@ -235,8 +243,39 @@ function compileHandlebars(risp, sponsor) {
             details.removeClass("selected");
             details.eq(posizione).addClass("selected");
         });
+        compileServices(risp[i].id);
+        
+
     }
 }
+
+//compila i servizi degli appartamenti
+function compileServices(id) {
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/services",
+        method: "GET",
+        headers: {
+            KEY: "test"
+        },
+        data: {
+            id: id,
+        },
+        success: function(risposta) {
+            if (risposta.length > 0) {
+                $('[serv-id="'+ id +'"]').empty();
+                for(i = 0; i < risposta.length; i++) {
+                    var icon = '<i class="' + risposta[i].icon + '"></i>'
+                    $('[serv-id="'+ id +'"]').append(icon);
+
+                }
+            }
+        },
+        error: function() {}
+    });
+    
+    
+}
+
 
 /// appendere le immagini allo slider
 function getImages(id, sponsor) {
@@ -285,15 +324,18 @@ function appendImages(risp, clss, sponsor) {
 // funzione per troncare una stringa
 function troncaStringa(stringa) {
     var shortText = "";
-    if (stringa.length != 0) {
-        for (var i = 0; i < stringa.length; i++) {
-            if (stringa[i] == " " && i <= 43) {
-                var shortText = $.trim(stringa).substring(0, i) + "...";
+    if(stringa.length > 28) {
+        for (var i = 28; i > 0; i--) {
+            if (stringa[i] == " ") {
+                shortText = $.trim(stringa).substring(0, i) + "...";
+                i = 0;
             }
-        }
+        } 
     } else {
-        shortText = "Descrizione non disponibile";
+        shortText = stringa;
+        
     }
+
     return shortText;
 }
 
@@ -317,6 +359,7 @@ var serviceCheck = (function() {
                 return item != serviceType;
             });
         }
+        console.log(selectedService);
     });
     /////// fa prtire la ricerca con i servizi selezionati
     $("#cerca-filtri").click(function() {

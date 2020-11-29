@@ -5,11 +5,44 @@
     height: 100%;
     color: var(--color-font-black);
 
-    
+
     @include responsive(tab){
         @include flex(row, center, center);
     }
 }
+
+.apt-info-general {
+    position: relative;
+
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+}
+
+.inactive-apt {
+    background-color: rgba(0, 0, 0, 0.8);
+
+}
+
+.inactive-msg {
+    width: 100px;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, -50%);
+    color: rgb(255,90,95);
+    text-align: center;
+    font-size: 130%;
+    z-index: 50;
+    background-color: #fff;
+}
+
 
 .apt-info {
     &-general {
@@ -65,7 +98,7 @@
     margin-bottom: 0.3rem;
     max-height: 20%;
     min-height: 20%;
-   
+
     &-text {
         opacity: 0;
         word-break: break-all;
@@ -88,13 +121,15 @@
     object-fit: cover;
     transition: all 0.2s;
 }
-.apt-services {
-    @include flex(row, flex-start, flex-start);
+.apt-services-show {
+    width:100%;
+    @include flex(row, space-around, center);
 }
 
 .service {
-    @include flex(column, flex-start, center);
+    @include flex(row, space-around, center);
 }
+
 .apartment-button {
     position: absolute;
     z-index: 3;

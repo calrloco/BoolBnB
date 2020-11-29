@@ -34,9 +34,9 @@
        <div>
             <button id="registerL" type="submit" class="signup_btn">{{ __('Login') }}</button>
           @if (Route::has('password.request'))
-                <a class="forgot_password" href="{{ route('password.request') }}">
+                {{-- <a class="forgot_password" href="{{ route('password.request') }}">
                     {{ __('Forgot Your Password?') }}
-                </a>
+                </a> --}}
             @endif
        </div>
       </form>

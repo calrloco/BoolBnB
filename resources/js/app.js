@@ -124,20 +124,20 @@ var unreadMessages = (function() {
             if(risposta.length > 0) {
                 // messaggio per count 1
                 if(risposta[0].unread == 1) {
-                    $('#unread-msg').empty();
-                    $('#unread-msg').append(risposta[0].unread + ' nuovo messaggio');
-                    $('#unread-msg').append(`<i class="dot fas fa-circle"></i>`);
+                    $('.msg-msg').empty();
+                    $('.msg-msg').append(risposta[0].unread + ' nuovo messaggio');
+                    $('.msg-msg').append(`<i class="dot fas fa-circle"></i>`);
                 // messaggio per count > 1
                 } else {
-                    $('#unread-msg').empty();
-                    $('#unread-msg').append(risposta[0].unread + ' nuovi messaggi');
-                    $('#unread-msg').append(`<i class="dot fas fa-circle"></i>`);
+                    $('.msg-msg').empty();
+                    $('.msg-msg').append(risposta[0].unread + ' nuovi messaggi');
+                    $('.msg-msg').append(`<i class="dot fas fa-circle"></i>`);
                 }
 
 
             } else {
-                $('#unread-msg').empty();
-                $('#unread-msg').append('Messaggi');
+                $('.msg-msg').empty();
+                $('.msg-msg').append('Messaggi');
             }
 
 
@@ -447,57 +447,6 @@ function matchKind(selector, kind) {
     return false;
 }
 
-$(".openB").click(function() {
-    $(".left").addClass("open");
-    setTimeout(function() {
-        $(".right").addClass("open");
-    }, 250);
-    setTimeout(function() {
-        $(".back").addClass("open");
-        $(".front").addClass("display");
-    }, 350);
-    $(".closeB")
-        .delay(1000)
-        .fadeIn();
-});
-
-$(".closeB").click(function() {
-    setTimeout(function() {
-        $(".left").removeClass("open");
-    }, 250);
-    $(".right").removeClass("open");
-    setTimeout(function() {
-        $(".back").removeClass("open");
-        $(".front").removeClass("display");
-    }, 600);
-    $(".closeB").fadeOut();
-});
-
-$(".pay").click(function() {
-    setTimeout(function() {
-        $(".form-container").addClass("acti");
-    }, 500);
-});
-
-$("#sponsorBasic").click(function() {
-    $("#amount").val([2.99]);
-    $("#sponsor_plan").val([1]);
-});
-$("#sponsorMedium").click(function() {
-    $("#amount").val([5.99]);
-    $("#sponsor_plan").val([2]);
-});
-$("#sponsorPremium").click(function() {
-    $("#amount").val([9.99]);
-    $("#sponsor_plan").val([3]);
-});
-$('.hamburger-menu').click(function() {
-  $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
-  $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
-  $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
-  $('.hamburger-menu').toggleClass('hamburger-menu-animated');
-  $('.mobile-menu').toggleClass('hidden');
-});
 // chiamta che prende ip dell'utente e capisce la regione per ricerca nei paraggi
 var getIp = (function() {
     $.ajax({
@@ -516,3 +465,11 @@ var getIp = (function() {
         }
     });
 })();
+
+$('.hamburger-menu').click(function () {
+    $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
+    $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
+    $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
+    $('.hamburger-menu').toggleClass('hamburger-menu-animated');
+    $('.mobile-menu').toggleClass('hidden');
+});

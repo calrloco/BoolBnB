@@ -387,7 +387,7 @@ function autoComplete(query) {
                 
                 if (address.length > 0) {
                     $("#auto-complete").addClass("complete-on");
-                    document.getElementById("auto-complete").innerHTML = results;                   
+                    document.getElementById("auto-complete").innerHTML = results;                  
                 }else{
                     $("#auto-complete").removeClass("complete-on");
                 }

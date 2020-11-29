@@ -19,6 +19,7 @@ class GetServices extends Controller
         $services = Service::whereHas('apartments',function($q) use ($id){
            $q->where('apartments.id','=',$id);
         })->get();
+        dd($services);
         return response()->json($services);
     }
   

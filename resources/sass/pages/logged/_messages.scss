@@ -1,148 +1,74 @@
-.container-center {
 
-    .title {
-        font-size: 22px;
-        text-align: center;
-        margin-bottom: 20px;
-    }
+.messaggi{
+    padding: 10px;
+    text-align: center;
+}
 
-    .messages-box{
-        height: 100%;
-        width: 100%;
-        // background-color: green;
-        padding: 10px 0;
-        @include flex(column, center, center);
-        @include responsive(phone){
-            padding: 0;
+.message-list{
+    list-style: none;
+ /*    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; */
+        li{
+            margin: 10px;
         }
-
-        .message-card {
-            min-height: 100px;
-            width: 100%;
-            // background-color: red;
-            @include flex(row, center, center);
-            border: 1px solid #ff5a5f;
-            border-radius: 15px;
-            @include responsive(phone){
-                @include flex(column, center, center);
-            }
-
-            .message-card-sx{
-                width:20%;
-                height: 100%;
-                // background-color: yellow;
-                border-radius: 15px;
-                @include flex(column, center, center);
-
-                .apart-img img {
-                    display: flex;
-                    width: 150px;
-                    height: 150px;
-                    border-radius: 15px;
-                    @include responsive(phone){
-                        padding-top: 10px;
+        .message-wrap{
+            position: relative;
+            display: grid;
+            grid-template-columns: 130px minmax(120px,1fr) 25px;
+            grid-gap: 2rem;
+            background: white;
+            box-shadow: 0 4px 10px #686868;
+            padding: 2rem;
+            border-radius: 16px;
+                .message-author {
+                    font-weight: 700;
+                    font-size: 24px;
+                 }
+                .message-time {
+                    margin: 0 0 1rem;
+                    font-size: 11px;
+                     i {  
+                        padding: 3px 4px;
+                        color: rgb(146, 144, 144);
+                        font-size: 13px;
                     }
                 }
-
-            }
-
-            .message-card-center{
-                width:70%;
-                height: 100%;
-                min-height: 100px;
-                // background-color: blue;
-                @include flex(column, flex-start, center);
-                @include responsive(phone){
-                    width: 90%;
-                }
-
-
-                .sender-details-up {
-                    width:100%;
-                    padding: 20px 0;
-                    @include flex(column, center, center);
-
-                    .details-sender{
-                        width:100%;
-                        @include flex(row, space-around, center);
-
-                        @include responsive(phone){
-                            @include flex(column, center, center);
-                            text-align: center;
-                            padding: 10px 0;
-                        }
-
-                        .details {
-                            font-size: 18px;
-                            @include responsive(phone){
-                                text-align: center;
-                            }
-                        }
+                .message-content{
+                    padding-top: 10px;
+                    padding-right: 5px;
+                      i{
+                        padding: 3px 4px;
+                        color: rgb(146, 144, 144);
+                        font-size: 13px;
                     }
-
-                    .details-apt {
-                        padding-top: 10px;
-                        font-size: 12px;
-                        text-align: center;
-
-                        .apt-link {
-                            color: black;
-                            text-decoration: none;
-                        }
-
-                        a:hover {
-                            color: #ff5a5f;
-                        }
-                    }
+                .message-user{
+                    font-size: 12px;
+                    margin-left: 5px;
                 }
-
-                .sender-details-down {
-                    padding: 0 20px;
-                    @include flex(row, center, center);
-                    @include responsive(phone){
-                        @include flex(column, center, center);
-                        height:100%;
-                        width: 100%;
-                        padding: 0 5px;
-                    }
-
-                    .message {
-                        padding-top: 15px;
-                        font-size: 16px;
-                        color: black;
-                        border-top: 1px solid #ff5a5f;
-                        max-height: 1000px;
-                        text-align:justify;
-
-                    }
-                }
-            }
-
-            .message-card-dx{
-                width:10%;
-                height: 100%;
-                // background-color: pink;
-                border-radius: 15px;
-                @include responsive(phone){
-                    width:100%;
-                }
-
-                .button-section {
-                    .buttons {
-                        width:100%;
-                        @include flex(row, space-around, center);
-                        @include responsive(phone){
-                            height:100%;
-                            padding-bottom: 10px;
-                        }
-
-                        .msg-btn {
-                            color: gray;
-                            font-size: 20px;
-                        }
-                    }
-                }
-            }
         }
+}
+
+.btn-delete{
+    background: transparent;
+}
+
+
+.message-actions{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.delete{
+    i{
+        font-size: 18px;
+        color:black;
+        cursor: pointer;
+        padding: 10px;
     }
+}
+.message-body{
+    border-right: 1px solid gray;
+}
 }

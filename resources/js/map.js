@@ -382,15 +382,12 @@ function autoComplete(query) {
                     }
                 }
                 for (let i = 0; i < address.length; i++) {
-                    results +=
-                        '<div class="complete-results">' +
-                        address[i] +
-                        "</div>";
+                    results +='<div class="complete-results">' + address[i] + '</div>';
                 }
                 
                 if (address.length > 0) {
-                    document.getElementById("auto-complete").innerHTML = results;
                     $("#auto-complete").addClass("complete-on");
+                    document.getElementById("auto-complete").innerHTML = results;                   
                 }else{
                     $("#auto-complete").removeClass("complete-on");
                 }

@@ -55,6 +55,9 @@
         }
         
         .city-info{
+            .label-input{
+                min-height: 95.6px;
+            }
             @include responsive(phone){
                 display: block;
                 #city,

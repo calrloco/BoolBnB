@@ -27,7 +27,7 @@
             </div>
 
             <div class="input-row">
-                <div class="input-group">
+                <div class="input-group city-info">
                     <div class="label-input">
                         <label for="city">Città</label>
                         <input id="city" type="text" name="city" value="{{ $apartment->city }}">

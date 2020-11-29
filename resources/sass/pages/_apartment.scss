@@ -257,7 +257,7 @@
 .services{
     @include flex(row, flex-start, center);
     flex-wrap: wrap;
-
+}
 // statistiche
 .chart-section{
     @include flex(column,flex-start,stretch);
@@ -270,5 +270,5 @@
     max-width: 100%;
 }
 .btn-show{
-    width:100%
+    width:100%;
 }

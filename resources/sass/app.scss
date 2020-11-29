@@ -19,7 +19,7 @@
 
 //pages
 @import 'pages/home';
-@import 'pages/messages';
+// @import 'pages/messages';
 @import 'pages/add';
 @import 'pages/apartment';
 @import 'pages/auth/register';
@@ -28,6 +28,7 @@
 @import 'pages/search';
 @import 'pages/logged/sponsor';
 @import 'pages/logged/myapartments';
-@import 'pages/logged/create';
+@import 'pages/logged/apartment';
+@import 'pages/logged/messages';
 //animations
 @import 'animations/animations';

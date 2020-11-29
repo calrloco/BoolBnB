@@ -10,14 +10,16 @@
         <!-- email -->
         <div>
           <label for="email">Email</label><br />
-          <input type="email" name="email" placeholder="Enter your email"/>
+          <input id="emailL" type="email" name="email" placeholder="Enter your email"/>
+          <p class="message"></p>
         </div>
 
         <!-- password -->
         <div>
           <label for="password">Password</label><br />
           <div class="password">
-            <input type="password" name="password" placeholder="Enter your password" />
+            <input id="passwordL" type="password" name="password" placeholder="Enter your password" />
+            <p class="message"></p>
           </div>
         </div>
 
@@ -30,7 +32,7 @@
         </div>
 
        <div>
-            <button type="submit" class="signup_btn">{{ __('Login') }}</button>
+            <button id="registerL" type="submit" class="signup_btn">{{ __('Login') }}</button>
           @if (Route::has('password.request'))
                 <a class="forgot_password" href="{{ route('password.request') }}">
                     {{ __('Forgot Your Password?') }}

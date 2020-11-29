@@ -9,7 +9,7 @@ use App\Image;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
-
+use Carbon\carbon;
 
 class ApartmentController extends Controller
 {
@@ -24,34 +24,54 @@ class ApartmentController extends Controller
              'lat'=>'required',
              'lng'=>'required',
              'maxDist'=>'required|numeric|min:20|max:100',
+             'sponsored' =>'boolean',
         ]);
 
         if($validator->fails()){
             return response()->json($validator->messages());
         }
-        $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
-        point(longitude, latitude)) * .001 as distance")
-        ->having('distance','<=',$request->maxDist);
-        // FILTRO per servizi se presenti        
+
+
+
+        //controllo di $request->sponsored per la selezione della query
+        if($request->sponsored) {
+            //se sono richiesti gli sponsorizzati
+            $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
+            point(longitude, latitude)) * .001 as distance")
+            ->having('distance','<=',$request->maxDist)
+            ->where('attivo', '=', '1')
+            ->whereHas('sponsors',function($q){
+                $q->where('end_sponsor','>=', Carbon::now());
+            })->inRandomOrder();
+            
+        } else {
+            //se sono richiesti tutti gli appartamenti
+            $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
+            point(longitude, latitude)) * .001 as distance")
+            ->having('distance','<=',$request->maxDist)
+            ->where('attivo', '=', '1');
+        }
+        
+        // FILTRO per servizi se presenti
         if($request['services']) {
             $serv = $request['services'];
             foreach($serv as $ser) {
                 $query->whereHas('services', function (Builder $b) use ($ser) {
                 $b->where('services.id', '=', $ser );
-    
+
                 });
             }
         }
+        
 
 
         $query = $query->orderBy('distance','asc')->get();
-            
+
         // ->get();
 
-        
 
 
-        
+
 
 
         return response()->json($query, 200);
@@ -78,7 +98,7 @@ class ApartmentController extends Controller
                'beds' =>'required|numeric|min:1',
                'bathrooms'=>'required|min:1',
                'sm'=>'required|min:1',
-               'address'=>'required|min:10',
+               'address'=>'required|min:3',
                'latitude'=>'required',
                'longitude'=>'required',
                'city'=>'required|min:1',
@@ -115,8 +135,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment){
-        return response()->json($require,200);
+    public function show($id){
+       $app = Apartment::where('id','=',$id)->get();
+        return response()->json($app);
     }
 
     /**
@@ -156,10 +177,9 @@ class ApartmentController extends Controller
     }
 
     public function getServices($id){
-           
+
     }
 
 
 
 }
-

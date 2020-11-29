@@ -42,3 +42,9 @@
     border:1px solid rgb(176,176,176);
     transition: all .2s;
 }
+%button-hover{
+    background-color: var(--pink-bnb);
+    color: #fff;
+    transform: translateY(-4px);
+    border:1px solid var(--pink-bnb);
+}

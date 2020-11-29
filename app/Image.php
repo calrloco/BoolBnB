@@ -12,6 +12,6 @@ class Image extends Model
 
     public function apartment()
     {
-            return $this->belongsTo('App\Apartment');
+      return $this->belongsTo('App\Apartment');
     }
 }

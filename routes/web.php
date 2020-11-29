@@ -31,6 +31,7 @@ Route::resource('/host','Logged\HostController');
 // Route::get('/prova', function () {
 //     return view('logged.messages');
 // });
+Route::post('/send-message','SendMessageController@store')->name('send.message');
 Route::resource('/view','ViewsController');
 Route::get('/apartment', function () {
     return view('apartment');
@@ -52,8 +53,8 @@ Route::get('/test', function () {
     return view('test');
 });
 
+Route::patch('host/visibility/{id}', 'Logged\HostController@visibility')->name('logged.visibility');
+
 
 
 Route::resource('/images','Logged\ImageController');
-
-

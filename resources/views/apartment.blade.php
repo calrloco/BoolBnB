@@ -1,7 +1,14 @@
 @extends('layouts.app')
 @section('content')
     <div class="container-center">
+        @if (!session('status'))
+            <div class="status-msg">
+                {{-- <p>{{session('status')}}</p> --}}
+                <p>Messaggio cancellato correttamente.</p>
+            </div>
+        @endif
         <section class="top-section">
+            <span class="hidden" id="app-id">{{ $apartment->id }}</span>
             <div class="title-apt">
                 <p class="title">{{ $apartment->title }}</p>
                 <a class="address-apt" href="#">{{ $apartment->address }}, {{ $apartment->city }},
@@ -11,10 +18,10 @@
         <div class="container-slider-app">
             <section class="slider-section">
                 <div class="apt-images">
-                    <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
+                     <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
                     @for ($i = 0; $i < $apartment->images->count('id'); $i++)
                         <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
-                            src="{{ $apartment->images[$i]->path }}" alt="{{ $apartment->title }}">
+                            src="{{asset('storage/'.$apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
                     @endfor
                     <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
                 </div>
@@ -60,26 +67,30 @@
                 <div class="send-message-box">
                     <p class="message-title">Contatta l'Host!</p>
                     <div class="message-form">
-                        <form class="" action="" method="post">
-                            <p class "firstname-message">
+                        <form class="" action="{{ route('send.message') }}" method="POST">
+                            @method('POST')
+                            @csrf
+                           <p class="firstname-message">
                                 <label for="fname">Nome:</label>
-                                <input type="text" id="fname" name="fname">
+                                <input type="text" id="firstname" name="name" value="{{ Auth::check() ? Auth::user()->name : '' }}"
+                                    name="firstname">
                             </p>
-                            <p class "lastname-message">
+                            <p class="lastname-message">
                                 <label for="lname">Cognome:</label>
-                                <input type="text" id="lname" name="lname">
+                                <input type="text" id="lastname" name="lastname" value="{{ Auth::check() ? Auth::user()->lastname : '' }}"
+                                    name="lastname">
                             </p>
-                            <p class "email-message">
+                            <p class="email-message">
                                 <label for="email">Email:</label>
-                                <input type="email" id="email" name="email">
+                                <input type="email" id="email" value="{{ Auth::check() ? Auth::user()->email : '' }}"
+                                    name="email">
                             </p>
-                            <p class "text-message">
-                                <label for="message">Testo:</label>
-                                <textarea name="message" maxlenght="500" class="message" cols="30" rows="10">
-                            </textarea>
-                            </p>
+
+                            <label for="message">Messaggio</label>
+                            <textarea  name="message" id="message"  rows="10">{{ Auth::check() ?'Buongiorno sono '. Auth::user()->name : '' }}</textarea>
+                            <input type="hidden" value="{{ $apartment->id }}" name="apartment_id">
                             <p class "send-message">
-                                <input type="submit" name="mail-submit" value="Invia mail!"></input>
+                                <input type="submit"></input>
                             </p>
                         </form>
                     </div>
@@ -90,12 +101,13 @@
 
 
         <section class="map-section">
-            <div class="map-box">
-                MAPPA
-            </div>
+
+            <div class="map-apartment" id="map"></div>
+
             {{-- <div class="message-box">
 
             </div> --}}
         </section>
     </div>
+<script src="{{ asset('js/apt.js') }}"></script>
 @endsection

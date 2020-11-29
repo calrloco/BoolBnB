@@ -13,11 +13,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $apartment = Apartment::join('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
-            ->where('apartment_sponsor.end_sponsor', '>=', Carbon::now())->inRandomOrder()
-            ->get();
+        $apartment = Apartment::whereHas('sponsors',function($q){
+            $q->where('end_sponsor','>=', Carbon::now());
+        })->inRandomOrder()->get();
 
         return view('home', compact('apartment'));
     }
 
 }
+
+
+

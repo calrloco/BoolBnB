@@ -13,11 +13,6 @@
                 <a class="create-apt-link" href="{{ route('host.create') }}">Crea un nuovo annuncio!</a>
             </div>
             <div class="apartments-list">
-                @foreach ($apartments as $apartment)
-            <div class="apt-info-general">
-                        {{-- faccio un ternario per vedere se l'appartamento è inattivo ed uno per vedere se sponsorizzato
-                        e nel caso assegno caratteristiche --}}
-                        <div class="overlay {{ ($apartment->attivo == 1) ? 'active-apt' : 'inactive-apt'}}"></div>
             @foreach ($apartments as $apartment)
                 <div class="apt-info-general">
                     {{-- faccio un ternario per vedere se l'appartamento è inattivo ed uno per vedere se sponsorizzato 
@@ -42,30 +37,9 @@
                             
                             <p>{{ strlen($apartment->title) <= 25 ? $apartment->title : substr($apartment->title,0,18).'...' }}</p>
                         </div>
-                        <div class="apt-info-dx">
-                            <div class="apt-title">
-
-                                <p>{{ strlen($apartment->title) <= 25 ? $apartment->title : substr($apartment->title,0,18).'...' }}</p>
-                            </div>
-                            <div class="apt-description">
-                                <p class="apt-address">{{ $apartment->city }}, {{ $apartment->country }}</p>
-                            </div>
-                            <p class="apt-details"> Caratteristiche: nr. stanze: {{ $apartment->rooms }}, nr. letti:
-                                {{ $apartment->beds }} - nr. bagni: {{ $apartment->bathrooms }} - mq: {{ $apartment->sm }}
-                            </p>
-                            <p class="apt-description-text">{{ $apartment->description }}</p>
-                            <ul class="apt-services-show">
-                                @foreach ($apartment->services as $service)
-                                    <li class="service">
-                                        <i class="service-icon-appartments fas {{ $service->icon }}"></i>
-                                    </li>
-                                @endforeach
-                            </ul>
                         <div class="apt-description">
                             <p class="apt-address">{{ $apartment->city }}, {{ $apartment->country }}</p>
                         </div>
-                        <a href="{{ route('host.show', $apartment->id) }}" class="apartment-button">Vai
-                            all'appartamento</a>
                         <p class="apt-details"> Caratteristiche: nr. stanze: {{ $apartment->rooms }}, nr. letti:
                             {{ $apartment->beds }} - nr. bagni: {{ $apartment->bathrooms }} - mq: {{ $apartment->sm }}
                         </p>
@@ -78,7 +52,7 @@
                             @endforeach
                         </ul>
                     </div>
-                    <a href="{{ route('host.show', $apartment->id) }}" class="apartment-button">Vai all'appartamenoto</a>
+                    <a href="{{ route('host.show', $apartment->id) }}" class="apartment-button">Vai all'appartamento</a>
                 </div>
             @endforeach
             </div>

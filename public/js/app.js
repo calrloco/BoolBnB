@@ -42402,8 +42402,9 @@ $(document).ready(function () {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! ./add */ "./resources/js/add.js"); //require("./sponsor");
+__webpack_require__(/*! ./add */ "./resources/js/add.js");
 
+__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
 
 __webpack_require__(/*! ./alert */ "./resources/js/alert.js");
 
@@ -42834,6 +42835,46 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/sponsor.js":
+/*!*********************************!*\
+  !*** ./resources/js/sponsor.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+document.addEventListener("DOMContentLoaded", function () {
+  var form = document.querySelector('#payment-form');
+  var client_token = document.querySelector('#client_token').value;
+  braintree.dropin.create({
+    authorization: client_token,
+    selector: '#bt-dropin',
+    paypal: {
+      flow: 'vault'
+    }
+  }, function (createErr, instance) {
+    if (createErr) {
+      console.log('Create Error', createErr);
+      return;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      instance.requestPaymentMethod(function (err, payload) {
+        if (err) {
+          console.log('Request Payment Method Error', err);
+          return;
+        } // Add the nonce to the form and submit
+
+
+        document.querySelector('#nonce').value = payload.nonce;
+        form.submit();
+      });
+    });
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -42852,8 +42893,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/sevenis/Programmazione/mamp_public/laravel/laravel-consegne/BoolBnB/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

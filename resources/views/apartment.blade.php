@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
     <div class="container-center">
-        @if (!session('status'))
+        @if (session('status'))
             <div class="status-msg">
-                {{-- <p>{{session('status')}}</p> --}}
-                <p>Messaggio cancellato correttamente.</p>
+                <p>{{session('status')}}</p>
+                {{-- <p>Messaggio cancellato correttamente.</p> --}}
             </div>
         @endif
         <section class="top-section">
@@ -21,7 +21,7 @@
                     <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-left arrow-slider-dx">
                         <i class="fas fa-chevron-right"></i>
                     </div>
-                  
+
                     @for ($i = 0; $i < $apartment->images->count('id'); $i++)
                         <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
                             src="{{asset('storage/'.$apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
@@ -46,11 +46,11 @@
                         <img src="" alt="">
                     </div>
                 </div>
-              
+
                 <div class="apt-description">
                     <p>{{ $apartment->description }}</p>
                 </div>
-              
+
                 <div class="services-box">
                     <p class="services-title">Servizi</p>
                     <ul class="services-show">

@@ -62,7 +62,7 @@
 
                             <li class="nav__user__menu-item">
                                 <input id="nav_user-id" type="hidden" value="{{Auth::user()->id}}">
-                                <a href="{{route('messages.index')}}" class="nav-link"><span id="unread-msg">Messaggi</span></a>
+                                <a href="{{route('messages.index')}}" class="nav-link"><span id="unread-msg" class="msg-msg">Messaggi</span></a>
                             </li>
                             <li class="nav__user__menu-item">
                                 <a href="{{route('host.index')}}" class="nav-link">I tuoi appartamenti</a>

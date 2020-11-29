@@ -124,20 +124,20 @@ var unreadMessages = (function() {
             if(risposta.length > 0) {
                 // messaggio per count 1
                 if(risposta[0].unread == 1) {
-                    $('#unread-msg').empty();
-                    $('#unread-msg').append(risposta[0].unread + ' nuovo messaggio');
-                    $('#unread-msg').append(`<i class="dot fas fa-circle"></i>`);
+                    $('.msg-msg').empty();
+                    $('.msg-msg').append(risposta[0].unread + ' nuovo messaggio');
+                    $('.msg-msg').append(`<i class="dot fas fa-circle"></i>`);
                 // messaggio per count > 1
                 } else {
-                    $('#unread-msg').empty();
-                    $('#unread-msg').append(risposta[0].unread + ' nuovi messaggi');
-                    $('#unread-msg').append(`<i class="dot fas fa-circle"></i>`);
+                    $('.msg-msg').empty();
+                    $('.msg-msg').append(risposta[0].unread + ' nuovi messaggi');
+                    $('.msg-msg').append(`<i class="dot fas fa-circle"></i>`);
                 }
 
 
             } else {
-                $('#unread-msg').empty();
-                $('#unread-msg').append('Messaggi');
+                $('.msg-msg').empty();
+                $('.msg-msg').append('Messaggi');
             }
 
 

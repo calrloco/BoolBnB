@@ -6687,10 +6687,6 @@ canvas:focus {
   border-radius: 5px;
 }
 
-.payment-checkout .payment-checkout-form .pay-button .btn-succes:hover {
-  background: gray;
-}
-
 *,
 *:before,
 *:after {
@@ -7009,94 +7005,83 @@ canvas:focus {
   transform: scale(1);
 }
 
-ul,
-li {
-  list-style: none;
-  margin: 10px;
-}
-
 .messaggi {
   padding: 10px;
   text-align: center;
 }
 
-.CommentForm .comment-wrap,
-.commentlist .comment-wrap,
-.comment ul .comment-wrap {
+.message-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.message-list li {
+  margin: 10px;
+}
+
+.message-list .message-wrap {
   position: relative;
   display: grid;
   grid-template-columns: 130px minmax(120px, 1fr) 25px;
   grid-gap: 2rem;
   background: white;
-  color: black;
   box-shadow: 0 4px 10px #686868;
   padding: 2rem;
   border-radius: 16px;
 }
 
-.CommentForm .comment-wrap .comment-author,
-.commentlist .comment-wrap .comment-author,
-.comment ul .comment-wrap .comment-author {
-  color: black;
+.message-list .message-wrap .message-author {
   font-weight: 700;
   font-size: 24px;
 }
 
-.CommentForm .comment-wrap .comment-time,
-.commentlist .comment-wrap .comment-time,
-.comment ul .comment-wrap .comment-time {
+.message-list .message-wrap .message-time {
   margin: 0 0 1rem;
+  font-size: 11px;
 }
 
-.CommentForm .comment-wrap .comment-time i,
-.commentlist .comment-wrap .comment-time i,
-.comment ul .comment-wrap .comment-time i {
-  padding-right: 5px;
+.message-list .message-wrap .message-time i {
+  padding: 3px 4px;
   color: #929090;
+  font-size: 13px;
 }
 
-.CommentForm .comment-wrap .article-content,
-.commentlist .comment-wrap .article-content,
-.comment ul .comment-wrap .article-content {
-  overflow-wrap: break-word;
-  margin: 0 0 1.5rem;
-  border-radius: 8px;
-}
-
-.CommentForm .comment-wrap .comment-content,
-.commentlist .comment-wrap .comment-content,
-.comment ul .comment-wrap .comment-content {
+.message-list .message-wrap .message-content {
   padding-top: 10px;
   padding-right: 5px;
 }
 
-.CommentForm .comment-wrap .comment-content i,
-.commentlist .comment-wrap .comment-content i,
-.comment ul .comment-wrap .comment-content i {
-  padding-right: 5px;
+.message-list .message-wrap .message-content i {
+  padding: 3px 4px;
   color: #929090;
+  font-size: 13px;
 }
 
-.CommentForm .comment-wrap .comment-actions,
-.commentlist .comment-wrap .comment-actions,
-.comment ul .comment-wrap .comment-actions {
+.message-list .message-wrap .message-content .message-user {
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.message-list .btn-delete {
+  background: transparent;
+}
+
+.message-list .message-actions {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.CommentForm .comment-wrap .delete i,
-.commentlist .comment-wrap .delete i,
-.comment ul .comment-wrap .delete i {
+.message-list .delete i {
   font-size: 18px;
   color: black;
   cursor: pointer;
   padding: 10px;
 }
 
-.CommentForm .comment-wrap .comment-body,
-.commentlist .comment-wrap .comment-body,
-.comment ul .comment-wrap .comment-body {
+.message-list .message-body {
   border-right: 1px solid gray;
 }
 

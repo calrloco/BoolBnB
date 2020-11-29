@@ -1,43 +1,70 @@
 @extends('layouts.app')
 
 @section('content')
+  @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
 
 <div class="container-center">
-<h2 class="messaggi">Messaggi</h2>
+<h2 class="messaggi">
+    @if (count($messages)==0)
+        Non hai messaggi da visualizzare
+    @else
+        Messaggi
+    @endif
+</h2>
 
-<ul class="commentlist" id="commentlist">
+<ul class="message-list">
   @foreach ($messages as $message)
-        <li class="comment even thread-even depth-1 buried" id="li-comment-466098">
-    <div class="comment-wrap" id="comment-466098">
-        <div class="author-avatar">
-        <img src="{{asset('storage/' .$message->apartment->images[0]['path'] )}}" loading="lazy" class="lazyload-gravatar" alt="Apartment " style="" width="130" height="130">
+        <li class="comment">
+    <div class="message-wrap" >
+        <div class="apartment-info">
+            <a class="apt-link" href="{{ route('host.show', $message->apartment->id) }}">
+                <img src="{{asset('storage/' .$message->apartment->images[0]['path'] )}}" loading="lazy" class="lazyload-gravatar" alt="Apartment " style="" width="130" height="130">
+            </a>
         </div>
-    <div class="comment-body">
-        <div class="comment-author-wrap vcard">
+    <div class="message-body">
+        <div class="message-author-wrap">
             
-            <div class="comment-author">{{$message->name. " " . $message->lastname }}</div> 
-            <span class="comment-time">
+            <div class="message-author">{{$message->name. " " . $message->lastname }}</div> 
+            <span class="message-time">
             <i class="fas fa-envelope"></i> {{$message->email}}
             </span>
-            <div class="comment-time">
+            <div class="message-time">
             <i class="fas fa-clock"></i> {{$message->created_at}}
             </div>
            
         </div>
-        <div class="comment-content article-content">
-          <i class="fas fa-envelope-open"></i> <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, temporibus numquam. In aspernatur tempora labore molestiae modi neque quae ab facere hic? Vitae ab recusandae placeat eveniet quisquam accusantium consequuntur!</p>
+        <div class="message-content">
+          <i class="fas fa-comment-alt"></i>
+          <p class="message-user">{{$message->message}}</p>
         </div>
     </div>
-    <div class="comment-actions">
+    <div class="message-actions">
         <div class="delete">
-           <i class="fas fa-trash-alt"></i>
-           <i class="fas fa-bookmark"></i>
+          <form action="{{ route('messages.update', $message->id_msg) }}" method="post">
+               @csrf
+               @method('PATCH')
+               <button class="btn-delete" type="submit">
+                   @if($message->read == 0)
+                    <i class="fas fa-envelope"></i>
+                   @else
+                    <i class=" fas fa-envelope-open"></i>
+                   @endif
+               </button>
+           </form>
+           <form action="{{ route('messages.destroy', $message->id_msg) }}" method="post">
+               @csrf
+               @method('DELETE')
+               <button class="btn-delete" type="submit"><i class="fas fa-trash-alt"></i></button>
+           </form>
         </div>
     </div>
     </div>
 </li>
   @endforeach
 </ul>
-
 </div>
 @endsection

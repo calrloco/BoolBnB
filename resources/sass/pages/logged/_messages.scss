@@ -1,52 +1,65 @@
-ul,li{
-    list-style: none;
-    margin: 10px;
-}
+
 .messaggi{
     padding: 10px;
     text-align: center;
 }
-.CommentForm .comment-wrap, .commentlist .comment-wrap, .comment ul .comment-wrap {
-    position: relative;
-    display: grid;
-    grid-template-columns: 130px minmax(120px,1fr) 25px;
-    grid-gap: 2rem;
-    background: white;
-    color: black;
-    box-shadow: 0 4px 10px #686868;
-    padding: 2rem;
-    border-radius: 16px;
-        .comment-author {
-        color: black;
-        font-weight: 700;
-        font-size: 24px;
-        
+
+.message-list{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+        li{
+            margin: 10px;
+        }
+        .message-wrap{
+            position: relative;
+            display: grid;
+            grid-template-columns: 130px minmax(120px,1fr) 25px;
+            grid-gap: 2rem;
+            background: white;
+            box-shadow: 0 4px 10px #686868;
+            padding: 2rem;
+            border-radius: 16px;
+                .message-author {
+                    font-weight: 700;
+                    font-size: 24px;
+                 }
+                .message-time {
+                    margin: 0 0 1rem;
+                    font-size: 11px;
+                     i {  
+                        padding: 3px 4px;
+                        color: rgb(146, 144, 144);
+                        font-size: 13px;
+                    }
+                }
+                .message-content{
+                    padding-top: 10px;
+                    padding-right: 5px;
+                      i{
+                        padding: 3px 4px;
+                        color: rgb(146, 144, 144);
+                        font-size: 13px;
+                    }
+                .message-user{
+                    font-size: 12px;
+                    margin-left: 5px;
+                }
+        }
 }
-.comment-time {
-    margin: 0 0 1rem;
-    i{
-        padding-right: 5px;
-        color: rgb(146, 144, 144);
-    }
+
+.btn-delete{
+    background: transparent;
 }
-.article-content {
-    overflow-wrap: break-word;
-    margin: 0 0 1.5rem;
-    border-radius: 8px;
-}
-.comment-content{
-    padding-top: 10px;
-    padding-right: 5px;
-    i{
-        padding-right: 5px;
-        color: rgb(146, 144, 144);
-    }
-}
-.comment-actions{
+
+
+.message-actions{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
+
 .delete{
     i{
         font-size: 18px;
@@ -55,7 +68,7 @@ ul,li{
         padding: 10px;
     }
 }
-.comment-body{
+.message-body{
     border-right: 1px solid gray;
 }
 }

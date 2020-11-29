@@ -9,9 +9,11 @@
                 <span id="range-form" class="hidden">{{$range ?? ''}}</span>
             </div>
             <div class="container__search-left__top__filters">
-                <div class="services">
-                    <button id="cerca-filtri" class="service-cerca">Cerca con filtri</button>
+                <div class="filter-toggle">Filtri</div>
+                <div class="services hidden">
+                   
                 </div>
+                <div class="filter-search hidden"> <p id="cerca-filtri" class="service-cerca">Filtra ricerca</p></div>
             </div>
         </div>
             <div class="search__resoults__apartment">

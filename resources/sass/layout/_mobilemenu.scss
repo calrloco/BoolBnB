@@ -17,7 +17,7 @@
         list-style: none;
         &-item {
             flex:0 0 calc(100% / 8);
-            font-size: 1.4rem;
+            font-size: 2rem;
             @include flex(column, center, center);
             position: relative;
             padding: 0.6rem 0;
@@ -30,6 +30,9 @@
             
             &-link {
                 color:var(--color-font-black);
+                width:100%;
+                height: 100%;
+                @include flex(row, center, center);
             }
           
             &::before {
@@ -42,21 +45,6 @@
                 top: 0;
                 transition:all 0.2s;
             }
-            
-            &::after {
-                content: "";
-                background-color: rgb(118, 118, 118);
-                position:absolute;
-                right: 0;
-                top: 0;
-                height: 100%;
-                width: 3px;
-                transition:all 0.2s;
-            }
-             &:hover::after {
-               width: 100%;
-                background-color: var(--pink-bnb);
-             }
             &:hover::before {
                 width: 100%;
                 background-color: var(--pink-bnb);
@@ -70,4 +58,56 @@
 }
 a {
     text-decoration: none;
+}
+.hamburger-menu{
+    z-index: 3000;
+    position: fixed;
+    right: 2rem;
+    top: calc(var(--nav-height) + 2rem);
+    background-color:#fff;
+    height: 5rem;
+    width:5rem;
+    border-radius: 50%;
+    display:none !important;
+    @media screen and (max-width:600px){
+        display:flex !important;
+    }
+    @include flex(column,center, center);
+    &-animated{
+        top: 1.5rem;
+    }
+    &-bars{
+       background-color:var(--color-font-black);
+       width:60%;
+       height:.3rem;
+       position: relative;
+       cursor: pointer;
+       &-top{
+        position:absolute;
+        top: -1.1rem;
+        background-color:var(--color-font-black);
+        height:.3rem;
+        width:100%;
+        transition:all 0.2s;
+       }
+       &-bottom{
+        width:100%;
+        position:absolute;
+        top: 1.1rem;
+        background-color:var(--color-font-black);
+        height:.3rem;
+        transition:all 0.2s;
+       }
+       &-animated{
+           transform: rotate(-45deg);
+       }
+       &-bottom-animated {
+           transform:rotate(90deg);
+           top: 0;
+       }
+       &-top-animated {
+        transform:rotate(-90deg);
+        top: 0;
+    }
+    }
 }

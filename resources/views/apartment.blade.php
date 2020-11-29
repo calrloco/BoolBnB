@@ -43,18 +43,18 @@
                         <img src="" alt="">
                     </div>
                 </div>
-                <hr class="split-line">
+              
                 <div class="apt-description">
                     <p>{{ $apartment->description }}</p>
                 </div>
-                <hr class="split-line">
+              
                 <div class="services-box">
                     <p class="services-title">Servizi</p>
-                    <ul class="services">
+                    <ul class="services-show">
                         @foreach ($apartment->services as $service)
-                            <li class="service">
+                            <li class="services-show-service">
                                 <div class="service-head">
-                                    <i class="service-icon {{ $service->icon }}"></i>
+                                    <i class="service-icon fas {{ $service->icon }}"></i>
                                     <p>{{ $service->service }}</p>
                                 </div>
                                 <span>{{ $service->description }}</span>
@@ -70,24 +70,28 @@
                         <form class="" action="{{ route('send.message') }}" method="POST">
                             @method('POST')
                             @csrf
-                           <p class="firstname-message">
+                            <div class="input-aps-group">
+                                <p class="firstname-message"></p>
                                 <label for="fname">Nome:</label>
                                 <input type="text" id="firstname" name="name" value="{{ Auth::check() ? Auth::user()->name : '' }}"
                                     name="firstname">
-                            </p>
-                            <p class="lastname-message">
+                            </div>
+                            <div class="input-aps-group">
+                                <p class="lastname-message"></p>
                                 <label for="lname">Cognome:</label>
                                 <input type="text" id="lastname" name="lastname" value="{{ Auth::check() ? Auth::user()->lastname : '' }}"
                                     name="lastname">
-                            </p>
-                            <p class="email-message">
+                            </div>
+                            <div class="input-aps-group">
+                                <p class="email-message">  </p>
                                 <label for="email">Email:</label>
                                 <input type="email" id="email" value="{{ Auth::check() ? Auth::user()->email : '' }}"
                                     name="email">
-                            </p>
-
+                            </div>
+                            <div class="input-aps-group">
                             <label for="message">Messagio</label>
                             <textarea  name="message" id="message"  rows="10">{{ Auth::check() ?'Buongiorno sono '. Auth::user()->name : '' }}</textarea>
+                            <div class="input-aps-group">
                             <input type="hidden" value="{{ $apartment->id }}" name="apartment_id">
                             <p class "send-message">
                                 <input type="submit"></input>

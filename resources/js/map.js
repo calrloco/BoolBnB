@@ -31,6 +31,7 @@ $(document).ready(function() {
 
     $(".nav__search-icon-big").click(function() {
         $(".search__resoults__apartment-cards").empty();
+        $('#address-inst').text($("#search").val());
         if ($("#search").val() != "") {
             getCoordinates($("#search").val(), $("#range-value").html(), false);
         }
@@ -319,11 +320,11 @@ var serviceCheck = (function() {
             });
         }
     });
-
+    /////// fa prtire la ricerca con i servizi selezionati
     $("#cerca-filtri").click(function() {
         $("#no-sponsor").empty();
         $("#sponsor").empty();
-        getCoordinates("roma", $("#range-value").html(), selectedService);
+        getCoordinates($('#address-inst').html(), $("#range-value").html(), selectedService);
     });
 })();
 // al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom
@@ -438,3 +439,13 @@ $(document).on("click", ".arrow-slider-dx", function() {
         activeImage.prev().addClass("active");
     }
 });
+$('.filter-toggle').click(function(){
+  $('.services').toggleClass('hidden');
+  $('.filter-search').toggleClass('hidden');
+  $(this).text('Chiudi');
+  $(this).toggleClass('chiudi');
+  if(!$(this).hasClass('chiudi')){
+    $(this).text('filtri');
+  }
+});
+

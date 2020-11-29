@@ -13,7 +13,15 @@
         @include flex(column, center, flex-start);
         font-size: 5.2rem;
         color: var(--color-font-black);
-
+        
+        @media screen and (max-width:600px){
+            @include flex(column, center, center);
+            font-size:4rem;
+        }
+        @media screen and (max-width:350px){
+            @include flex(column, center, center);
+            font-size:3.5rem;
+        }
         &-banner{
             font-weight: 800;
             color: #fff;
@@ -50,17 +58,24 @@
     }
 
     &-card {
-        flex: 0 0 calc(100% / 4);
+        flex: 0 0 calc(100% / 3);
         overflow: hidden;
         font-size: 1.8rem;
         @include flex(column, flex-start, flex-start);
         cursor: pointer;
 
+        @include responsive(tab){
+            flex: 0 0 calc(100% / 2);
+        }
+        @media screen and (max-width:600px){
+            flex: 0 0 100%;
+        }
+        
         &:not(:last-child) {
             margin-right: 1.5rem;
         }
         &-text {
-            
+            flex:1;
         }
     }
     &-card-img {
@@ -68,6 +83,7 @@
         max-width: 100%;
         margin-bottom: 0.8rem;
         height: 25rem;
+        height: 36.8rem;
         & img {
             width: 100%;
             height: 100%;

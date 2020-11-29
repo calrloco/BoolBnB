@@ -33,7 +33,13 @@
 
 
     <div class="container-page">
-         {{-- @include('partials/mobilemenu')  --}}
+          @include('partials/mobilemenu')  
+         <div class="hamburger-menu">
+             <div class="hamburger-menu-bars">
+                <div class="hamburger-menu-bars-top"></div>
+                <div class="hamburger-menu-bars-bottom"></div>
+             </div>
+         </div>
         @include('partials/navbar')
 
         <main class="">

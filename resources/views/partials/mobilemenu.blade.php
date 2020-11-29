@@ -1,4 +1,4 @@
-<div class="mobile-menu">
+<div class="mobile-menu hidden">
     <ul class="mobile-menu-list">
        
             @guest

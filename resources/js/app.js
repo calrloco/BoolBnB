@@ -412,14 +412,15 @@ $(".pay").click(function () {
 });
 
 $("#sponsorBasic").click(function () {
-    $('#amount').val([2.99]);
-   $('#sponsor_plan').val([1]);
+    $('#amount').val([4.99]);
+   $('#sponsor_plan').val([2]);
 });
 $("#sponsorMedium").click(function () {
     $('#amount').val([5.99]);
    $('#sponsor_plan').val([2]);
 });
 $("#sponsorPremium").click(function () {
-    $('#amount').val([9.99]);
+    var amount = 9;
    $('#sponsor_plan').val([3]);
+   console.log(amount);
 });

@@ -24,18 +24,19 @@
                 @for ($i = 0; $i < 4 && $i < count($apartment); $i++)
             <a href="{{ route('search.show', $apartment[$i]->id) }}" class="sponsor__home-card">
                             <div class="sponsor__home-card-img">
-                                @if (isset($apartment[$i]->images[0]->path))
-                                  <img src="{{ asset('storage/'.$apartment[$i]->images[0]->path) }}" alt="{{ $apartment[$i]->title }}" alt="">
+                                @if ($apartment[$i]->images[0]->path)
+                                    <img src="{{ asset('storage/' . $apartment[$i]->images[0]->path) }}"
+                                        alt="{{ $apartment[$i]->title }}" alt="">
                                 @endif
                             </div>
                             <div class="sponsor__home-card-text">
-                                <p>{{ $apartment[$i]->title }}</p>
+                                <p class="home-apt-title">{{ strlen($apartment[$i]->title) <= 25 ? $apartment[$i]->title : substr($apartment[$i]->title,0,18).'...' }}</p>
+
                             </div>
                         </a>
                     @endfor
                 @endif
+            </div>
         </section>
-    </div>
 
-
-@endsection
+    @endsection

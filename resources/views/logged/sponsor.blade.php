@@ -74,4 +74,5 @@
     <!-- Load the PayPal Checkout component. -->
 <script src="https://js.braintreegateway.com/web/3.38.1/js/paypal-checkout.min.js"></script>
 <script src="https://js.braintreegateway.com/web/dropin/1.22.1/js/dropin.min.js"></script>
+<script src="{{ asset('js/sponsor.js')}}"></script>
 @endsection

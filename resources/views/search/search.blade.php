@@ -9,13 +9,18 @@
                 <span id="range-form" class="hidden">{{$range ?? ''}}</span>
             </div>
             <div class="container__search-left__top__filters">
-                <div class="services">
+                <div class="filter-toggle">Filtri</div>
+                <div class="services hidden">
                    
                 </div>
+                <div class="filter-search hidden"> <p id="cerca-filtri" class="service-cerca">Filtra ricerca</p></div>
             </div>
         </div>
             <div class="search__resoults__apartment">
-                <div class="search__resoults__apartment-cards">
+                <div class="search__resoults__apartment-cards" id="sponsor">
+                    
+                </div>
+                <div class="search__resoults__apartment-cards" id="no-sponsor">
                     
                 </div>
             </div>
@@ -25,8 +30,8 @@
     </div>
  
         <script id="handlebars_cards" type="text/x-handlebars-template">
-            <div class="search__resoults__apartment-cards-content" data-service="">
-                <div class="search__resoults__apartment-cards-content-slider">
+        <div class="search__resoults__apartment-cards-content sponsor-@{{sponsor}}" data-service="">
+        <div class="search__resoults__apartment-cards-content-slider" data-id="@{{dataId}}">
                     <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-left arrow-slider-dx">
                         <i class="fas fa-chevron-left"></i>
                     </div>
@@ -35,7 +40,7 @@
                     </div>
                    
                 </div>    
-            </button>    
+                  
              <div class="search__resoults__apartment-cards-content__text">
                 <p class="search__resoults__apartment-cards-content-city">
                     @{{ city }}
@@ -43,6 +48,9 @@
                 <p class="search__resoults__apartment-cards-content-description">
                     @{{ title }}
                 </p>
+                <div class="services-icons">
+                   
+                </div>
                 <form action="{{route('view.store')}}" class="search__resoults__apartment-cards-content-form" method="POST">
                     @csrf
                     @method('POST')

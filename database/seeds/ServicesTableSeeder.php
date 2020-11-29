@@ -32,12 +32,12 @@ class ServicesTableSeeder extends Seeder
         ];
 
         $icons = [
-            'fa-wifi',
-            'fa-parking',
-            'fa-bath',
-            'fa-temperature-high',
-            'fa-utensils',
-            'fa-hand-rock',
+            'fas fa-wifi',
+            'fas fa-parking',
+            'fas fa-bath',
+            'fas fa-temperature-high',
+            'fas fa-utensils',
+            'fas fa-hand-rock',
         ];
         
 

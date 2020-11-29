@@ -47,7 +47,7 @@ class StatsController extends Controller
         ->join('messages', 'apartments.id', '=', 'messages.apartment_id')
         ->where('users.id', '=', $request->id )
         ->where('messages.read', '=', '0' )
-        ->groupBy('messages.id')
+        ->groupBy('messages.read')
         ->get();
 
         return response()->json($response, 200);

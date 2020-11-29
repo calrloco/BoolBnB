@@ -31,26 +31,20 @@
                         <p class="info-apt"> nr. stanze: {{ $apartment->rooms }}, nr. letti: {{ $apartment->beds }} - nr.
                             bagni: {{ $apartment->bathrooms }} - mq: {{ $apartment->sm }}</p>
                     </div>
-                    <div class="host-logo">
-                        <img src="" alt="">
-                    </div>
                 </div>
-                <hr class="split-line">
                 <div class="apt-description">
                     <p>{{ $apartment->description }}</p>
                 </div>
-                <hr class="split-line">
                 <div class="services-box">
                     <p class="services-title">Servizi</p>
-
                     <ul class="services">
                         @foreach ($apartment->services as $service)
-                            <li class="service">
+                            <li class="service-list">
                                 <div class="service-head">
                                     <i class="service-icon {{ $service->icon }}"></i>
                                     <p>{{ $service->service }}</p>
                                 </div>
-                                <span>{{ $service->description }}</span>
+                                <span id="service-descr">{{ $service->description }}</span>
                             </li>
                         @endforeach
                     </ul>

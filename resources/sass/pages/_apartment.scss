@@ -2,16 +2,16 @@
 
 
     .title-apt {
-        padding: 20px 0;
+        padding: 1.5rem 0;
         text-align: center;
         .title {
-            font-size: 22px;
+            font-size: 2.8rem;
         }
 
         .address-apt {
             color: black;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 1.6rem;
         }
     }
 }
@@ -72,12 +72,16 @@
     font-size:1.4rem;
     margin-bottom: 5rem;
     @include flex(row, space-between, flex-start);
+    @include responsive(phone){
+        display: block;
+    }
 
     .info-box-sx {
-        width: 700px;
+        width: 65%;
         height: 100%;
-        // background-color: red;
-
+        @include responsive(phone){
+            width: 100%;
+        }
 
         .info-apt-summary {
             @include flex(row, space-between, center);
@@ -87,17 +91,11 @@
             .info-host {
                 font-size: 22px;
                 font-weight: 500;
+                margin-bottom: .8rem;;
             }
 
             .info-apt {
                 font-size: 16px;
-            }
-
-            .host-logo {
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                background-color: black;
             }
         }
 
@@ -136,14 +134,18 @@
                             color: #df1362;
                         }
                     }
+                    #service-descr{
+                        @include responsive(phone){
+                            display: none;
+                            } 
+                        }
+                    }
                 }
-            }
             }
         }
 
     .info-box-dx {
         height: 100%;
-        // background-color: blue;
         position: sticky;
         -webkit-position: sticky;
         top: 10rem;
@@ -153,6 +155,9 @@
             display: flex;
             align-items: flex-end;
             flex-direction: column;
+            @include responsive(phone){
+                display: block;
+            }
             border-radius: $card-img-radius;
             padding: 2rem;
             margin-left: 1rem;
@@ -163,6 +168,7 @@
                 font-size: 22px;
                 padding-bottom: 12px;
                 width: 100%;
+                text-align: center;
             }
 
             .message-form {
@@ -217,6 +223,7 @@
     }
 }
 
+// mappa
 .map-section {
     width: 100%;
     height: 400px;
@@ -228,4 +235,19 @@
 }
 .firstname-message,.lastname-message,.email-message,.message{
     margin-bottom:1rem;
+}
+
+// statistiche
+.chart-section{
+    @include flex(column,flex-start,stretch);
+}
+#chart-views{
+    max-width: 100%;
+    
+}
+#chart-messages{
+    max-width: 100%;
+}
+.btn-show{
+    width:100%
 }

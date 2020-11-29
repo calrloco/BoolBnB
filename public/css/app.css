@@ -5814,17 +5814,6 @@ a {
   cursor: pointer;
 }
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-.top-section {
-  width: 80%;
-  padding: 0 8rem;
-  margin: 0 auto;
-}
-
->>>>>>> Stashed changes
-=======
 .error {
   border: 0.3rem solid #d60565;
 }
@@ -5850,7 +5839,6 @@ a {
   color: white;
 }
 
->>>>>>> master
 .top-section .title-apt {
   padding: 1.5rem 0;
   text-align: center;
@@ -6803,23 +6791,7 @@ canvas:focus {
   background: #F68657;
 }
 
-<<<<<<< Updated upstream
 .apartments-list {
-=======
-.apt-section {
-  width: 80%;
-  padding: 0 8rem;
-  margin: 20px auto;
-}
-
-.apt-section .head {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.apt-section .apartments-list .apt-info-general {
->>>>>>> Stashed changes
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -6924,19 +6896,6 @@ canvas:focus {
   max-width: 100%;
 }
 
-<<<<<<< HEAD
-.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description .title {
-  color: black;
-  text-decoration: none;
-}
-
-.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description .title:hover {
-  color: #ff5a5f;
-}
-
-.apt-section .apartments-list .apt-info-general .apt-info-dx .apt-description .apt-address {
-  font-size: 16px;
-=======
 .apt-address {
   margin-bottom: 0.3rem;
   height: 100%;
@@ -6945,9 +6904,6 @@ canvas:focus {
 
 .apt-description {
   margin-bottom: 0.3rem;
-<<<<<<< HEAD
->>>>>>> master
-=======
   max-height: 20%;
   min-height: 20%;
 }
@@ -6960,7 +6916,6 @@ canvas:focus {
 .apt-details {
   max-height: 20%;
   min-height: 20%;
->>>>>>> master
 }
 
 .apt-title {
@@ -6979,18 +6934,19 @@ canvas:focus {
   transition: all 0.2s;
 }
 
-.apt-services {
+.apt-services-show {
+  width: 100%;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: space-around;
+  align-items: center;
   flex-direction: row;
 }
 
 .service {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .apartment-button {

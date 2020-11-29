@@ -25,6 +25,8 @@ class SendMessageController extends Controller
        }
        
        Message::create($request->all());
+
+       return redirect()->back()->with('status', 'messaggio inviato correttamente');
         
     }
 

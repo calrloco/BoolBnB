@@ -21,8 +21,8 @@
             <p class="sponsor__home-title">In evidenza</p>
             <div class="sponsor__home">
                 @if (count($apartment) > 0)
-                    @for ($i = 0; $i < 4 && $i < count($apartment); $i++)
-                        <div class="sponsor__home-card">
+                @for ($i = 0; $i < 4 && $i < count($apartment); $i++)
+            <a href="{{ route('search.show', $apartment[$i]->id) }}" class="sponsor__home-card">
                             <div class="sponsor__home-card-img">
                                 @if ($apartment[$i]->images[0]->path)
                                     <img src="{{ asset('storage/' . $apartment[$i]->images[0]->path) }}"
@@ -33,7 +33,7 @@
                                 <p>{{ strlen($apartment[$i]->title) <= 25 ? $apartment[$i]->title : substr($apartment[$i]->title,0,18).'...' }}</p>
                                 
                             </div>
-                        </div>
+                        </a>
                     @endfor
                 @endif
             </div>

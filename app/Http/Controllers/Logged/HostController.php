@@ -323,5 +323,3 @@ class HostController extends Controller
     }
 
 }
-    
-

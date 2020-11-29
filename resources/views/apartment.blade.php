@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
     <div class="container-center">
-        {{$messageInviato ?? ''}}
+        @if (session('status'))
+        {{session('status')}}
+        @endif
         <section class="top-section">
             <span class="hidden" id="app-id">{{ $apartment->id }}</span>
             <div class="title-apt">
@@ -21,9 +23,7 @@
                         <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
                             src="{{asset('storage/'.$apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
                     @endfor
-                    <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-right arrow-slider-sx">
-                        <i class="fas fa-chevron-left"></i>
-                    </div>
+                    <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
                 </div>
             </section>
         </div>
@@ -87,9 +87,9 @@
                                 <label for="email">Email:</label>
                                 <input type="email" id="email" value="{{ Auth::check() ? Auth::user()->email : '' }}"
                                     name="email">
-                            </div>
-                            <div class="input-aps-group">
-                            <label for="message">Messagio</label>
+                            </p>
+
+                            <label for="message">Messaggio</label>
                             <textarea  name="message" id="message"  rows="10">{{ Auth::check() ?'Buongiorno sono '. Auth::user()->name : '' }}</textarea>
                             <div class="input-aps-group">
                             <input type="hidden" value="{{ $apartment->id }}" name="apartment_id">

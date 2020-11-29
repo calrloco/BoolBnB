@@ -47,7 +47,22 @@ class HostController extends Controller
             // ->orderBy('created_at','desc');
 
         }
-        return view('logged.apartments', compact('apartments'));
+
+        // $sponsorizzati = Apartment::whereHas('sponsors',function($q){
+        //     $q->where('end_sponsor','>=', Carbon::now());
+        // })->where('apartments.user_id', '=', Auth::id())
+        // ->get();
+        // dd($sponsorizzati);
+        
+        $sponsorizzati = DB::table(apartment_sponsor)
+        ->whereHas('sponsors',function($q){
+            $q->where('end_sponsor','>=', Carbon::now());
+        })->where('apartments.user_id', '=', Auth::id())
+        ->get();
+        dd($sponsorizzati);
+
+
+        return view('logged.apartments', compact('apartments', 'sponsorizzati'));
     }
 
     /**

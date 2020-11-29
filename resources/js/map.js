@@ -311,6 +311,7 @@ var serviceCheck = (function() {
                    return item !== serviceType;
              })
         }
+
        
         $(this).toggleClass(".service-selected");
         $(".search__resoults__apartment-cards-content").each(function() {
@@ -333,6 +334,8 @@ var serviceCheck = (function() {
                 $('.mapboxgl-popup').eq($(this).index()).hide();
             }
         });
+        console.log('QUIIIIIIIIII');
+        console.log(selectedService);
     });
 })();
 // al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom

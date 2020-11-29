@@ -6,6 +6,39 @@
     color: var(--color-font-black);
 }
 
+.apt-info-general {
+    position: relative;
+   
+} 
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+}
+
+.inactive-apt {
+    background-color: rgba(0, 0, 0, 0.8);
+    
+}
+
+.inactive-msg {
+    width: 100px;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, -50%);
+    color: rgb(255,90,95);
+    text-align: center;
+    font-size: 130%;
+    z-index: 50;
+    background-color: #fff;
+}
+
+
 .apt-info {
     &-general {
         height: 44rem;

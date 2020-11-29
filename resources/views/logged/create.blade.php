@@ -100,7 +100,7 @@
                 <!-- IMMAGINI -->
                 <h3>Aggiungi le tue immagini</h3>
                 <div class="container-upload">
-                    <input type="file" name="img[]" id="img" accept="image/*" multiple>
+                    <input type="file" name="img[]" id="img" accept="image/*" multiple required>
                 </div>
 
 

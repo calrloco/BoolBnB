@@ -9,29 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ViewsController extends Controller
 {
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-    //     $views =  DB::table('views')->selectRaw('DATE(views.created_at),COUNT(DATE(views.created_at)) as daily_views')
-    //         ->join('apartments', 'views.apartment_id', '=', 'apartments.id')
-    //         ->where('apartment_id', '=', $id)
-    //         ->groupBy('views.created_at')->get();
-    //         $count = count($views);
-    //         return view('test',compact('views'));
-    // }
-
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         // parte sotre chiedo l'ip del client
@@ -49,6 +27,6 @@ class ViewsController extends Controller
              ];
              View::create($validator);
          }
-        return redirect()->route('search.show',$id);
+        return redirect()->route('cerca',$id);
     }
 }

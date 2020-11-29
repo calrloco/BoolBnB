@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container-center">
     {{-- avviso di riuscita eliminazione messaggio --}}
     @if (session('status'))
@@ -18,6 +17,7 @@
     <div class="messages-box">
         @foreach($messages as $message)
             <div class="message-card {{ (($message->read == 0) ? 'unread' : 'read') }}">
+                @dd($message->apartment->images[0]);
                 <div class="message-card-sx">
                     <div class="apart-img">
                         <img src="{{ $message->apartment->images[0]->path }}" alt="foto appartamento">

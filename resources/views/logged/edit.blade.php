@@ -130,7 +130,7 @@
         <p>elimina le immagini</p>
         {{-- ciclo per visualizzazione ed eliminazione delle immagini dell'appartamento --}}
         @foreach($apartment->images as $image)
-        <form action="{{route('images.destroy', $image)}}" method="post" class="img-apt-box">
+        <form action="{{route('cancella', $image)}}" method="post" class="img-apt-box">
             @csrf
             @method('DELETE')
             <img src="{{ asset('storage/'. $image->path) }}" alt="foto appartamento">

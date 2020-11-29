@@ -4,7 +4,7 @@
         <div class="container-center container-fullheight">
             <div class="jumbotron__text">
                 <p class="jumbotron__text-banner">Vicino e bello</p>
-                <form action="{{ route('search.store') }}" method="POST">
+                <form action="{{ route('search') }}" method="POST">
                     @csrf
                     @method('POST')
                     <button type="submit" class="jumbotron__text-button">Esplora i soggiorni nei dintorni</button>
@@ -34,7 +34,7 @@
                             </div>
                         </a>
                     @else
-                        <a href="{{ route('search.show', $apartment[$i]->id) }}" class="sponsor__home-card">
+                        <a href="{{ route('cerca', $apartment[$i]->id) }}" class="sponsor__home-card">
                             <div class="sponsor__home-card-img">
                                 @if (isset($apartment[$i]->images[0]->path))
                                     <img src="{{ asset('storage/'.$apartment[$i]->images[0]->path) }}" alt="{{ $apartment[$i]->title }}" alt="">

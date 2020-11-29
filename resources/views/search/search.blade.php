@@ -51,7 +51,7 @@
                 <div class="services-icons">
                    
                 </div>
-                <form action="{{route('view.store')}}" class="search__resoults__apartment-cards-content-form" method="POST">
+                <form action="{{route('visualizza')}}" class="search__resoults__apartment-cards-content-form" method="POST">
                     @csrf
                     @method('POST')
                     @{{{id}}}

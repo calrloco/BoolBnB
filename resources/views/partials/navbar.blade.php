@@ -1,5 +1,5 @@
 <nav class="nav-container">
-    <div class="{{url()->current() == route('search.store') ? 'nav-full' : 'container-center'}}">
+    <div class="{{url()->current() == route('search') ? 'nav-full' : 'container-center'}}">
         <div class="nav">
             <div class="nav__logo">
                 <a href="{{ route('home') }}">
@@ -8,7 +8,7 @@
                 </a>
             </div>
             <div class="nav__search">
-                <form class="nav__search-button" action="{{ route('search.store') }}" method="POST">
+                <form class="nav__search-button" action="{{ route('search') }}" method="POST">
                     @csrf
                     @method('POST')
                      <p id="start-search" class="">Inizia la ricerca<p>
@@ -25,7 +25,7 @@
                          <input type="hidden" id="range-hidden" name="range" value="20">
                          <input type="range" min="20" max="100" value="20" id="myRanges" class="sliders">
                     </div>
-                    <button type="{{url()->current() == route('search.store') ? 'button' : 'submit'}}" class="nav__search-icon nav__search-icon-big hidden">
+                    <button type="{{url()->current() == route('search') ? 'button' : 'submit'}}" class="nav__search-icon nav__search-icon-big hidden">
                         Cerca
                         <i class="fas fa-search"></i>
                     </button>

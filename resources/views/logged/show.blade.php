@@ -65,7 +65,7 @@
                         <button type="button" class="btn-show services-all visualizza-appartamneto"><a
                                 href="{{ route('logged.sponsor', $apartment->id) }}">Sponsorizza il tuo
                                 appartamento!</a></button>
-                        <button type="button" class="btn-show services-all visualizza-appartamneto"><a href="#">Modifica
+                        <button type="button" class="btn-show services-all visualizza-appartamneto"><a href="{{ route('host.edit',$apartment->id) }}">Modifica
                                 annuncio</a></button>
                         {{-- <button type="button"
                             class="btn-show services-all visualizza-appartamneto"><a href="#">Modifica

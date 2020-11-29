@@ -54,13 +54,10 @@ class HostController extends Controller
         // ->get();
         // dd($sponsorizzati);
         
-        $sponsorizzati = DB::table(apartment_sponsor)
-        ->whereHas('sponsors',function($q){
-            $q->where('end_sponsor','>=', Carbon::now());
-        })->where('apartments.user_id', '=', Auth::id())
+        $sponsorizzati = DB::table('apartment_sponsor')
+        ->where('end_sponsor', '>', Carbon::now())
+        ->orderBy('end_sponsor', 'desc')
         ->get();
-        dd($sponsorizzati);
-
 
         return view('logged.apartments', compact('apartments', 'sponsorizzati'));
     }

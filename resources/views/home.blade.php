@@ -29,7 +29,7 @@
                                 @endif
                             </div>
                             <div class="sponsor__home-card-text">
-                                <p>{{ $apartment[$i]->title }}</p>
+                                <p class="home-apt-title">{{ $apartment[$i]->title }}</p>
                             </div>
                         </a>
                     @endfor

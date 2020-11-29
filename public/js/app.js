@@ -42380,6 +42380,19 @@ function calcoloCoordinate() {
 
 /***/ }),
 
+/***/ "./resources/js/alert.js":
+/*!*******************************!*\
+  !*** ./resources/js/alert.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('.status-msg').delay(5000).slideUp(300);
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -42392,6 +42405,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
 __webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
+
+__webpack_require__(/*! ./alert */ "./resources/js/alert.js");
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
@@ -42547,7 +42562,7 @@ function autoComplete(query) {
 
       for (var i = 0; i < 4; i++) {
         if (response.results[i]) {
-          // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni                
+          // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
           var streetName = response.results[i].address['streetName'];
           var city = response.results[i].address['municipality'];
           var countryCode = response.results[i].address['countryCode'];

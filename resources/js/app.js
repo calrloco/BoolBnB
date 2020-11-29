@@ -1,6 +1,7 @@
 require("./bootstrap");
 require("./add");
 require("./sponsor");
+require("./alert");
 
 var $ = require("jquery");
 const Handlebars = require("handlebars");
@@ -138,7 +139,7 @@ var unreadMessages = (function() {
                 $('#unread-msg').empty();
                 $('#unread-msg').append('Messaggi');
             }
-             
+
 
             },
         error: function() {
@@ -168,7 +169,7 @@ function autoComplete(query) {
 
                 for (let i = 0; i < 4; i++) {
                     if (response.results[i]) {
-                        // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni                
+                        // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
                         var streetName = response.results[i].address['streetName'];
                         var city = response.results[i].address['municipality'];
                         var countryCode = response.results[i].address['countryCode'];

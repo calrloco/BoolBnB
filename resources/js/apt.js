@@ -1,6 +1,7 @@
 require("./bootstrap");
 //require("./apt");
 require("./aptSlider");
+require("./alert");
 var $ = require("jquery");
 const Handlebars = require("handlebars");
 const {
@@ -43,7 +44,7 @@ $.ajax({
         var coordinates = [response[0].longitude,response[0].latitude];
         const marker = new tt.Marker({ element: element })
             .setLngLat(coordinates)
-            
+
             .addTo(map);
 
         var popupOffsets = {
@@ -55,11 +56,8 @@ $.ajax({
             right: [-25, -35]
         };
 
-        
+
     },error: function(){
         console.log(arguments);
     }
 });
-
-
-

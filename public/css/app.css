@@ -5396,6 +5396,7 @@ input:-webkit-autofill:active {
   align-items: center;
   flex-direction: row;
   flex-wrap: nowrap;
+  text-decoration: none;
   height: 100%;
 }
 
@@ -5409,14 +5410,34 @@ input:-webkit-autofill:active {
   flex: 0 1 calc(100% / 4);
   font-size: 1.8rem;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   cursor: pointer;
 }
 
+.sponsor__home-card:link {
+  text-decoration: none;
+}
+
+.sponsor__home-card:visited {
+  text-decoration: none;
+}
+
 .sponsor__home-card:not(:last-child) {
   margin-right: 1.5rem;
+}
+
+.sponsor__home-card-text {
+  color: black;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.sponsor__home-card-text .home-apt-title {
+  padding: 2px 6px;
+  border: 1px solid #ff5a5f;
+  border-radius: 15px;
 }
 
 .sponsor__home-card-img {
@@ -5538,6 +5559,18 @@ input:-webkit-autofill:active {
 
 .message-on {
   color: #d60565;
+}
+
+.status-msg {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  background-color: #38c172;
+}
+
+.status-msg p {
+  border-radius: 14px;
+  color: white;
 }
 
 .top-section .title-apt {
@@ -6706,7 +6739,7 @@ hr {
   width: 100%;
   padding: 20px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
 }

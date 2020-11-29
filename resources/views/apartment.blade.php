@@ -1,8 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <div class="container-center">
-        @if (session('status'))
-        {{session('status')}}
+        @if (!session('status'))
+            <div class="status-msg">
+                {{-- <p>{{session('status')}}</p> --}}
+                <p>Messaggio cancellato correttamente.</p>
+            </div>
         @endif
         <section class="top-section">
             <span class="hidden" id="app-id">{{ $apartment->id }}</span>

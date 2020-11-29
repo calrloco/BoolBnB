@@ -11,14 +11,14 @@
         </section>
         <section class="slider-section">
             <div class="apt-images">
-                <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
+            <i class="far fa-arrow-alt-circle-left arrow-slider-sx {{$apartment->images->count('id') < 2 ? 'hidden' : 'pippo'}}"></i>
                 @for ($i = 0; $i < $apartment->images->count('id'); $i++)
                 
                     <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
                         src="{{ asset('storage/' . $apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
                 @endfor
                 <div class="arrow-slider-dx">
-                    <i class="far fa-arrow-alt-circle-right"></i>
+                    <i class="far fa-arrow-alt-circle-right {{$apartment->images->count('id') < 2 ? 'hidden' : 'pippo'}}"></i>
                 </div>
             </div>
         </section>

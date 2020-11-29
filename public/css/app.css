@@ -4953,6 +4953,14 @@ form {
   color: var(--color-font-black);
 }
 
+@media screen and (max-width: 600px) {
+  .footer {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+}
+
 .footer-container {
   height: 100%;
   max-height: 100%;
@@ -4978,6 +4986,21 @@ form {
   padding: 4rem 0;
 }
 
+@media screen and (max-width: 600px) {
+  .footer__content {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 448px) {
+  .footer__content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
 .footer-list {
   height: 100%;
   list-style: none;
@@ -4985,6 +5008,13 @@ form {
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: column;
+}
+
+@media screen and (max-width: 448px) {
+  .footer-list {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
 }
 
 .footer-li {
@@ -5568,7 +5598,8 @@ input:-webkit-autofill:active {
 
 .mobile-menu-list-item:hover::before {
   width: 100%;
-  background-color: var(--pink-bnb);
+  background-color: none;
+  background-image: var(--gradient-color);
 }
 
 .mobile-menu-list-item:hover .mobile-menu-list-item-link {
@@ -5582,7 +5613,7 @@ a {
 
 .hamburger-menu {
   z-index: 3000;
-  position: fixed;
+  flex: 1;
   right: 2rem;
   top: calc(var(--nav-height) + 2rem);
   background-color: #fff;
@@ -5608,7 +5639,7 @@ a {
 
 .hamburger-menu-bars {
   background-color: var(--color-font-black);
-  width: 60%;
+  width: 3.4rem;
   height: 0.3rem;
   position: relative;
   cursor: pointer;
@@ -5644,6 +5675,55 @@ a {
 .hamburger-menu-bars-top-animated {
   transform: rotate(-90deg);
   top: 0;
+}
+
+.footer__menu-mobile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6rem;
+  background-color: #fff;
+  z-index: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .footer__menu-mobile {
+    display: flex;
+  }
+}
+
+.footer__menu-mobile__home-icon {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 3rem;
+}
+
+.footer__menu-mobile-hamburger {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 3rem;
+}
+
+.link-mobile {
+  color: var(--color-font-black);
+}
+
+.pink-mobile {
+  color: var(--pink-bnb);
 }
 
 .jumbotron {
@@ -5710,33 +5790,68 @@ a {
 
 .highlited {
   margin: 4.8rem 0 4.8rem 0;
+  max-width: 100%;
 }
 
 .sponsor__home {
+  max-width: 100%;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: row;
-  flex-wrap: nowrap;
-  text-decoration: none;
-  height: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .sponsor__home {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 448px) {
+  .sponsor__home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 }
 
 .sponsor__home-title {
   padding-bottom: 1.6rem;
   font-weight: 700;
   font-size: 3.2rem;
+  margin-left: 0.7rem;
+}
+
+@media screen and (max-width: 448px) {
+  .sponsor__home-title {
+    text-align: center;
+  }
 }
 
 .sponsor__home-card {
-  flex: 0 0 calc(100% / 3);
-  overflow: hidden;
-  font-size: 1.8rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  flex: 0 1 25%;
+  margin: 0 0.7rem;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1376) {
+  .sponsor__home-card {
+    flex: 0 0 50%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .sponsor__home-card {
+    flex: 0 1 calc(50%);
+  }
+}
+
+@media screen and (max-width: 448px) {
+  .sponsor__home-card {
+    flex: 0 0 100%;
+    margin-bottom: 2rem;
+  }
 }
 
 .sponsor__home-card:link {
@@ -5747,41 +5862,22 @@ a {
   text-decoration: none;
 }
 
-@media screen and (max-width: 800px) {
-  .sponsor__home-card {
-    flex: 0 0 calc(100% / 2);
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .sponsor__home-card {
-    flex: 0 0 100%;
-  }
-}
-
-.sponsor__home-card:not(:last-child) {
-  margin-right: 1.5rem;
-}
-
 .sponsor__home-card-text {
   color: black;
   font-size: 1.5rem;
-  text-align: center;
-  flex: 1;
+  text-align: left;
+  padding-top: 0.8rem;
+  font-weight: 800;
 }
 
 .sponsor__home-card-text .home-apt-title {
   padding: 2px 6px;
-  border: 1px solid #ff5a5f;
   border-radius: 15px;
 }
 
 .sponsor__home-card-img {
-  min-width: 100%;
-  max-width: 100%;
-  margin-bottom: 0.8rem;
-  height: 25rem;
-  height: 36.8rem;
+  height: 27rem;
+  width: 100%;
 }
 
 .sponsor__home-card-img img {
@@ -6068,15 +6164,26 @@ a {
   flex-direction: row;
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 600px) {
   .info-apt-section {
-    display: block;
+    flex-direction: column;
   }
 }
 
 .info-apt-section .info-box-sx {
   width: 65%;
   height: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .info-apt-section .info-box-sx {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 414px) {
@@ -6114,10 +6221,28 @@ a {
   padding: 10px 0;
 }
 
+@media screen and (max-width: 600px) {
+  .info-apt-section .info-box-sx .services-box .services {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
 .info-apt-section .info-box-sx .services-box .services .services-title {
   font-size: 22px;
   font-weight: 500;
   padding-bottom: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .info-apt-section .info-box-sx .services-box .services .services-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
 }
 
 .info-apt-section .info-box-sx .services-box .services .service-list {
@@ -6125,6 +6250,12 @@ a {
   padding: 5px;
   margin-bottom: 1rem;
   list-style-type: none;
+}
+
+@media screen and (max-width: 600px) {
+  .info-apt-section .info-box-sx .services-box .services .service-list {
+    flex: 0 0 calc(100% / 3);
+  }
 }
 
 .info-apt-section .info-box-sx .services-box .services .service-list .service-head {
@@ -6151,6 +6282,22 @@ a {
   -webkit-position: -webkit-sticky;
   top: 10rem;
   z-index: 2;
+}
+
+@media screen and (max-width: 600px) {
+  .info-apt-section .info-box-dx {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .info-apt-section .info-box-dx {
+    flex: 0 1 auto;
+  }
 }
 
 @media screen and (max-width: 1376px) {
@@ -6496,6 +6643,14 @@ h1 {
   overflow-y: scroll;
 }
 
+@media screen and (max-width: 600px) {
+  .container__search-left {
+    max-height: -webkit-fit-content;
+    max-height: -moz-fit-content;
+    max-height: fit-content;
+  }
+}
+
 .container__search-left__top {
   display: flex;
   justify-content: flex-start;
@@ -6513,6 +6668,12 @@ h1 {
   flex: 2;
   max-height: calc(100vh - var(--nav-height));
   min-height: calc(100vh - var(--nav-height));
+}
+
+@media screen and (max-width: 800px) {
+  .container__search-right {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 1462px) {
@@ -6986,6 +7147,23 @@ canvas:focus {
   background-color: #fff;
 }
 
+.apt-info-top {
+  position: absolute;
+  height: 10%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-image: var(--gradient-color);
+  z-index: 5;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transform: translateY(-100%);
+  transition: all 0.2s;
+}
+
 .apt-info-general {
   height: 44rem;
   display: flex;
@@ -6999,10 +7177,20 @@ canvas:focus {
   border-radius: 2.1rem;
   width: 31.4rem;
   transition: all 0.2s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.apt-info-general:hover {
+  transform: translateY(-2%);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .apt-info-general:hover .apt-info-dx {
   transform: translateY(0%);
+}
+
+.apt-info-general:hover .apt-info-top {
+  transform: translateY(0);
 }
 
 .apt-info-general:hover .apt-img-small {

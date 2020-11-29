@@ -14,6 +14,10 @@
         max-height:  calc(100vh -  var(--nav-height));
         overflow-y: scroll;
         
+        @media screen and (max-width:600px){
+            max-height: fit-content;
+            
+        }
           
         &__top {
             @include flex(column, flex-start, flex-start);
@@ -32,9 +36,13 @@
         flex: 2;
         max-height:  calc(100vh -  var(--nav-height));
         min-height: calc(100vh -  var(--nav-height));
-        @include responsive(small_desktop){
+        @include responsive(tab){
+            display: none;
+      }
+      @include responsive(small_desktop){
                flex: 1;
          }
+       
     }
     .search__resoults__apartment-cards {
         @include flex(row, flex-start, flex-start);

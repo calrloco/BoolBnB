@@ -42749,6 +42749,23 @@ $('.hamburger-menu').click(function () {
   $('.hamburger-menu').toggleClass('hamburger-menu-animated');
   $('.mobile-menu').toggleClass('hidden');
 });
+$('#menu-bottom').click(function () {
+  $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
+  $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
+  $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
+  $('.hamburger-menu').toggleClass('hamburger-menu-animated');
+  $('.mobile-menu').toggleClass('hidden');
+}); /// animazione mobile menu
+
+$(window).scroll(function () {
+  if (jQuery(window).width() <= 600) {
+    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+      $('.footer__menu-mobile').slideUp(100);
+    } else {
+      $('.footer__menu-mobile').slideDown(100);
+    }
+  }
+});
 
 /***/ }),
 
@@ -42855,13 +42872,8 @@ document.addEventListener("DOMContentLoaded", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\lavori\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\lavori\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> aa1bc632f059cd952a25d5784632eae021f10d27
 
 
 /***/ })

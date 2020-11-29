@@ -83,13 +83,19 @@
     font-size:1.4rem;
     margin-bottom:9rem;
     @include flex(row, space-between, flex-start);
-    @include responsive(phone){
-        display: block;
+    @media screen and (max-width:600px){
+        flex-direction:column;
     }
+    
 
     .info-box-sx {
         width: 65%;
         height: 100%;
+        @media screen and (max-width:600px){
+            flex-grow:1;
+            width: 100%;
+            @include flex(column, center, center);
+        }
         @include responsive(phone){
             width: 100%;
         }
@@ -121,11 +127,18 @@
             
 
             .services{
-                          
+                @media screen and (max-width:600px){
+                    @include flex(row, flex-start, center);
+                }  
             .services-title {         
                 font-size: 22px;
                 font-weight: 500;
                 padding-bottom: 10px;
+
+                @media screen and (max-width:600px){
+                    @include flex(row, center, center);
+                }
+              
             }
 
             .service-list {
@@ -133,7 +146,9 @@
                 padding: 5px;
                 margin-bottom: 1rem;
                 list-style-type: none;
-
+                @media screen and (max-width:600px){
+                    flex: 0 0 calc(100% / 3);
+                }  
                     .service-head{
                     display: flex;
                     flex-direction: row;
@@ -161,9 +176,19 @@
         -webkit-position: sticky;
         top: 10rem;
         z-index:2;
+        @media screen and (max-width:600px){
+            width: 100%;
+            @include flex(row, center, center);
+        }
+      
+        @media screen and (max-width:800px){
+            flex:0 1 auto;
+        }
+      
         @media screen and (max-width:1376px){
             flex:1 1 100%;
         }
+       
         .send-message-box {
             display: flex;
             align-items: flex-end;

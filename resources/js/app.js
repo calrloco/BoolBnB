@@ -502,3 +502,20 @@ $('.hamburger-menu').click(function () {
     $('.hamburger-menu').toggleClass('hamburger-menu-animated');
     $('.mobile-menu').toggleClass('hidden');
 });
+$('#menu-bottom').click(function(){
+    $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
+    $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
+    $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
+    $('.hamburger-menu').toggleClass('hamburger-menu-animated');
+    $('.mobile-menu').toggleClass('hidden');
+});
+/// animazione mobile menu
+$(window).scroll(function() {
+    if(jQuery(window).width() <= 600){
+    if($(window).scrollTop() + $(window).height() == $(document).height()) {
+        $('.footer__menu-mobile').slideUp(100);
+    }else{
+        $('.footer__menu-mobile').slideDown(100);
+    }
+    }
+ });

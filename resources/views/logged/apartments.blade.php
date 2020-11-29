@@ -7,35 +7,43 @@
             <p class="status-msg">{{ session('status') }}</p>
         @endif
 
-        @if (!empty($apartments))
+        @if (count($apartments) > 0)
             <div class="head">
                 <h2 class="title">I tuoi appartamenti</h2>
                 <a class="create-apt-link" href="{{ route('host.create') }}">Crea un nuovo annuncio!</a>
             </div>
             <div class="apartments-list">
                 @foreach ($apartments as $apartment)
-            <div class="apt-info-general">
-                        {{-- faccio un ternario per vedere se l'appartamento è inattivo ed uno per vedere se sponsorizzato 
+                    <div class="apt-info-general">
+                        {{-- faccio un ternario per vedere se l'appartamento è inattivo ed uno
+                        per vedere se sponsorizzato
                         e nel caso assegno caratteristiche --}}
-                        <div class="overlay {{ ($apartment->attivo == 1) ? 'active-apt' : 'inactive-apt'}}"></div>
+                        <div class="overlay {{ $apartment->attivo == 1 ? 'active-apt' : 'inactive-apt' }}"></div>
+
+                        <div class="apt-info-top">
+                            @for ($i = 0; $i < count($spons); $i++)
+                                @if ($apartment->id == $spons[$i]->apartment_id)
+                                     @php $class = 'active' @endphp
+                                    <i class="fas fa-star"></i>
+                                    <div>sponsorizzato fino al: {{ $spons[$i]->end_sponsor }}</div>
+                                    <?php $i = count($spons); ?>
+                                @endif
+                            @endfor
+                        </div>
 
                         <div class="apt-info-sx">
-                        @for($i = 0; $i < count($spons); $i++)
-                            @if($apartment->id == $spons[$i]->apartment_id)
-                                <i class="fas fa-star"></i>
-                                <div>sponsorizzato fino al: {{ $spons[$i]->end_sponsor }}</div>
-                                <?php $i = count($spons) ?>
-                            @endif
-                        @endfor
-                            <div class="inactive-msg">{{ ($apartment->attivo == 1) ? '' : 'annuncio inattivo'}}</div>
+
+                            <div class="inactive-msg">{{ $apartment->attivo == 1 ? '' : 'annuncio inattivo' }}</div>
                             @if (isset($apartment->images[0]->path))
-                                <img class=apt-img-small src="{{ asset('storage/' . $apartment->images[0]->path) }}" alt="{{ $apartment->title }}">
+                                <img class=apt-img-small src="{{ asset('storage/' . $apartment->images[0]->path) }}"
+                                    alt="{{ $apartment->title }}">
                             @endif
                         </div>
                         <div class="apt-info-dx">
                             <div class="apt-title">
-                               
-                                <p>{{ strlen($apartment->title) <= 25 ? $apartment->title : substr($apartment->title,0,18).'...' }}</p>
+
+                                <p>{{ strlen($apartment->title) <= 25 ? $apartment->title : substr($apartment->title, 0, 18) . '...' }}
+                                </p>
                             </div>
                             <div class="apt-description">
                                 <p class="apt-address">{{ $apartment->city }}, {{ $apartment->country }}</p>

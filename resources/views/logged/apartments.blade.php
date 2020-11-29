@@ -22,7 +22,8 @@
                         </div>
                         <div class="apt-info-dx">
                             <div class="apt-title">
-                                <p>{{ $apartment->title }}</p>
+                               
+                                <p>{{ strlen($apartment->title) <= 25 ? $apartment->title : substr($apartment->title,0,18).'...' }}</p>
                             </div>
                             <div class="apt-description">
                                 <p class="apt-address">{{ $apartment->city }}, {{ $apartment->country }}</p>
@@ -31,11 +32,10 @@
                                 {{ $apartment->beds }} - nr. bagni: {{ $apartment->bathrooms }} - mq: {{ $apartment->sm }}
                             </p>
                             <p class="apt-description-text">{{ $apartment->description }}</p>
-                            <ul class="apt-services">
+                            <ul class="apt-services-show">
                                 @foreach ($apartment->services as $service)
                                     <li class="service">
-                                        <i class="service-icon {{ $service->icon }}"></i>
-                                        <p class="service-title">{{ $service->service }}</p>
+                                        <i class="service-icon-appartments fas {{ $service->icon }}"></i>
                                     </li>
                                 @endforeach
                             </ul>

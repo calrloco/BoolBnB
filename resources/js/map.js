@@ -2,12 +2,8 @@ require("./bootstrap");
 //require("./apt");
 var $ = require("jquery");
 const Handlebars = require("handlebars");
-const {
-    log
-} = require("handlebars");
-const {
-    find
-} = require("lodash");
+const { log } = require("handlebars");
+const { find } = require("lodash");
 
 const APPLICATION_NAME = "My Application";
 const APPLICATION_VERSION = "1.0";
@@ -24,54 +20,69 @@ let map = tt.map({
 $(document).ready(function() {
     var instantSearch = (function() {
         if ($("#address-inst").html() != "") {
-            getCoordinates($("#address-inst").html(), $("#range-form").html());
+            getCoordinates(
+                $("#address-inst").html(),
+                $("#range-form").html(),
+                false
+            );
             getServices();
         }
     })();
-    
-    $(".nav__search-icon-big").click(function () {
+
+    $(".nav__search-icon-big").click(function() {
         $(".search__resoults__apartment-cards").empty();
+        $('#address-inst').text($("#search").val());
         if ($("#search").val() != "") {
-            getCoordinates($("#search").val(), $("#range-value").html()); 
+            getCoordinates($("#search").val(), $("#range-value").html(), false);
         }
-        
     });
 
-    $('#search').keydown(function(){
-        if (event.which == 13 || event.keyCode == 13){
+    $("#search").keydown(function() {
+        if (event.which == 13 || event.keyCode == 13) {
             if ($("#search").val() != "") {
-                getCoordinates($("#search").val(), $("#range-value").html()); 
+                getCoordinates(
+                    $("#search").val(),
+                    $("#range-value").html(),
+                    false
+                );
+            }
         }
-      }
     });
 });
 //// prendi coordinate dell'input////////////////
-function getCoordinates(input, range) {
+function getCoordinates(input, range, services) {
     var zoom = 10;
-    if (input != '') {
-        tt.services.fuzzySearch({
+    if (input != "") {
+        tt.services
+            .fuzzySearch({
                 key: apiKey,
-                query: input,
+                query: input
             })
             .go()
-            .then(function (response) {
+            .then(function(response) {
                 var longitude = response.results[0].position["lng"];
                 var latitude = response.results[0].position["lat"];
-                city = response.results[0].address['municipality'];
-                streetName = response.results[0].address['streetName'];
+                city = response.results[0].address["municipality"];
+                streetName = response.results[0].address["streetName"];
                 // condizione per selezionare lo zoom in caso di città o indirizzo specifico
                 if (streetName != undefined && city) {
                     zoom = 16;
-                } 
+                }
                 map = tt.map({
                     key: apiKey,
-                    style: 'tomtom://vector/1/basic-main',
-                    container: 'map',
+                    style: "tomtom://vector/1/basic-main",
+                    container: "map",
                     center: response.results[0].position,
                     zoom: zoom
                 });
-
-                getCards(latitude, longitude, range);
+                
+                if (services == false) {
+                    getCards(latitude, longitude, range, 1);
+                    getCards(latitude, longitude, range, 0);
+                } else {
+                    getCardsFilter(latitude, longitude, range, 1, services);
+                    getCardsFilter(latitude, longitude, range, 0, services);
+                }
             });
     }
 }
@@ -84,20 +95,17 @@ function getServices() {
         headers: {
             KEY: "test"
         },
-        success: function (response) {
-            console.log(response);
+        success: function(response) {
             for (var i = 0; i < response.length; i++) {
                 var service = `<button data-servicetype="${response[i].id}" class="services-all">${response[i].service}</button>`;
                 $(".services").append(service);
             }
         },
-        error: function () {
-            console.log(arguments);
-        }
+        error: function() {}
     });
 }
 
-function getCards(lat, lng, maxDist) {
+function getCards(lat, lng, maxDist, sponsor) {
     $.ajax({
         url: "http://127.0.0.1:8000/api/apartments",
         method: "GET",
@@ -107,22 +115,47 @@ function getCards(lat, lng, maxDist) {
         data: {
             lat: lat,
             lng: lng,
-            maxDist: maxDist
+            maxDist: maxDist,
+            sponsored: sponsor
         },
         success: function(risposta) {
-            if(risposta.length > 0){
-               compileHandlebars(risposta);
+            if (risposta.length > 0) {
+                compileHandlebars(risposta, sponsor);
             }
         },
-        error: function () {
-            console.log("error");
-        }
+        error: function() {}
     });
 }
-
+function getCardsFilter(lat, lng, maxDist, sponsor, services) {
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/apartments",
+        method: "GET",
+        headers: {
+            KEY: "test"
+        },
+        data: {
+            lat: lat,
+            lng: lng,
+            maxDist: maxDist,
+            services: Array.from(services),
+            sponsored: sponsor
+        },
+        success: function(risposta) {
+            if (risposta.length > 0) {
+                compileHandlebars(risposta, sponsor);
+            }
+        },
+        error: function() {}
+    });
+}
 ////////////////////////////////////
 /// funzione per inserire le card della ricerca nel dom e creare i marker associati nella mappa
-function compileHandlebars(risp) {
+function compileHandlebars(risp, sponsor) {
+    if (sponsor == 1) {
+        var containerCards = $("#sponsor");
+    } else {
+        var containerCards = $("#no-sponsor");
+    }
     var source = $("#handlebars_cards").html();
     var templateCards = Handlebars.compile(source);
     const markersCity = [];
@@ -130,7 +163,9 @@ function compileHandlebars(risp) {
         var context = {
             city: risp[i].city,
             title: troncaStringa(risp[i].title),
-            id: `<input class="aps_id" type="hidden" name="apartment_id" value=${risp[i].id}>`
+            id: `<input class="aps_id" type="hidden" name="apartment_id" value=${risp[i].id}>`,
+            sponsor: sponsor,
+            dataId: risp[i].id
         };
 
         var coordinates = [risp[i].longitude, risp[i].latitude];
@@ -173,9 +208,8 @@ function compileHandlebars(risp) {
         marker.setPopup(popup);
 
         var htmlContext = templateCards(context);
-        $(".search__resoults__apartment-cards").append(htmlContext);
-        appendServices(risp[i].id);
-        getImages(risp[i].id);
+        containerCards.append(htmlContext);
+        getImages(risp[i].id, sponsor);
         var el = $(".search__resoults__apartment-cards-content");
         var details = buildLocation(el, address);
         // cliccando su un elemento della lista a sx lo trova in mappa
@@ -191,92 +225,61 @@ function compileHandlebars(risp) {
                     // serve a passare da un marker all'altro nella selezione di sx
                     closeAllPopups();
                     // marker.togglePopup();
-                }
+                };
             })(marker)
         );
 
         // cliccando sul marker aggiunge la classe selected alla card dell'appartamento corrispondente
-        marker._element.addEventListener('click',
-            (function () {
-                var posizione = $(this).index() - 1;
-                details.removeClass('selected');
-                details.eq(posizione).addClass('selected');
-            })
-        );    
-    }    
+        marker._element.addEventListener("click", function() {
+            var posizione = $(this).index() - 1;
+            details.removeClass("selected");
+            details.eq(posizione).addClass("selected");
+        });
+    }
 }
-/// appende i servizi all'appartamento
-function appendServices(id) {
+
+/// appendere le immagini allo slider
+function getImages(id, sponsor) {
     $.ajax({
-        url: "http://127.0.0.1:8000/api/services",
-        headers: {
-            KEY: "test"
-        },
+        url: "http://127.0.0.1:8000/api/images",
+        method: "GET",
         data: {
             id: id
         },
-        success: function (response) {
-            var dataAttr = [];
+        headers: {
+            KEY: "test"
+        },
+        success: function(response) {
+            var clss = "";
             for (var i = 0; i < response.length; i++) {
-                dataAttr.push(response[i].service_id);
-                $(".search__resoults__apartment-cards-content").each(
-                    function () {
-                        if (
-                            $(this)
-                            .find($(".aps_id"))
-                            .val() == response[i].apartment_id
-                        ) {
-                            $(this).attr("data-service", dataAttr);
-                        }
-                    }
-                );
+                var img = (clss = "hidden");
+                if (i == 0) {
+                    clss = "first active";
+                } else if (i == response.length - 1) {
+                    clss = "hidden last";
+                } else {
+                    clss = "hidden";
+                }
+                appendImages(response[i], clss, sponsor);
             }
         },
-        error: function () {}
+        error: function() {}
     });
 }
-/// appendere le immagini allo slider
-function getImages(id) {
-    $.ajax({
-        url:'http://127.0.0.1:8000/api/images',
-        method: 'GET',
-        data: {
-          id: id
-        }, 
-        headers: {
-            KEY:'test'
-        },
-        success: function(response){
-            console.log(response);
-            
-           for (var i = 0; i <response.length; i++){
-               var clss = "hidden";
-               if(i == 0){
-                   clss = 'first active'
-               }else if(i == response.length - 1){
-                  clss = 'hidden last'
-               }else{
-                clss = 'hidden'
-               }
-               appendImages(response[i],clss);
-           }
-        },
-        error: function () {
-
+function appendImages(risp, clss, sponsor) {
+    var container = $(".sponsor-" + sponsor);
+    container.each(function() {
+        var appId = $(this)
+            .find(".aps_id")
+            .val();
+      
+        if (appId == risp.apartment_id) {
+            img = `<img class="search__resoults__apartment-cards-content-slider-img apt-image ${clss}" 
+           src="${risp.path}">`;
+            $(this)
+                .find(".search__resoults__apartment-cards-content-slider")
+                .append(img);
         }
-    });
-}
-function appendImages(risp,clss){
-    var container  = $('.search__resoults__apartment-cards-content');
-    container.each(function(){
-       appId =  $(this).find('.aps_id').val();
-       if(appId == risp.apartment_id){
-           img =  `<img class="search__resoults__apartment-cards-content-slider-img apt-image ${clss}" 
-           src="${risp.path}">`
-          $(this).find('.search__resoults__apartment-cards-content-slider').append(img);
-          
-       }
-       
     });
 }
 // funzione per troncare una stringa
@@ -297,95 +300,97 @@ function troncaStringa(stringa) {
 /// filtra ricerca per servizi
 var serviceCheck = (function() {
     var selectedService = [];
-    
+
     $(document).on("click", ".services-all", function() {
         var serviceType = $(this)
             .data("servicetype")
             .toString();
         $(this).toggleClass("service-selected");
-        if(selectedService.length < $('.services-all').length && !selectedService.includes(serviceType)){
+        if (
+            selectedService.length < $(".services-all").length &&
+            !selectedService.includes(serviceType)
+        ) {
             selectedService.push(serviceType);
         }
-        if(!$(this).hasClass("service-selected")){
-             selectedService = selectedService.filter(function(item){
-                   return item !== serviceType;
-             })
+        if (!$(this).hasClass("service-selected")) {
+            selectedService = selectedService.filter(function(item) {
+                return item != serviceType;
+            });
         }
-       
-        $(this).toggleClass(".service-selected");
-        $(".search__resoults__apartment-cards-content").each(function() {
-            var serviceHome = $(this).data("service").toString();
-            console.log(serviceHome);
-            var servicesCasa = serviceHome.split(",");
-            if(selectedService.length === 0 ){
-                $(this).show();
-                $('.mapboxgl-marker').show();
-            }else if(servicesCasa.length > selectedService.length && serviceHome.includes(selectedService.toString())){
-                 $(this).show();
-                 $('.mapboxgl-marker').eq($(this).index()).show();
-            }else if (same(servicesCasa,selectedService)) {
-                $(this).show();
-                $('.mapboxgl-marker').eq($(this).index()).show();
-            } else {
-                $(this).hide();
-                $('.mapboxgl-marker').eq($(this).index()).hide();
-                $('.mapboxgl-popup').eq($(this).index()).hide();
-            }
-        });
+    });
+    /////// fa prtire la ricerca con i servizi selezionati
+    $("#cerca-filtri").click(function() {
+        $("#no-sponsor").empty();
+        $("#sponsor").empty();
+        getCoordinates($('#address-inst').html(), $("#range-value").html(), selectedService);
     });
 })();
 // al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom
-$("#search").keyup(function () {
-    $('#auto-complete').empty();
+$("#search").keyup(function() {
+    $("#auto-complete").empty();
     autoComplete($("#search").val());
 });
 
 // //funzione per selezionare suggerimento e restuirlo nella search
 $(document).on('click', '.complete-results', function () {
     var value = $(this).text();
-    $('#search').val(value);
+    $("#search").val(value);
     getCoordinates($("#search").val());
-    $('#auto-complete').removeClass('complete-on');
-
+    $("#auto-complete").removeClass("complete-on");
 });
 
 // funzione per i suggerimenti nella search
 function autoComplete(query) {
-    if (query.length < 3 || query == '') {
-        $('#auto-complete').removeClass('complete-on');
+    if (query.length < 3 || query == "") {
+        $("#auto-complete").removeClass("complete-on");
     }
-    if (query != '' && isNaN(query) && query.length > 3) {
-        $('#auto-complete').addClass('complete-on');
-        tt.services.fuzzySearch({
+    if (query != "" && isNaN(query) && query.length > 3) {
+        $("#auto-complete").addClass("complete-on");
+        tt.services
+            .fuzzySearch({
                 key: apiKey,
-                query: query,
+                query: query
             })
             .go()
-            .then(function (response) {
-
+            .then(function(response) {
                 var address = [];
-                var results = '';
+                var results = "";
 
                 for (let i = 0; i < 4; i++) {
                     if (response.results[i]) {
-                        // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni                
-                        var streetName = response.results[i].address['streetName'];
-                        var city = response.results[i].address['municipality'];
-                        var countryCode = response.results[i].address['countryCode'];
-                        if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == 'IT') {
-                            address.push(streetName + ' ' + city);
-                        } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == 'IT') {
+                        // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
+                        var streetName =
+                            response.results[i].address["streetName"];
+                        var city = response.results[i].address["municipality"];
+                        var countryCode =
+                            response.results[i].address["countryCode"];
+                        if (
+                            streetName != undefined &&
+                            !address.includes(streetName) &&
+                            city != undefined &&
+                            !address.includes(city) &&
+                            countryCode == "IT"
+                        ) {
+                            address.push(streetName + " " + city);
+                        } else if (
+                            streetName == undefined &&
+                            city != undefined &&
+                            !address.includes(city) &&
+                            countryCode == "IT"
+                        ) {
                             address.push(city);
                         }
                     }
                 }
                 for (let i = 0; i < address.length; i++) {
-                    results += '<div class="complete-results">' + address[i] + '</div>'
-
+                    results +=
+                        '<div class="complete-results">' +
+                        address[i] +
+                        "</div>";
                 }
-                document.getElementById('auto-complete').innerHTML = results;
-                if (results == '') {
-                    $('#auto-complete').removeClass('complete-on');
+                document.getElementById("auto-complete").innerHTML = results;
+                if (results == "") {
+                    $("#auto-complete").removeClass("complete-on");
                 }
             });
     }
@@ -399,48 +404,46 @@ function buildLocation(el, text) {
     return details;
 }
 
-// compare arrays:
-function same(arr1, arr2) {
-    if($(arr1).not(arr2).length === 0 && $(arr2).not(arr1).length === 0){
-        return true
-    }
-     return false;    
-}
-
 // per chiudere l'autocomplete al click fuori
 $(document).click(function() {
-    $('#auto-complete').removeClass('complete-on');
-  });
+    $("#auto-complete").removeClass("complete-on");
+});
 //slider
-$(document).on("click", ".arrow-slider-sx", function(){
-     var activeImage = $(this).siblings('.apt-image.active');
-    activeImage.removeClass('active');
-    activeImage.addClass('hidden');
-     if (activeImage.hasClass('last') == true) {
-        activeImage.siblings('.apt-image.first').removeClass('hidden');
-        activeImage.siblings('.apt-image.first').addClass('active');
+$(document).on("click", ".arrow-slider-sx", function() {
+    var activeImage = $(this).siblings(".apt-image.active");
+    activeImage.removeClass("active");
+    activeImage.addClass("hidden");
+    if (activeImage.hasClass("last") == true) {
+        activeImage.siblings(".apt-image.first").removeClass("hidden");
+        activeImage.siblings(".apt-image.first").addClass("active");
     } else {
         //metto la classe attiva al successivo
-        activeImage.next().removeClass('hidden');
-        activeImage.next().addClass('active');
+        activeImage.next().removeClass("hidden");
+        activeImage.next().addClass("active");
     }
-
 });
- $(document).on("click", ".arrow-slider-dx", function(){
-    var activeImage = $(this).siblings('.apt-image.active');
-    
-    activeImage.removeClass('active');
-    activeImage.addClass('hidden');
-    
-    if (activeImage.hasClass('first') == true) {
-        activeImage.siblings('.apt-image.last').removeClass('hidden');
-        activeImage.siblings('.apt-image.last').addClass('active');
+$(document).on("click", ".arrow-slider-dx", function() {
+    var activeImage = $(this).siblings(".apt-image.active");
+
+    activeImage.removeClass("active");
+    activeImage.addClass("hidden");
+
+    if (activeImage.hasClass("first") == true) {
+        activeImage.siblings(".apt-image.last").removeClass("hidden");
+        activeImage.siblings(".apt-image.last").addClass("active");
     } else {
         //metto la classe attiva al successivo
-        activeImage.prev().removeClass('hidden');
-        activeImage.prev().addClass('active');
+        activeImage.prev().removeClass("hidden");
+        activeImage.prev().addClass("active");
     }
-     
 });
-
+$('.filter-toggle').click(function(){
+  $('.services').toggleClass('hidden');
+  $('.filter-search').toggleClass('hidden');
+  $(this).text('Chiudi');
+  $(this).toggleClass('chiudi');
+  if(!$(this).hasClass('chiudi')){
+    $(this).text('filtri');
+  }
+});
 

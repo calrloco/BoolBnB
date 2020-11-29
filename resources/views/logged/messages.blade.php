@@ -20,7 +20,8 @@
             <div class="message-card {{ (($message->read == 0) ? 'unread' : 'read') }}">
                 <div class="message-card-sx">
                     <div class="apart-img">
-                        <img src="{{ $message->apartment->images[0]->path }}" alt="foto appartamento">
+                       
+                        <img src="{{ asset('storage/'. $message->apartment->images[0]->path) }}" alt="foto appartamento">
                     </div>
                 </div>
                 <div class="message-card-center">

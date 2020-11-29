@@ -4,7 +4,7 @@
         <section class="top-section">
             <div class="title-apt">
 
-                <p class="title">{{ $apartment->title }}</p>
+                <p class="title">{{ strlen($apartment->title) <= 60 ? $apartment->title : substr($apartment->title,0,18).'...' }}</p>
                 <a class="address-apt" href="#">{{ $apartment->address }}, {{ $apartment->city }},
                     {{ $apartment->country }}</a>
             </div>
@@ -95,6 +95,7 @@
             <canvas id="chart-views"></canvas>
             <canvas id="chart-messages"></canvas>
         </section>
+        <input type="hidden" id="stats-check" style="display:none" value="{{$apartment->id}}">
     </div>
     <script src="{{ asset('js/stats.js') }}"></script>
 @endsection

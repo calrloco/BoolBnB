@@ -197,150 +197,183 @@ $(document).click(function() {
     $("#auto-complete").removeClass("complete-on");
 });
 
-
-// VALIDAZIONE FORM
-var letterNumber = /^[0-9a-zA-Z ]+$/;
-var letter = /^[a-zA-Z' ]+$/;
-var number = /^[0-9 ]+$/;
-var allChar = /^[a-zA-Z0-9'!@#àèòìù\$%\^\&*\)\( +=.,_-]+$/;
-var dateR = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
-var emailR = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+// VALIDAZIONE FORM incapulamento variabili da usare nelle funzione di validazione
+var checkForm = (function() {
+    return {
+        letterNumber: /^[0-9a-zA-Z ]+$/,
+        letter: /^[a-zA-Z' ]+$/,
+        number: /^[0-9 ]+$/,
+        allChar: /^[a-zA-Z0-9'!@#àèòìù\$%\^\&*\)\( +=.,_-]+$/,
+        dateR: /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
+        emailR: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    };
+})();
 
 // validazione input della pagina create e edit apartment
-$('#title').focusout(function(){
-    checkInput($(this), allChar, 10, 300, 'il titolo');
+$("#title").focusout(function() {
+    checkInput($(this), checkForm.allChar, 10, 300, "il titolo");
 });
-$('#address').focusout(function(){
-    checkInput($(this), allChar, 3, 300, "l'indirizzo");
+$("#address").focusout(function() {
+    checkInput($(this), checkForm.allChar, 3, 300, "l'indirizzo");
 });
-$('#city').focusout(function(){
-    checkInput($(this), allChar, 1, 30, "la città");
+$("#city").focusout(function() {
+    checkInput($(this), checkForm.allChar, 1, 30, "la città");
 });
 $("#postal-code").focusout(function() {
-    checkInput($(this), allChar, 1, 20, "il codice postale");
+    checkInput($(this), checkForm.allChar, 1, 20, "il codice postale");
 });
 $("#country").focusout(function() {
-    checkInput($(this), letter, 1, 30, "la nazione");
+    checkInput($(this), checkForm.letter, 1, 30, "la nazione");
 });
 $("#description").focusout(function() {
-    checkInput($(this), allChar, 20, 2000, "la descrizione");
+    checkInput($(this), checkForm.allChar, 20, 2000, "la descrizione");
 });
-$('#daily-price').focusout(function(){
-    checkInput($(this), number , 1, 2000, "il prezzo");
+$("#daily-price").focusout(function() {
+    checkInput($(this), checkForm.number, 1, 2000, "il prezzo");
 });
 $("#sm").focusout(function() {
-    checkInput($(this), number, 1, 2000, "i metri quadrati");
+    checkInput($(this), checkForm.number, 1, 2000, "i metri quadrati");
 });
 $("#rooms").focusout(function() {
-    checkInput($(this), number, 1, 2000, "le camere");
+    checkInput($(this), checkForm.number, 1, 2000, "le camere");
 });
 $("#beds").focusout(function() {
-    checkInput($(this), number, 1, 2000, "i letti");
+    checkInput($(this), checkForm.number, 1, 2000, "i letti");
 });
 $("#bathrooms").focusout(function() {
-    checkInput($(this), number, 1, 2000, "i bagni");
+    checkInput($(this), checkForm.number, 1, 2000, "i bagni");
 });
 
 // al click del submit controlla se i campi soddisfano le condizioni e impedisce il submit del create e del edit apartment
-$('#crea').click(function(e){
-    if( checkInput($('#title'), allChar, 10, 300, 'il titolo') &&
-        checkInput($('#address'), allChar, 3, 300, "l'indirizzo") &&
-        checkInput($('#city'), allChar, 1, 30, "la città") &&
-        checkInput($('#postal-code'), allChar, 1, 20, "il codice postale") &&
-        checkInput($('#country'), letter, 1, 30, "la nazione") &&
-        checkInput($('#description'), allChar, 20, 2000, "la descrizione") &&
-        checkInput($('#daily-price'), number , 1, 2000, "il prezzo prezzo") &&
-        checkInput($('#sm'), number , 1, 2000, "i metri quadrati") &&
-        checkInput($('#rooms'), number , 1, 2000, "le camere") &&
-        checkInput($('#beds'), number , 1, 2000, "i letti") &&
-        checkInput($('#bathrooms'), number , 1, 2000, "i bagni") ||
-
-            checkInput($('#title'), allChar, 10, 300, 'il titolo') ||
-            checkInput($('#address'), allChar, 3, 300, "l'indirizzo") ||
-            checkInput($('#city'), allChar, 1, 30, "la città") ||
-            checkInput($('#postal-code'), allChar, 1, 20, "il codice postale") ||
-            checkInput($('#country'), letter, 1, 30, "la nazione") ||
-            checkInput($('#description'), allChar, 20, 2000, "la descrizione") ||
-            checkInput($('#daily-price'), number , 1, 2000, "il prezzo") ||
-            checkInput($('#sm'), number , 1, 2000, "i metri quadrati") ||
-            checkInput($('#rooms'), number , 1, 2000, "le camere") ||
-            checkInput($('#beds'), number , 1, 2000, "i letti") ||
-            checkInput($('#bathrooms'), number , 1, 2000, "i bagni")
-        ){
+$("#crea").click(function(e) {
+    if (
+        (checkInput($("#title"), checkForm.allChar, 10, 300, "il titolo") &&
+            checkInput($("#address"), checkForm.allChar, 3, 300, "l'indirizzo") &&
+            checkInput($("#city"), checkForm.allChar, 1, 30, "la città") &&
+            checkInput(
+                $("#postal-code"),
+                checkForm.allChar,
+                1,
+                20,
+                "il codice postale"
+            ) &&
+            checkInput($("#country"), checkForm.letter, 1, 30, "la nazione") &&
+            checkInput(
+                $("#description"),
+                checkForm.allChar,
+                20,
+                2000,
+                "la descrizione"
+            ) &&
+            checkInput(
+                $("#daily-price"),
+                checkForm.number,
+                1,
+                2000,
+                "il prezzo prezzo"
+            ) &&
+            checkInput($("#sm"), checkForm.number, 1, 2000, "i metri quadrati") &&
+            checkInput($("#rooms"), checkForm.number, 1, 2000, "le camere") &&
+            checkInput($("#beds"), checkForm.number, 1, 2000, "i letti") &&
+            checkInput($("#bathrooms"), checkForm.number, 1, 2000, "i bagni")) ||
+        checkInput($("#title"), checkForm.allChar, 10, 300, "il titolo") ||
+        checkInput($("#address"), checkForm.allChar, 3, 300, "l'indirizzo") ||
+        checkInput($("#city"), checkForm.allChar, 1, 30, "la città") ||
+        checkInput($("#postal-code"), checkForm.allChar, 1, 20, "il codice postale") ||
+        checkInput($("#country"), checkForm.letter, 1, 30, "la nazione") ||
+        checkInput($("#description"), checkForm.allChar, 20, 2000, "la descrizione") ||
+        checkInput($("#daily-price"), checkForm.number, 1, 2000, "il prezzo") ||
+        checkInput($("#sm"), checkForm.number, 1, 2000, "i metri quadrati") ||
+        checkInput($("#rooms"), checkForm.number, 1, 2000, "le camere") ||
+        checkInput($("#beds"), checkForm.number, 1, 2000, "i letti") ||
+        checkInput($("#bathrooms"), checkForm.number, 1, 2000, "i bagni")
+    ) {
         e.preventDefault();
     }
 });
 
 // validazione input della pagina register
-$('#firstnameR').focusout(function(){
-    checkInput($(this), letter, 2, 50, 'il nome');
+$("#firstnameR").focusout(function() {
+    checkInput($(this), checkForm.letter, 2, 50, "il nome");
 });
-$('#lastnameR').focusout(function(){
-    checkInput($(this), letter, 2, 50, 'il cognome');
+$("#lastnameR").focusout(function() {
+    checkInput($(this), checkForm.letter, 2, 50, "il cognome");
 });
-$('#emailR').focusout(function(){
-    checkInput($(this), emailR, 2, 255, 'la mail');
+$("#emailR").focusout(function() {
+    checkInput($(this), checkForm.emailR, 2, 255, "la mail");
 });
-$('#passwordR').focusout(function(){
-    checkInput($(this), allChar, 8, 255, 'la password');
+$("#passwordR").focusout(function() {
+    checkInput($(this), checkForm.allChar, 8, 255, "la password");
 });
-$('#password-confirmR').focusout(function(){
-    if($('#password-confirmR').val() != $('#passwordR').val() || $('#password-confirmR').val() == ''){
-        $(this).addClass('error');
-        $(this).next('.message').addClass('message-on');
-        $(this).next('.message').text('Le password non sono uguali');
+$("#password-confirmR").focusout(function() {
+    if (
+        $("#password-confirmR").val() != $("#passwordR").val() ||
+        $("#password-confirmR").val() == ""
+    ) {
+        $(this).addClass("error");
+        $(this)
+            .next(".message")
+            .addClass("message-on");
+        $(this)
+            .next(".message")
+            .text("Le password non sono uguali");
     }
 });
-$('#dateR').focusout(function(){
-   if($('#dateR').val() == ''){
-    $(this).addClass('error');
-    $(this).next('.message').addClass('message-on');
-    $(this).next('.message').text('Non hai inserito la data');
-   }else{
-    $(this).removeClass('error');
-    $(this).next('.message').removeClass('message-on');
-   }
+$("#dateR").focusout(function() {
+    if ($("#dateR").val() == "") {
+        $(this).addClass("error");
+        $(this)
+            .next(".message")
+            .addClass("message-on");
+        $(this)
+            .next(".message")
+            .text("Non hai inserito la data");
+    } else {
+        $(this).removeClass("error");
+        $(this)
+            .next(".message")
+            .removeClass("message-on");
+    }
 });
 
 // Al click del form register controlla se tutte le condizione sono soddisfatte
-$('#registerR').click(function(e){
-    if(checkInput($('#firstnameR'), letter, 2, 50, 'il nome') &&
-        checkInput($('#lastnameR'), letter, 2, 50, 'il cognome') &&
-        checkInput($('#emailR'), emailR, 2, 255, 'la mail') &&
-        checkInput($('#passwordR'), allChar, 8, 255, 'la password') &&
-        $('#password-confirmR').val() != $('#passwordR').val() &&
-        $('#password-confirmR').val() == '' &&
-        $('#dateR').val() == '' ||
-
-        checkInput($('#firstnameR'), letter, 2, 50, 'il nome') ||
-        checkInput($('#lastnameR'), letter, 2, 50, 'il cognome') ||
-        checkInput($('#emailR'), emailR, 2, 255, 'la mail') ||
-        checkInput($('#passwordR'), allChar, 8, 255, 'la password') ||
-        $('#password-confirmR').val() != $('#passwordR').val() ||
-        $('#password-confirmR').val() == '' ||
-        $('#dateR').val() == ''
-    ){
+$("#registerR").click(function(e) {
+    if (
+        (checkInput($("#firstnameR"), checkForm.letter, 2, 50, "il nome") &&
+            checkInput($("#lastnameR"), checkForm.letter, 2, 50, "il cognome") &&
+            checkInput($("#emailR"), checkForm.emailR, 2, 255, "la mail") &&
+            checkInput($("#passwordR"), checkForm.allChar, 8, 255, "la password") &&
+            $("#password-confirmR").val() != $("#passwordR").val() &&
+            $("#password-confirmR").val() == "" &&
+            $("#dateR").val() == "") ||
+        checkInput($("#firstnameR"), checkForm.letter, 2, 50, "il nome") ||
+        checkInput($("#lastnameR"), checkForm.letter, 2, 50, "il cognome") ||
+        checkInput($("#emailR"), checkForm.emailR, 2, 255, "la mail") ||
+        checkInput($("#passwordR"), checkForm.allChar, 8, 255, "la password") ||
+        $("#password-confirmR").val() != $("#passwordR").val() ||
+        $("#password-confirmR").val() == "" ||
+        $("#dateR").val() == ""
+    ) {
         e.preventDefault();
     }
 });
 // fine pagina register
 
 // validazione pagina login
-$('#emailL').focusout(function(){
-    checkInput($(this), emailR, 2, 255, 'la mail');
+$("#emailL").focusout(function() {
+    checkInput($(this), emailR, 2, 255, "la mail");
 });
-$('#passwordL').focusout(function(){
-    checkInput($(this), allChar, 8, 255, 'la password');
+$("#passwordL").focusout(function() {
+    checkInput($(this), allChar, 8, 255, "la password");
 });
 
-$('#registerL').click(function(e){
-    if(checkInput($('#emailL'), emailR, 2, 255, 'la mail') &&
-    checkInput($('#passwordL'), allChar, 8, 255, 'la password') ||
-
-    checkInput($('#emailL'), emailR, 2, 255, 'la mail') ||
-    checkInput($('#passwordL'), allChar, 8, 255, 'la password')
-    ){
+$("#registerL").click(function(e) {
+    if (
+        (checkInput($("#emailL"), emailR, 2, 255, "la mail") &&
+            checkInput($("#passwordL"), allChar, 8, 255, "la password")) ||
+        checkInput($("#emailL"), emailR, 2, 255, "la mail") ||
+        checkInput($("#passwordL"), allChar, 8, 255, "la password")
+    ) {
         e.preventDefault();
     }
 });
@@ -359,7 +392,9 @@ function checkInput(selector, kind, min, max, field) {
         if (selector.val() == "") {
             selector.next(".message").text("Non hai inserito " + field);
         } else if (!matchKind(selector, kind)) {
-            selector.next('.message').text('Hai inserito un formato non valido');
+            selector
+                .next(".message")
+                .text("Hai inserito un formato non valido");
         } else if (selector.val().length < min) {
             selector.next(".message").text("Il campo è troppo breve");
         } else if (selector.val().length > max) {
@@ -380,47 +415,72 @@ function matchKind(selector, kind) {
     return false;
 }
 
-$(".openB").click(function () {
-
+$(".openB").click(function() {
     $(".left").addClass("open");
-    setTimeout(function () {
+    setTimeout(function() {
         $(".right").addClass("open");
     }, 250);
-    setTimeout(function () {
+    setTimeout(function() {
         $(".back").addClass("open");
         $(".front").addClass("display");
     }, 350);
-    $(".closeB").delay(1000).fadeIn();
+    $(".closeB")
+        .delay(1000)
+        .fadeIn();
 });
 
-$(".closeB").click(function () {
-
-    setTimeout(function () {
+$(".closeB").click(function() {
+    setTimeout(function() {
         $(".left").removeClass("open");
     }, 250);
     $(".right").removeClass("open");
-    setTimeout(function () {
+    setTimeout(function() {
         $(".back").removeClass("open");
         $(".front").removeClass("display");
     }, 600);
     $(".closeB").fadeOut();
 });
 
-$(".pay").click(function () {
-    setTimeout(function () {
+$(".pay").click(function() {
+    setTimeout(function() {
         $(".form-container").addClass("acti");
     }, 500);
 });
 
-$("#sponsorBasic").click(function () {
-    $('#amount').val([2.99]);
-   $('#sponsor_plan').val([1]);
+$("#sponsorBasic").click(function() {
+    $("#amount").val([2.99]);
+    $("#sponsor_plan").val([1]);
 });
-$("#sponsorMedium").click(function () {
-    $('#amount').val([5.99]);
-   $('#sponsor_plan').val([2]);
+$("#sponsorMedium").click(function() {
+    $("#amount").val([5.99]);
+    $("#sponsor_plan").val([2]);
 });
-$("#sponsorPremium").click(function () {
-    $('#amount').val([9.99]);
-   $('#sponsor_plan').val([3]);
+$("#sponsorPremium").click(function() {
+    $("#amount").val([9.99]);
+    $("#sponsor_plan").val([3]);
 });
+$('.hamburger-menu').click(function() {
+  $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
+  $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
+  $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
+  $('.hamburger-menu').toggleClass('hamburger-menu-animated');
+  $('.mobile-menu').toggleClass('hidden');
+});
+// chiamta che prende ip dell'utente e capisce la regione per ricerca nei paraggi
+var getIp = (function() {
+    $.ajax({
+        mehtod: "GET",
+        url: "https://api.ipdata.co/",
+        data: {
+            "api-key":
+                "1777abd71f2ebf5cdeb8cc5089569063908fa10482d91cfff26ae02a"
+        },
+        success: function(risposta) {
+            console.log(risposta);
+            $("#ip-home-search").val(risposta.region);
+        },
+        error: function() {
+            
+        }
+    });
+})();

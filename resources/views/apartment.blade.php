@@ -5,7 +5,7 @@
         <section class="top-section">
             <span class="hidden" id="app-id">{{ $apartment->id }}</span>
             <div class="title-apt">
-                <p class="title">{{ $apartment->title }}</p>
+                <p class="title">{{ strlen($apartment->title) <= 60 ? $apartment->title : substr($apartment->title,0,18).'...' }}</p>
                 <a class="address-apt" href="#">{{ $apartment->address }}, {{ $apartment->city }},
                     {{ $apartment->country }}</a>
             </div>

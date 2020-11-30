@@ -1,11 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
+@if (session('status'))
+<p class="status-msg">{{ session('status') }}</p>
+@endif
 
     <div class="container-center">
         <h2 class="messaggi">

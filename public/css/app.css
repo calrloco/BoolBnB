@@ -6011,44 +6011,69 @@ a {
 }
 
 @media screen and (max-width: 800px) {
-  .info-apt-section .info-box-sx .services-box ul.services {
+  .info-apt-section .info-box-sx .services-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
+    flex-direction: column;
   }
 }
 
-.info-apt-section .info-box-sx .services-box ul.services .services-title {
+.info-apt-section .info-box-sx .services-box .services-title {
   font-size: 22px;
   font-weight: 500;
-  padding-bottom: 10px;
+  padding: 10px 0;
 }
 
-.info-apt-section .info-box-sx .services-box ul.services .service-list {
+.info-apt-section .info-box-sx .services-box .services {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+  .info-apt-section .info-box-sx .services-box .services {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.info-apt-section .info-box-sx .services-box .services .service-list {
   font-size: 16px;
   padding: 5px;
   margin-bottom: 1rem;
   list-style-type: none;
 }
 
-.info-apt-section .info-box-sx .services-box ul.services .service-list .service-head {
+.info-apt-section .info-box-sx .services-box .services .service-list .service-head {
+  width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
-  justify-content: flex-start;
   padding-bottom: 5px;
 }
 
-.info-apt-section .info-box-sx .services-box ul.services .service-list .service-head .service-icon {
-  padding-right: 10px;
+@media screen and (max-width: 800px) {
+  .info-apt-section .info-box-sx .services-box .services .service-list .service-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.info-apt-section .info-box-sx .services-box .services .service-list .service-head .service-icon {
+  padding-right: 5px;
   font-size: 3rem;
   color: #df1362;
 }
 
-@media screen and (max-width: 800px) {
-  .info-apt-section .info-box-sx .services-box ul.services .service-list #service-descr {
-    display: none;
-  }
+.info-apt-section .info-box-sx .services-box .services .service-list .service-head .service-title {
+  vertical-align: 3rem;
 }
 
 .info-apt-section .info-box-dx {
@@ -6382,7 +6407,7 @@ h1 {
 }
 
 .container__search-left {
-  flex: 1.3;
+  flex: 1.4;
   max-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
   overflow-y: scroll;
 }
@@ -6401,7 +6426,7 @@ h1 {
 }
 
 .container__search-right {
-  flex: 1.7;
+  flex: 1.6;
 }
 
 @media screen and (max-width: 1462px) {
@@ -6429,27 +6454,33 @@ h1 {
   padding: 0.8rem 0.8rem;
   cursor: pointer;
   margin-bottom: 2rem;
+  margin-right: 2rem;
   min-height: 23.1rem;
   border-radius: 0.8rem;
   height: 35rem;
   max-height: 35rem;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.container__search .search__resoults__apartment-cards-content:hover {
+  box-shadow: 0px 10px 20px rgba(43, 20, 11, 0.315);
 }
 
 @media screen and (min-width: 2000px) {
   .container__search .search__resoults__apartment-cards-content {
-    flex: 0 0 calc(100% / 3);
+    flex: 0 0 calc((100% - 6rem)/ 3);
   }
 }
 
 @media screen and (max-width: 800px) {
   .container__search .search__resoults__apartment-cards-content {
-    flex: 0 0 calc(100% / 2);
+    flex: 0 0 calc((100% - 4rem) / 2);
   }
 }
 
 @media screen and (max-width: 414px) {
   .container__search .search__resoults__apartment-cards-content {
-    flex: 1 1 100%;
+    flex: 1 1 calc(100% - 2rem);
   }
 }
 
@@ -6461,7 +6492,7 @@ h1 {
   flex: 1 0;
   width: 100%;
   padding-top: 1.5rem;
-  max-height: 40%;
+  max-height: 50%;
 }
 
 .container__search .search__resoults__apartment-cards-content-form {
@@ -6479,7 +6510,7 @@ h1 {
   position: relative;
   flex: 0 0 100%;
   width: 100%;
-  max-height: 60%;
+  max-height: 50%;
 }
 
 @media screen and (max-width: 800px) {
@@ -6571,6 +6602,10 @@ h1 {
 
 .services {
   padding: 2rem 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
 }
 
 .services-all {
@@ -6630,19 +6665,23 @@ canvas:focus {
   transform: translateY(0px);
 }
 
-.services-icons {
+.services-icons,
+.details-recap {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   flex-direction: row;
+  padding-top: 5px;
 }
 
-.services-icons i {
+.services-icons i,
+.details-recap i {
   font-size: 2rem;
   color: var(--pink-bnb);
 }
 
-.services-icons i:not(:last-child) {
+.services-icons i:not(:last-child),
+.details-recap i:not(:last-child) {
   margin-right: 1rem;
 }
 
@@ -6653,6 +6692,10 @@ canvas:focus {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.details-recap {
+  list-style: none;
 }
 
 .payment-checkout {

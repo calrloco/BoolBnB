@@ -120,16 +120,24 @@
 
         .services-box {
             padding: 10px 0;
-            
+            @include responsive(tab){
+                @include flex(column, center, center);
+            }
 
-            ul.services{    
+            .services-title {
+                font-size: 22px;
+                font-weight: 500;
+                padding: 10px 0;
+
+            }
+
+            .services{
+                width:100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
                 @include responsive(tab){
-                    @include flex(row, center, center);
-                    }
-                .services-title {         
-                    font-size: 22px;
-                    font-weight: 500;
-                    padding-bottom: 10px;
+                    @include flex(column, center, center);
                 }
 
                 .service-list {
@@ -139,25 +147,32 @@
                     list-style-type: none;
 
                         .service-head{
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: flex-start;
-                        padding-bottom: 5px;
+                            width:100%;
+                            @include flex(row, center, center);
+                            padding-bottom: 5px;
+                            @include responsive(tab){
+                                @include flex(column, center, center);
+                            }
 
                             .service-icon{
-                                padding-right: 10px;
+                                padding-right: 5px;
                                 font-size: 3rem;
                                 color: #df1362;
                             }
-                        }
-                        #service-descr{
-                            @include responsive(tab){
-                                display: none;
-                                } 
+
+                            .service-title{
+                                vertical-align:3rem;
                             }
                         }
+
+                        // #service-descr{
+                        //     @include responsive(tab){
+                        //         display: none;
+                        //         }
+                        //     }
                     }
                 }
+            }
         }
 
     .info-box-dx {
@@ -195,16 +210,16 @@
                 align-self: flex-end;
                 margin-right: 0px;
                 width: 100%;
-                
-                 
 
-             
+
+
+
             input, textarea{
                 width: 100%;
                 padding: 7.5px 15px;
                 border-radius: 3px;
                 margin-top: 5px;
-            }    
+            }
 
             #send-message{
                 padding: 0.8em 3.5em;
@@ -221,7 +236,7 @@
                 width: 100%;
                 background-image: var(--gradient-color);
                 color: #ffffff;
-            }    
+            }
 
 
                 .btn-show {
@@ -254,7 +269,7 @@
     width: 100%;
     height: 100%;
 
-    
+
 }
 .firstname-message,.lastname-message,.email-message,.message{
     margin-bottom:1rem;
@@ -269,7 +284,7 @@
 }
 #chart-views{
     max-width: 100%;
-    
+
 }
 #chart-messages{
     max-width: 100%;

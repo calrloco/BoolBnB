@@ -310,6 +310,7 @@
 // statistiche
 .chart-section{
     @include flex(column,flex-start,stretch);
+    
 }
 #chart-views{
     max-width: 100%;

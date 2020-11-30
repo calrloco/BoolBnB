@@ -42,13 +42,14 @@
         border-radius: $card-img-radius;
         @include flex(row, space-between, center);
         position: relative;
-
+        
 
         
         .apt-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 1.1rem;
         }
 
         .arrow-slider-sx {
@@ -68,6 +69,8 @@
             position: absolute;
             right: 10px;
 
+
+
         }
 
         .arrow-slider-dx:hover {
@@ -81,15 +84,20 @@
     font-size:1.4rem;
     margin-bottom:9rem;
     @include flex(row, space-between, flex-start);
-    @include responsive(tab){
+    color: var(--color-font-black);
+    @media screen and (max-width:1156px){
         display: block;
         text-align: center;
     }
-    
+   
 
     .info-box-sx {
-        width: 65%;
+        flex: 1.4;
         height: 100%;
+
+        @media screen and (max-width:1376px){
+            flex: 1;
+        }
         @include responsive(tab){
             width: 100%;
         }
@@ -97,7 +105,7 @@
         .info-apt-summary {
             @include flex(row, space-between, center);
             padding: 10px 0;
-            border-bottom: 1px solid #ff5a5f;
+            border-bottom: 1px solid #dddddd;
             @include responsive(tab){
                 justify-content: center;
             }
@@ -106,6 +114,7 @@
                 font-size: 22px;
                 font-weight: 500;
                 margin-bottom: .8rem;
+                font-weight: 700;
             }
 
             .info-apt {
@@ -116,7 +125,7 @@
         .apt-description {
             padding: 20px 0;
             font-size: 16px;
-            border-bottom: 1px solid #ff5a5f;
+            border-bottom: 1px solid #dddddd;
 
             & p {
                 word-wrap: break-word;
@@ -186,6 +195,7 @@
         -webkit-position: sticky;
         top: 10rem;
         z-index:2;
+       @include flex(row,center, center);
         @media screen and (max-width:600px){
             width: 100%;
             @include flex(row, center, center);
@@ -196,7 +206,7 @@
         }
       
         @media screen and (max-width:1376px){
-            flex:1 1 100%;
+            flex:1;
         }
        
         .send-message-box {
@@ -262,6 +272,10 @@
                     font-size: 16px;
                     text-decoration-line: none;
                     color: black;
+
+                    &:hover{
+                        color: white;
+                    }
                 }
 
                 label {

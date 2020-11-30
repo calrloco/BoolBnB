@@ -35,7 +35,7 @@
                     <li class="footer-header">Ringraziamenti</li>
                     <li class="footer-li"><i class="footer-icons fas fa-code"></i>Formicola Luca</li>
                     <li class="footer-li"><i class="footer-icons fas fa-code"></i>Galfo Cristina</li>
-                    <li class="footer-li"><i class="footer-icons fas fa-code"></i>Minchele Papagni</li>
+                    <li class="footer-li"><i class="footer-icons fas fa-code"></i>Michele Papagni</li>
                     <li class="footer-li"><i class="footer-icons fas fa-code"></i>Fabio Forghieri</li>
                 </div>
             </div>

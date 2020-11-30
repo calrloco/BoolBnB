@@ -29,7 +29,8 @@
         <div class="container__search-right" id="map"></div>
         
     </div>
- 
+
+        {{-- SCRIPT HANDLEBARS --}}
         <script id="handlebars_cards" type="text/x-handlebars-template">
         <div class="search__resoults__apartment-cards-content sponsor-@{{sponsor}}">
         <div class="search__resoults__apartment-cards-content-slider" data-id="@{{dataId}}">
@@ -49,7 +50,7 @@
                 <p class="search__resoults__apartment-cards-content-description">
                     @{{ title }}
                 </p>
-                <p>Prezzo: @{{ price }} Mq: @{{ mq }} Stanze: @{{ rooms }} Posti letto: @{{ beds }} Bagni: @{{ bathrooms }}</p>
+                <ul class="details-recap"><li> Prezzo: @{{ price }}</li> <li> Mq: @{{ mq }}</li> <li> Stanze: @{{ rooms }}</li> <li> Posti letto: @{{ beds }}</li> <li> Bagni: @{{ bathrooms }}</li></ul>
                 <div class="services-icons" serv-id="@{{dataId}}">
                    
                 </div>

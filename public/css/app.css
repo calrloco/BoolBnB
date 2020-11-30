@@ -6247,6 +6247,20 @@ a {
 }
 
 @media screen and (max-width: 800px) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  .info-apt-section .info-box-sx .services-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.info-apt-section .info-box-sx .services-box .services-title {
+=======
+>>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
   .info-apt-section .info-box-sx .services-box ul.services {
     display: flex;
     justify-content: center;
@@ -6256,11 +6270,34 @@ a {
 }
 
 .info-apt-section .info-box-sx .services-box ul.services .services-title {
+<<<<<<< HEAD
+=======
+>>>>>>> master
+>>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
   font-size: 22px;
   font-weight: 500;
-  padding-bottom: 10px;
+  padding: 10px 0;
 }
 
+.info-apt-section .info-box-sx .services-box .services {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+<<<<<<< HEAD
+=======
+@media screen and (max-width: 800px) {
+  .info-apt-section .info-box-sx .services-box .services {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+>>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
 .info-apt-section .info-box-sx .services-box ul.services .service-list {
   font-size: 16px;
   padding: 5px;
@@ -6268,23 +6305,60 @@ a {
   list-style-type: none;
 }
 
+<<<<<<< HEAD
 .info-apt-section .info-box-sx .services-box ul.services .service-list .service-head {
+=======
+<<<<<<< HEAD
+.info-apt-section .info-box-sx .services-box .services .service-list .service-head {
+  width: 100%;
+=======
+.info-apt-section .info-box-sx .services-box ul.services .service-list .service-head {
+>>>>>>> master
+>>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
-  justify-content: flex-start;
   padding-bottom: 5px;
 }
 
+<<<<<<< HEAD
 .info-apt-section .info-box-sx .services-box ul.services .service-list .service-head .service-icon {
   padding-right: 10px;
+=======
+<<<<<<< HEAD
+@media screen and (max-width: 800px) {
+  .info-apt-section .info-box-sx .services-box .services .service-list .service-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+.info-apt-section .info-box-sx .services-box .services .service-list .service-head .service-icon {
+  padding-right: 5px;
+=======
+.info-apt-section .info-box-sx .services-box ul.services .service-list .service-head .service-icon {
+  padding-right: 10px;
+>>>>>>> master
+>>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
   font-size: 3rem;
   color: #df1362;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+.info-apt-section .info-box-sx .services-box .services .service-list .service-head .service-title {
+  vertical-align: 3rem;
+=======
+>>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
 @media screen and (max-width: 800px) {
   .info-apt-section .info-box-sx .services-box ul.services .service-list #service-descr {
     display: none;
   }
+>>>>>>> master
 }
 
 .info-apt-section .info-box-dx {
@@ -6684,8 +6758,13 @@ h1 {
 }
 
 .container__search-left {
+<<<<<<< HEAD
   flex: 1;
   max-height: calc(100vh - var(--nav-height));
+=======
+  flex: 1.4;
+  max-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
+>>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
   overflow-y: scroll;
 }
 
@@ -6711,6 +6790,7 @@ h1 {
 }
 
 .container__search-right {
+<<<<<<< HEAD
   flex: 2;
   max-height: calc(100vh - var(--nav-height));
   min-height: calc(100vh - var(--nav-height));
@@ -6720,6 +6800,9 @@ h1 {
   .container__search-right {
     display: none;
   }
+=======
+  flex: 1.6;
+>>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
 }
 
 @media screen and (max-width: 1462px) {
@@ -6747,27 +6830,33 @@ h1 {
   padding: 0.8rem 0.8rem;
   cursor: pointer;
   margin-bottom: 2rem;
+  margin-right: 2rem;
   min-height: 23.1rem;
   border-radius: 0.8rem;
   height: 35rem;
   max-height: 35rem;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.container__search .search__resoults__apartment-cards-content:hover {
+  box-shadow: 0px 10px 20px rgba(43, 20, 11, 0.315);
 }
 
 @media screen and (min-width: 2000px) {
   .container__search .search__resoults__apartment-cards-content {
-    flex: 0 0 calc(100% / 3);
+    flex: 0 0 calc((100% - 6rem)/ 3);
   }
 }
 
 @media screen and (max-width: 800px) {
   .container__search .search__resoults__apartment-cards-content {
-    flex: 0 0 calc(100% / 2);
+    flex: 0 0 calc((100% - 4rem) / 2);
   }
 }
 
 @media screen and (max-width: 414px) {
   .container__search .search__resoults__apartment-cards-content {
-    flex: 1 1 100%;
+    flex: 1 1 calc(100% - 2rem);
   }
 }
 
@@ -6779,7 +6868,7 @@ h1 {
   flex: 1 0;
   width: 100%;
   padding-top: 1.5rem;
-  max-height: 40%;
+  max-height: 50%;
 }
 
 .container__search .search__resoults__apartment-cards-content-form {
@@ -6797,7 +6886,7 @@ h1 {
   position: relative;
   flex: 0 0 100%;
   width: 100%;
-  max-height: 60%;
+  max-height: 50%;
 }
 
 @media screen and (max-width: 800px) {
@@ -6950,19 +7039,22 @@ canvas:focus {
   transform: translateY(0px);
 }
 
-.services-icons {
+.services-icons,
+.details-recap {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
 }
 
-.services-icons i {
+.services-icons i,
+.details-recap i {
   font-size: 2rem;
   color: var(--pink-bnb);
 }
 
-.services-icons i:not(:last-child) {
+.services-icons i:not(:last-child),
+.details-recap i:not(:last-child) {
   margin-right: 1rem;
 }
 
@@ -6973,6 +7065,10 @@ canvas:focus {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.details-recap {
+  list-style: none;
 }
 
 .payment-checkout {
@@ -7039,10 +7135,6 @@ canvas:focus {
   border: 1px solid gray;
   margin-top: 5px;
   border-radius: 5px;
-}
-
-.payment-checkout .payment-checkout-form .pay-button .btn-succes:hover {
-  background: gray;
 }
 
 *,
@@ -7392,199 +7484,84 @@ canvas:focus {
   transform: scale(0.9);
 }
 
-.container-center .title {
-  font-size: 22px;
+.messaggi {
+  padding: 10px;
   text-align: center;
-  margin-bottom: 20px;
 }
 
-.container-center .messages-box {
-  height: 100%;
-  width: 100%;
-  padding: 10px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.message-list {
+  list-style: none;
+  /*    display: flex;
+     flex-wrap: wrap;
+     justify-content: center; */
 }
 
-@media screen and (max-width: 414px) {
-  .container-center .messages-box {
-    padding: 0;
-  }
+.message-list li {
+  margin: 10px;
 }
 
-.container-center .messages-box .message-card {
-  min-height: 100px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  border: 1px solid #ff5a5f;
-  border-radius: 15px;
+.message-list .message-wrap {
+  position: relative;
+  display: grid;
+  grid-template-columns: 130px minmax(120px, 1fr) 25px;
+  grid-gap: 2rem;
+  background: white;
+  box-shadow: 0 4px 10px #686868;
+  padding: 2rem;
+  border-radius: 16px;
 }
 
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+.message-list .message-wrap .message-author {
+  font-weight: 700;
+  font-size: 24px;
 }
 
-.container-center .messages-box .message-card .message-card-sx {
-  width: 20%;
-  height: 100%;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.message-list .message-wrap .message-time {
+  margin: 0 0 1rem;
+  font-size: 11px;
 }
 
-.container-center .messages-box .message-card .message-card-sx .apart-img img {
-  display: flex;
-  width: 150px;
-  height: 150px;
-  border-radius: 15px;
+.message-list .message-wrap .message-time i {
+  padding: 3px 4px;
+  color: #929090;
+  font-size: 13px;
 }
 
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-sx .apart-img img {
-    padding-top: 10px;
-  }
-}
-
-.container-center .messages-box .message-card .message-card-center {
-  width: 70%;
-  height: 100%;
-  min-height: 100px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-}
-
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-center {
-    width: 90%;
-  }
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-up {
-  width: 100%;
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-up .details-sender {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
-}
-
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-center .sender-details-up .details-sender {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 10px 0;
-  }
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-up .details-sender .details {
-  font-size: 18px;
-}
-
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-center .sender-details-up .details-sender .details {
-    text-align: center;
-  }
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-up .details-apt {
+.message-list .message-wrap .message-content {
   padding-top: 10px;
+  padding-right: 5px;
+}
+
+.message-list .message-wrap .message-content i {
+  padding: 3px 4px;
+  color: #929090;
+  font-size: 13px;
+}
+
+.message-list .message-wrap .message-content .message-user {
   font-size: 12px;
-  text-align: center;
+  margin-left: 5px;
 }
 
-.container-center .messages-box .message-card .message-card-center .sender-details-up .details-apt .apt-link {
-  color: black;
-  text-decoration: none;
+.message-list .btn-delete {
+  background: transparent;
 }
 
-.container-center .messages-box .message-card .message-card-center .sender-details-up .details-apt a:hover {
-  color: #ff5a5f;
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-down {
-  padding: 0 20px;
+.message-list .message-actions {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-}
-
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-center .sender-details-down {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    padding: 0 5px;
-  }
-}
-
-.container-center .messages-box .message-card .message-card-center .sender-details-down .message {
-  padding-top: 15px;
-  font-size: 16px;
-  color: black;
-  border-top: 1px solid #ff5a5f;
-  max-height: 1000px;
-  text-align: justify;
-}
-
-.container-center .messages-box .message-card .message-card-dx {
-  width: 10%;
-  height: 100%;
-  border-radius: 15px;
-}
-
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-dx {
-    width: 100%;
-  }
-}
-
-.container-center .messages-box .message-card .message-card-dx .button-section .buttons {
-  width: 100%;
-  display: flex;
+  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
 }
 
-@media screen and (max-width: 414px) {
-  .container-center .messages-box .message-card .message-card-dx .button-section .buttons {
-    height: 100%;
-    padding-bottom: 10px;
-  }
+.message-list .delete i {
+  font-size: 18px;
+  color: black;
+  cursor: pointer;
+  padding: 10px;
 }
 
-.container-center .messages-box .message-card .message-card-dx .button-section .buttons .msg-btn {
-  color: gray;
-  font-size: 20px;
+.message-list .message-body {
+  border-right: 1px solid gray;
 }
 
 .active {

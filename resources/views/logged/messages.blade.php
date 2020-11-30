@@ -1,79 +1,70 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="container-center">
-    {{-- avviso di riuscita eliminazione messaggio --}}
-    @if (session('status'))
+  @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
     </div>
-    @endif
+@endif
 
-    {{-- controllo presenza di messaggi --}}
-    @if (!empty($messages))
-    <div class="header">
-        <p class="title">I tuoi messaggi</p>
-    </div>
-    <div class="messages-box">
-        @foreach($messages as $message)
-            <div class="message-card {{ (($message->read == 0) ? 'unread' : 'read') }}">
-                <div class="message-card-sx">
-                    <div class="apart-img">
-                       
-                        <img src="{{ asset('storage/'. $message->apartment->images[0]->path) }}" alt="foto appartamento">
-                    </div>
-                </div>
-                <div class="message-card-center">
-                    <div class="sender-details-up">
-                        <div class="details-sender">
-                            <p class="details"> <strong>Da: </strong> {{ $message->name . " " . $message->lastname }}</p>
-                            <p class="details"> <strong>Email: </strong> {{ $message->email }}</p>
-                        </div>
-                        <div class="details-apt">
-                            <p class="details"> <strong>Per: </strong> <a class="apt-link" href="{{ route('host.show', $message->apartment->id) }}">{{ $message->apartment->title }}</a></p>
-                        </div>
-                    </div>
-                    <div class="sender-details-down">
-                        <p class="message"> <strong>Messaggio: </strong> {{ $message->message }}</p>
-                    </div>
-                </div>
-                <div class="message-card-dx">
-                    <div class="button-section">
-                        <div class="buttons">
-                            {{-- controllo messaggio letto --}}
-                            <form action="{{ route('messages.update', $message->id_msg) }}" method="post">
-                                @csrf
-                                @method('PATCH')
-                                <button type="submit">
-                                    @if($message->read == 0)
-                                    <i class="msg-btn fas fa-envelope"></i>
-                                    @else
-                                    <i class="msg-btn fas fa-envelope-open"></i>
-                                    @endif
-                                </button>
-                            </form>
-                            <form action="{{ route('messages.destroy', $message->id_msg) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"><i class="msg-btn fas fa-trash-alt"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-
-
-    </div>
-
-
-
-
-    {{-- se non ha messaggi --}}
+<div class="container-center">
+<h2 class="messaggi">
+    @if (count($messages)==0)
+        Non hai messaggi da visualizzare
     @else
-    <h2>Non hai messaggi</h2>
+        Messaggi
     @endif
+</h2>
+
+<ul class="message-list">
+  @foreach ($messages as $message)
+        <li class="comment">
+    <div class="message-wrap" >
+        <div class="apartment-info">
+            <a class="apt-link" href="{{ route('host.show', $message->apartment->id) }}">
+                <img src="{{asset('storage/' .$message->apartment->images[0]['path'] )}}" loading="lazy" class="lazyload-gravatar" alt="Apartment " style="" width="130" height="130">
+            </a>
+        </div>
+    <div class="message-body">
+        <div class="message-author-wrap">
+            
+            <div class="message-author">{{$message->name. " " . $message->lastname }}</div> 
+            <span class="message-time">
+            <i class="fas fa-envelope"></i> {{$message->email}}
+            </span>
+            <div class="message-time">
+            <i class="fas fa-clock"></i> {{$message->created_at}}
+            </div>
+           
+        </div>
+        <div class="message-content">
+          <i class="fas fa-comment-alt"></i>
+          <p class="message-user">{{$message->message}}</p>
+        </div>
+    </div>
+    <div class="message-actions">
+        <div class="delete">
+          <form action="{{ route('messages.update', $message->id_msg) }}" method="post">
+               @csrf
+               @method('PATCH')
+               <button class="btn-delete" type="submit">
+                   @if($message->read == 0)
+                    <i class="fas fa-envelope"></i>
+                   @else
+                    <i class=" fas fa-envelope-open"></i>
+                   @endif
+               </button>
+           </form>
+           <form action="{{ route('messages.destroy', $message->id_msg) }}" method="post">
+               @csrf
+               @method('DELETE')
+               <button class="btn-delete" type="submit"><i class="fas fa-trash-alt"></i></button>
+           </form>
+        </div>
+    </div>
+    </div>
+</li>
+  @endforeach
+</ul>
 </div>
 @endsection

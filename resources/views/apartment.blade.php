@@ -64,7 +64,7 @@
                                     <i class="service-icon {{ $service->icon }}"></i>
                                     <p>{{ $service->service }}</p>
                                 </div>
-                                <span id="service-descr">{{ $service->description }}</span>
+                                {{-- <span id="service-descr">{{ $service->description }}</span> --}}
                             </li>
                         @endforeach
                     </ul>
@@ -82,21 +82,21 @@
                                 <label for="fname">Nome:</label>
                                 <input type="text" id="firstnameM" name="name" value="{{ Auth::check() ? Auth::user()->name : '' }}"
                                     name="firstname">
-                                <p class="message-E">error</p>    
+                                <p class="message-E">error</p>
                             </div>
                             <div class="input-aps-group">
                                 <p class="lastname-message"></p>
                                 <label for="lname">Cognome:</label>
                                 <input type="text" id="lastnameM" name="lastname" value="{{ Auth::check() ? Auth::user()->lastname : '' }}"
                                     name="lastname">
-                                <p class="message-E">error</p>    
+                                <p class="message-E">error</p>
                             </div>
                             <div class="input-aps-group">
                                 <p class="email-message">  </p>
                                 <label for="email">Email:</label>
                                 <input type="email" id="emailM" value="{{ Auth::check() ? Auth::user()->email : '' }}"
                                     name="email">
-                                <p class="message-E">error</p>    
+                                <p class="message-E">error</p>
                             </p>
 
                             <label for="message">Messaggio</label>

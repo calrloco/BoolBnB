@@ -33,13 +33,16 @@
        
     }
     &-right {
-        flex: 2;
+        flex: 1.6;
         max-height:  calc(100vh -  var(--nav-height));
         min-height: calc(100vh -  var(--nav-height));
         @include responsive(tab){
             display: none;
       }
-      @include responsive(small_desktop){
+      
+        
+       
+        @include responsive(small_desktop){
                flex: 1;
          }
        
@@ -56,21 +59,28 @@
             padding: .8rem 0.8rem;
             cursor: pointer;
             margin-bottom: 2rem;
+            margin-right: 2rem;
             min-height: 23.1rem;
             border-radius: 0.8rem;
             height: 35rem;
             max-height: 35rem;
+            box-shadow: $box_shadow_one;
+            // border:1px solid rgba(0, 0, 0, 0.4);
+
+            &:hover {
+                box-shadow: $box_shadow_two;
+            }
             
             @include responsive(large_desktop){
-                flex: 0 0 calc(100% / 3);
+                flex: 0 0 calc((100% - 6rem)/ 3);
             }
            
  
             @include responsive(tab){
-                flex: 0 0 calc(100% / 2);
+                flex: 0 0 calc((100% - 4rem) / 2);
             }
             @include responsive(phone){
-                flex: 1 1 100%;
+                flex: 1 1 calc(100% - 2rem);
             }
             
             &__text{
@@ -78,7 +88,7 @@
                 flex: 1 0;
                 width: 100%;
                 padding-top: 1.5rem;
-                max-height: 40%;
+                max-height: 50%;
             }
 
             &-form {
@@ -93,7 +103,7 @@
                 position: relative;
                 flex: 0 0 100%;
                 width: 100%;
-                max-height: 60%;
+                max-height: 50%;
                 @include responsive(tab){
                     height:30rem;
                 }
@@ -229,7 +239,7 @@
     }
 
 }
-.services-icons {
+.services-icons, .details-recap {
     @include flex(row,flex-start, center);
     & i{
         font-size:2rem;
@@ -251,3 +261,9 @@
     
 }
 
+
+
+.details-recap {
+    list-style: none;
+    
+}

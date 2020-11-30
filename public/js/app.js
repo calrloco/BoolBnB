@@ -42498,7 +42498,7 @@ var getIp = function () {
     mehtod: "GET",
     url: "https://api.ipdata.co",
     data: {
-      "api-key": "b9bcf03b37c7c5b52f5297af16c2acf07e72d596a1cb8257ed1add0c"
+      "api-key": "92f9e5e9b27bdc813e5552b9f01845c320c980dcaebb48b880455854"
     },
     success: function success(risposta) {
       $("#ip-home-search").val(risposta.region);
@@ -42891,8 +42891,8 @@ document.addEventListener("DOMContentLoaded", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\mamp-boolean\progetto-finale-airbnb\air-bnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\pay\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\pay\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -22,7 +22,7 @@
     <div class="message-wrap" >
         <div class="apartment-info">
             <a class="apt-link" href="{{ route('host.show', $message->apartment->id) }}">
-                <img src="{{asset('storage/' .$message->apartment->images[0]['path'] )}}" loading="lazy" class="lazyload-gravatar" alt="Apartment " style="" width="130" height="130">
+                <img src="{{asset('storage/' .$message->apartment->images[0]['path'] )}}"   alt="Apartment " width="130" height="130">
             </a>
         </div>
     <div class="message-body">

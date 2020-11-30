@@ -96,7 +96,7 @@ var getIp = (function() {
         url: "https://api.ipdata.co",
         data: {
             "api-key":
-                "b9bcf03b37c7c5b52f5297af16c2acf07e72d596a1cb8257ed1add0c"
+                "92f9e5e9b27bdc813e5552b9f01845c320c980dcaebb48b880455854"
         },
         success: function(risposta) {
             $("#ip-home-search").val(risposta.region);

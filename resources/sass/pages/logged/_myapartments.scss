@@ -1,5 +1,5 @@
 .apartments-list {
-    @include flex(row, space-between, flex-start);
+    @include flex(row, flex-start, flex-start);
     font-size: 1.2rem;
     flex-wrap: wrap;
     height: 100%;
@@ -13,6 +13,7 @@
 
 .apt-info-general {
     position: relative;
+    margin:1.5rem;
 
 }
 
@@ -189,6 +190,7 @@
         }
     }
 }
+
 .create-apt-link {
     @extend %button-default;
     text-decoration: none;

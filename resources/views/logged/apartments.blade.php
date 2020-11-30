@@ -61,12 +61,12 @@
             @endforeach
             </div>
         @else
-            <div class="noapt-section">
-                <div class="create-apt-section">
-                    <p class="alert-noapt">Non hai ancora registrato un appartamento</p>
+        <div class="head">
+         
+                    <h2 class="title">Non hai ancora registrato un appartamento</h2>
                     <a class="create-apt-link" href="{{ route('host.create') }}">Crea un nuovo annuncio!</a>
-                </div>
-            </div>
+                
+        </div>
         @endif
 
 

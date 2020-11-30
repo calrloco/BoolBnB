@@ -7198,7 +7198,7 @@ canvas:focus {
 
 .apartments-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   flex-direction: row;
   font-size: 1.2rem;
@@ -7218,6 +7218,7 @@ canvas:focus {
 
 .apt-info-general {
   position: relative;
+  margin: 1.5rem;
 }
 
 .overlay {

@@ -16,9 +16,10 @@ class ViewsTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         $apartments = Apartment::all();
-        for ($i = 0; $i < 100; $i++){
+        for ($i = 0; $i < 1000; $i++){
             $newView = new View;
             $newView->ip_guest = $faker->ipv4;
+            $newView->created_at = $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = null)
             $newView->apartment_id = $apartments->random()->id;
             $newView->save();
         }

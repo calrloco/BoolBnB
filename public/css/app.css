@@ -6709,7 +6709,7 @@ h1 {
 }
 
 .container__search-left {
-  flex: 1;
+  flex: 1.4;
   max-height: calc(100vh - var(--nav-height));
   overflow-y: scroll;
 }
@@ -6768,7 +6768,7 @@ h1 {
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
-  flex: 0 0 calc(100% / 2);
+  flex: 0 0 calc(100% / 3 - 2rem);
   padding: 0.8rem 0.8rem;
   cursor: pointer;
   margin-bottom: 2rem;

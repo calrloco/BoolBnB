@@ -47,6 +47,18 @@ var myfunction = (function () {
                backgroundColor:'rgba(0,166,153,.4)'
            }],
        },
+       animation: {
+        animateScale: true
+    },
+    scales:{
+        yAxes: [
+            {
+              ticks: {
+                precision: 0,
+              },
+            },
+          ],
+    },
        options:{
            title:{
                text:title,

@@ -6,11 +6,6 @@ use Illuminate\Database\Seeder;
 
 class ServicesTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run(Faker $faker)
     {
         $services = [
@@ -39,7 +34,7 @@ class ServicesTableSeeder extends Seeder
             'fas fa-bullhorn',
             'fas fa-snowflake',
         ];
-        
+
 
         for($i = 0; $i < count($services); $i++){
             $newService = new Service;
@@ -50,3 +45,4 @@ class ServicesTableSeeder extends Seeder
         }
     }
 }
+

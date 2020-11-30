@@ -42598,44 +42598,44 @@ var checkForm = function () {
     letterNumber: /^[0-9a-zA-Z ]+$/,
     letter: /^[a-zA-Z' ]+$/,
     number: /^[0-9 ]+$/,
-    allChar: /^[a-zA-Z0-9'!@#àèòìù\$%\^\&*\)\( +=.,_-]+$/,
+    allChar: /^[a-zA-Z0-9'!?@#àèòìù\$%\^\&*\)\( +=.,_-]+$/,
     dateR: /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
     emailR: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   };
 }(); // validazione input della pagina create e edit apartment
 
 
-$("#title").focusout(function () {
+$("#title").keyup(function () {
   checkInput($(this), checkForm.allChar, 10, 300, "il titolo");
 });
-$("#address").focusout(function () {
+$("#address").keyup(function () {
   checkInput($(this), checkForm.allChar, 3, 300, "l'indirizzo");
 });
-$("#city").focusout(function () {
+$("#city").keyup(function () {
   checkInput($(this), checkForm.allChar, 1, 30, "la città");
 });
-$("#postal-code").focusout(function () {
+$("#postal-code").keyup(function () {
   checkInput($(this), checkForm.allChar, 1, 20, "il cap");
 });
-$("#country").focusout(function () {
+$("#country").keyup(function () {
   checkInput($(this), checkForm.letter, 1, 30, "la nazione");
 });
-$("#description").focusout(function () {
+$("#description").keyup(function () {
   checkInput($(this), checkForm.allChar, 20, 2000, "la descrizione");
 });
-$("#daily-price").focusout(function () {
+$("#daily-price").keyup(function () {
   checkInput($(this), checkForm.number, 1, 2000, "il prezzo");
 });
-$("#sm").focusout(function () {
+$("#sm").keyup(function () {
   checkInput($(this), checkForm.number, 1, 2000, "i metri quadrati");
 });
-$("#rooms").focusout(function () {
+$("#rooms").keyup(function () {
   checkInput($(this), checkForm.number, 1, 2000, "le camere");
 });
-$("#beds").focusout(function () {
+$("#beds").keyup(function () {
   checkInput($(this), checkForm.number, 1, 2000, "i letti");
 });
-$("#bathrooms").focusout(function () {
+$("#bathrooms").keyup(function () {
   checkInput($(this), checkForm.number, 1, 2000, "i bagni");
 }); // al click del submit controlla se i campi soddisfano le condizioni e impedisce il submit del create e del edit apartment
 
@@ -42645,23 +42645,26 @@ $("#crea").click(function (e) {
   }
 }); // validazione input della pagina register
 
-$("#firstnameR").focusout(function () {
+$("#firstnameR").keyup(function () {
   checkInput($(this), checkForm.letter, 2, 50, "il nome");
 });
-$("#lastnameR").focusout(function () {
+$("#lastnameR").keyup(function () {
   checkInput($(this), checkForm.letter, 2, 50, "il cognome");
 });
-$("#emailR").focusout(function () {
+$("#emailR").keyup(function () {
   checkInput($(this), checkForm.emailR, 2, 255, "la mail");
 });
-$("#passwordR").focusout(function () {
+$("#passwordR").keyup(function () {
   checkInput($(this), checkForm.allChar, 8, 255, "la password");
 });
-$("#password-confirmR").focusout(function () {
-  if ($("#password-confirmR").val() != $("#passwordR").val() || $("#password-confirmR").val() == "") {
+$("#password-confirmR").keyup(function () {
+  if ($("#password-confirmR").val() != $("#passwordR").val()) {
     $(this).addClass("error");
     $(this).next(".message-E").addClass("message-on");
     $(this).next(".message-E").text("Le password non sono uguali");
+  } else {
+    $(this).removeClass("error");
+    $(this).next(".message-E").removeClass("message-on");
   }
 });
 $("#dateR").focusout(function () {
@@ -42682,10 +42685,10 @@ $("#registerR").click(function (e) {
 }); // fine pagina register
 // validazione pagina login
 
-$("#emailL").focusout(function () {
+$("#emailL").keyup(function () {
   checkInput($(this), checkForm.emailR, 2, 255, "la mail");
 });
-$("#passwordL").focusout(function () {
+$("#passwordL").keyup(function () {
   checkInput($(this), checkForm.allChar, 8, 255, "la password");
 });
 $("#registerL").click(function (e) {
@@ -42695,20 +42698,20 @@ $("#registerL").click(function (e) {
 }); // fine validazione pagina login
 // validazione invio messaggio pagina apartment 
 
-$("#firstnameM").focusout(function () {
+$("#firstnameM").keyup(function () {
   checkInput($(this), checkForm.letter, 2, 50, "il nome");
 });
-$("#lastnameM").focusout(function () {
+$("#lastnameM").keyup(function () {
   checkInput($(this), checkForm.letter, 2, 50, "il cognome");
 });
-$("#emailM").focusout(function () {
+$("#emailM").keyup(function () {
   checkInput($(this), checkForm.emailR, 2, 255, "la mail");
 });
-$("#messageM").focusout(function () {
+$("#messageM").keyup(function () {
   checkInput($(this), checkForm.allChar, 2, 2000, "il messsaggio");
 });
 $("#send-message").click(function (e) {
-  if (checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") && checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") && checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") && checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messsaggio") || checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") || checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") || checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") || checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messsaggio")) {
+  if (checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") && checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") && checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") && checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messaggio") || checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") || checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") || checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") || checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messsaggio")) {
     e.preventDefault();
   }
 }); // fine validazione messaggio

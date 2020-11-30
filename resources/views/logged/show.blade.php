@@ -21,13 +21,11 @@
                         src="{{ asset('storage/' . $apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
                 @endfor
                 <div class="dots__carousel-container">
-                @if ($apartment->images->count('id') > 1)
-
+                    @if ($apartment->images->count('id') > 1)
                     @for ($i = 0; $i < $apartment->images->count('id'); $i++)
                     <div class="dots__carousel {{$i == 0 ? 'dots__carousel-active first' : ($i == $apartment->images->count('id') - 1 ? ' last' : '') }}"></div>
                     @endfor
-                @endif
-                  
+                    @endif
                    </div>
                 <div class="apt-image-icon apt-image-icon-right arrow-slider-dx {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}">
                     <i class="fas fa-chevron-right {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}"></i>

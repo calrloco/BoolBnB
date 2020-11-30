@@ -13,13 +13,13 @@ class ImagesTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    // {
-    //     $apartments = Apartment::all();
-    //     for($i=0; $i<20; $i++){
-    //         $newImage = new Image;
-    //         $newImage->path = "https://loremflickr.com/600/400/home";
-    //         $newImage->apartment_id = $apartments->random()->id;
-    //         $newImage->save();
-    //     }
-    // }
+    {
+        $apartments = Apartment::all();
+        for($i=0; $i<20; $i++){
+            $newImage = new Image;
+            $newImage->path = "https://loremflickr.com/600/400/home";
+            $newImage->apartment_id = $apartments->random()->id;
+            $newImage->save();
+        }
+    }
 }

@@ -26,5 +26,6 @@ class MessagesTableSeeder extends Seeder
             $newMessage->created_at = $faker->dateTimeThisMonth($max = 'now', $timezone = null) ;
             $newMessage->save();
         }
+
     }
 }

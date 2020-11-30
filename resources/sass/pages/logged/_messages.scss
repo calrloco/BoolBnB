@@ -120,7 +120,7 @@
     flex:0 0 20%;
     @include responsive(tab){
         justify-self: flex-start;
-        max-height: 10rem;
+       
     }
 }
 .message-info{

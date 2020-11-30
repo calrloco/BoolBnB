@@ -7432,7 +7432,6 @@ canvas:focus {
 .create-apt-link {
   text-decoration: none;
   color: var(--color-font-black);
-  margin-bottom: 2rem;
 }
 
 .create-apt-link:hover {
@@ -7591,7 +7590,6 @@ canvas:focus {
 @media screen and (max-width: 800px) {
   .apartment-info {
     justify-self: flex-start;
-    max-height: 10rem;
   }
 }
 

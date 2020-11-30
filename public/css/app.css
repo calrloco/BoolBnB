@@ -6922,6 +6922,10 @@ h1 {
 
 .services {
   padding: 2rem 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
 }
 
 .services-all {
@@ -6984,9 +6988,10 @@ canvas:focus {
 .services-icons,
 .details-recap {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   flex-direction: row;
+  padding-top: 5px;
 }
 
 .services-icons i,

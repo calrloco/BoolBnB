@@ -7030,6 +7030,10 @@ canvas:focus {
   list-style: none;
 }
 
+.sponsor-1 {
+  background-color: Cornsilk;
+}
+
 .payment-checkout {
   display: flex;
   justify-content: center;

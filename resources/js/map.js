@@ -170,8 +170,13 @@ function compileHandlebars(risp, sponsor) {
     var templateCards = Handlebars.compile(source);
     const markersCity = [];
     for (let i = 0; i < risp.length; i++) {
+        if(sponsor == 1) {
+            city = risp[i].city + ' -sponsorizzato-';
+        } else {
+            city = risp[i].city;
+        }
         var context = {
-            city: risp[i].city,
+            city: city,
             title: troncaStringa(risp[i].title),
             id: `<input class="aps_id" type="hidden" name="apartment_id" value=${risp[i].id}>`,
             sponsor: sponsor,

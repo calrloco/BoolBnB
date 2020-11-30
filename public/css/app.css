@@ -7047,9 +7047,6 @@ canvas:focus {
 
 .message-list {
   list-style: none;
-  /*    display: flex;
-     flex-wrap: wrap;
-     justify-content: center; */
 }
 
 .message-list li {

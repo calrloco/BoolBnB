@@ -121,7 +121,12 @@ function getCards(lat, lng, maxDist, sponsor) {
         },
         success: function(risposta) {
             if (risposta.length > 0) {
+                var results = 'I tuoi risultati per';
+                $('.container__search-left__top__text-heading').text(results);
                 compileHandlebars(risposta, sponsor);
+            } else {
+                var noResults = 'Non ci sono risultati per'
+                $('.container__search-left__top__text-heading').text(noResults);
             }
         },
         error: function() {}
@@ -145,6 +150,9 @@ function getCardsFilter(lat, lng, maxDist, sponsor, services) {
         success: function(risposta) {
             if (risposta.length > 0) {
                 compileHandlebars(risposta, sponsor);
+            } else {
+                var noResults = 'Non ci sono risultati per'
+                $('.container__search-left__top__text-heading').text(noResults);
             }
         },
         error: function() {}
@@ -221,7 +229,7 @@ function compileHandlebars(risp, sponsor) {
         var el = $(".search__resoults__apartment-cards-content");
         var details = buildLocation(el, address);
         // cliccando su un elemento della lista a sx lo trova in mappa
-        details.on(
+        $('.search__resoults__apartment-cards-content__text').on(
             "click",
             (function(marker) {
                 const activeItem = $(this);
@@ -301,6 +309,10 @@ function getImages(id, sponsor) {
                 }
                 appendImages(response[i], clss, sponsor);
             }
+            if(response.length == 1) {
+                $('[data-id="'+ id +'"]').find('.arrow-slider-dx').hide();
+                $('[data-id="'+ id +'"]').find('.arrow-slider-sx').hide();
+            }
         },
         error: function() {}
     });
@@ -320,6 +332,7 @@ function appendImages(risp, clss, sponsor) {
                 .append(img);
         }
     });
+    
 }
 // funzione per troncare una stringa
 function troncaStringa(stringa) {
@@ -370,7 +383,7 @@ var serviceCheck = (function() {
 })();
 // al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom
 $("#search").keyup(function() {
-    $("#auto-complete").empty();
+    $(".complete-results").empty();
     autoComplete($("#search").val());
 });
 
@@ -388,7 +401,6 @@ function autoComplete(query) {
         $("#auto-complete").removeClass("complete-on");
     }
     if (query != "" && isNaN(query) && query.length > 3) {
-        $("#auto-complete").addClass("complete-on");
         tt.services
             .fuzzySearch({
                 key: apiKey,
@@ -426,13 +438,13 @@ function autoComplete(query) {
                     }
                 }
                 for (let i = 0; i < address.length; i++) {
-                    results +=
-                        '<div class="complete-results">' +
-                        address[i] +
-                        "</div>";
+                    results +='<div class="complete-results">' + address[i] + '</div>';
                 }
-                document.getElementById("auto-complete").innerHTML = results;
-                if (results == "") {
+                
+                if (address.length > 0) {
+                    $("#auto-complete").addClass("complete-on");
+                    document.getElementById("auto-complete").innerHTML = results;                  
+                }else{
                     $("#auto-complete").removeClass("complete-on");
                 }
             });

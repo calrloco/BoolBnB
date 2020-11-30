@@ -42511,7 +42511,7 @@ var getIp = function () {
 
 
 var unreadMessages = function () {
-  var id = $('#nav_user-id').val();
+  var id = $("#nav_user-id").val();
   $.ajax({
     url: "http://127.0.0.1:8000/api/unread",
     method: "GET",
@@ -42540,49 +42540,49 @@ var unreadMessages = function () {
     },
     error: function error() {
       consol.log(arguments);
-      alert('errore');
+      alert("errore");
     }
   });
 }(); // funzione per i suggerimenti nella search
 
 
 function autoComplete(query) {
-  if (query.length < 3 || query == '') {
-    $('#auto-complete').removeClass('complete-on');
+  if (query.length < 3 || query == "") {
+    $("#auto-complete").removeClass("complete-on");
   }
 
-  if (query != '' && isNaN(query) && query.length > 3) {
-    $('#auto-complete').addClass('complete-on');
+  if (query != "" && isNaN(query) && query.length > 3) {
     tt.services.fuzzySearch({
       key: "31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk",
       query: query
     }).go().then(function (response) {
       var address = [];
-      var results = '';
+      var results = "";
 
       for (var i = 0; i < 4; i++) {
         if (response.results[i]) {
           // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
-          var streetName = response.results[i].address['streetName'];
-          var city = response.results[i].address['municipality'];
-          var countryCode = response.results[i].address['countryCode'];
+          var streetName = response.results[i].address["streetName"];
+          var city = response.results[i].address["municipality"];
+          var countryCode = response.results[i].address["countryCode"];
 
-          if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == 'IT') {
-            address.push(streetName + ' ' + city);
-          } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == 'IT') {
+          if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == "IT") {
+            address.push(streetName + " " + city);
+          } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == "IT") {
             address.push(city);
           }
         }
       }
 
       for (var _i = 0; _i < address.length; _i++) {
-        results += '<div class="complete-results">' + address[_i] + '</div>';
+        results += '<div class="complete-results">' + address[_i] + "</div>";
       }
 
-      document.getElementById('auto-complete').innerHTML = results;
-
-      if (results == '') {
-        $('#auto-complete').removeClass('complete-on');
+      if (address.length != 0) {
+        document.getElementById("auto-complete").innerHTML = results;
+        $("#auto-complete").addClass("complete-on");
+      } else {
+        $("#auto-complete").removeClass("complete-on");
       }
     });
   }
@@ -42615,7 +42615,7 @@ $("#city").focusout(function () {
   checkInput($(this), checkForm.allChar, 1, 30, "la città");
 });
 $("#postal-code").focusout(function () {
-  checkInput($(this), checkForm.allChar, 1, 20, "il codice postale");
+  checkInput($(this), checkForm.allChar, 1, 20, "il cap");
 });
 $("#country").focusout(function () {
   checkInput($(this), checkForm.letter, 1, 30, "la nazione");
@@ -42640,7 +42640,7 @@ $("#bathrooms").focusout(function () {
 }); // al click del submit controlla se i campi soddisfano le condizioni e impedisce il submit del create e del edit apartment
 
 $("#crea").click(function (e) {
-  if (checkInput($("#title"), checkForm.allChar, 10, 300, "il titolo") && checkInput($("#address"), checkForm.allChar, 3, 300, "l'indirizzo") && checkInput($("#city"), checkForm.allChar, 1, 30, "la città") && checkInput($("#postal-code"), checkForm.allChar, 1, 20, "il codice postale") && checkInput($("#country"), checkForm.letter, 1, 30, "la nazione") && checkInput($("#description"), checkForm.allChar, 20, 2000, "la descrizione") && checkInput($("#daily-price"), checkForm.number, 1, 2000, "il prezzo prezzo") && checkInput($("#sm"), checkForm.number, 1, 2000, "i metri quadrati") && checkInput($("#rooms"), checkForm.number, 1, 2000, "le camere") && checkInput($("#beds"), checkForm.number, 1, 2000, "i letti") && checkInput($("#bathrooms"), checkForm.number, 1, 2000, "i bagni") || checkInput($("#title"), checkForm.allChar, 10, 300, "il titolo") || checkInput($("#address"), checkForm.allChar, 3, 300, "l'indirizzo") || checkInput($("#city"), checkForm.allChar, 1, 30, "la città") || checkInput($("#postal-code"), checkForm.allChar, 1, 20, "il codice postale") || checkInput($("#country"), checkForm.letter, 1, 30, "la nazione") || checkInput($("#description"), checkForm.allChar, 20, 2000, "la descrizione") || checkInput($("#daily-price"), checkForm.number, 1, 2000, "il prezzo") || checkInput($("#sm"), checkForm.number, 1, 2000, "i metri quadrati") || checkInput($("#rooms"), checkForm.number, 1, 2000, "le camere") || checkInput($("#beds"), checkForm.number, 1, 2000, "i letti") || checkInput($("#bathrooms"), checkForm.number, 1, 2000, "i bagni")) {
+  if (checkInput($("#title"), checkForm.allChar, 10, 300, "il titolo") && checkInput($("#address"), checkForm.allChar, 3, 300, "l'indirizzo") && checkInput($("#city"), checkForm.allChar, 1, 30, "la città") && checkInput($("#postal-code"), checkForm.allChar, 1, 20, "il cap") && checkInput($("#country"), checkForm.letter, 1, 30, "la nazione") && checkInput($("#description"), checkForm.allChar, 20, 2000, "la descrizione") && checkInput($("#daily-price"), checkForm.number, 1, 2000, "il prezzo prezzo") && checkInput($("#sm"), checkForm.number, 1, 2000, "i metri quadrati") && checkInput($("#rooms"), checkForm.number, 1, 2000, "le camere") && checkInput($("#beds"), checkForm.number, 1, 2000, "i letti") && checkInput($("#bathrooms"), checkForm.number, 1, 2000, "i bagni") || checkInput($("#title"), checkForm.allChar, 10, 300, "il titolo") || checkInput($("#address"), checkForm.allChar, 3, 300, "l'indirizzo") || checkInput($("#city"), checkForm.allChar, 1, 30, "la città") || checkInput($("#postal-code"), checkForm.allChar, 1, 20, "il cap") || checkInput($("#country"), checkForm.letter, 1, 30, "la nazione") || checkInput($("#description"), checkForm.allChar, 20, 2000, "la descrizione") || checkInput($("#daily-price"), checkForm.number, 1, 2000, "il prezzo") || checkInput($("#sm"), checkForm.number, 1, 2000, "i metri quadrati") || checkInput($("#rooms"), checkForm.number, 1, 2000, "le camere") || checkInput($("#beds"), checkForm.number, 1, 2000, "i letti") || checkInput($("#bathrooms"), checkForm.number, 1, 2000, "i bagni")) {
     e.preventDefault();
   }
 }); // validazione input della pagina register
@@ -42660,18 +42660,18 @@ $("#passwordR").focusout(function () {
 $("#password-confirmR").focusout(function () {
   if ($("#password-confirmR").val() != $("#passwordR").val() || $("#password-confirmR").val() == "") {
     $(this).addClass("error");
-    $(this).next(".message").addClass("message-on");
-    $(this).next(".message").text("Le password non sono uguali");
+    $(this).next(".message-E").addClass("message-on");
+    $(this).next(".message-E").text("Le password non sono uguali");
   }
 });
 $("#dateR").focusout(function () {
   if ($("#dateR").val() == "") {
     $(this).addClass("error");
-    $(this).next(".message").addClass("message-on");
-    $(this).next(".message").text("Non hai inserito la data");
+    $(this).next(".message-E").addClass("message-on");
+    $(this).next(".message-E").text("Non hai inserito la data");
   } else {
     $(this).removeClass("error");
-    $(this).next(".message").removeClass("message-on");
+    $(this).next(".message-E").removeClass("message-on");
   }
 }); // Al click del form register controlla se tutte le condizione sono soddisfatte
 
@@ -42683,37 +42683,56 @@ $("#registerR").click(function (e) {
 // validazione pagina login
 
 $("#emailL").focusout(function () {
-  checkInput($(this), emailR, 2, 255, "la mail");
+  checkInput($(this), checkForm.emailR, 2, 255, "la mail");
 });
 $("#passwordL").focusout(function () {
-  checkInput($(this), allChar, 8, 255, "la password");
+  checkInput($(this), checkForm.allChar, 8, 255, "la password");
 });
 $("#registerL").click(function (e) {
-  if (checkInput($("#emailL"), emailR, 2, 255, "la mail") && checkInput($("#passwordL"), allChar, 8, 255, "la password") || checkInput($("#emailL"), emailR, 2, 255, "la mail") || checkInput($("#passwordL"), allChar, 8, 255, "la password")) {
+  if (checkInput($("#emailL"), checkForm.emailR, 2, 255, "la mail") && checkInput($("#passwordL"), checkForm.allChar, 8, 255, "la password") || checkInput($("#emailL"), checkForm.emailR, 2, 255, "la mail") || checkInput($("#passwordL"), checkForm.allChar, 8, 255, "la password")) {
     e.preventDefault();
   }
 }); // fine validazione pagina login
+// validazione invio messaggio pagina apartment 
+
+$("#firstnameM").focusout(function () {
+  checkInput($(this), checkForm.letter, 2, 50, "il nome");
+});
+$("#lastnameM").focusout(function () {
+  checkInput($(this), checkForm.letter, 2, 50, "il cognome");
+});
+$("#emailM").focusout(function () {
+  checkInput($(this), checkForm.emailR, 2, 255, "la mail");
+});
+$("#messageM").focusout(function () {
+  checkInput($(this), checkForm.allChar, 2, 2000, "il messsaggio");
+});
+$("#send-message").click(function (e) {
+  if (checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") && checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") && checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") && checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messsaggio") || checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") || checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") || checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") || checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messsaggio")) {
+    e.preventDefault();
+  }
+}); // fine validazione messaggio
 // funzione per controllare lato client il form
 
 function checkInput(selector, kind, min, max, field) {
   if (selector.val() == "" || !matchKind(selector, kind) || selector.val().length < min || selector.val().length > max) {
     selector.addClass("error");
-    selector.next(".message").addClass("message-on");
+    selector.next(".message-E").addClass("message-on");
 
     if (selector.val() == "") {
-      selector.next(".message").text("Non hai inserito " + field);
+      selector.next(".message-E").text("Non hai inserito " + field);
     } else if (!matchKind(selector, kind)) {
-      selector.next(".message").text("Hai inserito un formato non valido");
+      selector.next(".message-E").text("Hai inserito un formato non valido");
     } else if (selector.val().length < min) {
-      selector.next(".message").text("Il campo è troppo breve");
+      selector.next(".message-E").text("Il campo è troppo breve");
     } else if (selector.val().length > max) {
-      selector.next(".message").text("Il campo è troppo lungo");
+      selector.next(".message-E").text("Il campo è troppo lungo");
     }
 
     return true;
   } else {
     selector.removeClass("error");
-    selector.next(".message").removeClass("message-on");
+    selector.next(".message-E").removeClass("message-on");
   }
 } // funzione per controllare se l'input soddisfa la condizione di tipo
 
@@ -42748,6 +42767,23 @@ $('.hamburger-menu').click(function () {
   $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
   $('.hamburger-menu').toggleClass('hamburger-menu-animated');
   $('.mobile-menu').toggleClass('hidden');
+});
+$('#menu-bottom').click(function () {
+  $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
+  $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
+  $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
+  $('.hamburger-menu').toggleClass('hamburger-menu-animated');
+  $('.mobile-menu').toggleClass('hidden');
+}); /// animazione mobile menu
+
+$(window).scroll(function () {
+  if (jQuery(window).width() <= 600) {
+    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+      $('.footer__menu-mobile').slideUp(100);
+    } else {
+      $('.footer__menu-mobile').slideDown(100);
+    }
+  }
 });
 
 /***/ }),

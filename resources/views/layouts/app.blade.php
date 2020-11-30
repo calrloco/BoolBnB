@@ -34,19 +34,17 @@
 
     <div class="container-page">
           @include('partials/mobilemenu')  
-         <div class="hamburger-menu">
-             <div class="hamburger-menu-bars">
-                <div class="hamburger-menu-bars-top"></div>
-                <div class="hamburger-menu-bars-bottom"></div>
-             </div>
-         </div>
+       
         @include('partials/navbar')
 
         <main class="">
             @yield('content')
         </main>
-
+         
         @include('partials/footer')
+       
+        @include('partials/mobilemenubottom')
+        
     </div>
     <script src="{{ asset('/js/app.js') }}"></script>
 </body>

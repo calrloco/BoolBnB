@@ -57,19 +57,8 @@
         <button id="registerR" type="submit" class="signup_btn">{{ __('Register') }}</button>
       </form>
 
-       <!-- Social icons -->
-      <p class="or_else">Or Sign up using</p>
-      <div class="social_logins">
-        <button type="submit" class="google_login">
-          <i class="fab fa-google"></i>
-        </button>
-        <button type="submit" class="facebook_login">
-          <i class="fab fa-facebook-f"></i>
-        </button>
-        <button type="submit" class="linkedin_login">
-          <i class="fab fa-linkedin-in"></i>
-        </button>
-      </div>
+      
+      
     </div>
   </div>
 @endsection

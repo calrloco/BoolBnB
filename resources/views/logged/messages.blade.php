@@ -2,10 +2,8 @@
 
 @section('content')
   @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-@endif
+            <p class="status-msg">{{ session('status') }}</p>
+ @endif
 
 <div class="container-center">
 <h2 class="messaggi">

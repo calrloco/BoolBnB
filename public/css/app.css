@@ -6382,7 +6382,7 @@ h1 {
 }
 
 .container__search-left {
-  flex: 1.3;
+  flex: 1.4;
   max-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
   overflow-y: scroll;
 }
@@ -6401,7 +6401,7 @@ h1 {
 }
 
 .container__search-right {
-  flex: 1.7;
+  flex: 1.6;
 }
 
 @media screen and (max-width: 1462px) {
@@ -6429,27 +6429,33 @@ h1 {
   padding: 0.8rem 0.8rem;
   cursor: pointer;
   margin-bottom: 2rem;
+  margin-right: 2rem;
   min-height: 23.1rem;
   border-radius: 0.8rem;
   height: 35rem;
   max-height: 35rem;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.container__search .search__resoults__apartment-cards-content:hover {
+  box-shadow: 0px 10px 20px rgba(43, 20, 11, 0.315);
 }
 
 @media screen and (min-width: 2000px) {
   .container__search .search__resoults__apartment-cards-content {
-    flex: 0 0 calc(100% / 3);
+    flex: 0 0 calc((100% - 6rem)/ 3);
   }
 }
 
 @media screen and (max-width: 800px) {
   .container__search .search__resoults__apartment-cards-content {
-    flex: 0 0 calc(100% / 2);
+    flex: 0 0 calc((100% - 4rem) / 2);
   }
 }
 
 @media screen and (max-width: 414px) {
   .container__search .search__resoults__apartment-cards-content {
-    flex: 1 1 100%;
+    flex: 1 1 calc(100% - 2rem);
   }
 }
 
@@ -6461,7 +6467,7 @@ h1 {
   flex: 1 0;
   width: 100%;
   padding-top: 1.5rem;
-  max-height: 40%;
+  max-height: 50%;
 }
 
 .container__search .search__resoults__apartment-cards-content-form {
@@ -6479,7 +6485,7 @@ h1 {
   position: relative;
   flex: 0 0 100%;
   width: 100%;
-  max-height: 60%;
+  max-height: 50%;
 }
 
 @media screen and (max-width: 800px) {
@@ -6630,19 +6636,22 @@ canvas:focus {
   transform: translateY(0px);
 }
 
-.services-icons {
+.services-icons,
+.details-recap {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
 }
 
-.services-icons i {
+.services-icons i,
+.details-recap i {
   font-size: 2rem;
   color: var(--pink-bnb);
 }
 
-.services-icons i:not(:last-child) {
+.services-icons i:not(:last-child),
+.details-recap i:not(:last-child) {
   margin-right: 1rem;
 }
 
@@ -6653,6 +6662,10 @@ canvas:focus {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.details-recap {
+  list-style: none;
 }
 
 .payment-checkout {

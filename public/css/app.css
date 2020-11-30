@@ -6247,9 +6247,6 @@ a {
 }
 
 @media screen and (max-width: 800px) {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
   .info-apt-section .info-box-sx .services-box {
     display: flex;
     justify-content: center;
@@ -6259,21 +6256,6 @@ a {
 }
 
 .info-apt-section .info-box-sx .services-box .services-title {
-=======
->>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
-  .info-apt-section .info-box-sx .services-box ul.services {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-  }
-}
-
-.info-apt-section .info-box-sx .services-box ul.services .services-title {
-<<<<<<< HEAD
-=======
->>>>>>> master
->>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
   font-size: 22px;
   font-weight: 500;
   padding: 10px 0;
@@ -6286,8 +6268,6 @@ a {
   align-items: center;
 }
 
-<<<<<<< HEAD
-=======
 @media screen and (max-width: 800px) {
   .info-apt-section .info-box-sx .services-box .services {
     display: flex;
@@ -6297,24 +6277,15 @@ a {
   }
 }
 
->>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
-.info-apt-section .info-box-sx .services-box ul.services .service-list {
+.info-apt-section .info-box-sx .services-box .services .service-list {
   font-size: 16px;
   padding: 5px;
   margin-bottom: 1rem;
   list-style-type: none;
 }
 
-<<<<<<< HEAD
-.info-apt-section .info-box-sx .services-box ul.services .service-list .service-head {
-=======
-<<<<<<< HEAD
 .info-apt-section .info-box-sx .services-box .services .service-list .service-head {
   width: 100%;
-=======
-.info-apt-section .info-box-sx .services-box ul.services .service-list .service-head {
->>>>>>> master
->>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6322,11 +6293,6 @@ a {
   padding-bottom: 5px;
 }
 
-<<<<<<< HEAD
-.info-apt-section .info-box-sx .services-box ul.services .service-list .service-head .service-icon {
-  padding-right: 10px;
-=======
-<<<<<<< HEAD
 @media screen and (max-width: 800px) {
   .info-apt-section .info-box-sx .services-box .services .service-list .service-head {
     display: flex;
@@ -6338,27 +6304,12 @@ a {
 
 .info-apt-section .info-box-sx .services-box .services .service-list .service-head .service-icon {
   padding-right: 5px;
-=======
-.info-apt-section .info-box-sx .services-box ul.services .service-list .service-head .service-icon {
-  padding-right: 10px;
->>>>>>> master
->>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
   font-size: 3rem;
   color: #df1362;
 }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 .info-apt-section .info-box-sx .services-box .services .service-list .service-head .service-title {
   vertical-align: 3rem;
-=======
->>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
-@media screen and (max-width: 800px) {
-  .info-apt-section .info-box-sx .services-box ul.services .service-list #service-descr {
-    display: none;
-  }
->>>>>>> master
 }
 
 .info-apt-section .info-box-dx {
@@ -6758,13 +6709,8 @@ h1 {
 }
 
 .container__search-left {
-<<<<<<< HEAD
   flex: 1;
   max-height: calc(100vh - var(--nav-height));
-=======
-  flex: 1.4;
-  max-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
->>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
   overflow-y: scroll;
 }
 
@@ -6790,8 +6736,7 @@ h1 {
 }
 
 .container__search-right {
-<<<<<<< HEAD
-  flex: 2;
+  flex: 1.6;
   max-height: calc(100vh - var(--nav-height));
   min-height: calc(100vh - var(--nav-height));
 }
@@ -6800,9 +6745,6 @@ h1 {
   .container__search-right {
     display: none;
   }
-=======
-  flex: 1.6;
->>>>>>> 7f36fb6da18ec0c2bf712764f99ac407569e6cd4
 }
 
 @media screen and (max-width: 1462px) {

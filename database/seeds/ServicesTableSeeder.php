@@ -6,29 +6,24 @@ use Illuminate\Database\Seeder;
 
 class ServicesTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run(Faker $faker)
     {
         $services = [
             'Wi-Fi',
             'parcheggio',
-            'vasca da bagno',
+            'idromassaggio',
             'riscaldamento',
-            'cucina',
-            'happy ending'
+            'arrotino',
+            'aria condizionata'
         ];
 
         $descriptions = [
             'servizio Wi-Fi gratuito', 
             'parcheggio gratuito riservato', 
-            'l\'appartamento dispone di una vasca da bagno',
+            'vasca da bagno con idromassaggio',
             'riscaldamento autonomo',
-            'appartamento dotato di cucina',
-            ':)'
+            'servizio di sveglia con arrotino',
+            'dotato di aria condizionata'
         ];
 
         $icons = [
@@ -36,10 +31,10 @@ class ServicesTableSeeder extends Seeder
             'fas fa-parking',
             'fas fa-bath',
             'fas fa-temperature-high',
-            'fas fa-utensils',
-            'fas fa-hand-rock',
+            'fas fa-bullhorn',
+            'fas fa-snowflake',
         ];
-        
+
 
         for($i = 0; $i < count($services); $i++){
             $newService = new Service;
@@ -50,3 +45,4 @@ class ServicesTableSeeder extends Seeder
         }
     }
 }
+

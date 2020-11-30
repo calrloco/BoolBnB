@@ -18,7 +18,7 @@
         </div>
             <div class="search__resoults__apartment">
                 <div class="search__resoults__apartment-cards" id="sponsor">
-                    
+                   
                 </div>
                 <div class="search__resoults__apartment-cards" id="no-sponsor">
                     
@@ -41,6 +41,7 @@
                         <i class="fas fa-chevron-right"></i>
                     </div>
                    
+
                 </div>    
                   
              <div class="search__resoults__apartment-cards-content__text">

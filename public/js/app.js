@@ -42511,7 +42511,7 @@ var getIp = function () {
 
 
 var unreadMessages = function () {
-  var id = $('#nav_user-id').val();
+  var id = $("#nav_user-id").val();
   $.ajax({
     url: "http://127.0.0.1:8000/api/unread",
     method: "GET",
@@ -42540,49 +42540,49 @@ var unreadMessages = function () {
     },
     error: function error() {
       consol.log(arguments);
-      alert('errore');
+      alert("errore");
     }
   });
 }(); // funzione per i suggerimenti nella search
 
 
 function autoComplete(query) {
-  if (query.length < 3 || query == '') {
-    $('#auto-complete').removeClass('complete-on');
+  if (query.length < 3 || query == "") {
+    $("#auto-complete").removeClass("complete-on");
   }
 
-  if (query != '' && isNaN(query) && query.length > 3) {
-    $('#auto-complete').addClass('complete-on');
+  if (query != "" && isNaN(query) && query.length > 3) {
     tt.services.fuzzySearch({
       key: "31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk",
       query: query
     }).go().then(function (response) {
       var address = [];
-      var results = '';
+      var results = "";
 
       for (var i = 0; i < 4; i++) {
         if (response.results[i]) {
           // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
-          var streetName = response.results[i].address['streetName'];
-          var city = response.results[i].address['municipality'];
-          var countryCode = response.results[i].address['countryCode'];
+          var streetName = response.results[i].address["streetName"];
+          var city = response.results[i].address["municipality"];
+          var countryCode = response.results[i].address["countryCode"];
 
-          if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == 'IT') {
-            address.push(streetName + ' ' + city);
-          } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == 'IT') {
+          if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == "IT") {
+            address.push(streetName + " " + city);
+          } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == "IT") {
             address.push(city);
           }
         }
       }
 
       for (var _i = 0; _i < address.length; _i++) {
-        results += '<div class="complete-results">' + address[_i] + '</div>';
+        results += '<div class="complete-results">' + address[_i] + "</div>";
       }
 
-      document.getElementById('auto-complete').innerHTML = results;
-
-      if (results == '') {
-        $('#auto-complete').removeClass('complete-on');
+      if (address.length != 0) {
+        document.getElementById("auto-complete").innerHTML = results;
+        $("#auto-complete").addClass("complete-on");
+      } else {
+        $("#auto-complete").removeClass("complete-on");
       }
     });
   }
@@ -42767,6 +42767,23 @@ $('.hamburger-menu').click(function () {
   $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
   $('.hamburger-menu').toggleClass('hamburger-menu-animated');
   $('.mobile-menu').toggleClass('hidden');
+});
+$('#menu-bottom').click(function () {
+  $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
+  $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
+  $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
+  $('.hamburger-menu').toggleClass('hamburger-menu-animated');
+  $('.mobile-menu').toggleClass('hidden');
+}); /// animazione mobile menu
+
+$(window).scroll(function () {
+  if (jQuery(window).width() <= 600) {
+    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+      $('.footer__menu-mobile').slideUp(100);
+    } else {
+      $('.footer__menu-mobile').slideDown(100);
+    }
+  }
 });
 
 /***/ }),

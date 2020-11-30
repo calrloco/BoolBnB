@@ -4,21 +4,29 @@
         <section class="top-section">
             <div class="title-apt">
 
-                <p class="title">{{ $apartment->title }}</p>
+                <p class="title">{{ strlen($apartment->title) <= 60 ? $apartment->title : substr($apartment->title,0,18).'...' }}</p>
                 <a class="address-apt" href="#">{{ $apartment->address }}, {{ $apartment->city }},
                     {{ $apartment->country }}</a>
             </div>
         </section>
         <section class="slider-section">
             <div class="apt-images">
-                <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
+                <div class="apt-images">
+                    <div class="apt-image-icon apt-image-icon-left  arrow-slider-sx {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}">
+                        <i class="fas fa-chevron-left {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}"></i>
+                    </div>
                 @for ($i = 0; $i < $apartment->images->count('id'); $i++)
-                
+
                     <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
                         src="{{ asset('storage/' . $apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
                 @endfor
-                <div class="arrow-slider-dx">
-                    <i class="far fa-arrow-alt-circle-right"></i>
+                <div class="dots__carousel-container">
+                    @for ($i = 0; $i < $apartment->images->count('id'); $i++)
+                    <div class="dots__carousel {{$i == 0 ? 'dots__carousel-active first' : ($i == $apartment->images->count('id') - 1 ? ' last' : '') }}"></div>
+                    @endfor
+                   </div>
+                <div class="apt-image-icon apt-image-icon-right arrow-slider-dx {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}">
+                    <i class="fas fa-chevron-right {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}"></i>
                 </div>
             </div>
         </section>
@@ -50,9 +58,9 @@
                             <li class="service-list">
                                 <div class="service-head">
                                     <i class="service-icon {{ $service->icon }}"></i>
-                                    <p>{{ $service->service }}</p>
+                                    <p class="service-title">{{ $service->service }}</p>
                                 </div>
-                                <span id="service-descr">{{ $service->description }}</span>
+                                {{-- <span id="service-descr">{{ $service->description }}</span> --}}
                             </li>
                         @endforeach
                     </ul>
@@ -95,6 +103,7 @@
             <canvas id="chart-views"></canvas>
             <canvas id="chart-messages"></canvas>
         </section>
+        <input type="hidden" id="stats-check" style="display:none" value="{{$apartment->id}}">
     </div>
     <script src="{{ asset('js/stats.js') }}"></script>
 @endsection

@@ -5,44 +5,57 @@
     width: 100%;
     @include flex(row, flex-start, stretch);
     color: var(--color-font-black);
-    
+
     @include responsive(tab){
         @include flex(column, flex-start, stretch);
     }
     &-left {
         flex: 1.4;
-        max-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
+        max-height:  calc(100vh -  var(--nav-height));
         overflow-y: scroll;
         
+        @media screen and (max-width:600px){
+            max-height: fit-content;
+            
+        }
           
         &__top {
             @include flex(column, flex-start, flex-start);
             padding: 0 2.4rem;
             padding-top: 5rem;
- 
+
             &__text {
                 font-size: 3.2rem;
-               
+
             }
 
         }
-       
+
     }
     &-right {
         flex: 1.6;
+        max-height:  calc(100vh -  var(--nav-height));
+        min-height: calc(100vh -  var(--nav-height));
+        @include responsive(tab){
+            display: none;
+      }
+      
+        
+       
         @include responsive(small_desktop){
                flex: 1;
          }
+       
     }
     .search__resoults__apartment-cards {
         @include flex(row, flex-start, flex-start);
         padding: 0 2.4rem;
         flex-wrap: wrap;
         max-width: 100%;
-       
+
         &-content {
             @include flex(column,flex-start, flex-start);
-            flex: 0 0 calc(100% / 2);
+            flex: 0 0 calc(100% / 3 - 2rem);
             padding: .8rem 0.8rem;
             cursor: pointer;
             margin-bottom: 2rem;
@@ -57,19 +70,19 @@
             &:hover {
                 box-shadow: $box_shadow_two;
             }
-            
+
             @include responsive(large_desktop){
                 flex: 0 0 calc((100% - 6rem)/ 3);
             }
-           
- 
+
+
             @include responsive(tab){
                 flex: 0 0 calc((100% - 4rem) / 2);
             }
             @include responsive(phone){
                 flex: 1 1 calc(100% - 2rem);
             }
-            
+
             &__text{
                 @include flex(column,space-between,stretch);
                 flex: 1 0;
@@ -98,7 +111,7 @@
                     opacity:1;
                 }
 
-              
+
             &-img {
                 width: 100%;
                 height: 100%;
@@ -117,12 +130,14 @@
                   height: 3rem;
                   width: 3rem;
                   text-align: center;
+                  color:lightgrey;
                   border-radius:50%;
                   @include flex(row,center, center);
                   transition: all .3s;
+                  
 
                   &:hover {
-                      
+                      color:var(--pink-bnb);
                       transform: translate(-50%, -50%) scale(1.1);
                   }
                   &:active {
@@ -171,7 +186,8 @@
 }
 .services{
     padding: 2rem 0;
-    
+    @include flex(row,space-around, center);
+
     &-all{
         cursor: pointer;
         border-radius:3rem;
@@ -182,10 +198,10 @@
         margin-right: 8px;
         transition: all .2s;
         margin-bottom: 1rem;
-        
-        
+
+
     }
-    
+
 }
 .filter-search{
     @include flex(row, center,center);
@@ -211,8 +227,8 @@
 .visualizza-appartamneto{
     @extend %button-default;
     align-self: center;
-    
-    
+
+
     &:hover{
         background-color: var(--pink-bnb);
         color: #fff;
@@ -225,30 +241,31 @@
 
 }
 .services-icons, .details-recap {
-    @include flex(row,flex-start, center);
+    @include flex(row,space-around, center);
+    padding-top: 5px;
     & i{
         font-size:2rem;
-        
+
         color:var(--pink-bnb);
 
         &:not(:last-child) {
             margin-right:1rem;
         }
     }
-    
+
 }
 .filter-toggle{
-    margin-top:2rem;
+    margin:2rem 0;
     font-size:1.6rem;
     cursor: pointer;
     @extend %button-default;
     width:fit-content;
-    
+
 }
 
 
 
 .details-recap {
     list-style: none;
-    
+
 }

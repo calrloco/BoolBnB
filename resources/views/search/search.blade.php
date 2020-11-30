@@ -25,12 +25,14 @@
                 </div>
             </div>
         </div>
+        {{-- MAPPA --}}
         <div class="container__search-right" id="map"></div>
         
     </div>
- 
+
+        {{-- SCRIPT HANDLEBARS --}}
         <script id="handlebars_cards" type="text/x-handlebars-template">
-        <div class="search__resoults__apartment-cards-content sponsor-@{{sponsor}}" data-service="">
+        <div class="search__resoults__apartment-cards-content sponsor-@{{sponsor}}">
         <div class="search__resoults__apartment-cards-content-slider" data-id="@{{dataId}}">
                     <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-left arrow-slider-dx">
                         <i class="fas fa-chevron-left"></i>
@@ -48,7 +50,8 @@
                 <p class="search__resoults__apartment-cards-content-description">
                     @{{ title }}
                 </p>
-                <div class="services-icons">
+                <ul class="details-recap"><li> Prezzo: @{{ price }}</li> <li> Mq: @{{ mq }}</li> <li> Stanze: @{{ rooms }}</li> <li> Posti letto: @{{ beds }}</li> <li> Bagni: @{{ bathrooms }}</li></ul>
+                <div class="services-icons" serv-id="@{{dataId}}">
                    
                 </div>
                 <form action="{{route('view.store')}}" class="search__resoults__apartment-cards-content-form" method="POST">

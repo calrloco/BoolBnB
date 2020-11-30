@@ -105,6 +105,7 @@ function getServices() {
     });
 }
 
+//chiamata per gli appartamenti senza filtro servizi
 function getCards(lat, lng, maxDist, sponsor) {
     $.ajax({
         url: "http://127.0.0.1:8000/api/apartments",
@@ -120,12 +121,18 @@ function getCards(lat, lng, maxDist, sponsor) {
         },
         success: function(risposta) {
             if (risposta.length > 0) {
+                var results = 'I tuoi risultati per';
+                $('.container__search-left__top__text-heading').text(results);
                 compileHandlebars(risposta, sponsor);
+            } else {
+                var noResults = 'Non ci sono risultati per'
+                $('.container__search-left__top__text-heading').text(noResults);
             }
         },
         error: function() {}
     });
 }
+//chiamata per gli appartamenti con filtro servizi
 function getCardsFilter(lat, lng, maxDist, sponsor, services) {
     $.ajax({
         url: "http://127.0.0.1:8000/api/apartments",
@@ -143,6 +150,9 @@ function getCardsFilter(lat, lng, maxDist, sponsor, services) {
         success: function(risposta) {
             if (risposta.length > 0) {
                 compileHandlebars(risposta, sponsor);
+            } else {
+                var noResults = 'Non ci sono risultati per'
+                $('.container__search-left__top__text-heading').text(noResults);
             }
         },
         error: function() {}
@@ -165,7 +175,13 @@ function compileHandlebars(risp, sponsor) {
             title: troncaStringa(risp[i].title),
             id: `<input class="aps_id" type="hidden" name="apartment_id" value=${risp[i].id}>`,
             sponsor: sponsor,
-            dataId: risp[i].id
+            dataId: risp[i].id,
+            price: risp[i].daily_price,
+            mq: risp[i].sm,
+            rooms: risp[i].rooms,
+            beds: risp[i].beds,
+            bathrooms: risp[i].bathrooms
+
         };
 
         var coordinates = [risp[i].longitude, risp[i].latitude];
@@ -213,7 +229,7 @@ function compileHandlebars(risp, sponsor) {
         var el = $(".search__resoults__apartment-cards-content");
         var details = buildLocation(el, address);
         // cliccando su un elemento della lista a sx lo trova in mappa
-        details.on(
+        $('.search__resoults__apartment-cards-content__text').on(
             "click",
             (function(marker) {
                 const activeItem = $(this);
@@ -235,8 +251,39 @@ function compileHandlebars(risp, sponsor) {
             details.removeClass("selected");
             details.eq(posizione).addClass("selected");
         });
+        compileServices(risp[i].id);
+        
+
     }
 }
+
+//compila i servizi degli appartamenti
+function compileServices(id) {
+    $.ajax({
+        url: "http://127.0.0.1:8000/api/services",
+        method: "GET",
+        headers: {
+            KEY: "test"
+        },
+        data: {
+            id: id,
+        },
+        success: function(risposta) {
+            if (risposta.length > 0) {
+                $('[serv-id="'+ id +'"]').empty();
+                for(i = 0; i < risposta.length; i++) {
+                    var icon = '<i class="' + risposta[i].icon + '"></i>'
+                    $('[serv-id="'+ id +'"]').append(icon);
+
+                }
+            }
+        },
+        error: function() {}
+    });
+    
+    
+}
+
 
 /// appendere le immagini allo slider
 function getImages(id, sponsor) {
@@ -262,6 +309,10 @@ function getImages(id, sponsor) {
                 }
                 appendImages(response[i], clss, sponsor);
             }
+            if(response.length == 1) {
+                $('[data-id="'+ id +'"]').find('.arrow-slider-dx').hide();
+                $('[data-id="'+ id +'"]').find('.arrow-slider-sx').hide();
+            }
         },
         error: function() {}
     });
@@ -281,19 +332,23 @@ function appendImages(risp, clss, sponsor) {
                 .append(img);
         }
     });
+    
 }
 // funzione per troncare una stringa
 function troncaStringa(stringa) {
     var shortText = "";
-    if (stringa.length != 0) {
-        for (var i = 0; i < stringa.length; i++) {
-            if (stringa[i] == " " && i <= 43) {
-                var shortText = $.trim(stringa).substring(0, i) + "...";
+    if(stringa.length > 28) {
+        for (var i = 28; i > 0; i--) {
+            if (stringa[i] == " ") {
+                shortText = $.trim(stringa).substring(0, i) + "...";
+                i = 0;
             }
-        }
+        } 
     } else {
-        shortText = "Descrizione non disponibile";
+        shortText = stringa;
+        
     }
+
     return shortText;
 }
 
@@ -317,6 +372,7 @@ var serviceCheck = (function() {
                 return item != serviceType;
             });
         }
+        console.log(selectedService);
     });
     /////// fa prtire la ricerca con i servizi selezionati
     $("#cerca-filtri").click(function() {
@@ -327,7 +383,7 @@ var serviceCheck = (function() {
 })();
 // al keyup si attiva funzione per l'autocompletamento della search che richiama l'API tomtom
 $("#search").keyup(function() {
-    $("#auto-complete").empty();
+    $(".complete-results").empty();
     autoComplete($("#search").val());
 });
 
@@ -345,7 +401,6 @@ function autoComplete(query) {
         $("#auto-complete").removeClass("complete-on");
     }
     if (query != "" && isNaN(query) && query.length > 3) {
-        $("#auto-complete").addClass("complete-on");
         tt.services
             .fuzzySearch({
                 key: apiKey,
@@ -383,13 +438,13 @@ function autoComplete(query) {
                     }
                 }
                 for (let i = 0; i < address.length; i++) {
-                    results +=
-                        '<div class="complete-results">' +
-                        address[i] +
-                        "</div>";
+                    results +='<div class="complete-results">' + address[i] + '</div>';
                 }
-                document.getElementById("auto-complete").innerHTML = results;
-                if (results == "") {
+                
+                if (address.length > 0) {
+                    $("#auto-complete").addClass("complete-on");
+                    document.getElementById("auto-complete").innerHTML = results;                  
+                }else{
                     $("#auto-complete").removeClass("complete-on");
                 }
             });

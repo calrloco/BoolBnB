@@ -18,15 +18,24 @@
         <div class="container-slider-app">
             <section class="slider-section">
                 <div class="apt-images">
-                    <div class="search__resoults__apartment-cards-content-slider-icons search__resoults__apartment-cards-content-slider-icons-left arrow-slider-dx">
-                        <i class="fas fa-chevron-right"></i>
+                    <div class="apt-image-icon apt-image-icon-left  arrow-slider-sx {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}">
+                        <i class="fas fa-chevron-left {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}"></i>
                     </div>
+                    
 
                     @for ($i = 0; $i < $apartment->images->count('id'); $i++)
                         <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
                             src="{{asset('storage/'.$apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
+                           
                     @endfor
-                    <i class="far fa-arrow-alt-circle-right arrow-slider-dx"></i>
+                    <div class="dots__carousel-container">
+                    @for ($i = 0; $i < $apartment->images->count('id'); $i++)
+                    <div class="dots__carousel {{$i == 0 ? 'dots__carousel-active first' : ($i == $apartment->images->count('id') - 1 ? ' last' : '') }}"></div>
+                    @endfor
+                   </div>
+                    <div class="apt-image-icon apt-image-icon-right arrow-slider-dx {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}">
+                        <i class="fas fa-chevron-right {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}"></i>
+                    </div>
                 </div>
             </section>
         </div>
@@ -48,14 +57,14 @@
                 </div>
                 <div class="services-box">
                     <p class="services-title">Servizi</p>
-                    <ul class="services-show">
+                    <ul class="services">
                         @foreach ($apartment->services as $service)
                             <li class="service-list">
                                 <div class="service-head">
-                                    <i class="service-icon fas {{ $service->icon }}"></i>
+                                    <i class="service-icon {{ $service->icon }}"></i>
                                     <p>{{ $service->service }}</p>
                                 </div>
-                                <span id="service-descr">{{ $service->description }}</span>
+                                {{-- <span id="service-descr">{{ $service->description }}</span> --}}
                             </li>
                         @endforeach
                     </ul>
@@ -71,24 +80,28 @@
                             <div class="input-aps-group">
                                 <p class="firstname-message"></p>
                                 <label for="fname">Nome:</label>
-                                <input type="text" id="firstname" name="name" value="{{ Auth::check() ? Auth::user()->name : '' }}"
+                                <input type="text" id="firstnameM" name="name" value="{{ Auth::check() ? Auth::user()->name : '' }}"
                                     name="firstname">
+                                <p class="message-E">error</p>
                             </div>
                             <div class="input-aps-group">
                                 <p class="lastname-message"></p>
                                 <label for="lname">Cognome:</label>
-                                <input type="text" id="lastname" name="lastname" value="{{ Auth::check() ? Auth::user()->lastname : '' }}"
+                                <input type="text" id="lastnameM" name="lastname" value="{{ Auth::check() ? Auth::user()->lastname : '' }}"
                                     name="lastname">
+                                <p class="message-E">error</p>
                             </div>
                             <div class="input-aps-group">
                                 <p class="email-message">  </p>
                                 <label for="email">Email:</label>
-                                <input type="email" id="email" value="{{ Auth::check() ? Auth::user()->email : '' }}"
+                                <input type="email" id="emailM" value="{{ Auth::check() ? Auth::user()->email : '' }}"
                                     name="email">
+                                <p class="message-E">error</p>
                             </p>
 
                             <label for="message">Messaggio</label>
-                            <textarea  name="message" id="message"  rows="10">{{ Auth::check() ?'Buongiorno sono '. Auth::user()->name : '' }}</textarea>
+                            <textarea  name="message" id="messageM"  rows="10">{{ Auth::check() ?'Buongiorno sono '. Auth::user()->name : '' }}</textarea>
+                            <p class="message-E">error</p>
                             <div class="input-aps-group">
                             <input type="hidden" value="{{ $apartment->id }}" name="apartment_id">
                             <p class ="send-message">

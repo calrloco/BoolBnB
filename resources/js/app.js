@@ -122,31 +122,21 @@ var unreadMessages = (function() {
         success: function(risposta) {
             if (risposta.length > 0) {
                 // messaggio per count 1
-                if (risposta[0].unread == 1) {
-                    $("#unread-msg").empty();
-                    $("#unread-msg").append(
-                        risposta[0].unread + " nuovo messaggio"
-                    );
-                    $("#unread-msg").append(
-                        `<i class="dot fas fa-circle"></i>`
-                    );
-                    // messaggio per count > 1
+                if(risposta[0].unread == 1) {
+                    $('.msg-msg').empty();
+                    $('.msg-msg').append(risposta[0].unread + ' nuovo messaggio');
+                    $('.msg-msg').append(`<i class="dot fas fa-circle"></i>`);
+                // messaggio per count > 1
                 } else {
-                    $("#unread-msg").empty();
-                    $("#unread-msg").append(
-                        risposta[0].unread + " nuovi messaggi"
-                    );
-                    $("#unread-msg").append(
-                        `<i class="dot fas fa-circle"></i>`
-                    );
+                    $('.msg-msg').empty();
+                    $('.msg-msg').append(risposta[0].unread + ' nuovi messaggi');
+                    $('.msg-msg').append(`<i class="dot fas fa-circle"></i>`);
                 }
             } else {
-                $("#unread-msg").empty();
-                $("#unread-msg").append("Messaggi");
+                $('.msg-msg').empty();
+                $('.msg-msg').append('Messaggi');
             }
-
-
-            },
+        },
         error: function() {
             consol.log(arguments);
             alert("errore");
@@ -243,7 +233,7 @@ $("#city").focusout(function() {
     checkInput($(this), checkForm.allChar, 1, 30, "la città");
 });
 $("#postal-code").focusout(function() {
-    checkInput($(this), checkForm.allChar, 1, 20, "il codice postale");
+    checkInput($(this), checkForm.allChar, 1, 20, "il cap");
 });
 $("#country").focusout(function() {
     checkInput($(this), checkForm.letter, 1, 30, "la nazione");
@@ -284,7 +274,7 @@ $("#crea").click(function(e) {
                 checkForm.allChar,
                 1,
                 20,
-                "il codice postale"
+                "il cap"
             ) &&
             checkInput($("#country"), checkForm.letter, 1, 30, "la nazione") &&
             checkInput(
@@ -320,13 +310,7 @@ $("#crea").click(function(e) {
         checkInput($("#title"), checkForm.allChar, 10, 300, "il titolo") ||
         checkInput($("#address"), checkForm.allChar, 3, 300, "l'indirizzo") ||
         checkInput($("#city"), checkForm.allChar, 1, 30, "la città") ||
-        checkInput(
-            $("#postal-code"),
-            checkForm.allChar,
-            1,
-            20,
-            "il codice postale"
-        ) ||
+        checkInput($("#postal-code"), checkForm.allChar, 1, 20, "il cap") ||
         checkInput($("#country"), checkForm.letter, 1, 30, "la nazione") ||
         checkInput(
             $("#description"),
@@ -365,10 +349,10 @@ $("#password-confirmR").focusout(function() {
     ) {
         $(this).addClass("error");
         $(this)
-            .next(".message")
+            .next(".message-E")
             .addClass("message-on");
         $(this)
-            .next(".message")
+            .next(".message-E")
             .text("Le password non sono uguali");
     }
 });
@@ -376,15 +360,15 @@ $("#dateR").focusout(function() {
     if ($("#dateR").val() == "") {
         $(this).addClass("error");
         $(this)
-            .next(".message")
+            .next(".message-E")
             .addClass("message-on");
         $(this)
-            .next(".message")
+            .next(".message-E")
             .text("Non hai inserito la data");
     } else {
         $(this).removeClass("error");
         $(this)
-            .next(".message")
+            .next(".message-E")
             .removeClass("message-on");
     }
 });
@@ -426,23 +410,55 @@ $("#registerR").click(function(e) {
 
 // validazione pagina login
 $("#emailL").focusout(function() {
-    checkInput($(this), emailR, 2, 255, "la mail");
+    checkInput($(this), checkForm.emailR, 2, 255, "la mail");
 });
 $("#passwordL").focusout(function() {
-    checkInput($(this), allChar, 8, 255, "la password");
+    checkInput($(this), checkForm.allChar, 8, 255, "la password");
 });
 
 $("#registerL").click(function(e) {
     if (
-        (checkInput($("#emailL"), emailR, 2, 255, "la mail") &&
-            checkInput($("#passwordL"), allChar, 8, 255, "la password")) ||
-        checkInput($("#emailL"), emailR, 2, 255, "la mail") ||
-        checkInput($("#passwordL"), allChar, 8, 255, "la password")
+        (checkInput($("#emailL"), checkForm.emailR, 2, 255, "la mail") &&
+            checkInput($("#passwordL"), checkForm.allChar, 8, 255, "la password")) ||
+        checkInput($("#emailL"), checkForm.emailR, 2, 255, "la mail") ||
+        checkInput($("#passwordL"), checkForm.allChar, 8, 255, "la password")
     ) {
         e.preventDefault();
     }
 });
 // fine validazione pagina login
+
+// validazione invio messaggio pagina apartment 
+$("#firstnameM").focusout(function() {
+    checkInput($(this), checkForm.letter, 2, 50, "il nome");
+});
+$("#lastnameM").focusout(function() {
+    checkInput($(this), checkForm.letter, 2, 50, "il cognome");
+});
+$("#emailM").focusout(function() {
+    checkInput($(this), checkForm.emailR, 2, 255, "la mail");
+}); 
+
+$("#messageM").focusout(function() {
+    checkInput($(this), checkForm.allChar, 2, 2000, "il messsaggio");
+});
+
+$("#send-message").click(function(e) {
+    if (
+        checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") &&
+        checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") &&
+        checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") &&
+        checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messsaggio") ||
+
+        checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") ||
+        checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") ||
+        checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") ||
+        checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messsaggio") 
+    ) {
+        e.preventDefault();
+    }
+});
+// fine validazione messaggio
 
 // funzione per controllare lato client il form
 function checkInput(selector, kind, min, max, field) {
@@ -453,22 +469,22 @@ function checkInput(selector, kind, min, max, field) {
         selector.val().length > max
     ) {
         selector.addClass("error");
-        selector.next(".message").addClass("message-on");
+        selector.next(".message-E").addClass("message-on");
         if (selector.val() == "") {
-            selector.next(".message").text("Non hai inserito " + field);
+            selector.next(".message-E").text("Non hai inserito " + field);
         } else if (!matchKind(selector, kind)) {
             selector
-                .next(".message")
+                .next(".message-E")
                 .text("Hai inserito un formato non valido");
         } else if (selector.val().length < min) {
-            selector.next(".message").text("Il campo è troppo breve");
+            selector.next(".message-E").text("Il campo è troppo breve");
         } else if (selector.val().length > max) {
-            selector.next(".message").text("Il campo è troppo lungo");
+            selector.next(".message-E").text("Il campo è troppo lungo");
         }
         return true;
     } else {
         selector.removeClass("error");
-        selector.next(".message").removeClass("message-on");
+        selector.next(".message-E").removeClass("message-on");
     }
 }
 
@@ -504,3 +520,20 @@ $('.hamburger-menu').click(function () {
     $('.hamburger-menu').toggleClass('hamburger-menu-animated');
     $('.mobile-menu').toggleClass('hidden');
 });
+$('#menu-bottom').click(function(){
+    $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
+    $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
+    $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
+    $('.hamburger-menu').toggleClass('hamburger-menu-animated');
+    $('.mobile-menu').toggleClass('hidden');
+});
+/// animazione mobile menu
+$(window).scroll(function() {
+    if(jQuery(window).width() <= 600){
+    if($(window).scrollTop() + $(window).height() == $(document).height()) {
+        $('.footer__menu-mobile').slideUp(100);
+    }else{
+        $('.footer__menu-mobile').slideDown(100);
+    }
+    }
+ });

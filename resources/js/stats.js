@@ -13,7 +13,7 @@ var myfunction = (function () {
          KEY:'test'
      },
      data:{
-         id:'10'
+         id:$('#stats-check').val(),
      },
      success:function(response){
          console.log(response);

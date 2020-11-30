@@ -11,7 +11,7 @@
         <div>
           <label for="email">Email</label><br />
           <input id="emailL" type="email" name="email" placeholder="Enter your email"/>
-          <p class="message"></p>
+          <p class="message-E">error</p>
         </div>
 
         <!-- password -->
@@ -19,7 +19,7 @@
           <label for="password">Password</label><br />
           <div class="password">
             <input id="passwordL" type="password" name="password" placeholder="Enter your password" />
-            <p class="message"></p>
+            <p class="message-E">error</p>
           </div>
         </div>
 
@@ -34,9 +34,9 @@
        <div>
             <button id="registerL" type="submit" class="signup_btn">{{ __('Login') }}</button>
           @if (Route::has('password.request'))
-                <a class="forgot_password" href="{{ route('password.request') }}">
+                {{-- <a class="forgot_password" href="{{ route('password.request') }}">
                     {{ __('Forgot Your Password?') }}
-                </a>
+                </a> --}}
             @endif
        </div>
       </form>

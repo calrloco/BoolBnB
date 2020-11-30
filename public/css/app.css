@@ -6011,7 +6011,6 @@ a {
 }
 
 @media screen and (max-width: 800px) {
-<<<<<<< HEAD
   .info-apt-section .info-box-sx .services-box {
     display: flex;
     justify-content: center;
@@ -6021,17 +6020,6 @@ a {
 }
 
 .info-apt-section .info-box-sx .services-box .services-title {
-=======
-  .info-apt-section .info-box-sx .services-box ul.services {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-  }
-}
-
-.info-apt-section .info-box-sx .services-box ul.services .services-title {
->>>>>>> master
   font-size: 22px;
   font-weight: 500;
   padding: 10px 0;
@@ -6053,19 +6041,15 @@ a {
   }
 }
 
-.info-apt-section .info-box-sx .services-box ul.services .service-list {
+.info-apt-section .info-box-sx .services-box .services .service-list {
   font-size: 16px;
   padding: 5px;
   margin-bottom: 1rem;
   list-style-type: none;
 }
 
-<<<<<<< HEAD
 .info-apt-section .info-box-sx .services-box .services .service-list .service-head {
   width: 100%;
-=======
-.info-apt-section .info-box-sx .services-box ul.services .service-list .service-head {
->>>>>>> master
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6073,7 +6057,6 @@ a {
   padding-bottom: 5px;
 }
 
-<<<<<<< HEAD
 @media screen and (max-width: 800px) {
   .info-apt-section .info-box-sx .services-box .services .service-list .service-head {
     display: flex;
@@ -6085,23 +6068,12 @@ a {
 
 .info-apt-section .info-box-sx .services-box .services .service-list .service-head .service-icon {
   padding-right: 5px;
-=======
-.info-apt-section .info-box-sx .services-box ul.services .service-list .service-head .service-icon {
-  padding-right: 10px;
->>>>>>> master
   font-size: 3rem;
   color: #df1362;
 }
 
-<<<<<<< HEAD
 .info-apt-section .info-box-sx .services-box .services .service-list .service-head .service-title {
   vertical-align: 3rem;
-=======
-@media screen and (max-width: 800px) {
-  .info-apt-section .info-box-sx .services-box ul.services .service-list #service-descr {
-    display: none;
-  }
->>>>>>> master
 }
 
 .info-apt-section .info-box-dx {
@@ -6630,6 +6602,10 @@ h1 {
 
 .services {
   padding: 2rem 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
 }
 
 .services-all {
@@ -6692,9 +6668,10 @@ canvas:focus {
 .services-icons,
 .details-recap {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   flex-direction: row;
+  padding-top: 5px;
 }
 
 .services-icons i,

@@ -4621,13 +4621,6 @@ readers do not read off random characters that represent icons */
   transition: all 0.2s;
 }
 
-.create-apt-link:hover {
-  background-color: var(--pink-bnb);
-  color: #fff;
-  transform: translateY(-4px);
-  border: 1px solid var(--pink-bnb);
-}
-
 :root {
   --pink-bnb: rgb(255,90,95);
   --turcoise-bnb: rgb(0,166,153);
@@ -6837,6 +6830,7 @@ h1 {
   height: 3rem;
   width: 3rem;
   text-align: center;
+  color: lightgrey;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -6846,6 +6840,7 @@ h1 {
 }
 
 .container__search .search__resoults__apartment-cards-content-slider-icons:hover {
+  color: var(--pink-bnb);
   transform: translate(-50%, -50%) scale(1.1);
 }
 
@@ -7385,15 +7380,16 @@ canvas:focus {
 .create-apt-link {
   text-decoration: none;
   color: var(--color-font-black);
+  margin-bottom: 2rem;
 }
 
 .create-apt-link:hover {
+  color: #fff;
   background-image: var(--gradient-color);
-  transform: scale(1.1);
 }
 
 .create-apt-link:active {
-  transform: scale(1);
+  transform: scale(0.9);
 }
 
 .container-center .title {

@@ -120,12 +120,14 @@
                   height: 3rem;
                   width: 3rem;
                   text-align: center;
+                  color:lightgrey;
                   border-radius:50%;
                   @include flex(row,center, center);
                   transition: all .3s;
+                  
 
                   &:hover {
-                      
+                      color:var(--pink-bnb);
                       transform: translate(-50%, -50%) scale(1.1);
                   }
                   &:active {

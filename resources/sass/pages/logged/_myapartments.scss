@@ -193,12 +193,13 @@
     @extend %button-default;
     text-decoration: none;
     color:var(--color-font-black);
+    margin-bottom: 2rem;
     &:hover {
-        @extend %button-hover;
+       color:#fff;
         background-image:var(--gradient-color);
-        transform:scale(1.1);
+        
     }
     &:active {
-        transform: scale(1);
+        transform: scale(0.9);
     }
 }

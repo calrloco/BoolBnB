@@ -13,7 +13,7 @@
             <div class="apt-images">
                 <i class="far fa-arrow-alt-circle-left arrow-slider-sx"></i>
                 @for ($i = 0; $i < $apartment->images->count('id'); $i++)
-                
+
                     <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
                         src="{{ asset('storage/' . $apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
                 @endfor
@@ -50,9 +50,9 @@
                             <li class="service-list">
                                 <div class="service-head">
                                     <i class="service-icon {{ $service->icon }}"></i>
-                                    <p>{{ $service->service }}</p>
+                                    <p class="service-title">{{ $service->service }}</p>
                                 </div>
-                                <span id="service-descr">{{ $service->description }}</span>
+                                {{-- <span id="service-descr">{{ $service->description }}</span> --}}
                             </li>
                         @endforeach
                     </ul>

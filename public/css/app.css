@@ -5726,6 +5726,12 @@ a {
   color: var(--pink-bnb);
 }
 
+#msg-mobile i {
+  color: var(--pink-bnb);
+  font-size: 1.2rem;
+  transform: translateY(-89%);
+}
+
 .jumbotron {
   background-image: url("https://images.pexels.com/photos/3757905/pexels-photo-3757905.jpeg?cs=srgb&dl=pexels-corinna-widmer-3757905.jpg&fm=jpg");
   height: 70rem;
@@ -5801,9 +5807,11 @@ a {
   flex-direction: row;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1376px) {
   .sponsor__home {
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -5835,15 +5843,9 @@ a {
   cursor: pointer;
 }
 
-@media screen and (max-width: 1376) {
+@media screen and (max-width: 1376px) {
   .sponsor__home-card {
-    flex: 0 0 50%;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .sponsor__home-card {
-    flex: 0 1 calc(50%);
+    flex: 0 0 calc(50% - (.7rem * 2));
   }
 }
 
@@ -6171,7 +6173,6 @@ a {
 }
 
 .slider-section .apt-images .arrow-slider-sx:hover {
-  transform: scale(2);
   color: #ff5a5f;
 }
 
@@ -6183,7 +6184,6 @@ a {
 }
 
 .slider-section .apt-images .arrow-slider-dx:hover {
-  transform: scale(2);
   color: #ff5a5f;
 }
 
@@ -6243,6 +6243,10 @@ a {
   padding: 20px 0;
   font-size: 16px;
   border-bottom: 1px solid #ff5a5f;
+}
+
+.info-apt-section .info-box-sx .apt-description p {
+  word-wrap: break-word;
 }
 
 .info-apt-section .info-box-sx .services-box {
@@ -6435,6 +6439,56 @@ a {
 
 .btn-show {
   width: 100%;
+}
+
+.apt-image-icon {
+  width: 5rem;
+  height: 5rem;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.apt-image-icon-left {
+  left: 3%;
+}
+
+.apt-image-icon-right {
+  right: 3%;
+}
+
+.dots__carousel {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: lightgrey;
+  position: relative;
+  margin: 1rem;
+}
+
+.dots__carousel-active {
+  background-color: var(--pink-bnb);
+  cursor: pointer;
+}
+
+.dots__carousel-container {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
 
 h1 {

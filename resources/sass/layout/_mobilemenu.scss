@@ -145,3 +145,11 @@ a {
 .pink-mobile{
     color: var(--pink-bnb);
 }
+#msg-mobile{
+
+    & i {
+        color: var(--pink-bnb);
+       font-size:1.2rem;
+       transform:translateY(-89%);
+    }
+}

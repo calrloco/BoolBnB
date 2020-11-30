@@ -11,14 +11,22 @@
         </section>
         <section class="slider-section">
             <div class="apt-images">
-            <i class="far fa-arrow-alt-circle-left arrow-slider-sx {{$apartment->images->count('id') < 2 ? 'hidden' : 'pippo'}}"></i>
+                <div class="apt-images">
+                    <div class="apt-image-icon apt-image-icon-left  arrow-slider-sx {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}">
+                        <i class="fas fa-chevron-left {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}"></i>
+                    </div>
                 @for ($i = 0; $i < $apartment->images->count('id'); $i++)
                 
                     <img class="apt-image {{ $i == 0 ? 'active first' : ($i == $apartment->images->count('id') - 1 ? 'hidden last' : 'hidden') }}"
                         src="{{ asset('storage/' . $apartment->images[$i]->path) }}" alt="{{ $apartment->title }}">
                 @endfor
-                <div class="arrow-slider-dx">
-                    <i class="far fa-arrow-alt-circle-right {{$apartment->images->count('id') < 2 ? 'hidden' : 'pippo'}}"></i>
+                <div class="dots__carousel-container">
+                    @for ($i = 0; $i < $apartment->images->count('id'); $i++)
+                    <div class="dots__carousel {{$i == 0 ? 'dots__carousel-active first' : ($i == $apartment->images->count('id') - 1 ? ' last' : '') }}"></div>
+                    @endfor
+                   </div>
+                <div class="apt-image-icon apt-image-icon-right arrow-slider-dx {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}">
+                    <i class="fas fa-chevron-right {{$apartment->images->count('id') == 1 ? 'hidden' : 'pippo' }}"></i>
                 </div>
             </div>
         </section>

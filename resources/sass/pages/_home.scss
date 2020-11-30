@@ -50,9 +50,12 @@
 .sponsor__home {
     max-width: 100%;
     @include flex(row,flex-start, center);
-    @include responsive(tab){
+    @media screen and (max-width:1376px){
         flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
     }
+  
     @media screen and (max-width:448px){
         @include flex(column,center, center);
     }
@@ -70,13 +73,11 @@
     &-card {
         flex: 0 1 25%;
         margin:0 .7rem;
+        @media screen and (max-width:1376px){
+            flex: 0 0 calc(50% - (.7rem * 2));
+        }
         
-        @media screen and (max-width:1376){
-            flex: 0 0 50%;
-        }
-        @include responsive(tab){
-            flex: 0 1 calc(50%);
-        }
+       
         @media screen and (max-width:448px){
             flex: 0 0 100%;
             margin-bottom: 2rem;

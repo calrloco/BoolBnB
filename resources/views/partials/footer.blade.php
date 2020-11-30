@@ -19,23 +19,20 @@
                 </ul>
                 <ul class="footer-list footer__content-creadeted">
                     <li class="footer-header">Created by</li>
-                    <li class="footer-li"><a target="_blank" href="https://github.com/AlexGuriev8" class="footer-link"><i
-                                class="footer-icons fab fa-github"></i>Alexandru Guriev</a></li>
-                    <li class="footer-li"><a target="_blank" href="https://github.com/calrloco" class="footer-link"><i
-                                class="footer-icons fab fa-github"></i>Carlo Briganti</a></li>
-                    <li class="footer-li"><a target="_blank" href="https://github.com/yuridido" class="footer-link"><i class="footer-icons fab fa-github"></i>
-                            Yuri Di Domenicantonio</a></li>
-
+                    <li class="footer-li"><a target="_blank" href="https://github.com/AlexGuriev8" class="footer-link"><i class="footer-icons fab fa-github"></i>Alexandru Guriev</a></li>
+                    <li class="footer-li"><a target="_blank" href="https://github.com/calrloco" class="footer-link"><i class="footer-icons fab fa-github"></i>Carlo Briganti</a></li>
                     <li class="footer-li"><a a target="_blank" href="https://github.com/Sevenis" class="footer-link"><i class="footer-icons fab fa-github"></i>Pietro Sette</a></li>
-                    <li class="footer-li"><a a target="_blank" href="https://github.com/Vamod" class="footer-link"><i
-                                class="footer-icons fab fa-github"></i>Valerio Modesti</a></li>
+                    <li class="footer-li"><a a target="_blank" href="https://github.com/Vamod" class="footer-link"><i class="footer-icons fab fa-github"></i>Valerio Modesti</a></li>
+                    <li class="footer-li"><a target="_blank" href="https://github.com/yuridido" class="footer-link"><i class="footer-icons fab fa-github"></i>Yuri Di Domenicantonio</a></li>
                 </ul>
                 <div class="footer-list footer__content-thanks">
                     <li class="footer-header">Ringraziamenti</li>
-                    <li class="footer-li"><i class="footer-icons fas fa-code"></i>Formicola Luca</li>
-                    <li class="footer-li"><i class="footer-icons fas fa-code"></i>Galfo Cristina</li>
-                    <li class="footer-li"><i class="footer-icons fas fa-code"></i>Minchele Papagni</li>
+                    <li class="footer-li"><i class="footer-icons fas fa-code"></i>Cristina Galfo</li>
                     <li class="footer-li"><i class="footer-icons fas fa-code"></i>Fabio Forghieri</li>
+                    <li class="footer-li"><i class="footer-icons fas fa-code"></i>Fabiola Gardin</li>
+                    <li class="footer-li"><i class="footer-icons fas fa-code"></i>Luca Formicola</li>
+                    <li class="footer-li"><i class="footer-icons fas fa-code"></i>Michele Papagni</li>
+                    <li class="footer-li"><i class="footer-icons fas fa-code"></i>Nikolas Mosca</li>
                 </div>
             </div>
             <div class="footer-privacy">

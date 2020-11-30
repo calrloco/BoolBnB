@@ -19,7 +19,7 @@ class ViewsTableSeeder extends Seeder
         for ($i = 0; $i < 1000; $i++){
             $newView = new View;
             $newView->ip_guest = $faker->ipv4;
-            $newView->created_at = $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = null)
+            $newView->created_at = $faker->dateTimeThisMonth($max = 'now', $timezone = null) ;
             $newView->apartment_id = $apartments->random()->id;
             $newView->save();
         }

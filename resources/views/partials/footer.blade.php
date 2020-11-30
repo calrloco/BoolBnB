@@ -19,15 +19,14 @@
                 </ul>
                 <ul class="footer-list footer__content-creadeted">
                     <li class="footer-header">Created by</li>
-                    <li class="footer-li"><a target="_blank" href="https://github.com/calrloco" class="footer-link"><i
-                                class="footer-icons fab fa-github"></i>Briganti Carlo</a></li>
-                    <li class="footer-li"><a target="_blank" href="https://github.com/yuridido" class="footer-link"><i class="footer-icons fab fa-github"></i>
-                            Didomenicantonio Yuri</a></li>
                     <li class="footer-li"><a target="_blank" href="https://github.com/AlexGuriev8" class="footer-link"><i
-                                class="footer-icons fab fa-github"></i>Guriev Alexandru</a></li>
+                                class="footer-icons fab fa-github"></i>Alexandru Guriev</a></li>
+                    <li class="footer-li"><a target="_blank" href="https://github.com/calrloco" class="footer-link"><i
+                                class="footer-icons fab fa-github"></i>Carlo Briganti</a></li>
+                    <li class="footer-li"><a target="_blank" href="https://github.com/yuridido" class="footer-link"><i class="footer-icons fab fa-github"></i>
+                            Yuri Di Domenicantonio</a></li>
 
-                    <li class="footer-li"><a a target="_blank" href="https://github.com/Sevenis" class="footer-link"><i class="footer-icons fab fa-github"></i>Sette
-                            Pietro</a></li>
+                    <li class="footer-li"><a a target="_blank" href="https://github.com/Sevenis" class="footer-link"><i class="footer-icons fab fa-github"></i>Pietro Sette</a></li>
                     <li class="footer-li"><a a target="_blank" href="https://github.com/Vamod" class="footer-link"><i
                                 class="footer-icons fab fa-github"></i>Valerio Modesti</a></li>
                 </ul>

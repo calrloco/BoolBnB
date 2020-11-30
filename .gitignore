@@ -2,6 +2,7 @@ public const home = '/';
 /node_modules
 /public/hot
 /storage/*.key
+/public/storage
 /vendor
 .env
 .env.backup

@@ -332,6 +332,7 @@ function appendImages(risp, clss, sponsor) {
                 .append(img);
         }
     });
+    
 }
 // funzione per troncare una stringa
 function troncaStringa(stringa) {

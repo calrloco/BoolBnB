@@ -32,7 +32,8 @@
                                 @endif
                             </div>
                             <div class="sponsor__home-card-text">
-                                <p>{{ $apartment[$i]->title }}</p>
+                                
+                                <p>{{ strlen($apartment[$i]->title) <= 25 ? $apartment[$i]->title : substr($apartment[$i]->title, 0, 18) . '...' }}</p>
                             </div>
                         </a>
                 @endfor

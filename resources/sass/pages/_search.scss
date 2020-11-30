@@ -10,11 +10,15 @@
         @include flex(column, flex-start, stretch);
     }
     &-left {
-        flex: 1.4;
-        max-height: calc(100vh - (var(--footer-height) + var(--nav-height)));
+        flex: 1;
+        max-height:  calc(100vh -  var(--nav-height));
         overflow-y: scroll;
-
-
+        
+        @media screen and (max-width:600px){
+            max-height: fit-content;
+            
+        }
+          
         &__top {
             @include flex(column, flex-start, flex-start);
             padding: 0 2.4rem;
@@ -30,9 +34,18 @@
     }
     &-right {
         flex: 1.6;
+        max-height:  calc(100vh -  var(--nav-height));
+        min-height: calc(100vh -  var(--nav-height));
+        @include responsive(tab){
+            display: none;
+      }
+      
+        
+       
         @include responsive(small_desktop){
                flex: 1;
          }
+       
     }
     .search__resoults__apartment-cards {
         @include flex(row, flex-start, flex-start);
@@ -117,12 +130,14 @@
                   height: 3rem;
                   width: 3rem;
                   text-align: center;
+                  color:lightgrey;
                   border-radius:50%;
                   @include flex(row,center, center);
                   transition: all .3s;
+                  
 
                   &:hover {
-
+                      color:var(--pink-bnb);
                       transform: translate(-50%, -50%) scale(1.1);
                   }
                   &:active {

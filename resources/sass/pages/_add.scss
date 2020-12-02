@@ -116,11 +116,8 @@
             @include responsive(tab){
                 label{
                     display: none;
-                }               
-            } 
-        }
-        .service:hover {
-            color: #de1362;
+                  }               
+               } 
             }
         }
 
@@ -148,34 +145,40 @@
             color: #ffffff;
         }
         // PER IMMAGINI IN EDIT
-        .img-apt-box {
-            position: relative;
-            height: 100px;
-            width: 100px;
-            object-fit: contain;
-            overflow: hidden;
-            & img {
-                width: 100%;
-                height: 100%;
+        .edit-img{
+            @include flex(row, flex-start, center);
+            .img-apt-box {
+                position: relative;
+                height: 100px;
+                width: 100px;
+                margin-right: .5rem;
+                object-fit: contain;
+                overflow: hidden;
+                    & img {
+                        width: 100%;
+                        height: 100%;
+                    }            
+                
+            }
+            
+            .x {
+                color: red;
+                position: absolute;
+                right: 7%;
+                top: 7%;
+            }
+            
+            
+            .img-delete:hover {
+                cursor: pointer;
             }
         }
-        
-        .x {
-            color: red;
-            position: absolute;
-            right: 7%;
-            top: 7%;
-        }
-        
-        
-        .img-delete:hover {
-            cursor: pointer;
-        }
+    
     } 
    
 }
 
 
-
-
-
+.checked{
+    color: #e01561;
+}

@@ -42787,6 +42787,19 @@ $(window).scroll(function () {
       $('.footer__menu-mobile').slideDown(100);
     }
   }
+}); //per cambiare colore aggiungendo la classe checked al click della checkbox
+
+$('input[type=checkbox]').on('change', function () {
+  var div = $(this).closest('.service');
+  $(this).is(":checked") ? div.addClass("checked") : div.removeClass("checked");
+}); // controlla se la checkbox è selezionata o no
+
+$('input[type=checkbox]').each(function (index) {
+  var div = $(this).closest('.service');
+
+  if ($(this).is(":checked")) {
+    div.addClass("checked");
+  }
 });
 
 /***/ }),
@@ -42894,8 +42907,8 @@ document.addEventListener("DOMContentLoaded", function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\lavori\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\lavori\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Valerio Modesti\mamp_public\42-progetto-finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

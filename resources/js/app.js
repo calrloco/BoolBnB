@@ -505,3 +505,17 @@ $(window).scroll(function() {
     }
     }
  });
+
+//per cambiare colore aggiungendo la classe checked al click della checkbox
+ $('input[type=checkbox]').on('change', function() {
+    var div = $(this).closest('.service');
+    $(this).is(":checked") ? div.addClass("checked") : div.removeClass("checked");
+});
+
+// controlla se la checkbox è selezionata o no
+$('input[type=checkbox]').each(function(index){
+    var div = $(this).closest('.service');
+    if($(this).is(":checked")){
+        div.addClass("checked")
+    }
+});

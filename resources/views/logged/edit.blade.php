@@ -128,6 +128,7 @@
         @endif
 
         <p>elimina le immagini</p>
+        <div class="edit-img">
         {{-- ciclo per visualizzazione ed eliminazione delle immagini dell'appartamento --}}
         @foreach($apartment->images as $image)
         <form action="{{route('images.destroy', $image)}}" method="post" class="img-apt-box">
@@ -137,6 +138,7 @@
             <button type="submit" class="img-delete"><i class="fas fa-times x"></i></button>
         </form>
         @endforeach
+        </div>
 
 
     </div>

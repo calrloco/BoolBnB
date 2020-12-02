@@ -89,7 +89,7 @@
                     <div class="label-input service">
                         <span><i class="{{ $service->icon }}"></i></span>
                         <label for="services">{{ $service->service }}</label>
-                        <input type="checkbox" name="services[]" value="{{ $service->id }}">
+                        <input type="checkbox" name="services[]" value="{{ $service->id }}"/>
                     </div>
                     @endforeach
 

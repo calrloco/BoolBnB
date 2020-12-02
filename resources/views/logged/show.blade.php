@@ -92,7 +92,7 @@
                             </button>
                         </form>
                         <button type="button" class="btn-show services-all visualizza-appartamneto"><a
-                                href="#">MAILBOX!</a></button>
+                                href="{{route('messages.index')}}">MAILBOX!</a></button>
                         {{-- <a
                             href="{{ route('logged.sponsor', $apartment->id) }}">Sponsorizza il tuo appartamento!</a>
                         --}}

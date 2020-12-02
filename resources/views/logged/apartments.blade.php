@@ -20,14 +20,7 @@
                     <div class="overlay {{ ($apartment->attivo == 1) ? 'active-apt' : 'inactive-apt'}}"></div>
                      
                     
-                        @for($i = 0; $i < count($spons); $i++)
-                        @if($apartment->id == $spons[$i]->apartment_id)
-                        <div class="apt-info-top">
-                            <i class="fas fa-star"></i>
-                            <div>sponsorizzato fino al: {{ $spons[$i]->end_sponsor }}</div>
-                        </div>
-                        @endif
-                      @endfor
+                      
                     
                     <div class="apt-info-sx">
                     
@@ -36,6 +29,7 @@
                             <img class=apt-img-small src="{{ asset('storage/' . $apartment->images[0]->path) }}" alt="{{ $apartment->title }}">
                         @endif
                     </div>
+                   
                     <div class="apt-info-dx">
                         <div class="apt-title">
                             
@@ -55,6 +49,14 @@
                                 </li>
                             @endforeach
                         </ul>
+                        @for($i = 0; $i < count($spons); $i++)
+                        @if($apartment->id == $spons[$i]->apartment_id)
+                        <div class="apt-info-sponsor">
+                            <i class="fas fa-star"></i>
+                            <div>sponsorizzato fino al: {{ $spons[$i]->end_sponsor }}</div>
+                        </div>
+                        @endif
+                      @endfor
                     </div>
                     <a href="{{ route('host.show', $apartment->id) }}" class="apartment-button">Vai all'appartamento</a>
                 </div>

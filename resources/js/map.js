@@ -145,9 +145,14 @@ function getCardsFilter(lat, lng, maxDist, sponsor, services) {
             lng: lng,
             maxDist: maxDist,
             services: Array.from(services),
-            sponsored: sponsor
+            sponsored: sponsor,
+            rooms:3,
+            beds:3,
+            bathrooms:3,
+            dailyPrice:3,
         },
         success: function(risposta) {
+            console.log(parseInt($('.room-numbers').html()));
             if (risposta.length > 0) {
                 compileHandlebars(risposta, sponsor);
             } else {
@@ -381,6 +386,7 @@ var serviceCheck = (function() {
     });
     /////// fa prtire la ricerca con i servizi selezionati
     $("#cerca-filtri").click(function() {
+        $('.container__search-left__top__filters').hide();
         $("#no-sponsor").empty();
         $("#sponsor").empty();
         getCoordinates($('#address-inst').html(), $("#range-value").html(), selectedService);
@@ -498,12 +504,13 @@ $(document).on("click", ".arrow-slider-dx", function() {
     }
 });
 $('.filter-toggle').click(function(){
-  $('.services').toggleClass('hidden');
-  $('.filter-search').toggleClass('hidden');
-  $(this).text('Chiudi');
+  $('.container__search-left__top__filters').slideDown();
+  $(this).find('.filter-toggle-tetx').text('Chiudi');
   $(this).toggleClass('chiudi');
+   document.querySelector('.chevron-filter').style.transform = 'rotate(-180deg)';
   if(!$(this).hasClass('chiudi')){
-    $(this).text('filtri');
-  }
+    document.querySelector('.chevron-filter').style.transform = 'rotate(360deg)';
+    $('.container__search-left__top__filters').slideUp();
+   }
 });
 

@@ -121,7 +121,12 @@ function getCards(lat, lng, maxDist, sponsor) {
         },
         success: function(risposta) {
             if (risposta.length > 0) {
+                var results = 'I tuoi risultati per';
+                $('.container__search-left__top__text-heading').text(results);
                 compileHandlebars(risposta, sponsor);
+            } else {
+                var noResults = 'Non ci sono risultati per'
+                $('.container__search-left__top__text-heading').text(noResults);
             }
         },
         error: function() {}
@@ -145,6 +150,9 @@ function getCardsFilter(lat, lng, maxDist, sponsor, services) {
         success: function(risposta) {
             if (risposta.length > 0) {
                 compileHandlebars(risposta, sponsor);
+            } else {
+                var noResults = 'Non ci sono risultati per'
+                $('.container__search-left__top__text-heading').text(noResults);
             }
         },
         error: function() {}
@@ -162,8 +170,13 @@ function compileHandlebars(risp, sponsor) {
     var templateCards = Handlebars.compile(source);
     const markersCity = [];
     for (let i = 0; i < risp.length; i++) {
+        if(sponsor == 1) {
+            city = risp[i].city + ' -sponsorizzato-';
+        } else {
+            city = risp[i].city;
+        }
         var context = {
-            city: risp[i].city,
+            city: city,
             title: troncaStringa(risp[i].title),
             id: `<input class="aps_id" type="hidden" name="apartment_id" value=${risp[i].id}>`,
             sponsor: sponsor,
@@ -221,7 +234,7 @@ function compileHandlebars(risp, sponsor) {
         var el = $(".search__resoults__apartment-cards-content");
         var details = buildLocation(el, address);
         // cliccando su un elemento della lista a sx lo trova in mappa
-        details.on(
+        $('.search__resoults__apartment-cards-content__text').on(
             "click",
             (function(marker) {
                 const activeItem = $(this);
@@ -301,6 +314,10 @@ function getImages(id, sponsor) {
                 }
                 appendImages(response[i], clss, sponsor);
             }
+            if(response.length == 1) {
+                $('[data-id="'+ id +'"]').find('.arrow-slider-dx').hide();
+                $('[data-id="'+ id +'"]').find('.arrow-slider-sx').hide();
+            }
         },
         error: function() {}
     });
@@ -320,6 +337,7 @@ function appendImages(risp, clss, sponsor) {
                 .append(img);
         }
     });
+    
 }
 // funzione per troncare una stringa
 function troncaStringa(stringa) {

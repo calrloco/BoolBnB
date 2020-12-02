@@ -107,21 +107,20 @@ var getIp = (function() {
     });
 })();
 
-
 // chiamata api per controllare messaggi non letti
 var unreadMessages = (function() {
-    var id = $('#nav_user-id').val();
-    $.ajax( {
+    var id = $("#nav_user-id").val();
+    $.ajax({
         url: "http://127.0.0.1:8000/api/unread",
         method: "GET",
         headers: {
-            KEY: "test",
+            KEY: "test"
         },
         data: {
-            id: id,
+            id: id
         },
         success: function(risposta) {
-            if(risposta.length > 0) {
+            if (risposta.length > 0) {
                 // messaggio per count 1
                 if(risposta[0].unread == 1) {
                     $('.msg-msg').empty();
@@ -133,60 +132,74 @@ var unreadMessages = (function() {
                     $('.msg-msg').append(risposta[0].unread + ' nuovi messaggi');
                     $('.msg-msg').append(`<i class="dot fas fa-circle"></i>`);
                 }
-
-
             } else {
                 $('.msg-msg').empty();
                 $('.msg-msg').append('Messaggi');
             }
-
-
-            },
+        },
         error: function() {
             consol.log(arguments);
-            alert('errore');
+            alert("errore");
         }
-
     });
 })();
 
 // funzione per i suggerimenti nella search
 function autoComplete(query) {
-    if (query.length < 3 || query == '') {
-        $('#auto-complete').removeClass('complete-on');
+    if (query.length < 3 || query == "") {
+        $("#auto-complete").removeClass("complete-on");
     }
-    if (query != '' && isNaN(query) && query.length > 3) {
-        $('#auto-complete').addClass('complete-on');
-        tt.services.fuzzySearch({
+    if (query != "" && isNaN(query) && query.length > 3) {
+        tt.services
+            .fuzzySearch({
                 key: "31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk",
-                query: query,
+                query: query
             })
             .go()
-            .then(function (response) {
-
+            .then(function(response) {
                 var address = [];
-                var results = '';
+                var results = "";
 
                 for (let i = 0; i < 4; i++) {
                     if (response.results[i]) {
                         // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
-                        var streetName = response.results[i].address['streetName'];
-                        var city = response.results[i].address['municipality'];
-                        var countryCode = response.results[i].address['countryCode'];
-                        if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == 'IT') {
-                            address.push(streetName + ' ' + city);
-                        } else if (streetName == undefined && city != undefined && !address.includes(city) && countryCode == 'IT') {
+                        var streetName =
+                            response.results[i].address["streetName"];
+                        var city = response.results[i].address["municipality"];
+                        var countryCode =
+                            response.results[i].address["countryCode"];
+                        if (
+                            streetName != undefined &&
+                            !address.includes(streetName) &&
+                            city != undefined &&
+                            !address.includes(city) &&
+                            countryCode == "IT"
+                        ) {
+                            address.push(streetName + " " + city);
+                        } else if (
+                            streetName == undefined &&
+                            city != undefined &&
+                            !address.includes(city) &&
+                            countryCode == "IT"
+                        ) {
                             address.push(city);
                         }
                     }
                 }
                 for (let i = 0; i < address.length; i++) {
-                    results += '<div class="complete-results">' + address[i] + '</div>'
-
+                    results +=
+                        '<div class="complete-results">' +
+                        address[i] +
+                        "</div>";
                 }
-                document.getElementById('auto-complete').innerHTML = results;
-                if (results == '') {
-                    $('#auto-complete').removeClass('complete-on');
+
+                if (address.length != 0) {
+                    document.getElementById(
+                        "auto-complete"
+                    ).innerHTML = results;
+                    $("#auto-complete").addClass("complete-on");
+                } else {
+                    $("#auto-complete").removeClass("complete-on");
                 }
             });
     }
@@ -198,54 +211,54 @@ $(document).click(function() {
 });
 
 // VALIDAZIONE FORM incapulamento variabili da usare nelle funzione di validazione
-var checkForm = (function() {
+var checkForm = (function () {
     return {
         letterNumber: /^[0-9a-zA-Z ]+$/,
         letter: /^[a-zA-Z' ]+$/,
         number: /^[0-9 ]+$/,
-        allChar: /^[a-zA-Z0-9'!@#àèòìù\$%\^\&*\)\( +=.,_-]+$/,
+        allChar: /^[a-zA-Z0-9'!?@#àèòìù\$%\^\&*\)\( +=.,_-]+$/,
         dateR: /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
         emailR: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     };
 })();
 
 // validazione input della pagina create e edit apartment
-$("#title").focusout(function() {
+$("#title").keyup(function () {
     checkInput($(this), checkForm.allChar, 10, 300, "il titolo");
 });
-$("#address").focusout(function() {
+$("#address").keyup(function () {
     checkInput($(this), checkForm.allChar, 3, 300, "l'indirizzo");
 });
-$("#city").focusout(function() {
+$("#city").keyup(function () {
     checkInput($(this), checkForm.allChar, 1, 30, "la città");
 });
-$("#postal-code").focusout(function() {
+$("#postal-code").keyup(function () {
     checkInput($(this), checkForm.allChar, 1, 20, "il cap");
 });
-$("#country").focusout(function() {
+$("#country").keyup(function () {
     checkInput($(this), checkForm.letter, 1, 30, "la nazione");
 });
-$("#description").focusout(function() {
+$("#description").keyup(function () {
     checkInput($(this), checkForm.allChar, 20, 2000, "la descrizione");
 });
-$("#daily-price").focusout(function() {
+$("#daily-price").keyup(function () {
     checkInput($(this), checkForm.number, 1, 2000, "il prezzo");
 });
-$("#sm").focusout(function() {
+$("#sm").keyup(function () {
     checkInput($(this), checkForm.number, 1, 2000, "i metri quadrati");
 });
-$("#rooms").focusout(function() {
+$("#rooms").keyup(function () {
     checkInput($(this), checkForm.number, 1, 2000, "le camere");
 });
-$("#beds").focusout(function() {
+$("#beds").keyup(function () {
     checkInput($(this), checkForm.number, 1, 2000, "i letti");
 });
-$("#bathrooms").focusout(function() {
+$("#bathrooms").keyup(function () {
     checkInput($(this), checkForm.number, 1, 2000, "i bagni");
 });
 
 // al click del submit controlla se i campi soddisfano le condizioni e impedisce il submit del create e del edit apartment
-$("#crea").click(function(e) {
+$("#crea").click(function (e) {
     if (
         (checkInput($("#title"), checkForm.allChar, 10, 300, "il titolo") &&
             checkInput($("#address"), checkForm.allChar, 3, 300, "l'indirizzo") &&
@@ -293,22 +306,21 @@ $("#crea").click(function(e) {
 });
 
 // validazione input della pagina register
-$("#firstnameR").focusout(function() {
+$("#firstnameR").keyup(function () {
     checkInput($(this), checkForm.letter, 2, 50, "il nome");
 });
-$("#lastnameR").focusout(function() {
+$("#lastnameR").keyup(function () {
     checkInput($(this), checkForm.letter, 2, 50, "il cognome");
 });
-$("#emailR").focusout(function() {
+$("#emailR").keyup(function () {
     checkInput($(this), checkForm.emailR, 2, 255, "la mail");
 });
-$("#passwordR").focusout(function() {
+$("#passwordR").keyup(function () {
     checkInput($(this), checkForm.allChar, 8, 255, "la password");
 });
-$("#password-confirmR").focusout(function() {
+$("#password-confirmR").keyup(function () {
     if (
-        $("#password-confirmR").val() != $("#passwordR").val() ||
-        $("#password-confirmR").val() == ""
+        $("#password-confirmR").val() != $("#passwordR").val()
     ) {
         $(this).addClass("error");
         $(this)
@@ -317,9 +329,14 @@ $("#password-confirmR").focusout(function() {
         $(this)
             .next(".message-E")
             .text("Le password non sono uguali");
+    } else {
+        $(this).removeClass("error");
+        $(this)
+            .next(".message-E")
+            .removeClass("message-on");
     }
 });
-$("#dateR").focusout(function() {
+$("#dateR").focusout(function () {
     if ($("#dateR").val() == "") {
         $(this).addClass("error");
         $(this)
@@ -337,7 +354,7 @@ $("#dateR").focusout(function() {
 });
 
 // Al click del form register controlla se tutte le condizione sono soddisfatte
-$("#registerR").click(function(e) {
+$("#registerR").click(function (e) {
     if (
         (checkInput($("#firstnameR"), checkForm.letter, 2, 50, "il nome") &&
             checkInput($("#lastnameR"), checkForm.letter, 2, 50, "il cognome") &&
@@ -360,14 +377,14 @@ $("#registerR").click(function(e) {
 // fine pagina register
 
 // validazione pagina login
-$("#emailL").focusout(function() {
+$("#emailL").keyup(function () {
     checkInput($(this), checkForm.emailR, 2, 255, "la mail");
 });
-$("#passwordL").focusout(function() {
+$("#passwordL").keyup(function () {
     checkInput($(this), checkForm.allChar, 8, 255, "la password");
 });
 
-$("#registerL").click(function(e) {
+$("#registerL").click(function (e) {
     if (
         (checkInput($("#emailL"), checkForm.emailR, 2, 255, "la mail") &&
             checkInput($("#passwordL"), checkForm.allChar, 8, 255, "la password")) ||
@@ -380,31 +397,31 @@ $("#registerL").click(function(e) {
 // fine validazione pagina login
 
 // validazione invio messaggio pagina apartment 
-$("#firstnameM").focusout(function() {
+$("#firstnameM").keyup(function () {
     checkInput($(this), checkForm.letter, 2, 50, "il nome");
 });
-$("#lastnameM").focusout(function() {
+$("#lastnameM").keyup(function () {
     checkInput($(this), checkForm.letter, 2, 50, "il cognome");
 });
-$("#emailM").focusout(function() {
+$("#emailM").keyup(function () {
     checkInput($(this), checkForm.emailR, 2, 255, "la mail");
-}); 
+});
 
-$("#messageM").focusout(function() {
+$("#messageM").keyup(function () {
     checkInput($(this), checkForm.allChar, 2, 2000, "il messsaggio");
 });
 
-$("#send-message").click(function(e) {
+$("#send-message").click(function (e) {
     if (
         checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") &&
         checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") &&
         checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") &&
-        checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messsaggio") ||
+        checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messaggio") ||
 
         checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") ||
         checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") ||
         checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") ||
-        checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messsaggio") 
+        checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messsaggio")
     ) {
         e.preventDefault();
     }
@@ -436,6 +453,7 @@ function checkInput(selector, kind, min, max, field) {
     } else {
         selector.removeClass("error");
         selector.next(".message-E").removeClass("message-on");
+
     }
 }
 
@@ -446,7 +464,6 @@ function matchKind(selector, kind) {
     }
     return false;
 }
-
 // chiamta che prende ip dell'utente e capisce la regione per ricerca nei paraggi
 var getIp = (function() {
     $.ajax({
@@ -460,9 +477,7 @@ var getIp = (function() {
             console.log(risposta);
             $("#ip-home-search").val(risposta.region);
         },
-        error: function() {
-            
-        }
+        error: function() {}
     });
 })();
 
@@ -473,3 +488,20 @@ $('.hamburger-menu').click(function () {
     $('.hamburger-menu').toggleClass('hamburger-menu-animated');
     $('.mobile-menu').toggleClass('hidden');
 });
+$('#menu-bottom').click(function(){
+    $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
+    $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
+    $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
+    $('.hamburger-menu').toggleClass('hamburger-menu-animated');
+    $('.mobile-menu').toggleClass('hidden');
+});
+/// animazione mobile menu
+$(window).scroll(function() {
+    if(jQuery(window).width() <= 600){
+    if($(window).scrollTop() + $(window).height() == $(document).height()) {
+        $('.footer__menu-mobile').slideUp(100);
+    }else{
+        $('.footer__menu-mobile').slideDown(100);
+    }
+    }
+ });

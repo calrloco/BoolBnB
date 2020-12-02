@@ -1,5 +1,5 @@
 .apartments-list {
-    @include flex(row, space-between, flex-start);
+    @include flex(row, flex-start, flex-start);
     font-size: 1.2rem;
     flex-wrap: wrap;
     height: 100%;
@@ -13,6 +13,7 @@
 
 .apt-info-general {
     position: relative;
+    margin:1.5rem;
 
 }
 
@@ -45,6 +46,20 @@
 
 
 .apt-info {
+
+    &-top{
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-image:var(--gradient-color);
+        z-index: 5;
+        color: #fff;
+        @include flex(column, center, center);
+        transform: translateY(-100%);
+        transition: all 0.2s;
+    }
     &-general {
         height: 44rem;
         @include flex(column, flex-end, center);
@@ -55,9 +70,17 @@
         border-radius: 2.1rem;
         width: 31.4rem;
         transition: all 0.2s;
-
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        
+        &:hover {
+            transform: translateY(-2%);
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
         &:hover .apt-info-dx {
             transform: translateY(0%);
+        }
+        &:hover .apt-info-top {
+            transform: translateY(0);
         }
         &:hover .apt-img-small {
             filter: blur(3px);
@@ -67,6 +90,7 @@
         }
         &:hover .apt-description-text {
             opacity: 1;
+
         }
     }
     &-sx {
@@ -166,16 +190,18 @@
         }
     }
 }
+
 .create-apt-link {
     @extend %button-default;
     text-decoration: none;
     color:var(--color-font-black);
+    margin-bottom: 2rem;
     &:hover {
-        @extend %button-hover;
+       color:#fff;
         background-image:var(--gradient-color);
-        transform:scale(1.1);
+        
     }
     &:active {
-        transform: scale(1);
+        transform: scale(0.9);
     }
 }

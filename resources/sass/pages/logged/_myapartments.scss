@@ -1,207 +1,101 @@
-.apartments-list {
-    @include flex(row, flex-start, flex-start);
-    font-size: 1.2rem;
-    flex-wrap: wrap;
-    height: 100%;
-    color: var(--color-font-black);
-
-
-    @include responsive(tab){
-        @include flex(row, center, center);
-    }
+.apartments-list{
+    @include flex(column, flex-start, flex-start);
 }
-
-.apt-info-general {
-    position: relative;
-    margin:1.5rem;
-
+.apt-info-general{
+    height: 30rem;
+    max-height:30rem;
+    width: 100%;
+    @include flex(row,flex-start, flex-start);
+    margin-bottom:2rem;
+    border-bottom: 1px solid lightgrey;
+    padding:2rem 0;
+    
 }
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 3;
-}
-
-.inactive-apt {
-    background-color: rgba(0, 0, 0, 0.8);
-
-}
-
-.inactive-msg {
-    width: 100px;
-    position: absolute;
-    left: 50%;
-    top: 10%;
-    transform: translate(-50%, -50%);
-    color: rgb(255,90,95);
-    text-align: center;
-    font-size: 130%;
-    z-index: 50;
-    background-color: #fff;
-}
-
-
-.apt-info {
-
-    &-top{
-        position: absolute;
-        height: 10%;
-        width: 100%;
-        top: 0;
-        left: 0;
-        background-image:var(--gradient-color);
-        z-index: 5;
-        color: #fff;
-        @include flex(column, center, center);
-        transform: translateY(-100%);
-        transition: all 0.2s;
-    }
-    &-general {
-        height: 44rem;
-        @include flex(column, flex-end, center);
-        margin-bottom: 2rem;
-        position: relative;
-        cursor: pointer;
-        overflow: hidden;
-        border-radius: 2.1rem;
-        width: 31.4rem;
-        transition: all 0.2s;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-        
-        &:hover {
-            transform: translateY(-2%);
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-        }
-        &:hover .apt-info-dx {
-            transform: translateY(0%);
-        }
-        &:hover .apt-info-top {
-            transform: translateY(0);
-        }
-        &:hover .apt-img-small {
-            filter: blur(3px);
-        }
-        &:hover .apartment-button {
-            opacity: 1;
-        }
-        &:hover .apt-description-text {
-            opacity: 1;
-
-        }
-    }
-    &-sx {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        z-index: 1;
-    }
-    &-dx {
-        @include flex(column, space-between, center);
-        flex: 0 0 50%;
-        z-index: 2;
-        background-image: var(--gradient-color);
-        padding: 2rem;
-        color: #fff;
-        transition: all 0.2s;
-        transform: translateY(30%);
-        max-width: 100%;
-    }
-}
-.apt-address {
-    margin-bottom: 0.3rem;
+.apt-info-sx{
     height: 100%;
     max-height: 100%;
-}
-.apt-description {
-    margin-bottom: 0.3rem;
-    max-height: 20%;
-    min-height: 20%;
-
-    &-text {
-        opacity: 0;
-        word-break: break-all;
+    flex: 0 0 calc(100% / 3);
+    position: relative;
+    & img{
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        max-height: 100%;
+        object-fit: cover;
+        border-radius: 0.8rem;
     }
+    
 }
-.apt-details{
-    max-height: 20%;
-    min-height: 20%;
-}
-.apt-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 0.3rem;
-    max-height: 20%;
-}
-.apt-img-small {
+.inactive-msg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size:1.6rem;
+    background-color:rgba(0,0,0,.8);
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: all 0.2s;
-}
-.apt-services-show {
-    width:100%;
-    @include flex(row, space-around, center);
-}
-
-.service {
-    @include flex(row, space-around, center);
-}
-
-.apartment-button {
-    position: absolute;
-    z-index: 3;
-    top: 20%;
-    text-decoration: none;
-    border: 3px solid #fff;
-    padding: 2rem;
+    @include flex(row,center, center);
     color: #fff;
-    border-radius: 4rem;
-    background-color: rgba(255, 90, 95, 0.7);
-    opacity: 0;
-    transition: all 0.2s;
-    font-size: 1.3rem;
-
-    &:hover {
-        transform: translateY(-0.5rem);
-    }
-    &:active {
-        transform: translateY(0rem);
-    }
+    border-radius:1.1rem;
 }
-.head {
-    padding: 3rem 0;
-    @include flex(row, space-between, center);
-    font-size: 2rem;
+.apt-info-dx{
+    font-size:1.4rem;
+}
+.apt-title{
+    font-size:1.6rem;
     font-weight: 800;
-    color: var(--color-font-black);
+    margin-bottom:2rem;
+}
+.apt-img-small{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+.apt-info-dx{
+    flex: 1;
+    @include flex(column, flex-start, flex-start);
+    margin-left: 2rem;
+    min-height: 100%;
 
-    @include responsive(tab){
-        @include flex(column, center, center);
-
-        & h2{
-            margin-bottom: 1.5rem;
-        }
+    & p {
+        margin-bottom:2rem;
     }
 }
+.apt-info-sponsor{
+    flex: 0 0 calc(100% / 3);
+}
+.head{
+    margin-bottom:4rem;
+    padding: 2rem 0;
+    font-size:1.6rem;
+    @include flex(row,space-between,center);
 
-.create-apt-link {
+
+    & a{
+        @extend %button-default;
+        border: 1px solid transparent;
+        color:#fff;
+        font-weight:800;
+        background-image: var(--gradient-color);
+        letter-spacing:.1rem;
+    }
+}
+.apt-services-show{
+    list-style: none;
+    @include flex(row, flex-start, flex-start);
+    font-size:2rem;
+    color: $blue;
+    & li{
+        margin-right:2rem;
+    }
+}
+.apartments__go-to{
+    flex:1;
+    @include flex(column, flex-end, flex-end);
+    width: 100%;
+}
+.apartment-button{
+    justify-self: flex-end;
     @extend %button-default;
-    text-decoration: none;
     color:var(--color-font-black);
-    margin-bottom: 2rem;
-    &:hover {
-       color:#fff;
-        background-image:var(--gradient-color);
-        
-    }
-    &:active {
-        transform: scale(0.9);
-    }
 }

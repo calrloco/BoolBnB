@@ -148,7 +148,7 @@
             .services{
                 width:100%;
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-start;
                 align-items: center;
                 @include responsive(tab){
                     @include flex(column, center, center);
@@ -363,4 +363,15 @@
         
     }
 }
+.eleimina-immagini{
+    width: 100%;
+    height: 100%;
+    @include flex(row,flex-start, center);
 
+    & img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        padding-left: 1rem;
+    }
+}

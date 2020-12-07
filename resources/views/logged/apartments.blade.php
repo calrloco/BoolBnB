@@ -57,8 +57,11 @@
                         </div>
                         @endif
                       @endfor
+                      <div class="apartments__go-to">
+                      <a href="{{ route('host.show', $apartment->id) }}" class="apartment-button">Vai all'appartamento</a>
+                      </div>
                     </div>
-                    <a href="{{ route('host.show', $apartment->id) }}" class="apartment-button">Vai all'appartamento</a>
+                   
                 </div>
             @endforeach
             </div>

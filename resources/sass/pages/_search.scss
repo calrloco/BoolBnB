@@ -246,6 +246,7 @@
     }
 
 }
+
 .services-icons, .details-recap {
     @include flex(row,space-around, center);
     padding-top: 5px;
@@ -293,8 +294,13 @@
   }
 
     &-range{
-        @include flex(row,flex-end, flex-start);
+        @include flex(row,flex-start, center);
         flex:1 1;
+    }
+    &__numbers{
+        flex: 0 0 10%;
+        @include flex(column,center, center);
+        min-height: 100%;
     }
 }
 

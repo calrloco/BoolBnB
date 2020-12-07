@@ -513,4 +513,23 @@ $('.filter-toggle').click(function(){
     $('.container__search-left__top__filters').slideUp();
    }
 });
-
+$('.plus').click(function(){
+    var value = parseInt($(this).siblings(".filter__chars__numbers").text());
+    value ++;
+    if(value > 10){
+        $(this).siblings(".filter__chars__numbers").text(2);
+    }else{
+        $(this).siblings(".filter__chars__numbers").text(value);
+    }
+    
+});
+$('.minus').click(function(){
+    var value = parseInt($(this).siblings(".filter__chars__numbers").text());
+    value --;
+    if(value < 1){
+        $(this).siblings(".filter__chars__numbers").text(10);
+    }else{
+        $(this).siblings(".filter__chars__numbers").text(value);
+    }
+    
+});

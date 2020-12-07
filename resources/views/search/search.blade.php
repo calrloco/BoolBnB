@@ -20,11 +20,11 @@
                         <p class="filter__chars-name">Numero stanze</p>
                         <div class="filter__chars-range">
                         <div class="minus">
-                       <i class="fas fa-minus"></i>
+                       <i class="fas fa-minus" id="filter__minus"></i>
                        </div>
                        <p class="filter__chars__numbers room-numbers">3</p>
                        <div class="plus">
-                       <i class="fas fa-plus"></i>
+                       <i class="fas fa-plus" id="filter__plus"></i>
                     </div>
                     </div>
                     </div>
@@ -32,11 +32,11 @@
                         <p class="filter__chars-name beds-number">Posti letto</p>
                       <div class="filter__chars-range">
                          <div class="minus">
-                            <i class="fas fa-minus"></i>
+                            <i class="fas fa-minus" id="filter__minus"></i>
                             </div>
                             <p class="filter__chars__numbers">3</p>
                             <div class="plus">
-                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-plus" id="filter__plus"></i>
                           </div>
                        </div>
                     </div>
@@ -44,11 +44,11 @@
                         <p class="filter__chars-name">Bagni</p>
                         <div class="filter__chars-range">
                         <div class="minus">
-                            <i class="fas fa-minus"></i>
+                            <i class="fas fa-minus" id="filter__minus"></i>
                         </div>
                         <p class="filter__chars__numbers">3</p>
                         <div class="plus">
-                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-plus" id="filter__plus"></i>
                          </div>
                        </div>
                     </div>
@@ -57,13 +57,13 @@
                         <p class="filter__chars-name">Prezzo</p>
                         <div class="filter__chars-range">
                         <div class="minus">
-                            <i class="fas fa-minus"></i>
+                            <i class="fas fa-minus" id="filter__minus"></i>
                             </div>
                             
                             <p class="filter__chars__numbers">3</p>
                             
                             <div class="plus">
-                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-plus" id="filter__plus"></i>
                          </div>
                         </div>
                     </div>

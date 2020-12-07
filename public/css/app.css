@@ -4608,6 +4608,8 @@ readers do not read off random characters that represent icons */
   font-weight: 900; }
 /* media query */
 
+.apartment-button,
+.head a,
 .filter-toggle,
 .visualizza-appartamneto,
 .filter-search {
@@ -7081,10 +7083,19 @@ canvas:focus {
 
 .filter__chars-range {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
   flex-direction: row;
   flex: 1 1;
+}
+
+.filter__chars__numbers {
+  flex: 0 0 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .plus,
@@ -7296,14 +7307,15 @@ canvas:focus {
   align-items: flex-start;
   flex-direction: row;
   margin-bottom: 2rem;
-  border-top: 2px soli red;
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid lightgrey;
+  padding: 2rem 0;
 }
 
 .apt-info-sx {
   height: 100%;
   max-height: 100%;
   flex: 0 0 calc(100% / 3);
+  position: relative;
 }
 
 .apt-info-sx img {
@@ -7315,9 +7327,29 @@ canvas:focus {
      object-fit: cover;
 }
 
+.inactive-msg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.6rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  color: #fff;
+}
+
+.apt-info-dx {
+  font-size: 1.4rem;
+}
+
 .apt-title {
   font-size: 1.6rem;
   font-weight: 800;
+  margin-bottom: 2rem;
 }
 
 .apt-img-small {
@@ -7328,7 +7360,7 @@ canvas:focus {
 }
 
 .apt-info-dx {
-  flex: 0 0 calc(100% / 3);
+  flex: 1;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -7337,12 +7369,57 @@ canvas:focus {
   min-height: 100%;
 }
 
+.apt-info-dx p {
+  margin-bottom: 2rem;
+}
+
 .apt-info-sponsor {
   flex: 0 0 calc(100% / 3);
 }
 
 .head {
   margin-bottom: 4rem;
+  padding: 2rem 0;
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.head a {
+  color: #fff;
+  font-weight: 800;
+  background-image: var(--gradient-color);
+  letter-spacing: 0.1rem;
+}
+
+.apt-services-show {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+  font-size: 2rem;
+  color: #3490dc;
+}
+
+.apt-services-show li {
+  margin-right: 2rem;
+}
+
+.apartments__go-to {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 100%;
+}
+
+.apartment-button {
+  justify-self: flex-end;
+  color: var(--color-font-black);
 }
 
 .messaggi {

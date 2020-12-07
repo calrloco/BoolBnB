@@ -35,6 +35,7 @@ class ApartmentController extends Controller
 
         //controllo di $request->sponsored per la selezione della query
         if($request->sponsored) {
+            
             //se sono richiesti gli sponsorizzati
             $query = Apartment::selectRaw("*, ST_Distance_Sphere(point($request->lng,$request->lat),
             point(longitude, latitude)) * .001 as distance")

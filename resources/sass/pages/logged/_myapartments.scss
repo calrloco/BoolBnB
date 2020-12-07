@@ -22,6 +22,7 @@
         min-height: 100%;
         max-height: 100%;
         object-fit: cover;
+        border-radius: 0.8rem;
     }
     
 }
@@ -35,6 +36,7 @@
     height: 100%;
     @include flex(row,center, center);
     color: #fff;
+    border-radius:1.1rem;
 }
 .apt-info-dx{
     font-size:1.4rem;
@@ -71,6 +73,7 @@
 
     & a{
         @extend %button-default;
+        border: 1px solid transparent;
         color:#fff;
         font-weight:800;
         background-image: var(--gradient-color);

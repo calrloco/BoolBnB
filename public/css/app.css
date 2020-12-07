@@ -7325,6 +7325,7 @@ canvas:focus {
   max-height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  border-radius: 0.8rem;
 }
 
 .inactive-msg {
@@ -7340,6 +7341,7 @@ canvas:focus {
   align-items: center;
   flex-direction: row;
   color: #fff;
+  border-radius: 1.1rem;
 }
 
 .apt-info-dx {
@@ -7388,6 +7390,7 @@ canvas:focus {
 }
 
 .head a {
+  border: 1px solid transparent;
   color: #fff;
   font-weight: 800;
   background-image: var(--gradient-color);

@@ -24,7 +24,7 @@
                     
                     <div class="apt-info-sx">
                     
-                        <div class="inactive-msg">{{ ($apartment->attivo == 1) ? '' : 'annuncio inattivo'}}</div>
+                        <div class=" {{ ($apartment->attivo == 1) ? 'hidden' : 'inactive-msg'}}">{{ ($apartment->attivo == 1) ? '' : 'Annuncio inattivo'}}</div>
                         @if (isset($apartment->images[0]->path))
                             <img class=apt-img-small src="{{ asset('storage/' . $apartment->images[0]->path) }}" alt="{{ $apartment->title }}">
                         @endif

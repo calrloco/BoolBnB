@@ -471,7 +471,7 @@ var getIp = (function() {
         url: "https://api.ipdata.co/",
         data: {
             "api-key":
-                "1777abd71f2ebf5cdeb8cc5089569063908fa10482d91cfff26ae02a"
+                "92f9e5e9b27bdc813e5552b9f01845c320c980dcaebb48b880455854"
         },
         success: function(risposta) {
             console.log(risposta);

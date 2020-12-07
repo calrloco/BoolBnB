@@ -126,18 +126,19 @@
         @if(session('status'))
         <p>{{session('status')}}</p>
         @endif
-
-        <p>elimina le immagini</p>
+        <p style="font-size:1.8rem">elimina le immagini</p>
+    <div class="eleimina-immagini">
+        
         {{-- ciclo per visualizzazione ed eliminazione delle immagini dell'appartamento --}}
         @foreach($apartment->images as $image)
-        <form action="{{route('images.destroy', $image)}}" method="post" class="img-apt-box">
+        <form action="{{route('images.destroy', $image)}}" method="post" class="img-apt-box img-edit">
             @csrf
             @method('DELETE')
             <img src="{{ asset('storage/'. $image->path) }}" alt="foto appartamento">
             <button type="submit" class="img-delete"><i class="fas fa-times x"></i></button>
         </form>
         @endforeach
-
+    </div>
 
     </div>
 

@@ -1,6 +1,5 @@
 require("./bootstrap");
 require("./add");
-require("./sponsor");
 require("./alert");
 
 var $ = require("jquery");
@@ -33,6 +32,11 @@ $(document).ready(function() {
         var value = $(this).text();
         $("#search").val(value);
     });
+
+    // per chiudere l'autocomplete al click fuori
+    $(document).click(function() {
+        $("#auto-complete").removeClass("complete-on");
+    });
 });
 
 // animation
@@ -58,7 +62,7 @@ $(window).bind("mousewheel", function(event) {
     $("#start-search").removeClass("hidden");
 });
 
-// range value
+// slider per impostare il range della ricerca fra 20km e 120 km///
 var slider = (function() {
     var slider = document.getElementById("myRanges");
     var output = document.getElementById("range-value");
@@ -122,19 +126,23 @@ var unreadMessages = (function() {
         success: function(risposta) {
             if (risposta.length > 0) {
                 // messaggio per count 1
-                if(risposta[0].unread == 1) {
-                    $('.msg-msg').empty();
-                    $('.msg-msg').append(risposta[0].unread + ' nuovo messaggio');
-                    $('.msg-msg').append(`<i class="dot fas fa-circle"></i>`);
-                // messaggio per count > 1
+                if (risposta[0].unread == 1) {
+                    $(".msg-msg").empty();
+                    $(".msg-msg").append(
+                        risposta[0].unread + " nuovo messaggio"
+                    );
+                    $(".msg-msg").append(`<i class="dot fas fa-circle"></i>`);
+                    // messaggio per count > 1
                 } else {
-                    $('.msg-msg').empty();
-                    $('.msg-msg').append(risposta[0].unread + ' nuovi messaggi');
-                    $('.msg-msg').append(`<i class="dot fas fa-circle"></i>`);
+                    $(".msg-msg").empty();
+                    $(".msg-msg").append(
+                        risposta[0].unread + " nuovi messaggi"
+                    );
+                    $(".msg-msg").append(`<i class="dot fas fa-circle"></i>`);
                 }
             } else {
-                $('.msg-msg').empty();
-                $('.msg-msg').append('Messaggi');
+                $(".msg-msg").empty();
+                $(".msg-msg").append("Messaggi");
             }
         },
         error: function() {
@@ -157,6 +165,8 @@ function autoComplete(query) {
             })
             .go()
             .then(function(response) {
+
+                /// creaimo array vuoto in cui pushamo i rusultati della chiamata api a tomtom
                 var address = [];
                 var results = "";
 
@@ -168,6 +178,8 @@ function autoComplete(query) {
                         var city = response.results[i].address["municipality"];
                         var countryCode =
                             response.results[i].address["countryCode"];
+
+                        /// se l'indirizzo o la citta non e ripetuto lo pushamo nell'array di cui sopra 
                         if (
                             streetName != undefined &&
                             !address.includes(streetName) &&
@@ -186,13 +198,14 @@ function autoComplete(query) {
                         }
                     }
                 }
+                //// appaendiamo l'array senza doppioni nell'autocomplete
                 for (let i = 0; i < address.length; i++) {
                     results +=
                         '<div class="complete-results">' +
                         address[i] +
                         "</div>";
                 }
-
+                //// se l'array non e vuoto facciamo apparire il menu autocoplete 
                 if (address.length != 0) {
                     document.getElementById(
                         "auto-complete"
@@ -205,13 +218,8 @@ function autoComplete(query) {
     }
 }
 
-// per chiudere l'autocomplete al click fuori
-$(document).click(function() {
-    $("#auto-complete").removeClass("complete-on");
-});
-
 // VALIDAZIONE FORM incapulamento variabili da usare nelle funzione di validazione
-var checkForm = (function () {
+var checkForm = (function() {
     return {
         letterNumber: /^[0-9a-zA-Z ]+$/,
         letter: /^[a-zA-Z' ]+$/,
@@ -223,53 +231,53 @@ var checkForm = (function () {
 })();
 
 // validazione input della pagina create e edit apartment
-$("#title").keyup(function () {
+$("#title").keyup(function() {
     checkInput($(this), checkForm.allChar, 10, 300, "il titolo");
 });
-$("#address").keyup(function () {
+$("#address").keyup(function() {
     checkInput($(this), checkForm.allChar, 3, 300, "l'indirizzo");
 });
-$("#city").keyup(function () {
+$("#city").keyup(function() {
     checkInput($(this), checkForm.allChar, 1, 30, "la città");
 });
-$("#postal-code").keyup(function () {
+$("#postal-code").keyup(function() {
     checkInput($(this), checkForm.allChar, 1, 20, "il cap");
 });
-$("#country").keyup(function () {
+$("#country").keyup(function() {
     checkInput($(this), checkForm.letter, 1, 30, "la nazione");
 });
-$("#description").keyup(function () {
+$("#description").keyup(function() {
     checkInput($(this), checkForm.allChar, 20, 2000, "la descrizione");
 });
-$("#daily-price").keyup(function () {
+$("#daily-price").keyup(function() {
     checkInput($(this), checkForm.number, 1, 2000, "il prezzo");
 });
-$("#sm").keyup(function () {
+$("#sm").keyup(function() {
     checkInput($(this), checkForm.number, 1, 2000, "i metri quadrati");
 });
-$("#rooms").keyup(function () {
+$("#rooms").keyup(function() {
     checkInput($(this), checkForm.number, 1, 2000, "le camere");
 });
-$("#beds").keyup(function () {
+$("#beds").keyup(function() {
     checkInput($(this), checkForm.number, 1, 2000, "i letti");
 });
-$("#bathrooms").keyup(function () {
+$("#bathrooms").keyup(function() {
     checkInput($(this), checkForm.number, 1, 2000, "i bagni");
 });
 
 // al click del submit controlla se i campi soddisfano le condizioni e impedisce il submit del create e del edit apartment
-$("#crea").click(function (e) {
+$("#crea").click(function(e) {
     if (
         (checkInput($("#title"), checkForm.allChar, 10, 300, "il titolo") &&
-            checkInput($("#address"), checkForm.allChar, 3, 300, "l'indirizzo") &&
-            checkInput($("#city"), checkForm.allChar, 1, 30, "la città") &&
             checkInput(
-                $("#postal-code"),
+                $("#address"),
                 checkForm.allChar,
-                1,
-                20,
-                "il cap"
+                3,
+                300,
+                "l'indirizzo"
             ) &&
+            checkInput($("#city"), checkForm.allChar, 1, 30, "la città") &&
+            checkInput($("#postal-code"), checkForm.allChar, 1, 20, "il cap") &&
             checkInput($("#country"), checkForm.letter, 1, 30, "la nazione") &&
             checkInput(
                 $("#description"),
@@ -285,16 +293,34 @@ $("#crea").click(function (e) {
                 2000,
                 "il prezzo prezzo"
             ) &&
-            checkInput($("#sm"), checkForm.number, 1, 2000, "i metri quadrati") &&
+            checkInput(
+                $("#sm"),
+                checkForm.number,
+                1,
+                2000,
+                "i metri quadrati"
+            ) &&
             checkInput($("#rooms"), checkForm.number, 1, 2000, "le camere") &&
             checkInput($("#beds"), checkForm.number, 1, 2000, "i letti") &&
-            checkInput($("#bathrooms"), checkForm.number, 1, 2000, "i bagni")) ||
+            checkInput(
+                $("#bathrooms"),
+                checkForm.number,
+                1,
+                2000,
+                "i bagni"
+            )) ||
         checkInput($("#title"), checkForm.allChar, 10, 300, "il titolo") ||
         checkInput($("#address"), checkForm.allChar, 3, 300, "l'indirizzo") ||
         checkInput($("#city"), checkForm.allChar, 1, 30, "la città") ||
         checkInput($("#postal-code"), checkForm.allChar, 1, 20, "il cap") ||
         checkInput($("#country"), checkForm.letter, 1, 30, "la nazione") ||
-        checkInput($("#description"), checkForm.allChar, 20, 2000, "la descrizione") ||
+        checkInput(
+            $("#description"),
+            checkForm.allChar,
+            20,
+            2000,
+            "la descrizione"
+        ) ||
         checkInput($("#daily-price"), checkForm.number, 1, 2000, "il prezzo") ||
         checkInput($("#sm"), checkForm.number, 1, 2000, "i metri quadrati") ||
         checkInput($("#rooms"), checkForm.number, 1, 2000, "le camere") ||
@@ -306,22 +332,20 @@ $("#crea").click(function (e) {
 });
 
 // validazione input della pagina register
-$("#firstnameR").keyup(function () {
+$("#firstnameR").keyup(function() {
     checkInput($(this), checkForm.letter, 2, 50, "il nome");
 });
-$("#lastnameR").keyup(function () {
+$("#lastnameR").keyup(function() {
     checkInput($(this), checkForm.letter, 2, 50, "il cognome");
 });
-$("#emailR").keyup(function () {
+$("#emailR").keyup(function() {
     checkInput($(this), checkForm.emailR, 2, 255, "la mail");
 });
-$("#passwordR").keyup(function () {
+$("#passwordR").keyup(function() {
     checkInput($(this), checkForm.allChar, 8, 255, "la password");
 });
-$("#password-confirmR").keyup(function () {
-    if (
-        $("#password-confirmR").val() != $("#passwordR").val()
-    ) {
+$("#password-confirmR").keyup(function() {
+    if ($("#password-confirmR").val() != $("#passwordR").val()) {
         $(this).addClass("error");
         $(this)
             .next(".message-E")
@@ -336,7 +360,7 @@ $("#password-confirmR").keyup(function () {
             .removeClass("message-on");
     }
 });
-$("#dateR").focusout(function () {
+$("#dateR").focusout(function() {
     if ($("#dateR").val() == "") {
         $(this).addClass("error");
         $(this)
@@ -354,12 +378,24 @@ $("#dateR").focusout(function () {
 });
 
 // Al click del form register controlla se tutte le condizione sono soddisfatte
-$("#registerR").click(function (e) {
+$("#registerR").click(function(e) {
     if (
         (checkInput($("#firstnameR"), checkForm.letter, 2, 50, "il nome") &&
-            checkInput($("#lastnameR"), checkForm.letter, 2, 50, "il cognome") &&
+            checkInput(
+                $("#lastnameR"),
+                checkForm.letter,
+                2,
+                50,
+                "il cognome"
+            ) &&
             checkInput($("#emailR"), checkForm.emailR, 2, 255, "la mail") &&
-            checkInput($("#passwordR"), checkForm.allChar, 8, 255, "la password") &&
+            checkInput(
+                $("#passwordR"),
+                checkForm.allChar,
+                8,
+                255,
+                "la password"
+            ) &&
             $("#password-confirmR").val() != $("#passwordR").val() &&
             $("#password-confirmR").val() == "" &&
             $("#dateR").val() == "") ||
@@ -377,17 +413,23 @@ $("#registerR").click(function (e) {
 // fine pagina register
 
 // validazione pagina login
-$("#emailL").keyup(function () {
+$("#emailL").keyup(function() {
     checkInput($(this), checkForm.emailR, 2, 255, "la mail");
 });
-$("#passwordL").keyup(function () {
+$("#passwordL").keyup(function() {
     checkInput($(this), checkForm.allChar, 8, 255, "la password");
 });
 
-$("#registerL").click(function (e) {
+$("#registerL").click(function(e) {
     if (
         (checkInput($("#emailL"), checkForm.emailR, 2, 255, "la mail") &&
-            checkInput($("#passwordL"), checkForm.allChar, 8, 255, "la password")) ||
+            checkInput(
+                $("#passwordL"),
+                checkForm.allChar,
+                8,
+                255,
+                "la password"
+            )) ||
         checkInput($("#emailL"), checkForm.emailR, 2, 255, "la mail") ||
         checkInput($("#passwordL"), checkForm.allChar, 8, 255, "la password")
     ) {
@@ -396,28 +438,39 @@ $("#registerL").click(function (e) {
 });
 // fine validazione pagina login
 
-// validazione invio messaggio pagina apartment 
-$("#firstnameM").keyup(function () {
+// validazione invio messaggio pagina apartment
+$("#firstnameM").keyup(function() {
     checkInput($(this), checkForm.letter, 2, 50, "il nome");
 });
-$("#lastnameM").keyup(function () {
+$("#lastnameM").keyup(function() {
     checkInput($(this), checkForm.letter, 2, 50, "il cognome");
 });
-$("#emailM").keyup(function () {
+$("#emailM").keyup(function() {
     checkInput($(this), checkForm.emailR, 2, 255, "la mail");
 });
 
-$("#messageM").keyup(function () {
+$("#messageM").keyup(function() {
     checkInput($(this), checkForm.allChar, 2, 2000, "il messsaggio");
 });
 
-$("#send-message").click(function (e) {
+$("#send-message").click(function(e) {
     if (
-        checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") &&
-        checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") &&
-        checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") &&
-        checkInput($("#messageM"), checkForm.allChar, 2, 2000, "il messaggio") ||
-
+        (checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") &&
+            checkInput(
+                $("#lastnameM"),
+                checkForm.letter,
+                2,
+                50,
+                "il cognome"
+            ) &&
+            checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") &&
+            checkInput(
+                $("#messageM"),
+                checkForm.allChar,
+                2,
+                2000,
+                "il messaggio"
+            )) ||
         checkInput($("#firstnameM"), checkForm.letter, 2, 50, "il nome") ||
         checkInput($("#lastnameM"), checkForm.letter, 2, 50, "il cognome") ||
         checkInput($("#emailM"), checkForm.emailR, 2, 255, "la mail") ||
@@ -453,7 +506,6 @@ function checkInput(selector, kind, min, max, field) {
     } else {
         selector.removeClass("error");
         selector.next(".message-E").removeClass("message-on");
-
     }
 }
 
@@ -481,27 +533,45 @@ var getIp = (function() {
     });
 })();
 
-$('.hamburger-menu').click(function () {
-    $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
-    $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
-    $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
-    $('.hamburger-menu').toggleClass('hamburger-menu-animated');
-    $('.mobile-menu').toggleClass('hidden');
+
+///////////////////////////////////////////////////////////////////
+///////////////////animazioni menu mobile /////////////////////////
+///////////////////////////////////////////////////////////////////
+
+//// funzione per animare il menu in mobile farlo apparire e scomparire////
+$(".hamburger-menu").click(function() {
+    $(".hamburger-menu-bars-top").toggleClass(
+        "hamburger-menu-bars-top-animated"
+    );
+    $(".hamburger-menu-bars-bottom").toggleClass(
+        "hamburger-menu-bars-bottom-animated"
+    );
+    $(".hamburger-menu-bars").toggleClass("hamburger-menu-bars-animated");
+    $(".hamburger-menu").toggleClass("hamburger-menu-animated");
+    $(".mobile-menu").toggleClass("hidden");
 });
-$('#menu-bottom').click(function(){
-    $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
-    $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
-    $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
-    $('.hamburger-menu').toggleClass('hamburger-menu-animated');
-    $('.mobile-menu').toggleClass('hidden');
+$("#menu-bottom").click(function() {
+    $(".hamburger-menu-bars-top").toggleClass(
+        "hamburger-menu-bars-top-animated"
+    );
+    $(".hamburger-menu-bars-bottom").toggleClass(
+        "hamburger-menu-bars-bottom-animated"
+    );
+    $(".hamburger-menu-bars").toggleClass("hamburger-menu-bars-animated");
+    $(".hamburger-menu").toggleClass("hamburger-menu-animated");
+    $(".mobile-menu").toggleClass("hidden");
 });
-/// animazione mobile menu
+
+/// animazione mobile menu quando il menu mobile tocca fondo pagina scopare per far vedere il footer senno riappare ///
 $(window).scroll(function() {
-    if(jQuery(window).width() <= 600){
-    if($(window).scrollTop() + $(window).height() == $(document).height()) {
-        $('.footer__menu-mobile').slideUp(100);
-    }else{
-        $('.footer__menu-mobile').slideDown(100);
+    if (jQuery(window).width() <= 600) {
+        if (
+            $(window).scrollTop() + $(window).height() ==
+            $(document).height()
+        ) {
+            $(".footer__menu-mobile").slideUp(100);
+        } else {
+            $(".footer__menu-mobile").slideDown(100);
+        }
     }
-    }
- });
+});

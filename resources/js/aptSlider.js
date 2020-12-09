@@ -9,7 +9,7 @@ $('.arrow-slider-sx').click(function(){
      nextImage();
  });
 
-
+//////////// funzione slider pagina appartamento /////
 function nextImage(){
     var activeImage =$('.apt-image.active');
     var activeDot = $('.dots__carousel-active');

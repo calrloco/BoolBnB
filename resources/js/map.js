@@ -153,9 +153,13 @@ function getCardsFilter(lat, lng, maxDist, sponsor, services) {
             lng: lng,
             maxDist: maxDist,
             services: Array.from(services),
-            sponsored: sponsor
+            sponsored: sponsor,
+            // rooms:$('.filter__chars__numbers.room-numbers').html(),
+            // beds:$('.filter__chars__numbers.beds').html(),
+            // bathrooms:$('.filter__chars__numbers.toilets').html(),
         },
         success: function(risposta) {
+            
             if (risposta.length > 0) {
                 compileHandlebars(risposta, sponsor);
             } else {

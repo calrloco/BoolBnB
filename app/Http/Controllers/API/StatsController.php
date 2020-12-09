@@ -21,7 +21,7 @@ class StatsController extends Controller
      */
     public function Index(Request $request)
     {
-        $id = $request->id;
+       $id = $request->id;
        $response = [];
         $views =  DB::table('views')->selectRaw('DATE(views.created_at) as date,COUNT(DATE(views.created_at)) as daily_views')
             ->join('apartments', 'views.apartment_id', '=', 'apartments.id')
@@ -46,6 +46,7 @@ class StatsController extends Controller
         ->join('apartments', 'users.id', '=', 'apartments.user_id')
         ->join('messages', 'apartments.id', '=', 'messages.apartment_id')
         ->where('users.id', '=', $request->id )
+        // restituisce il numero dei messaggi non letti dell'utente
         ->where('messages.read', '=', '0' )
         ->groupBy('messages.read')
         ->get();

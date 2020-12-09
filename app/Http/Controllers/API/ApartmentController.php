@@ -51,6 +51,7 @@ class ApartmentController extends Controller
             point(longitude, latitude)) * .001 as distance")
             ->having('distance','<=',$request->maxDist)
             ->where('attivo', '=', '1');
+            /// da implementare per ulteriori servizi volendo
             if($request->has(['rooms','beds','bathrooms'])){
                 $query->whereRaw("rooms >= $request->rooms AND beds >= $request->beds AND bathrooms >= $request->bathrooms");
             }
@@ -115,6 +116,7 @@ class ApartmentController extends Controller
             return response()->json($error);
         }
         $apartment = Apartment::create($request->all());
+        /// iserisce i servizi nella tabella pivot
         $apartment->services()->attach($request['services']);
 
         // if (!empty($request['img'])) {

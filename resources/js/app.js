@@ -19,10 +19,13 @@ $(document).ready(function() {
             }
         }
     });
+    /// la barra di ricerca nav nav sparisce al click ricerca
     $(".nav__search-button").click(function() {
         $("#hidenav").hide();
         hidenav();
     });
+
+    //////////////richiamo funzioni autocomplete
     $("#search").keyup(function() {
         $("#auto-complete").empty();
         autoComplete($("#search").val());
@@ -38,7 +41,7 @@ $(document).ready(function() {
         $("#auto-complete").removeClass("complete-on");
     });
 });
-
+/////////////////////////////////////
 // animation
 function hidenav() {
     $("nav__search-icon-big").addClass("active-flex");
@@ -106,7 +109,7 @@ var getIp = (function() {
             $("#ip-home-search").val(risposta.region);
         },
         error: function() {
-            console.log(arguments);
+            
         }
     });
 })();
@@ -201,7 +204,7 @@ function autoComplete(query) {
                 //// appaendiamo l'array senza doppioni nell'autocomplete
                 for (let i = 0; i < address.length; i++) {
                     results +=
-                        '<div class="complete-results">' +
+                        '<div style="padding:1rem .5rem" class="complete-results">' +
                         address[i] +
                         "</div>";
                 }

@@ -2,18 +2,14 @@
     @include flex(column, flex-start, flex-start);
 }
 .apt-info-general{
-    height: 30rem;
-    max-height:30rem;
+    height: 40rem;
+    max-height:40rem;
     width: 100%;
     @include flex(row,flex-start, flex-start);
     margin-bottom:2rem;
     border-bottom: 1px solid lightgrey;
     padding:2rem 0;
     
-    @media screen and (max-width:920px){
-        height:40rem;
-        max-height:40rem;
-    }
     
 }
 .apt-info-sx{

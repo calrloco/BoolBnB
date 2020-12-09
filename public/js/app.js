@@ -42352,11 +42352,8 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 //JS PER PAGINE CREATE ED EDIT
-var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"); //QUANDO ESCE DAI CAMPI INTERESSATI RICALCOLA LE COORDINATE IN CAMPI HIDDEN
 
-var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
-
-var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; //QUANDO ESCE DAI CAMPI INTERESSATI RICALCOLA LE COORDINATE IN CAMPI HIDDEN
 
 $('#address, #city, #postal').focusout(function () {
   calcoloCoordinate();
@@ -42367,6 +42364,7 @@ $(document).on('click', '.img-detele', function () {
 // calcolo coordinate con chiamata all'api tomtom
 
 function calcoloCoordinate() {
+  var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk';
   var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
   console.log(data);
   tt.services.fuzzySearch({
@@ -42426,11 +42424,13 @@ $(document).ready(function () {
         getCoordinates($("#search").val(), $("#range-value").html());
       }
     }
-  });
+  }); /// la barra di ricerca nav nav sparisce al click ricerca
+
   $(".nav__search-button").click(function () {
     $("#hidenav").hide();
     hidenav();
-  });
+  }); //////////////richiamo funzioni autocomplete
+
   $("#search").keyup(function () {
     $("#auto-complete").empty();
     autoComplete($("#search").val());
@@ -42444,7 +42444,8 @@ $(document).ready(function () {
   $(document).click(function () {
     $("#auto-complete").removeClass("complete-on");
   });
-}); // animation
+}); /////////////////////////////////////
+// animation
 
 function hidenav() {
   $("nav__search-icon-big").addClass("active-flex");
@@ -42505,9 +42506,7 @@ var getIp = function () {
     success: function success(risposta) {
       $("#ip-home-search").val(risposta.region);
     },
-    error: function error() {
-      console.log(arguments);
-    }
+    error: function error() {}
   });
 }(); // chiamata api per controllare messaggi non letti
 
@@ -42579,7 +42578,7 @@ function autoComplete(query) {
 
 
       for (var _i = 0; _i < address.length; _i++) {
-        results += '<div class="complete-results">' + address[_i] + "</div>";
+        results += '<div style="padding:1rem .5rem" class="complete-results">' + address[_i] + "</div>";
       } //// se l'array non e vuoto facciamo apparire il menu autocoplete 
 
 

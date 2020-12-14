@@ -3,7 +3,7 @@
     <header class="jumbotron">
         <div class="container-center container-fullheight">
             <div class="jumbotron__text">
-                <p class="jumbotron__text-banner">Vicino e bello</p>
+                <p class="jumbotron__text-banner">Vicino è bello</p>
                 <form action="{{ route('search.store') }}" method="POST">
                     @csrf
                     @method('POST')

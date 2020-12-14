@@ -1,8 +1,7 @@
 //JS PER PAGINE CREATE ED EDIT
 
 var $ = require('jquery');
-const Handlebars = require("handlebars");
-const apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk';
+
 
 //QUANDO ESCE DAI CAMPI INTERESSATI RICALCOLA LE COORDINATE IN CAMPI HIDDEN
 $('#address, #city, #postal').focusout(function() {
@@ -22,6 +21,7 @@ $(document).on('click', '.img-detele', function() {
 
 // calcolo coordinate con chiamata all'api tomtom
 function calcoloCoordinate() {
+    const apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk';
     var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
     console.log(data);
     tt.services.fuzzySearch({
@@ -29,11 +29,7 @@ function calcoloCoordinate() {
         query: data
     }).go()
     .then(function(response){
-        
         $('#longitude').attr('value', response.results[0].position['lng']);
         $('#latitude').attr('value', response.results[0].position['lat']);
-
-    
-    
     });
 }

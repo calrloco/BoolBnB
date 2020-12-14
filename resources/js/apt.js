@@ -14,9 +14,6 @@ const {
 
 
 var getMap = (function(){
-const APPLICATION_NAME = "My Application";
-const APPLICATION_VERSION = "1.0";
-tt.setProductInfo(APPLICATION_NAME, APPLICATION_VERSION);
 const apiKey = "31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk";
 let map = tt.map({
     key: apiKey,
@@ -26,6 +23,8 @@ let map = tt.map({
     zoom: 4
 });
 })();
+
+///////// chiamata ajax per prensere coordianate appartamento e metterle nella mappa////
 $.ajax({
     url:'http://127.0.0.1:8000/api/apartments/'+$('#app-id').html(),
     headers: {
@@ -35,8 +34,10 @@ $.ajax({
         let map = tt.map({
             key: '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk',
             container: "map",
+            //// prendo i dati e lei passo alla mappa 
             center: [ response[0].longitude,response[0].latitude],
             style: "tomtom://vector/1/basic-main",
+            /// zommo la mappa sul punto
             zoom: 16
         });
         var element = document.createElement("div");
@@ -44,7 +45,7 @@ $.ajax({
         var coordinates = [response[0].longitude,response[0].latitude];
         const marker = new tt.Marker({ element: element })
             .setLngLat(coordinates)
-
+             //// appaendo il marker alla mappa////
             .addTo(map);
 
         var popupOffsets = {

@@ -48,12 +48,8 @@ class HostController extends Controller
 
         }
 
-        // $sponsorizzati = Apartment::whereHas('sponsors',function($q){
-        //     $q->where('end_sponsor','>=', Carbon::now());
-        // })->where('apartments.user_id', '=', Auth::id())
-        // ->get();
-        // dd($sponsorizzati);
-
+        
+         /// ti fa vedere se uno degli appartamneti e sponsorizzato
         $spons = DB::table('apartment_sponsor')
         ->where('end_sponsor', '>', Carbon::now())
         ->orderBy('end_sponsor', 'desc')
@@ -110,7 +106,7 @@ class HostController extends Controller
     // creazione dell'appartamento
     $apartment = Apartment::create($request->all());
 
-    // creazione dei servizi correlati
+    // creazione dei servizi correlati nella tabella pivot
     if (!empty($apartment->services())) {
         $apartment->services()->attach($request['services']);
     }

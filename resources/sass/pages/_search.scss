@@ -23,10 +23,14 @@
             @include flex(column, flex-start, flex-start);
             padding: 0 2.4rem;
             padding-top: 5rem;
-
+      
             &__text {
                 font-size: 3.2rem;
 
+            }
+
+            &__filters{
+                width: 50%;
             }
 
         }
@@ -147,7 +151,7 @@
                      left:7%;
                   }
                   &-right{
-                    right: -5.5%;
+                    right: -3.5%;
                   }
 
               }
@@ -187,7 +191,8 @@
 .services{
     padding: 2rem 0;
     @include flex(row,space-around, center);
-
+    flex-wrap: wrap;
+    width: 100%;
     &-all{
         cursor: pointer;
         border-radius:3rem;
@@ -195,9 +200,10 @@
         font-size:1.4rem;
         background-color:#fff;
         border:1px solid rgb(176,176,176);
-        margin-right: 8px;
+        margin-right:1rem;
         transition: all .2s;
         margin-bottom: 1rem;
+        flex:0 0 calc(50% - 1rem);
 
 
     }
@@ -240,6 +246,7 @@
     }
 
 }
+
 .services-icons, .details-recap {
     @include flex(row,space-around, center);
     padding-top: 5px;
@@ -268,4 +275,50 @@
 .details-recap {
     list-style: none;
 
+}
+
+.sponsor-1 {
+    background-color: Cornsilk;
+}
+.filter__chars{
+    @include flex(column, flex-start, flex-start);
+    font-size:2rem;
+    width: 100%;
+   &-item {
+       @include flex(row,flex-start,flex-start);
+       margin-bottom:2rem;
+       min-width: 100%;
+   }
+  &-name{
+      flex: 1;
+  }
+
+    &-range{
+        @include flex(row,flex-start, center);
+        flex:1 1;
+    }
+    &__numbers{
+        flex: 0 0 10%;
+        @include flex(column,center, center);
+        min-height: 100%;
+    }
+}
+
+.plus,.minus{
+    width: 3rem;height: 3rem;
+    border: 1px solid #b0b0b0;
+    color: #b0b0b0;
+    border-radius: 50%;
+    @include flex(column,center, center);
+    cursor: pointer;
+    margin:0 2rem;
+}
+.chevron-filter{
+    transition:all .2s;
+}
+.filter-chevron-rotate{
+    transform: rotate(180deg);
+}
+.filter-chevron-rotate-back{
+    transform: rotate(-180deg);
 }

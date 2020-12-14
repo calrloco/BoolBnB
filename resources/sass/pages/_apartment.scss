@@ -92,7 +92,7 @@
    
 
     .info-box-sx {
-        flex: 1.4;
+        flex: 0 0 50%;
         height: 100%;
 
         @media screen and (max-width:1376px){
@@ -126,9 +126,9 @@
             padding: 20px 0;
             font-size: 16px;
             border-bottom: 1px solid #dddddd;
-
+            
             & p {
-                word-wrap: break-word;
+                word-break: break-all;
             }
         }
 
@@ -148,7 +148,7 @@
             .services{
                 width:100%;
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-start;
                 align-items: center;
                 @include responsive(tab){
                     @include flex(column, center, center);
@@ -361,5 +361,17 @@
         height:3rem;
         @include flex(row,center, center);
         
+    }
+}
+.eleimina-immagini{
+    width: 100%;
+    height: 100%;
+    @include flex(row,flex-start, center);
+
+    & img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        padding-left: 1rem;
     }
 }

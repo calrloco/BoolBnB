@@ -17,10 +17,14 @@ class SearchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
+     // form che salva i dati della ricerca se non e nella pagina ricerca
     public function store(Request $request)
     {
         $address = $request->address;
         $range = $request->range;
+        // li rimanda alla pagina di ricerca che fa poi partire la chiamata api ///
         return view('search.search', compact('address','range'));
     }
 

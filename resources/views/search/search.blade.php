@@ -8,17 +8,58 @@
                 <span id="address-inst">{{$address ?? ''}}</span>
                 <span id="range-form" class="hidden">{{$range ?? ''}}</span>
             </div>
-            <div class="container__search-left__top__filters">
-                <div class="filter-toggle">Filtri</div>
-                <div class="services hidden">
+            <div class="filter-toggle"><span class="filter-toggle-text">Filtri</span> <i class="fas fa-chevron-down chevron-filter"></i></div>
+            <div class="container__search-left__top__filters hidden">
+              
+                <div class="services">
                    
                 </div>
-                <div class="filter-search hidden"> <p id="cerca-filtri" class="service-cerca">Filtra ricerca</p></div>
+                {{-- <div class="filter__chars">
+                    <div class="filter__chars-item filter__chars-stanze">
+                       
+                        <p class="filter__chars-name">Numero stanze</p>
+                        <div class="filter__chars-range">
+                        <div class="minus">
+                       <i class="fas fa-minus" id="filter__minus"></i>
+                       </div>
+                       <p class="filter__chars__numbers room-numbers">2</p>
+                       <div class="plus">
+                       <i class="fas fa-plus" id="filter__plus"></i>
+                    </div>
+                    </div>
+                    </div>
+                    <div class=" filter__chars-item filter__chars__letti">
+                        <p class="filter__chars-name beds-number">Posti letto</p>
+                      <div class="filter__chars-range">
+                         <div class="minus">
+                            <i class="fas fa-minus" id="filter__minus"></i>
+                            </div>
+                            <p class="filter__chars__numbers beds">2</p>
+                            <div class="plus">
+                            <i class="fas fa-plus" id="filter__plus"></i>
+                          </div>
+                       </div>
+                    </div>
+                    <div class=" filter__chars-item filter__chars-posti-bagni">
+                        <p class="filter__chars-name">Bagni</p>
+                        <div class="filter__chars-range">
+                        <div class="minus">
+                            <i class="fas fa-minus" id="filter__minus"></i>
+                        </div>
+                        <p class="filter__chars__numbers toilets">2</p>
+                        <div class="plus">
+                            <i class="fas fa-plus" id="filter__plus"></i>
+                         </div>
+                       </div>
+                    </div>
+                   
+                </div> --}}
+                <div class="filter-search"> <p id="cerca-filtri" class="service-cerca">Filtra ricerca</p></div>
             </div>
         </div>
             <div class="search__resoults__apartment">
                 <div class="search__resoults__apartment-cards" id="sponsor">
-                    
+                   
                 </div>
                 <div class="search__resoults__apartment-cards" id="no-sponsor">
                     
@@ -41,6 +82,7 @@
                         <i class="fas fa-chevron-right"></i>
                     </div>
                    
+
                 </div>    
                   
              <div class="search__resoults__apartment-cards-content__text">

@@ -83,7 +83,7 @@
                         <form action="{{ route('logged.visibility', $apartment->id) }}" method="post">
                             @csrf
                             @method('PATCH')
-                            <button type="submit" class="btn-show services-all visualizza-appartamneto">
+                            <button type="submit" class="btn-show services-all visualizza-appartamneto" style="font-size:1.6rem">
                                 @if ($apartment->attivo == 0)
                                     Attiva annuncio!
                                 @else
@@ -92,7 +92,7 @@
                             </button>
                         </form>
                         <button type="button" class="btn-show services-all visualizza-appartamneto"><a
-                                href="#">MAILBOX!</a></button>
+                                href="{{route('messages.index')}}">MAILBOX!</a></button>
                         {{-- <a
                             href="{{ route('logged.sponsor', $apartment->id) }}">Sponsorizza il tuo appartamento!</a>
                         --}}

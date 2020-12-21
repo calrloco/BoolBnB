@@ -2,13 +2,14 @@
     @include flex(column, flex-start, flex-start);
 }
 .apt-info-general{
-    height: 30rem;
-    max-height:30rem;
+    height: 40rem;
+    max-height:40rem;
     width: 100%;
     @include flex(row,flex-start, flex-start);
     margin-bottom:2rem;
     border-bottom: 1px solid lightgrey;
     padding:2rem 0;
+    
     
 }
 .apt-info-sx{
@@ -16,6 +17,9 @@
     max-height: 100%;
     flex: 0 0 calc(100% / 3);
     position: relative;
+    @media screen and (max-width:1320px){
+        display:none;
+   }
     & img{
         width: 100%;
         height: 100%;
@@ -23,6 +27,9 @@
         max-height: 100%;
         object-fit: cover;
         border-radius: 0.8rem;
+
+     
+   
     }
     
 }
@@ -31,7 +38,7 @@
     left: 0;
     top: 0;
     font-size:1.6rem;
-    background-color:rgba(0,0,0,.8);
+    background-color:rgba(0,0,0,.5);
     width: 100%;
     height: 100%;
     @include flex(row,center, center);
@@ -70,6 +77,10 @@
     font-size:1.6rem;
     @include flex(row,space-between,center);
 
+    @media screen and (max-width:976px){
+        flex-direction:column;
+    }
+
 
     & a{
         @extend %button-default;
@@ -78,6 +89,10 @@
         font-weight:800;
         background-image: var(--gradient-color);
         letter-spacing:.1rem;
+        @media screen and (max-width:976px){
+            margin-top: 2rem;
+        }
+    
     }
 }
 .apt-services-show{
@@ -93,9 +108,25 @@
     flex:1;
     @include flex(column, flex-end, flex-end);
     width: 100%;
+
+    @media screen and (max-width:920px){
+        height:40rem;
+        max-height:40rem;
+        align-items: center;
+    }
 }
 .apartment-button{
     justify-self: flex-end;
     @extend %button-default;
     color:var(--color-font-black);
+}
+.apt-info-sponsor{
+    margin-top: 2rem;
+    @include flex(column, center, center);
+
+    & i{
+        color: gold;
+        font-size:2rem;
+        margin-bottom: 1rem;
+    }
 }

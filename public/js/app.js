@@ -42352,11 +42352,8 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 //JS PER PAGINE CREATE ED EDIT
-var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"); //QUANDO ESCE DAI CAMPI INTERESSATI RICALCOLA LE COORDINATE IN CAMPI HIDDEN
 
-var Handlebars = __webpack_require__(/*! handlebars */ "./node_modules/handlebars/dist/cjs/handlebars.js");
-
-var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk'; //QUANDO ESCE DAI CAMPI INTERESSATI RICALCOLA LE COORDINATE IN CAMPI HIDDEN
 
 $('#address, #city, #postal').focusout(function () {
   calcoloCoordinate();
@@ -42367,6 +42364,7 @@ $(document).on('click', '.img-detele', function () {
 // calcolo coordinate con chiamata all'api tomtom
 
 function calcoloCoordinate() {
+  var apiKey = '31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk';
   var data = $('#address').val() + " " + $('#city').val() + " " + $('#postal').val();
   console.log(data);
   tt.services.fuzzySearch({
@@ -42404,8 +42402,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./add */ "./resources/js/add.js");
 
-__webpack_require__(/*! ./sponsor */ "./resources/js/sponsor.js");
-
 __webpack_require__(/*! ./alert */ "./resources/js/alert.js");
 
 var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
@@ -42428,11 +42424,13 @@ $(document).ready(function () {
         getCoordinates($("#search").val(), $("#range-value").html());
       }
     }
-  });
+  }); /// la barra di ricerca nav nav sparisce al click ricerca
+
   $(".nav__search-button").click(function () {
     $("#hidenav").hide();
     hidenav();
-  });
+  }); //////////////richiamo funzioni autocomplete
+
   $("#search").keyup(function () {
     $("#auto-complete").empty();
     autoComplete($("#search").val());
@@ -42441,8 +42439,13 @@ $(document).ready(function () {
   $(document).on("click", ".complete-results", function () {
     var value = $(this).text();
     $("#search").val(value);
+  }); // per chiudere l'autocomplete al click fuori
+
+  $(document).click(function () {
+    $("#auto-complete").removeClass("complete-on");
   });
-}); // animation
+}); /////////////////////////////////////
+// animation
 
 function hidenav() {
   $("nav__search-icon-big").addClass("active-flex");
@@ -42465,7 +42468,7 @@ $(window).bind("mousewheel", function (event) {
   $(".nav__search-button").removeClass("nav__search-button-large");
   $(".nav__search-icon-big").removeClass("active-flex");
   $("#start-search").removeClass("hidden");
-}); // range value
+}); // slider per impostare il range della ricerca fra 20km e 120 km///
 
 var slider = function () {
   var slider = document.getElementById("myRanges");
@@ -42503,9 +42506,7 @@ var getIp = function () {
     success: function success(risposta) {
       $("#ip-home-search").val(risposta.region);
     },
-    error: function error() {
-      console.log(arguments);
-    }
+    error: function error() {}
   });
 }(); // chiamata api per controllare messaggi non letti
 
@@ -42525,17 +42526,17 @@ var unreadMessages = function () {
       if (risposta.length > 0) {
         // messaggio per count 1
         if (risposta[0].unread == 1) {
-          $('.msg-msg').empty();
-          $('.msg-msg').append(risposta[0].unread + ' nuovo messaggio');
-          $('.msg-msg').append("<i class=\"dot fas fa-circle\"></i>"); // messaggio per count > 1
+          $(".msg-msg").empty();
+          $(".msg-msg").append(risposta[0].unread + " nuovo messaggio");
+          $(".msg-msg").append("<i class=\"dot fas fa-circle\"></i>"); // messaggio per count > 1
         } else {
-          $('.msg-msg').empty();
-          $('.msg-msg').append(risposta[0].unread + ' nuovi messaggi');
-          $('.msg-msg').append("<i class=\"dot fas fa-circle\"></i>");
+          $(".msg-msg").empty();
+          $(".msg-msg").append(risposta[0].unread + " nuovi messaggi");
+          $(".msg-msg").append("<i class=\"dot fas fa-circle\"></i>");
         }
       } else {
-        $('.msg-msg').empty();
-        $('.msg-msg').append('Messaggi');
+        $(".msg-msg").empty();
+        $(".msg-msg").append("Messaggi");
       }
     },
     error: function error() {
@@ -42556,6 +42557,7 @@ function autoComplete(query) {
       key: "31kN4urrGHUYoJ4IOWdAiEzMJJKQpfVk",
       query: query
     }).go().then(function (response) {
+      /// creaimo array vuoto in cui pushamo i rusultati della chiamata api a tomtom
       var address = [];
       var results = "";
 
@@ -42564,7 +42566,7 @@ function autoComplete(query) {
           // nel ciclo pusho i risulti in un array e controllo che non ci siano ripetizioni
           var streetName = response.results[i].address["streetName"];
           var city = response.results[i].address["municipality"];
-          var countryCode = response.results[i].address["countryCode"];
+          var countryCode = response.results[i].address["countryCode"]; /// se l'indirizzo o la citta non e ripetuto lo pushamo nell'array di cui sopra 
 
           if (streetName != undefined && !address.includes(streetName) && city != undefined && !address.includes(city) && countryCode == "IT") {
             address.push(streetName + " " + city);
@@ -42572,11 +42574,13 @@ function autoComplete(query) {
             address.push(city);
           }
         }
-      }
+      } //// appaendiamo l'array senza doppioni nell'autocomplete
+
 
       for (var _i = 0; _i < address.length; _i++) {
-        results += '<div class="complete-results">' + address[_i] + "</div>";
-      }
+        results += '<div style="padding:1rem .5rem" class="complete-results">' + address[_i] + "</div>";
+      } //// se l'array non e vuoto facciamo apparire il menu autocoplete 
+
 
       if (address.length != 0) {
         document.getElementById("auto-complete").innerHTML = results;
@@ -42586,12 +42590,8 @@ function autoComplete(query) {
       }
     });
   }
-} // per chiudere l'autocomplete al click fuori
+} // VALIDAZIONE FORM incapulamento variabili da usare nelle funzione di validazione
 
-
-$(document).click(function () {
-  $("#auto-complete").removeClass("complete-on");
-}); // VALIDAZIONE FORM incapulamento variabili da usare nelle funzione di validazione
 
 var checkForm = function () {
   return {
@@ -42696,7 +42696,7 @@ $("#registerL").click(function (e) {
     e.preventDefault();
   }
 }); // fine validazione pagina login
-// validazione invio messaggio pagina apartment 
+// validazione invio messaggio pagina apartment
 
 $("#firstnameM").keyup(function () {
   checkInput($(this), checkForm.letter, 2, 50, "il nome");
@@ -42762,29 +42762,33 @@ var getIp = function () {
     },
     error: function error() {}
   });
-}();
+}(); ///////////////////////////////////////////////////////////////////
+///////////////////animazioni menu mobile /////////////////////////
+///////////////////////////////////////////////////////////////////
+//// funzione per animare il menu in mobile farlo apparire e scomparire////
 
-$('.hamburger-menu').click(function () {
-  $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
-  $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
-  $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
-  $('.hamburger-menu').toggleClass('hamburger-menu-animated');
-  $('.mobile-menu').toggleClass('hidden');
+
+$(".hamburger-menu").click(function () {
+  $(".hamburger-menu-bars-top").toggleClass("hamburger-menu-bars-top-animated");
+  $(".hamburger-menu-bars-bottom").toggleClass("hamburger-menu-bars-bottom-animated");
+  $(".hamburger-menu-bars").toggleClass("hamburger-menu-bars-animated");
+  $(".hamburger-menu").toggleClass("hamburger-menu-animated");
+  $(".mobile-menu").toggleClass("hidden");
 });
-$('#menu-bottom').click(function () {
-  $('.hamburger-menu-bars-top').toggleClass('hamburger-menu-bars-top-animated');
-  $('.hamburger-menu-bars-bottom').toggleClass('hamburger-menu-bars-bottom-animated');
-  $('.hamburger-menu-bars').toggleClass('hamburger-menu-bars-animated');
-  $('.hamburger-menu').toggleClass('hamburger-menu-animated');
-  $('.mobile-menu').toggleClass('hidden');
-}); /// animazione mobile menu
+$("#menu-bottom").click(function () {
+  $(".hamburger-menu-bars-top").toggleClass("hamburger-menu-bars-top-animated");
+  $(".hamburger-menu-bars-bottom").toggleClass("hamburger-menu-bars-bottom-animated");
+  $(".hamburger-menu-bars").toggleClass("hamburger-menu-bars-animated");
+  $(".hamburger-menu").toggleClass("hamburger-menu-animated");
+  $(".mobile-menu").toggleClass("hidden");
+}); /// animazione mobile menu quando il menu mobile tocca fondo pagina scopare per far vedere il footer senno riappare ///
 
 $(window).scroll(function () {
   if (jQuery(window).width() <= 600) {
     if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-      $('.footer__menu-mobile').slideUp(100);
+      $(".footer__menu-mobile").slideUp(100);
     } else {
-      $('.footer__menu-mobile').slideDown(100);
+      $(".footer__menu-mobile").slideDown(100);
     }
   }
 }); //per cambiare colore aggiungendo la classe checked al click della checkbox
@@ -42846,46 +42850,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
-
-/***/ }),
-
-/***/ "./resources/js/sponsor.js":
-/*!*********************************!*\
-  !*** ./resources/js/sponsor.js ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-document.addEventListener("DOMContentLoaded", function () {
-  var form = document.querySelector('#payment-form');
-  var client_token = document.querySelector('#client_token').value;
-  braintree.dropin.create({
-    authorization: client_token,
-    selector: '#bt-dropin',
-    paypal: {
-      flow: 'vault'
-    }
-  }, function (createErr, instance) {
-    if (createErr) {
-      console.log('Create Error', createErr);
-      return;
-    }
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-      instance.requestPaymentMethod(function (err, payload) {
-        if (err) {
-          console.log('Request Payment Method Error', err);
-          return;
-        } // Add the nonce to the form and submit
-
-
-        document.querySelector('#nonce').value = payload.nonce;
-        form.submit();
-      });
-    });
-  });
-});
 
 /***/ }),
 

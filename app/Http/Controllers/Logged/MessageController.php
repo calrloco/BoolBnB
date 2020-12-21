@@ -31,50 +31,7 @@ class MessageController extends Controller
     }
     
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // HO TOLTO MESSAGE $MESSAGE RICAVARMI LA LISTA MESSAGGI di USER
-    public function show(User $user)
-    {
-       
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        
-    }
+  
 
     /**
      * Update the specified resource in storage.
@@ -85,10 +42,13 @@ class MessageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // trova messaggio con id passata in url 
        $message = Message::find($id);
        $read = !$message->read;
       
+       // controllo se il messaggio e dell'utente loggato
        if($message->apartment->user_id  == Auth::id()){
+           ///cerco messaggio e lo segno come letto/non letto con un update nella colonna read
               Message::where('id',$id)->update(['read'=> $read]);
               return redirect()->route('messages.index');
        }
@@ -101,6 +61,7 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /// elimina messaggio con controllo su user loggato ////
     public function destroy(Message $message)
     {   
         if($message->apartment->user_id = Auth::id()) {

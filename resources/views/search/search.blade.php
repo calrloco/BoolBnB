@@ -14,7 +14,7 @@
                 <div class="services">
                    
                 </div>
-                <div class="filter__chars">
+                {{-- <div class="filter__chars">
                     <div class="filter__chars-item filter__chars-stanze">
                        
                         <p class="filter__chars-name">Numero stanze</p>
@@ -22,7 +22,7 @@
                         <div class="minus">
                        <i class="fas fa-minus" id="filter__minus"></i>
                        </div>
-                       <p class="filter__chars__numbers room-numbers">3</p>
+                       <p class="filter__chars__numbers room-numbers">2</p>
                        <div class="plus">
                        <i class="fas fa-plus" id="filter__plus"></i>
                     </div>
@@ -34,7 +34,7 @@
                          <div class="minus">
                             <i class="fas fa-minus" id="filter__minus"></i>
                             </div>
-                            <p class="filter__chars__numbers">3</p>
+                            <p class="filter__chars__numbers beds">2</p>
                             <div class="plus">
                             <i class="fas fa-plus" id="filter__plus"></i>
                           </div>
@@ -46,28 +46,14 @@
                         <div class="minus">
                             <i class="fas fa-minus" id="filter__minus"></i>
                         </div>
-                        <p class="filter__chars__numbers">3</p>
+                        <p class="filter__chars__numbers toilets">2</p>
                         <div class="plus">
                             <i class="fas fa-plus" id="filter__plus"></i>
                          </div>
                        </div>
                     </div>
-                    <div class=" filter__chars-item flrter__chars-prezzo">
-                     
-                        <p class="filter__chars-name">Prezzo</p>
-                        <div class="filter__chars-range">
-                        <div class="minus">
-                            <i class="fas fa-minus" id="filter__minus"></i>
-                            </div>
-                            
-                            <p class="filter__chars__numbers">3</p>
-                            
-                            <div class="plus">
-                            <i class="fas fa-plus" id="filter__plus"></i>
-                         </div>
-                        </div>
-                    </div>
-                </div>
+                   
+                </div> --}}
                 <div class="filter-search"> <p id="cerca-filtri" class="service-cerca">Filtra ricerca</p></div>
             </div>
         </div>
